@@ -9,6 +9,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
+import { ApiClientModule } from '../../../api-client/api-client.module';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,13 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
-    BrowserAnimationsModule,
+    ApiClientModule.forRoot(environment.baseApiUrl),
     MatSidenavModule,
     LayoutModule,
   ],
