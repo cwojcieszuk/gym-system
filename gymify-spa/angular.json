@@ -36,7 +36,8 @@
               "projects/spa/src/assets"
             ],
             "styles": [
-              "projects/spa/src/styles/styles.scss"
+              "projects/spa/src/styles/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -109,7 +110,8 @@
               "projects/spa/src/assets"
             ],
             "styles": [
-              "projects/spa/src/styles.scss"
+              "projects/spa/src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
@@ -144,7 +146,8 @@
               "projects/api-client/src/assets"
             ],
             "styles": [
-              "projects/api-client/src/styles.scss"
+              "projects/api-client/src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -212,7 +215,8 @@
               "projects/api-client/src/assets"
             ],
             "styles": [
-              "projects/api-client/src/styles.scss"
+              "projects/api-client/src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
