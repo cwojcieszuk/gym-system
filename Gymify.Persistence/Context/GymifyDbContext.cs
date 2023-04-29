@@ -17,12 +17,6 @@ public partial class GymifyDbContext : IdentityDbContext<AspNetUser>
     {
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseSqlServer("Server=tcp:gymify-sqlserver.database.windows.net,1433;Initial Catalog=gymify;Persist Security Info=False;User ID=pudzian;Password=h%saz$22lq7VJxxj;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-    }
-
     public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
 
     public virtual DbSet<BodyPart> BodyParts { get; set; }
