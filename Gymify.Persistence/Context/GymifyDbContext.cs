@@ -1,17 +1,17 @@
-﻿using Gymify.Domain.Entities;
+﻿using Gymify.Application.Interfaces;
+using Gymify.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gymify.Persistence.Context;
 
-public partial class GymifyDbContext : IdentityDbContext<AspNetUser>
+public partial class GymifyDbContext : IdentityDbContext<AspNetUser>, IGymifyDbContext
 {
     public GymifyDbContext()
     {
     }
 
-    public GymifyDbContext(DbContextOptions<GymifyDbContext> options)
-        : base(options)
+    public GymifyDbContext(DbContextOptions<GymifyDbContext> options) : base(options)
     {
     }
 

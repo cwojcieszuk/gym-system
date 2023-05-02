@@ -1,4 +1,5 @@
-﻿using Gymify.Domain.Entities;
+﻿using Gymify.Application.Interfaces;
+using Gymify.Domain.Entities;
 using Gymify.Persistence.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ public static class DependencyInjection
     {
         services.AddDbContext<GymifyDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("gymify")));
         services.AddIdentity<AspNetUser, IdentityRole>().AddEntityFrameworkStores<GymifyDbContext>();
+        services.AddScoped<IGymifyDbContext, GymifyDbContext>();
         
         return services;
     }
