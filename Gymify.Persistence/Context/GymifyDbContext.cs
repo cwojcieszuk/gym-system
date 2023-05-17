@@ -33,9 +33,9 @@ public partial class GymifyDbContext : IdentityDbContext<AspNetUser>, IGymifyDbC
 
     public virtual DbSet<Exercise> Exercises { get; set; }
 
-    public virtual DbSet<FavoriteCoach> FavoriteCoaches { get; set; }
+    public virtual DbSet<FavouriteCoach> FavouriteCoaches { get; set; }
 
-    public virtual DbSet<FavoriteExercise> FavoriteExercises { get; set; }
+    public virtual DbSet<FavouriteExercise> FavouriteExercises { get; set; }
 
     public virtual DbSet<GroupSession> GroupSessions { get; set; }
 

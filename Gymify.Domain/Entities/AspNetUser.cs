@@ -22,7 +22,7 @@ public partial class AspNetUser : IdentityUser
 
     public virtual Coach? Coach { get; set; }
 
-    public virtual ICollection<FavoriteExercise> FavoriteExercises { get; set; } = new List<FavoriteExercise>();
+    public virtual ICollection<FavouriteExercise> FavouriteExercises { get; set; } = new List<FavouriteExercise>();
 
     public virtual ICollection<UserTraining> UserTrainings { get; set; } = new List<UserTraining>();
 }

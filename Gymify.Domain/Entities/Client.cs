@@ -9,7 +9,7 @@ public partial class Client
 
     public virtual ICollection<CoachHour> CoachHours { get; set; } = new List<CoachHour>();
 
-    public virtual ICollection<FavoriteCoach> FavoriteCoaches { get; set; } = new List<FavoriteCoach>();
+    public virtual ICollection<FavouriteCoach> FavouriteCoaches { get; set; } = new List<FavouriteCoach>();
 
     public virtual AspNetUser IdClientNavigation { get; set; } = null!;
 

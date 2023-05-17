@@ -11,7 +11,7 @@ public partial class Coach
 
     public virtual ICollection<CoachHour> CoachHours { get; set; } = new List<CoachHour>();
 
-    public virtual ICollection<FavoriteCoach> FavoriteCoaches { get; set; } = new List<FavoriteCoach>();
+    public virtual ICollection<FavouriteCoach> FavouriteCoaches { get; set; } = new List<FavouriteCoach>();
 
     public virtual ICollection<GroupSession> GroupSessions { get; set; } = new List<GroupSession>();
 

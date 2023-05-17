@@ -23,9 +23,9 @@ public interface IGymifyDbContext
 
     DbSet<Exercise> Exercises { get; set; }
 
-    DbSet<FavoriteCoach> FavoriteCoaches { get; set; }
+    DbSet<FavouriteCoach> FavouriteCoaches { get; set; }
 
-    DbSet<FavoriteExercise> FavoriteExercises { get; set; }
+    DbSet<FavouriteExercise> FavouriteExercises { get; set; }
 
     DbSet<GroupSession> GroupSessions { get; set; }
 

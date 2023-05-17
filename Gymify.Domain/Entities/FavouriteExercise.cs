@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Gymify.Domain.Entities;
 
-public partial class FavoriteExercise
+public partial class FavouriteExercise
 {
-    public int FavoriteExercise1 { get; set; }
+    public int FavouriteExercise1 { get; set; }
 
     public int IdExercise { get; set; }
 

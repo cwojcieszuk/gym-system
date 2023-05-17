@@ -367,23 +367,23 @@ namespace Gymify.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FavoriteCoach",
+                name: "FavouriteCoach",
                 columns: table => new
                 {
-                    IdFavoriteCoach = table.Column<int>(type: "int", nullable: false),
+                    IdFavouriteCoach = table.Column<int>(type: "int", nullable: false),
                     IdClient = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IdCoach = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("FavoriteCoach_pk", x => new { x.IdFavoriteCoach, x.IdClient, x.IdCoach });
+                    table.PrimaryKey("FavouriteCoach_pk", x => new { x.IdFavouriteCoach, x.IdClient, x.IdCoach });
                     table.ForeignKey(
-                        name: "FavoriteCoach_Client",
+                        name: "FavouriteCoach_Client",
                         column: x => x.IdClient,
                         principalTable: "Client",
                         principalColumn: "IdClient");
                     table.ForeignKey(
-                        name: "FavoriteCoach_Coach",
+                        name: "FavouriteCoach_Coach",
                         column: x => x.IdCoach,
                         principalTable: "Coach",
                         principalColumn: "IdCoach");
@@ -437,18 +437,18 @@ namespace Gymify.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FavoriteExercise",
+                name: "FavouriteExercise",
                 columns: table => new
                 {
-                    FavoriteExercise = table.Column<int>(type: "int", nullable: false),
+                    FavouriteExercise = table.Column<int>(type: "int", nullable: false),
                     IdExercise = table.Column<int>(type: "int", nullable: false),
                     IdUser = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("FavoriteExercise_pk", x => new { x.IdExercise, x.IdUser, x.FavoriteExercise });
+                    table.PrimaryKey("FavouriteExercise_pk", x => new { x.IdExercise, x.IdUser, x.FavouriteExercise });
                     table.ForeignKey(
-                        name: "FavoriteExercise_AspNetUsers",
+                        name: "FavouriteExercise_AspNetUsers",
                         column: x => x.IdUser,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -605,18 +605,18 @@ namespace Gymify.Persistence.Migrations
                 column: "IdTarget");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FavoriteCoach_IdClient",
-                table: "FavoriteCoach",
+                name: "IX_FavouriteCoach_IdClient",
+                table: "FavouriteCoach",
                 column: "IdClient");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FavoriteCoach_IdCoach",
-                table: "FavoriteCoach",
+                name: "IX_FavouriteCoach_IdCoach",
+                table: "FavouriteCoach",
                 column: "IdCoach");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FavoriteExercise_IdUser",
-                table: "FavoriteExercise",
+                name: "IX_FavouriteExercise_IdUser",
+                table: "FavouriteExercise",
                 column: "IdUser");
 
             migrationBuilder.CreateIndex(
@@ -678,10 +678,10 @@ namespace Gymify.Persistence.Migrations
                 name: "CoachType");
 
             migrationBuilder.DropTable(
-                name: "FavoriteCoach");
+                name: "FavouriteCoach");
 
             migrationBuilder.DropTable(
-                name: "FavoriteExercise");
+                name: "FavouriteExercise");
 
             migrationBuilder.DropTable(
                 name: "TemplateExercise");

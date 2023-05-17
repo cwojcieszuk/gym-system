@@ -309,9 +309,9 @@ namespace Gymify.Persistence.Migrations
                     b.ToTable("Exercise", (string)null);
                 });
 
-            modelBuilder.Entity("Gymify.Domain.Entities.FavoriteCoach", b =>
+            modelBuilder.Entity("Gymify.Domain.Entities.FavouriteCoach", b =>
                 {
-                    b.Property<int>("IdFavoriteCoach")
+                    b.Property<int>("IdFavouriteCoach")
                         .HasColumnType("int");
 
                     b.Property<string>("IdClient")
@@ -320,17 +320,17 @@ namespace Gymify.Persistence.Migrations
                     b.Property<string>("IdCoach")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("IdFavoriteCoach", "IdClient", "IdCoach")
-                        .HasName("FavoriteCoach_pk");
+                    b.HasKey("IdFavouriteCoach", "IdClient", "IdCoach")
+                        .HasName("FavouriteCoach_pk");
 
                     b.HasIndex("IdClient");
 
                     b.HasIndex("IdCoach");
 
-                    b.ToTable("FavoriteCoach", (string)null);
+                    b.ToTable("FavouriteCoach", (string)null);
                 });
 
-            modelBuilder.Entity("Gymify.Domain.Entities.FavoriteExercise", b =>
+            modelBuilder.Entity("Gymify.Domain.Entities.FavouriteExercise", b =>
                 {
                     b.Property<int>("IdExercise")
                         .HasColumnType("int");
@@ -338,16 +338,16 @@ namespace Gymify.Persistence.Migrations
                     b.Property<string>("IdUser")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("FavoriteExercise1")
+                    b.Property<int>("FavouriteExercise1")
                         .HasColumnType("int")
-                        .HasColumnName("FavoriteExercise");
+                        .HasColumnName("FavouriteExercise");
 
-                    b.HasKey("IdExercise", "IdUser", "FavoriteExercise1")
-                        .HasName("FavoriteExercise_pk");
+                    b.HasKey("IdExercise", "IdUser", "FavouriteExercise1")
+                        .HasName("FavouriteExercise_pk");
 
                     b.HasIndex("IdUser");
 
-                    b.ToTable("FavoriteExercise", (string)null);
+                    b.ToTable("FavouriteExercise", (string)null);
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.GroupSession", b =>
@@ -762,38 +762,38 @@ namespace Gymify.Persistence.Migrations
                     b.Navigation("IdTargetNavigation");
                 });
 
-            modelBuilder.Entity("Gymify.Domain.Entities.FavoriteCoach", b =>
+            modelBuilder.Entity("Gymify.Domain.Entities.FavouriteCoach", b =>
                 {
                     b.HasOne("Gymify.Domain.Entities.Client", "IdClientNavigation")
-                        .WithMany("FavoriteCoaches")
+                        .WithMany("FavouriteCoaches")
                         .HasForeignKey("IdClient")
                         .IsRequired()
-                        .HasConstraintName("FavoriteCoach_Client");
+                        .HasConstraintName("FavouriteCoach_Client");
 
                     b.HasOne("Gymify.Domain.Entities.Coach", "IdCoachNavigation")
-                        .WithMany("FavoriteCoaches")
+                        .WithMany("FavouriteCoaches")
                         .HasForeignKey("IdCoach")
                         .IsRequired()
-                        .HasConstraintName("FavoriteCoach_Coach");
+                        .HasConstraintName("FavouriteCoach_Coach");
 
                     b.Navigation("IdClientNavigation");
 
                     b.Navigation("IdCoachNavigation");
                 });
 
-            modelBuilder.Entity("Gymify.Domain.Entities.FavoriteExercise", b =>
+            modelBuilder.Entity("Gymify.Domain.Entities.FavouriteExercise", b =>
                 {
                     b.HasOne("Gymify.Domain.Entities.Exercise", "IdExerciseNavigation")
-                        .WithMany("FavoriteExercises")
+                        .WithMany("FavouriteExercises")
                         .HasForeignKey("IdExercise")
                         .IsRequired()
                         .HasConstraintName("UserExercise_Exercise");
 
                     b.HasOne("Gymify.Domain.Entities.AspNetUser", "IdUserNavigation")
-                        .WithMany("FavoriteExercises")
+                        .WithMany("FavouriteExercises")
                         .HasForeignKey("IdUser")
                         .IsRequired()
-                        .HasConstraintName("FavoriteExercise_AspNetUsers");
+                        .HasConstraintName("FavouriteExercise_AspNetUsers");
 
                     b.Navigation("IdExerciseNavigation");
 
@@ -936,7 +936,7 @@ namespace Gymify.Persistence.Migrations
 
                     b.Navigation("Coach");
 
-                    b.Navigation("FavoriteExercises");
+                    b.Navigation("FavouriteExercises");
 
                     b.Navigation("UserTrainings");
                 });
@@ -950,14 +950,14 @@ namespace Gymify.Persistence.Migrations
                 {
                     b.Navigation("CoachHours");
 
-                    b.Navigation("FavoriteCoaches");
+                    b.Navigation("FavouriteCoaches");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Coach", b =>
                 {
                     b.Navigation("CoachHours");
 
-                    b.Navigation("FavoriteCoaches");
+                    b.Navigation("FavouriteCoaches");
 
                     b.Navigation("GroupSessions");
                 });
@@ -974,7 +974,7 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Exercise", b =>
                 {
-                    b.Navigation("FavoriteExercises");
+                    b.Navigation("FavouriteExercises");
 
                     b.Navigation("TemplateExercises");
                 });
