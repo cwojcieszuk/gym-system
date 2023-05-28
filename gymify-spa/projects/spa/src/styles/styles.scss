@@ -1,0 +1,10 @@
+@use 'colors';
+@use 'typography';
+@use 'global';
+@use 'reset';
+@use 'constants';
+@use 'mixins';
+@import 'ngx-toastr/toastr';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

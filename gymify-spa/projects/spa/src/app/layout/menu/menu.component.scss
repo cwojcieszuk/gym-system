@@ -1,0 +1,16 @@
+@use 'typography';
+
+img {
+  padding: 48px;
+}
+
+.menu-header {
+  @extend .typography-regular-12;
+  color: var(--color-dark-grey);
+  padding-left: 16px;
+}
+
+mat-nav-list {
+  display: flex;
+  flex-direction: column;
+}
