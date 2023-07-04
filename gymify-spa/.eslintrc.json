@@ -17,8 +17,7 @@
         "amd": true,
         "node": true
       },
-      "rules": {
-      }
+      "rules": {}
     },
     {
       "files": [
@@ -63,7 +62,9 @@
             "FunctionExpression": {
               "parameters": "first"
             },
-            "ignoredNodes": ["PropertyDefinition:has(Decorator)"],
+            "ignoredNodes": [
+              "PropertyDefinition:has(Decorator)"
+            ],
             "SwitchCase": 1
           }
         ],
@@ -110,8 +111,12 @@
         "object-curly-newline": [
           "error",
           {
-            "ImportDeclaration": {"minProperties": 5},
-            "ExportDeclaration": {"minProperties": 5}
+            "ImportDeclaration": {
+              "minProperties": 5
+            },
+            "ExportDeclaration": {
+              "minProperties": 5
+            }
           }
         ],
         "@typescript-eslint/comma-dangle": [
@@ -214,7 +219,9 @@
         "no-invalid-this": "off",
         "no-multiple-empty-lines": "off",
         "no-new-wrappers": "error",
-        "@typescript-eslint/no-shadow": ["error"],
+        "@typescript-eslint/no-shadow": [
+          "error"
+        ],
         "no-shadow": "off",
         "no-throw-literal": "error",
         "no-trailing-spaces": "error",
@@ -255,8 +262,7 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {
-      }
+      "rules": {}
     }
   ]
 }
