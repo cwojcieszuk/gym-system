@@ -11,10 +11,14 @@ import { LayoutModule } from './layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ApiClientModule } from '../../../api-client/api-client.module';
 import { environment } from '../environments/environment';
+import { RootTemplateComponent } from './root-template/root-template.component';
+import { BootstrapComponent } from './bootstrap/bootstrap.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    RootTemplateComponent,
+    BootstrapComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,6 @@ import { environment } from '../environments/environment';
     LayoutModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [BootstrapComponent],
 })
 export class AppModule { }

@@ -1,0 +1,19 @@
+:host {
+  @apply flex flex-1 overflow-hidden items-center justify-center;
+
+  background-image: url("../../../../assets/login-background-image.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+form {
+  @apply flex flex-col items-center rounded-md p-10 bg-white;
+
+  div {
+    @apply flex flex-col pt-8;
+  }
+
+  img {
+    @apply w-[169px] h-[69px];
+  }
+}
