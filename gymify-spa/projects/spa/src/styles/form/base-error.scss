@@ -1,0 +1,10 @@
+@mixin base-error {
+  @apply hidden text-form-input-red;
+  .ng-touched > & {
+    @apply block;
+  }
+}
+
+.base-error {
+  @include base-error;
+}

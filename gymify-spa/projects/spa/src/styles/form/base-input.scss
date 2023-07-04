@@ -1,0 +1,59 @@
+@mixin base-input {
+  @apply
+  m-[1px]
+  flex
+  items-center
+  text-[13.5px]
+  box-border
+  rounded-base
+  border
+  shadow-input
+  font-semibold
+  bg-white text-form-input-black
+  h-[45px] px-[14px]
+  gap-[14px]
+  ring-form-input-gray
+  focus-within:ring-1
+  ;
+
+  &.textarea {
+    @apply h-auto min-h-[45px];
+  }
+
+  &.disabled {
+    @apply cursor-not-allowed relative;
+    &:after {
+      @apply content-[''] absolute inset-0 bg-gray-100 bg-opacity-70;
+    }
+  }
+
+  .ng-invalid.ng-touched[formcontrolname] & {
+    @apply border-form-input-red ring-form-input-red;
+  }
+
+  textarea {
+    @apply resize-y min-h-[40px];
+  }
+
+  input, textarea {
+    @apply outline-none ring-0 w-full py-[10px] flex-1;
+  }
+
+  &.primary {
+    @apply
+    border-form-input-green
+    ring-form-input-green;
+  }
+
+  .search & {
+    @apply h-[35px] shadow-none text-primary text-[11.2px];
+    input {
+      @apply py-[5.5px];
+    }
+  }
+}
+
+.base-input {
+  @include base-input;
+}
+

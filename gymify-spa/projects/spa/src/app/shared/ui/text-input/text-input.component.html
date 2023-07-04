@@ -1,0 +1,44 @@
+<label [for]="id" class="base-label" *ngIf="label">
+    <span>{{label}}</span>
+    <span *ngIf="required">*</span>
+    <mat-icon
+        *ngIf="tooltip"
+        [matTooltip]="tooltip"
+        matTooltipPosition="right"
+        fontSet="material-icons-outlined"
+        class="text-gray-700"
+    >info</mat-icon>
+</label>
+<div class="base-input" [class.textarea]="type === 'textarea'" [class.small]="small" [ngClass]="color" [class.disabled]="disabled">
+    <ng-content select="[prefix]"></ng-content>
+    <ng-container *ngIf="type === 'textarea'">
+    <textarea
+        [id]="id"
+        (keyup)="handleInputChange($event)"
+        (change)="handleInputChange($event)"
+        (focus)="markTouched()"
+        [placeholder]="placeholder ?? ''"
+        [value]="value ?? ''"
+        [readOnly]="readonly || disabled"
+        [cols]="cols"
+        [rows]="rows"
+    ></textarea>
+    </ng-container>
+    <ng-container *ngIf="type !== 'textarea'">
+        <input
+            [id]="id"
+            [type]="type"
+            (keyup)="handleInputChange($event)"
+            (change)="handleInputChange($event)"
+            (focus)="markTouched()"
+            [placeholder]="placeholder ?? ''"
+            [value]="value ?? ''"
+            [readOnly]="readonly || disabled"
+        />
+    </ng-container>
+    <ng-content select="[suffix]"></ng-content>
+</div>
+<small class="base-error" *ngIf="hasError">
+    {{ error }}
+</small>
+

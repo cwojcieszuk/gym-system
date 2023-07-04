@@ -1,0 +1,27 @@
+@import "form/base-label";
+@import "form/base-input";
+@import "form/base-error";
+
+.mat-checkbox-layout {
+  white-space: normal!important;
+}
+
+button[mat-flat-button].toggle-button {
+  @apply w-[240px] h-[120px] text-xl border border-gray-500 shadow-base whitespace-normal;
+
+  :host.small, .small & {
+    @apply w-[130px] h-[80px] text-base;
+  }
+
+  .ng-touched.ng-invalid[formcontrolname] & {
+    @apply border-red-500;
+  }
+
+  &.disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+}
+
+.mat-tooltip {
+  white-space: pre-line;
+}

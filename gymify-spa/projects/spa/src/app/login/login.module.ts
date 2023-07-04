@@ -5,6 +5,8 @@ import { LoginViewComponent } from './views/login-view/login-view.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TextInputComponent } from '../shared/ui/text-input/text-input.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
+    TextInputComponent,
+    MatButtonModule,
   ],
 })
 export class LoginModule { }
