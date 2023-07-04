@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RootTemplateComponent } from './root-template/root-template.component';
 import { AppComponent } from './app.component';
+import { AuthenticatedGuard } from './auth/guards/authenticated.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +17,8 @@ const routes: Routes = [
         path: '',
         pathMatch: 'prefix',
         component: AppComponent,
+        runGuardsAndResolvers: 'always',
+        canActivate: [AuthenticatedGuard],
       },
     ],
   },

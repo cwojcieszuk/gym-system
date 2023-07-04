@@ -13,6 +13,9 @@ import { ApiClientModule } from '../../../api-client/api-client.module';
 import { environment } from '../environments/environment';
 import { RootTemplateComponent } from './root-template/root-template.component';
 import { BootstrapComponent } from './bootstrap/bootstrap.component';
+import { AuthStoreModule } from './auth/+state/auth-store.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AccessTokenInterceptor } from './auth/interceptors/access-token.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,8 +34,15 @@ import { BootstrapComponent } from './bootstrap/bootstrap.component';
     ApiClientModule.forRoot(environment.baseApiUrl),
     MatSidenavModule,
     LayoutModule,
+    AuthStoreModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AccessTokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [BootstrapComponent],
 })
 export class AppModule { }

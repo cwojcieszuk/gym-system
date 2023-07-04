@@ -39,6 +39,8 @@
     <ng-content select="[suffix]"></ng-content>
 </div>
 <small class="base-error" *ngIf="hasError">
-    {{ error }}
+    <ng-container [ngSwitch]="error">
+        <ng-container *ngSwitchCase="'required'">Field is required</ng-container>
+    </ng-container>
 </small>
 

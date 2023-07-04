@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { AuthFacade } from '../../../auth/+state/auth.facade';
 
 @Component({
   selector: 'gym-login-view',
@@ -8,12 +9,27 @@ import { NonNullableFormBuilder } from '@angular/forms';
 })
 export class LoginViewComponent {
   readonly form = this.fb.group({
-    login: this.fb.control<string>(''),
-    password: this.fb.control<string>(''),
+    login: this.fb.control<string>('', Validators.required),
+    password: this.fb.control<string>('', Validators.required),
   });
 
   constructor(
-    private fb: NonNullableFormBuilder
+    private fb: NonNullableFormBuilder,
+    public facade: AuthFacade
   ) {
+  }
+
+  submit(): void {
+    if (this.form.invalid) {
+      for (const control in this.form.controls) {
+        this.form.get(control)?.markAsDirty();
+      }
+
+      this.form.markAsTouched();
+
+      return;
+    }
+
+    this.facade.login(this.form.getRawValue());
   }
 }

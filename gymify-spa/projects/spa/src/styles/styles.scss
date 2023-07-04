@@ -12,3 +12,7 @@
 @layer components {
   @import 'form';
 }
+
+.mat-mdc-progress-spinner circle, .mat-spinner circle {
+  stroke: white !important;
+}
