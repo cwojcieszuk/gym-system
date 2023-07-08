@@ -15,7 +15,9 @@ public class CoachConfiguration : IEntityTypeConfiguration<Coach>
         builder.Property(e => e.Description)
             .HasMaxLength(300)
             .IsUnicode(false);
-
+        
+        builder.Property(e => e.IdCoach).HasMaxLength(450);
+        
         builder.HasOne(d => d.IdCoachNavigation).WithOne(p => p.Coach)
             .HasForeignKey<Coach>(d => d.IdCoach)
             .OnDelete(DeleteBehavior.ClientSetNull)

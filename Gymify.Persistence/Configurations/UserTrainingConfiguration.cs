@@ -11,6 +11,8 @@ public class UserTrainingConfiguration : IEntityTypeConfiguration<UserTraining>
         builder.HasKey(e => new { e.IdTraining, e.IdUser, e.IdUserTraining }).HasName("UserTraining_pk");
 
         builder.ToTable("UserTraining");
+        
+        builder.Property(e => e.IdUserTraining).HasMaxLength(450);
 
         builder.HasOne(d => d.IdTrainingNavigation).WithMany(p => p.UserTrainings)
             .HasForeignKey(d => d.IdTraining)

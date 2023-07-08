@@ -5,7 +5,7 @@ namespace Gymify.Domain.Entities;
 
 public partial class FavouriteCoach
 {
-    public int IdFavouriteCoach { get; set; }
+    public string IdFavouriteCoach { get; set; }
 
     public string IdClient { get; set; } = null!;
 

@@ -12,7 +12,7 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
 
         builder.ToTable("Template");
 
-        builder.Property(e => e.IdTemplate).ValueGeneratedNever();
+        builder.Property(e => e.IdTemplate).ValueGeneratedNever().HasMaxLength(450);;
         builder.Property(e => e.EstimatedTime).HasColumnType("numeric(3, 0)");
         builder.Property(e => e.TemplateName)
             .HasMaxLength(32)

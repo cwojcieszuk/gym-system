@@ -12,7 +12,8 @@ public class BodyPartConfiguration : IEntityTypeConfiguration<BodyPart>
 
         builder.ToTable("BodyPart");
 
-        builder.Property(e => e.IdBodyPart).ValueGeneratedNever();
+        builder.Property(e => e.IdBodyPart).ValueGeneratedNever()
+            .HasMaxLength(450);
         builder.Property(e => e.BodyPartName)
             .HasMaxLength(64)
             .IsUnicode(false);

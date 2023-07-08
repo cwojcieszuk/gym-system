@@ -8,11 +8,11 @@ public class CoachHourConfiguration : IEntityTypeConfiguration<CoachHour>
 {
     public void Configure(EntityTypeBuilder<CoachHour> builder)
     {
-        builder.HasKey(e => e.CoachHourId).HasName("CoachHour_pk");
+        builder.HasKey(e => e.IdCoachHour).HasName("CoachHour_pk");
 
         builder.ToTable("CoachHour");
 
-        builder.Property(e => e.CoachHourId).ValueGeneratedNever();
+        builder.Property(e => e.IdCoachHour).ValueGeneratedNever().HasMaxLength(450);;
         builder.Property(e => e.EndDate).HasColumnType("datetime");
         builder.Property(e => e.IdClient).HasMaxLength(450);
         builder.Property(e => e.IdCoach).HasMaxLength(450);

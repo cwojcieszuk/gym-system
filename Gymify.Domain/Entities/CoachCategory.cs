@@ -5,7 +5,7 @@ namespace Gymify.Domain.Entities;
 
 public partial class CoachCategory
 {
-    public int IdCoachCategory { get; set; }
+    public string IdCoachCategory { get; set; }
 
     public string CoachCategoryName { get; set; } = null!;
 

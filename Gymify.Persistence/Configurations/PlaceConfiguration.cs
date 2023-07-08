@@ -12,8 +12,8 @@ public class PlaceConfiguration : IEntityTypeConfiguration<Place>
 
         builder.ToTable("Place");
 
-        builder.Property(e => e.IdPlace).ValueGeneratedNever();
-        builder.Property(e => e.Place1)
+        builder.Property(e => e.IdPlace).ValueGeneratedNever().HasMaxLength(450);;
+        builder.Property(e => e.PlaceName)
             .HasMaxLength(50)
             .IsUnicode(false)
             .HasColumnName("Place");

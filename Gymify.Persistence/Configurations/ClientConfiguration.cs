@@ -9,7 +9,7 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
     public void Configure(EntityTypeBuilder<Client> builder)
     {
         builder.HasKey(e => e.IdClient).HasName("Client_pk");
-
+        builder.Property(e => e.IdClient).HasMaxLength(450);
         builder.ToTable("Client");
 
         builder.HasOne(d => d.IdClientNavigation).WithOne(p => p.Client)

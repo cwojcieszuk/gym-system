@@ -5,7 +5,7 @@ namespace Gymify.Domain.Entities;
 
 public partial class CoachHour
 {
-    public int CoachHourId { get; set; }
+    public string IdCoachHour { get; set; }
 
     public DateTime StartDate { get; set; }
 

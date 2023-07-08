@@ -12,7 +12,7 @@ public class DifficultyLevelConfiguration : IEntityTypeConfiguration<DifficultyL
 
         builder.ToTable("DifficultyLevel");
 
-        builder.Property(e => e.IdDifficultyLevel).ValueGeneratedNever();
+        builder.Property(e => e.IdDifficultyLevel).ValueGeneratedNever().HasMaxLength(450);;
         builder.Property(e => e.DifficultyLevelName)
             .HasMaxLength(32)
             .IsUnicode(false);

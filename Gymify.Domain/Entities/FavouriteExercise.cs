@@ -5,9 +5,9 @@ namespace Gymify.Domain.Entities;
 
 public partial class FavouriteExercise
 {
-    public int FavouriteExercise1 { get; set; }
+    public string IdFavouriteExercise { get; set; }
 
-    public int IdExercise { get; set; }
+    public string IdExercise { get; set; }
 
     public string IdUser { get; set; } = null!;
 

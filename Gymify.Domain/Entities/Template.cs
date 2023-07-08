@@ -5,11 +5,11 @@ namespace Gymify.Domain.Entities;
 
 public partial class Template
 {
-    public int IdTemplate { get; set; }
+    public string IdTemplate { get; set; }
 
     public string TemplateName { get; set; } = null!;
 
-    public int IdDifficultyLevel { get; set; }
+    public string IdDifficultyLevel { get; set; }
 
     public decimal EstimatedTime { get; set; }
 

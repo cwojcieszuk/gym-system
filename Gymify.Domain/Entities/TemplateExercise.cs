@@ -5,15 +5,15 @@ namespace Gymify.Domain.Entities;
 
 public partial class TemplateExercise
 {
-    public int IdTemplateExercise { get; set; }
+    public string IdTemplateExercise { get; set; }
 
-    public int IdExercise { get; set; }
+    public string IdExercise { get; set; }
 
-    public int IdTemplate { get; set; }
+    public string IdTemplate { get; set; }
 
-    public int NumberOfSets { get; set; }
+    public string NumberOfSets { get; set; }
 
-    public int NumberOfReps { get; set; }
+    public string NumberOfReps { get; set; }
 
     public string Comments { get; set; } = null!;
 

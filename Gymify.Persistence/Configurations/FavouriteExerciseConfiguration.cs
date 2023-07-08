@@ -8,12 +8,11 @@ public class FavouriteExerciseConfiguration : IEntityTypeConfiguration<Favourite
 {
     public void Configure(EntityTypeBuilder<FavouriteExercise> builder)
     {
-        builder.HasKey(e => new { e.IdExercise, e.IdUser, e.FavouriteExercise1 }).HasName("FavouriteExercise_pk");
+        builder.HasKey(e => new { e.IdExercise, e.IdUser, FavouriteExercise1 = e.IdFavouriteExercise }).HasName("FavouriteExercise_pk");
 
         builder.ToTable("FavouriteExercise");
 
-        builder.Property(e => e.FavouriteExercise1).HasColumnName("FavouriteExercise");
-
+        builder.Property(e => e.IdFavouriteExercise).HasColumnName("FavouriteExercise").HasMaxLength(450);
         builder.HasOne(d => d.IdExerciseNavigation).WithMany(p => p.FavouriteExercises)
             .HasForeignKey(d => d.IdExercise)
             .OnDelete(DeleteBehavior.ClientSetNull)

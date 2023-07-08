@@ -5,7 +5,7 @@ namespace Gymify.Domain.Entities;
 
 public partial class BodyPart
 {
-    public int IdBodyPart { get; set; }
+    public string IdBodyPart { get; set; }
 
     public string BodyPartName { get; set; } = null!;
 

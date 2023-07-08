@@ -51,6 +51,12 @@ public partial class GymifyDbContext : IdentityDbContext<AspNetUser>, IGymifyDbC
 
     public virtual DbSet<UserTraining> UserTrainings { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+        optionsBuilder.UseSqlServer("Data Source=(Localdb)\\Local;Initial Catalog=Gymify;Integrated Security=True;");
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(GymifyDbContext).Assembly);

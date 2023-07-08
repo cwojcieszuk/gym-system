@@ -10,7 +10,7 @@ public class TrainingConfiguration : IEntityTypeConfiguration<Training>
     {
         builder.HasKey(e => e.IdTraining).HasName("Training_pk");
 
-        builder.Property(e => e.IdTraining).ValueGeneratedNever();
+        builder.Property(e => e.IdTraining).ValueGeneratedNever().HasMaxLength(450);;
         builder.Property(e => e.TrainingDate).HasColumnType("date");
         builder.Property(e => e.TrainingName)
             .HasMaxLength(32)

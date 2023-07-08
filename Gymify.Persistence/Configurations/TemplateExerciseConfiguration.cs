@@ -11,7 +11,9 @@ public class TemplateExerciseConfiguration : IEntityTypeConfiguration<TemplateEx
         builder.HasKey(e => new { e.IdExercise, e.IdTemplate, e.IdTemplateExercise }).HasName("TemplateExercise_pk");
 
         builder.ToTable("TemplateExercise");
-
+        
+        builder.Property(e => e.IdTemplateExercise).HasMaxLength(450);
+        
         builder.Property(e => e.Comments)
             .HasMaxLength(160)
             .IsUnicode(false);

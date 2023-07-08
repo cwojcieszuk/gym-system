@@ -12,7 +12,7 @@ public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
 
         builder.ToTable("Exercise");
 
-        builder.Property(e => e.IdExercise).ValueGeneratedNever();
+        builder.Property(e => e.IdExercise).ValueGeneratedNever().HasMaxLength(450);;
         builder.Property(e => e.ExerciseName)
             .HasMaxLength(128)
             .IsUnicode(false);

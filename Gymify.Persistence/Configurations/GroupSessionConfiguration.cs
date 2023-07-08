@@ -12,7 +12,7 @@ public class GroupSessionConfiguration : IEntityTypeConfiguration<GroupSession>
 
         builder.ToTable("GroupSession");
 
-        builder.Property(e => e.IdGroupSession).ValueGeneratedNever();
+        builder.Property(e => e.IdGroupSession).ValueGeneratedNever().HasMaxLength(450);;
         builder.Property(e => e.Description)
             .HasMaxLength(300)
             .IsUnicode(false);

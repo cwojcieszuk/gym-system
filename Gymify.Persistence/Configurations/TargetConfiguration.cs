@@ -12,7 +12,7 @@ public class TargetConfiguration : IEntityTypeConfiguration<Target>
 
         builder.ToTable("Target");
 
-        builder.Property(e => e.IdTarget).ValueGeneratedNever();
+        builder.Property(e => e.IdTarget).ValueGeneratedNever().HasMaxLength(450);;
         builder.Property(e => e.TargetName)
             .HasMaxLength(64)
             .IsUnicode(false);

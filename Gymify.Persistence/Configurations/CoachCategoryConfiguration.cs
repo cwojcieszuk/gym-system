@@ -12,7 +12,7 @@ public class CoachCategoryConfiguration : IEntityTypeConfiguration<CoachCategory
 
         builder.ToTable("CoachCategory");
 
-        builder.Property(e => e.IdCoachCategory).ValueGeneratedNever();
+        builder.Property(e => e.IdCoachCategory).ValueGeneratedNever().HasMaxLength(450);;
         builder.Property(e => e.CoachCategoryName)
             .HasMaxLength(32)
             .IsUnicode(false);

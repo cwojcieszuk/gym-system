@@ -10,7 +10,7 @@ public class EquipmentConfiguration : IEntityTypeConfiguration<Equipment>
     {
         builder.HasKey(e => e.IdEquipment).HasName("Equipment_pk");
 
-        builder.Property(e => e.IdEquipment).ValueGeneratedNever();
+        builder.Property(e => e.IdEquipment).ValueGeneratedNever().HasMaxLength(450);;
         builder.Property(e => e.EquipmentName)
             .HasMaxLength(64)
             .IsUnicode(false);
