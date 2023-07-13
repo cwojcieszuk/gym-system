@@ -15,6 +15,7 @@ public class AuthController : ControllerBase
     }
     
     [HttpPost]
+    [Route("login")]
     public async Task<IActionResult> Login([FromBody]LoginCommand loginCommand)
     {
         var authResult = await _mediator.Send(loginCommand);
