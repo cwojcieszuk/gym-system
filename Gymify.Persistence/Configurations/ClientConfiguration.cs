@@ -8,12 +8,13 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
 {
     public void Configure(EntityTypeBuilder<Client> builder)
     {
-        builder.HasKey(e => e.IdClient).HasName("Client_pk");
-        builder.Property(e => e.IdClient).HasMaxLength(450);
+        builder.HasKey(e => e.ClientUid).HasName("Client_pk");
+        
+        builder.Property(e => e.ClientUid).ValueGeneratedNever();
         builder.ToTable("Client");
 
-        builder.HasOne(d => d.IdClientNavigation).WithOne(p => p.Client)
-            .HasForeignKey<Client>(d => d.IdClient)
+        builder.HasOne(d => d.User).WithOne(p => p.Client)
+            .HasForeignKey<Client>(d => d.ClientUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Client_AspNetUsers");
     }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Gymify.Domain.Entities;
 
-public partial class AspNetUser : IdentityUser
+public partial class AspNetUser : IdentityUser<Guid>
 {
     public string FirstName { get; set; } = null!;
 

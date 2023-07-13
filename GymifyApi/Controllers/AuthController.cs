@@ -18,10 +18,12 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login([FromBody]LoginCommand loginCommand)
     {
         var authResult = await _mediator.Send(loginCommand);
+        
         if (authResult == null)
         {
             return BadRequest();
         }
+        
         return Ok(authResult);
     } 
 }

@@ -8,18 +8,19 @@ public class FavouriteExerciseConfiguration : IEntityTypeConfiguration<Favourite
 {
     public void Configure(EntityTypeBuilder<FavouriteExercise> builder)
     {
-        builder.HasKey(e => new { e.IdExercise, e.IdUser, FavouriteExercise1 = e.IdFavouriteExercise }).HasName("FavouriteExercise_pk");
+        builder.HasKey(e => new { e.FavouriteExerciseUid, e.UserUid, e.ExerciseUid }).HasName("FavouriteExercise_pk");
 
         builder.ToTable("FavouriteExercise");
 
-        builder.Property(e => e.IdFavouriteExercise).HasColumnName("FavouriteExercise").HasMaxLength(450);
-        builder.HasOne(d => d.IdExerciseNavigation).WithMany(p => p.FavouriteExercises)
-            .HasForeignKey(d => d.IdExercise)
+        builder.Property(e => e.FavouriteExerciseUid).HasColumnName("FavouriteExercise");
+        
+        builder.HasOne(d => d.Exercise).WithMany(p => p.FavouriteExercises)
+            .HasForeignKey(d => d.ExerciseUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("UserExercise_Exercise");
 
-        builder.HasOne(d => d.IdUserNavigation).WithMany(p => p.FavouriteExercises)
-            .HasForeignKey(d => d.IdUser)
+        builder.HasOne(d => d.User).WithMany(p => p.FavouriteExercises)
+            .HasForeignKey(d => d.UserUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("FavouriteExercise_AspNetUsers");
     }

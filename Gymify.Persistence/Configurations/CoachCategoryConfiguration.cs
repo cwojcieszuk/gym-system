@@ -8,16 +8,17 @@ public class CoachCategoryConfiguration : IEntityTypeConfiguration<CoachCategory
 {
     public void Configure(EntityTypeBuilder<CoachCategory> builder)
     {
-        builder.HasKey(e => e.IdCoachCategory).HasName("CoachCategory_pk");
+        builder.HasKey(e => e.CoachCategoryUid).HasName("CoachCategory_pk");
 
         builder.ToTable("CoachCategory");
 
-        builder.Property(e => e.IdCoachCategory).ValueGeneratedNever().HasMaxLength(450);;
+        builder.Property(e => e.CoachCategoryUid).ValueGeneratedNever();
+        
         builder.Property(e => e.CoachCategoryName)
             .HasMaxLength(32)
             .IsUnicode(false);
 
-        builder.HasMany(d => d.IdCoaches).WithMany(p => p.IdCoachCategories)
+        builder.HasMany(d => d.Coaches).WithMany(p => p.CoachCategories)
             .UsingEntity<Dictionary<string, object>>(
                 "CoachType",
                 r => r.HasOne<Coach>().WithMany()

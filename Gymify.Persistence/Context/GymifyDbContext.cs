@@ -1,11 +1,12 @@
 ﻿using Gymify.Application.Interfaces;
 using Gymify.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gymify.Persistence.Context;
 
-public partial class GymifyDbContext : IdentityDbContext<AspNetUser>, IGymifyDbContext
+public partial class GymifyDbContext : IdentityDbContext<AspNetUser, IdentityRole<Guid>, Guid>, IGymifyDbContext
 {
     public GymifyDbContext()
     {
@@ -54,7 +55,7 @@ public partial class GymifyDbContext : IdentityDbContext<AspNetUser>, IGymifyDbC
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseSqlServer("Data Source=(Localdb)\\Local;Initial Catalog=Gymify;Integrated Security=True;");
+        optionsBuilder.UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=Gymify;Integrated Security=True;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

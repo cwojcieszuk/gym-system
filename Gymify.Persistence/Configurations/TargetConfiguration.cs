@@ -8,11 +8,11 @@ public class TargetConfiguration : IEntityTypeConfiguration<Target>
 {
     public void Configure(EntityTypeBuilder<Target> builder)
     {
-        builder.HasKey(e => e.IdTarget).HasName("Target_pk");
+        builder.HasKey(e => e.TargetUid).HasName("Target_pk");
 
         builder.ToTable("Target");
 
-        builder.Property(e => e.IdTarget).ValueGeneratedNever().HasMaxLength(450);;
+        builder.Property(e => e.TargetUid).ValueGeneratedNever();
         builder.Property(e => e.TargetName)
             .HasMaxLength(64)
             .IsUnicode(false);

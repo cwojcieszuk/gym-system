@@ -5,17 +5,17 @@ namespace Gymify.Domain.Entities;
 
 public partial class Template
 {
-    public string IdTemplate { get; set; }
+    public Guid TemplateUid { get; set; }
 
     public string TemplateName { get; set; } = null!;
 
-    public string IdDifficultyLevel { get; set; }
+    public Guid DifficultyLevelUid { get; set; }
 
     public decimal EstimatedTime { get; set; }
 
     public bool IsShared { get; set; }
 
-    public virtual DifficultyLevel IdDifficultyLevelNavigation { get; set; } = null!;
+    public virtual DifficultyLevel DifficultyLevel { get; set; } = null!;
 
     public virtual ICollection<TemplateExercise> TemplateExercises { get; set; } = new List<TemplateExercise>();
 

@@ -8,11 +8,11 @@ public class DifficultyLevelConfiguration : IEntityTypeConfiguration<DifficultyL
 {
     public void Configure(EntityTypeBuilder<DifficultyLevel> builder)
     {
-        builder.HasKey(e => e.IdDifficultyLevel).HasName("DifficultyLevel_pk");
+        builder.HasKey(e => e.DifficultyLevelUid).HasName("DifficultyLevel_pk");
 
         builder.ToTable("DifficultyLevel");
 
-        builder.Property(e => e.IdDifficultyLevel).ValueGeneratedNever().HasMaxLength(450);;
+        builder.Property(e => e.DifficultyLevelUid).ValueGeneratedNever();
         builder.Property(e => e.DifficultyLevelName)
             .HasMaxLength(32)
             .IsUnicode(false);

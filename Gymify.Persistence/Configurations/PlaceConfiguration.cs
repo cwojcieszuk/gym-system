@@ -8,11 +8,11 @@ public class PlaceConfiguration : IEntityTypeConfiguration<Place>
 {
     public void Configure(EntityTypeBuilder<Place> builder)
     {
-        builder.HasKey(e => e.IdPlace).HasName("Place_pk");
+        builder.HasKey(e => e.PlaceUid).HasName("Place_pk");
 
         builder.ToTable("Place");
 
-        builder.Property(e => e.IdPlace).ValueGeneratedNever().HasMaxLength(450);;
+        builder.Property(e => e.PlaceUid).ValueGeneratedNever();
         builder.Property(e => e.PlaceName)
             .HasMaxLength(50)
             .IsUnicode(false)

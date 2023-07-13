@@ -24,11 +24,11 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("ClientGroupSession", b =>
                 {
-                    b.Property<string>("IdGroupSession")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("IdGroupSession")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IdClient")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("IdClient")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IdGroupSession", "IdClient")
                         .HasName("ClientGroupSession_pk");
@@ -40,11 +40,11 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("CoachType", b =>
                 {
-                    b.Property<string>("IdCoachCategory")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("IdCoachCategory")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IdCoach")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("IdCoach")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("IdCoachCategory", "IdCoach")
                         .HasName("CoachType_pk");
@@ -56,8 +56,9 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.AspNetUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -147,9 +148,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.BodyPart", b =>
                 {
-                    b.Property<string>("IdBodyPart")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("BodyPartUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BodyPartName")
                         .IsRequired()
@@ -157,7 +157,7 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(64)");
 
-                    b.HasKey("IdBodyPart")
+                    b.HasKey("BodyPartUid")
                         .HasName("BodyPart_pk");
 
                     b.ToTable("BodyPart", (string)null);
@@ -165,11 +165,10 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Client", b =>
                 {
-                    b.Property<string>("IdClient")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ClientUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("IdClient")
+                    b.HasKey("ClientUid")
                         .HasName("Client_pk");
 
                     b.ToTable("Client", (string)null);
@@ -177,9 +176,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Coach", b =>
                 {
-                    b.Property<string>("IdCoach")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CoachUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -187,7 +185,7 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(300)");
 
-                    b.HasKey("IdCoach")
+                    b.HasKey("CoachUid")
                         .HasName("Coach_pk");
 
                     b.ToTable("Coach", (string)null);
@@ -195,9 +193,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.CoachCategory", b =>
                 {
-                    b.Property<string>("IdCoachCategory")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CoachCategoryUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CoachCategoryName")
                         .IsRequired()
@@ -205,7 +202,7 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(32)");
 
-                    b.HasKey("IdCoachCategory")
+                    b.HasKey("CoachCategoryUid")
                         .HasName("CoachCategory_pk");
 
                     b.ToTable("CoachCategory", (string)null);
@@ -213,40 +210,35 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.CoachHour", b =>
                 {
-                    b.Property<string>("IdCoachHour")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CoachHourUid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ClientUid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CoachUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("IdClient")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IdCoach")
-                        .IsRequired()
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime");
 
-                    b.HasKey("IdCoachHour")
+                    b.HasKey("CoachHourUid")
                         .HasName("CoachHour_pk");
 
-                    b.HasIndex("IdClient");
+                    b.HasIndex("ClientUid");
 
-                    b.HasIndex("IdCoach");
+                    b.HasIndex("CoachUid");
 
                     b.ToTable("CoachHour", (string)null);
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.DifficultyLevel", b =>
                 {
-                    b.Property<string>("IdDifficultyLevel")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("DifficultyLevelUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DifficultyLevelName")
                         .IsRequired()
@@ -254,7 +246,7 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(32)");
 
-                    b.HasKey("IdDifficultyLevel")
+                    b.HasKey("DifficultyLevelUid")
                         .HasName("DifficultyLevel_pk");
 
                     b.ToTable("DifficultyLevel", (string)null);
@@ -262,9 +254,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Equipment", b =>
                 {
-                    b.Property<string>("IdEquipment")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("EquipmentUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("EquipmentName")
                         .IsRequired()
@@ -272,7 +263,7 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(64)");
 
-                    b.HasKey("IdEquipment")
+                    b.HasKey("EquipmentUid")
                         .HasName("Equipment_pk");
 
                     b.ToTable("Equipment");
@@ -280,9 +271,14 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Exercise", b =>
                 {
-                    b.Property<string>("IdExercise")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ExerciseUid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BodyPartUid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EquipmentUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ExerciseName")
                         .IsRequired()
@@ -296,78 +292,71 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<string>("IdBodyPart")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("TargetUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IdEquipment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IdTarget")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("IdExercise")
+                    b.HasKey("ExerciseUid")
                         .HasName("Exercise_pk");
 
-                    b.HasIndex("IdBodyPart");
+                    b.HasIndex("BodyPartUid");
 
-                    b.HasIndex("IdEquipment");
+                    b.HasIndex("EquipmentUid");
 
-                    b.HasIndex("IdTarget");
+                    b.HasIndex("TargetUid");
 
                     b.ToTable("Exercise", (string)null);
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.FavouriteCoach", b =>
                 {
-                    b.Property<string>("IdFavouriteCoach")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("FavouriteCoachUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IdClient")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ClientUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IdCoach")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CoachUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("IdFavouriteCoach", "IdClient", "IdCoach")
+                    b.HasKey("FavouriteCoachUid", "ClientUid", "CoachUid")
                         .HasName("FavouriteCoach_pk");
 
-                    b.HasIndex("IdClient");
+                    b.HasIndex("ClientUid");
 
-                    b.HasIndex("IdCoach");
+                    b.HasIndex("CoachUid");
 
                     b.ToTable("FavouriteCoach", (string)null);
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.FavouriteExercise", b =>
                 {
-                    b.Property<string>("IdExercise")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IdUser")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IdFavouriteExercise")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<Guid>("FavouriteExerciseUid")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("FavouriteExercise");
 
-                    b.HasKey("IdExercise", "IdUser", "IdFavouriteExercise")
+                    b.Property<Guid>("UserUid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ExerciseUid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("FavouriteExerciseUid", "UserUid", "ExerciseUid")
                         .HasName("FavouriteExercise_pk");
 
-                    b.HasIndex("IdUser");
+                    b.HasIndex("ExerciseUid");
+
+                    b.HasIndex("UserUid");
 
                     b.ToTable("FavouriteExercise", (string)null);
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.GroupSession", b =>
                 {
-                    b.Property<string>("IdGroupSession")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GroupSessionUid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CoachUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -375,14 +364,8 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(300)");
 
-                    b.Property<string>("IdCoach")
-                        .IsRequired()
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IdPlace")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("PlaceUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("SessionEndDate")
                         .HasColumnType("datetime");
@@ -399,21 +382,20 @@ namespace Gymify.Persistence.Migrations
                     b.Property<int>("Slots")
                         .HasColumnType("int");
 
-                    b.HasKey("IdGroupSession")
+                    b.HasKey("GroupSessionUid")
                         .HasName("GroupSession_pk");
 
-                    b.HasIndex("IdCoach");
+                    b.HasIndex("CoachUid");
 
-                    b.HasIndex("IdPlace");
+                    b.HasIndex("PlaceUid");
 
                     b.ToTable("GroupSession", (string)null);
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Place", b =>
                 {
-                    b.Property<string>("IdPlace")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("PlaceUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PlaceName")
                         .IsRequired()
@@ -422,7 +404,7 @@ namespace Gymify.Persistence.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("Place");
 
-                    b.HasKey("IdPlace")
+                    b.HasKey("PlaceUid")
                         .HasName("Place_pk");
 
                     b.ToTable("Place", (string)null);
@@ -430,9 +412,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Target", b =>
                 {
-                    b.Property<string>("IdTarget")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("TargetUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TargetName")
                         .IsRequired()
@@ -440,7 +421,7 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(64)");
 
-                    b.HasKey("IdTarget")
+                    b.HasKey("TargetUid")
                         .HasName("Target_pk");
 
                     b.ToTable("Target", (string)null);
@@ -448,16 +429,14 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Template", b =>
                 {
-                    b.Property<string>("IdTemplate")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("TemplateUid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DifficultyLevelUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("EstimatedTime")
                         .HasColumnType("numeric(3, 0)");
-
-                    b.Property<string>("IdDifficultyLevel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsShared")
                         .HasColumnType("bit");
@@ -468,25 +447,24 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(32)");
 
-                    b.HasKey("IdTemplate")
+                    b.HasKey("TemplateUid")
                         .HasName("Template_pk");
 
-                    b.HasIndex("IdDifficultyLevel");
+                    b.HasIndex("DifficultyLevelUid");
 
                     b.ToTable("Template", (string)null);
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.TemplateExercise", b =>
                 {
-                    b.Property<string>("IdExercise")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("TemplateExerciseUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IdTemplate")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ExerciseUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IdTemplateExercise")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("TemplateUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comments")
                         .IsRequired()
@@ -502,23 +480,23 @@ namespace Gymify.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdExercise", "IdTemplate", "IdTemplateExercise")
+                    b.HasKey("TemplateExerciseUid", "ExerciseUid", "TemplateUid")
                         .HasName("TemplateExercise_pk");
 
-                    b.HasIndex("IdTemplate");
+                    b.HasIndex("ExerciseUid");
+
+                    b.HasIndex("TemplateUid");
 
                     b.ToTable("TemplateExercise", (string)null);
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Training", b =>
                 {
-                    b.Property<string>("IdTraining")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("TrainingUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IdTemplate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("TemplateUid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("TrainingDate")
                         .HasColumnType("date");
@@ -529,38 +507,40 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(32)");
 
-                    b.HasKey("IdTraining")
+                    b.HasKey("TrainingUid")
                         .HasName("Training_pk");
 
-                    b.HasIndex("IdTemplate");
+                    b.HasIndex("TemplateUid");
 
                     b.ToTable("Training");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.UserTraining", b =>
                 {
-                    b.Property<string>("IdTraining")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserTrainingUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IdUser")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("IdUserTraining")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("TrainingUid")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("IdTraining", "IdUser", "IdUserTraining")
+                    b.HasKey("UserTrainingUid", "UserUid", "TrainingUid")
                         .HasName("UserTraining_pk");
 
-                    b.HasIndex("IdUser");
+                    b.HasIndex("TrainingUid");
+
+                    b.HasIndex("UserUid");
 
                     b.ToTable("UserTraining", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -584,7 +564,7 @@ namespace Gymify.Persistence.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -598,9 +578,8 @@ namespace Gymify.Persistence.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -609,7 +588,7 @@ namespace Gymify.Persistence.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -623,9 +602,8 @@ namespace Gymify.Persistence.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -634,7 +612,7 @@ namespace Gymify.Persistence.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -645,9 +623,8 @@ namespace Gymify.Persistence.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -656,13 +633,13 @@ namespace Gymify.Persistence.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -671,10 +648,10 @@ namespace Gymify.Persistence.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -722,198 +699,198 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Client", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.AspNetUser", "IdClientNavigation")
+                    b.HasOne("Gymify.Domain.Entities.AspNetUser", "User")
                         .WithOne("Client")
-                        .HasForeignKey("Gymify.Domain.Entities.Client", "IdClient")
+                        .HasForeignKey("Gymify.Domain.Entities.Client", "ClientUid")
                         .IsRequired()
                         .HasConstraintName("Client_AspNetUsers");
 
-                    b.Navigation("IdClientNavigation");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Coach", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.AspNetUser", "IdCoachNavigation")
+                    b.HasOne("Gymify.Domain.Entities.AspNetUser", "User")
                         .WithOne("Coach")
-                        .HasForeignKey("Gymify.Domain.Entities.Coach", "IdCoach")
+                        .HasForeignKey("Gymify.Domain.Entities.Coach", "CoachUid")
                         .IsRequired()
                         .HasConstraintName("Coach_AspNetUsers");
 
-                    b.Navigation("IdCoachNavigation");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.CoachHour", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.Client", "IdClientNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Client", "Client")
                         .WithMany("CoachHours")
-                        .HasForeignKey("IdClient")
+                        .HasForeignKey("ClientUid")
                         .HasConstraintName("CoachHour_Client");
 
-                    b.HasOne("Gymify.Domain.Entities.Coach", "IdCoachNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Coach", "Coach")
                         .WithMany("CoachHours")
-                        .HasForeignKey("IdCoach")
+                        .HasForeignKey("CoachUid")
                         .IsRequired()
                         .HasConstraintName("CoachHour_Coach");
 
-                    b.Navigation("IdClientNavigation");
+                    b.Navigation("Client");
 
-                    b.Navigation("IdCoachNavigation");
+                    b.Navigation("Coach");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Exercise", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.BodyPart", "IdBodyPartNavigation")
+                    b.HasOne("Gymify.Domain.Entities.BodyPart", "BodyPart")
                         .WithMany("Exercises")
-                        .HasForeignKey("IdBodyPart")
+                        .HasForeignKey("BodyPartUid")
                         .IsRequired()
                         .HasConstraintName("Exercise_BodyPart");
 
-                    b.HasOne("Gymify.Domain.Entities.Equipment", "IdEquipmentNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Equipment", "Equipment")
                         .WithMany("Exercises")
-                        .HasForeignKey("IdEquipment")
+                        .HasForeignKey("EquipmentUid")
                         .IsRequired()
                         .HasConstraintName("Exercise_Equipment");
 
-                    b.HasOne("Gymify.Domain.Entities.Target", "IdTargetNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Target", "Target")
                         .WithMany("Exercises")
-                        .HasForeignKey("IdTarget")
+                        .HasForeignKey("TargetUid")
                         .IsRequired()
                         .HasConstraintName("Exercise_Target");
 
-                    b.Navigation("IdBodyPartNavigation");
+                    b.Navigation("BodyPart");
 
-                    b.Navigation("IdEquipmentNavigation");
+                    b.Navigation("Equipment");
 
-                    b.Navigation("IdTargetNavigation");
+                    b.Navigation("Target");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.FavouriteCoach", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.Client", "IdClientNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Client", "Client")
                         .WithMany("FavouriteCoaches")
-                        .HasForeignKey("IdClient")
+                        .HasForeignKey("ClientUid")
                         .IsRequired()
                         .HasConstraintName("FavouriteCoach_Client");
 
-                    b.HasOne("Gymify.Domain.Entities.Coach", "IdCoachNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Coach", "Coach")
                         .WithMany("FavouriteCoaches")
-                        .HasForeignKey("IdCoach")
+                        .HasForeignKey("CoachUid")
                         .IsRequired()
                         .HasConstraintName("FavouriteCoach_Coach");
 
-                    b.Navigation("IdClientNavigation");
+                    b.Navigation("Client");
 
-                    b.Navigation("IdCoachNavigation");
+                    b.Navigation("Coach");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.FavouriteExercise", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.Exercise", "IdExerciseNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Exercise", "Exercise")
                         .WithMany("FavouriteExercises")
-                        .HasForeignKey("IdExercise")
+                        .HasForeignKey("ExerciseUid")
                         .IsRequired()
                         .HasConstraintName("UserExercise_Exercise");
 
-                    b.HasOne("Gymify.Domain.Entities.AspNetUser", "IdUserNavigation")
+                    b.HasOne("Gymify.Domain.Entities.AspNetUser", "User")
                         .WithMany("FavouriteExercises")
-                        .HasForeignKey("IdUser")
+                        .HasForeignKey("UserUid")
                         .IsRequired()
                         .HasConstraintName("FavouriteExercise_AspNetUsers");
 
-                    b.Navigation("IdExerciseNavigation");
+                    b.Navigation("Exercise");
 
-                    b.Navigation("IdUserNavigation");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.GroupSession", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.Coach", "IdCoachNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Coach", "Coach")
                         .WithMany("GroupSessions")
-                        .HasForeignKey("IdCoach")
+                        .HasForeignKey("CoachUid")
                         .IsRequired()
                         .HasConstraintName("GroupSession_Coach");
 
-                    b.HasOne("Gymify.Domain.Entities.Place", "IdPlaceNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Place", "Place")
                         .WithMany("GroupSessions")
-                        .HasForeignKey("IdPlace")
+                        .HasForeignKey("PlaceUid")
                         .IsRequired()
                         .HasConstraintName("GroupSession_Place");
 
-                    b.Navigation("IdCoachNavigation");
+                    b.Navigation("Coach");
 
-                    b.Navigation("IdPlaceNavigation");
+                    b.Navigation("Place");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Template", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.DifficultyLevel", "IdDifficultyLevelNavigation")
+                    b.HasOne("Gymify.Domain.Entities.DifficultyLevel", "DifficultyLevel")
                         .WithMany("Templates")
-                        .HasForeignKey("IdDifficultyLevel")
+                        .HasForeignKey("DifficultyLevelUid")
                         .IsRequired()
                         .HasConstraintName("Template_DifficultyLevel");
 
-                    b.Navigation("IdDifficultyLevelNavigation");
+                    b.Navigation("DifficultyLevel");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.TemplateExercise", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.Exercise", "IdExerciseNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Exercise", "Exercise")
                         .WithMany("TemplateExercises")
-                        .HasForeignKey("IdExercise")
+                        .HasForeignKey("ExerciseUid")
                         .IsRequired()
-                        .HasConstraintName("Table_9_Exercise");
+                        .HasConstraintName("TemplateExercise_Exercise");
 
-                    b.HasOne("Gymify.Domain.Entities.Template", "IdTemplateNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Template", "Template")
                         .WithMany("TemplateExercises")
-                        .HasForeignKey("IdTemplate")
+                        .HasForeignKey("TemplateUid")
                         .IsRequired()
                         .HasConstraintName("TemplateExercise_Template");
 
-                    b.Navigation("IdExerciseNavigation");
+                    b.Navigation("Exercise");
 
-                    b.Navigation("IdTemplateNavigation");
+                    b.Navigation("Template");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Training", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.Template", "IdTemplateNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Template", "Template")
                         .WithMany("Training")
-                        .HasForeignKey("IdTemplate")
+                        .HasForeignKey("TemplateUid")
                         .IsRequired()
                         .HasConstraintName("Training_Template");
 
-                    b.Navigation("IdTemplateNavigation");
+                    b.Navigation("Template");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.UserTraining", b =>
                 {
-                    b.HasOne("Gymify.Domain.Entities.Training", "IdTrainingNavigation")
+                    b.HasOne("Gymify.Domain.Entities.Training", "Training")
                         .WithMany("UserTrainings")
-                        .HasForeignKey("IdTraining")
+                        .HasForeignKey("TrainingUid")
                         .IsRequired()
                         .HasConstraintName("UserTraining_Training");
 
-                    b.HasOne("Gymify.Domain.Entities.AspNetUser", "IdUserNavigation")
+                    b.HasOne("Gymify.Domain.Entities.AspNetUser", "User")
                         .WithMany("UserTrainings")
-                        .HasForeignKey("IdUser")
+                        .HasForeignKey("UserUid")
                         .IsRequired()
                         .HasConstraintName("UserTraining_AspNetUsers");
 
-                    b.Navigation("IdTrainingNavigation");
+                    b.Navigation("Training");
 
-                    b.Navigation("IdUserNavigation");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("Gymify.Domain.Entities.AspNetUser", null)
                         .WithMany()
@@ -922,7 +899,7 @@ namespace Gymify.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("Gymify.Domain.Entities.AspNetUser", null)
                         .WithMany()
@@ -931,9 +908,9 @@ namespace Gymify.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -946,7 +923,7 @@ namespace Gymify.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("Gymify.Domain.Entities.AspNetUser", null)
                         .WithMany()

@@ -5,11 +5,11 @@ namespace Gymify.Domain.Entities;
 
 public partial class TemplateExercise
 {
-    public string IdTemplateExercise { get; set; }
+    public Guid TemplateExerciseUid { get; set; }
 
-    public string IdExercise { get; set; }
+    public Guid ExerciseUid { get; set; }
 
-    public string IdTemplate { get; set; }
+    public Guid TemplateUid { get; set; }
 
     public string NumberOfSets { get; set; }
 
@@ -17,7 +17,7 @@ public partial class TemplateExercise
 
     public string Comments { get; set; } = null!;
 
-    public virtual Exercise IdExerciseNavigation { get; set; } = null!;
+    public virtual Exercise Exercise { get; set; } = null!;
 
-    public virtual Template IdTemplateNavigation { get; set; } = null!;
+    public virtual Template Template { get; set; } = null!;
 }

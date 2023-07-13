@@ -5,7 +5,7 @@ namespace Gymify.Domain.Entities;
 
 public partial class GroupSession
 {
-    public string IdGroupSession { get; set; }
+    public Guid GroupSessionUid { get; set; }
 
     public string SessionName { get; set; } = null!;
 
@@ -17,13 +17,13 @@ public partial class GroupSession
 
     public string Description { get; set; } = null!;
 
-    public string IdPlace { get; set; }
+    public Guid PlaceUid { get; set; }
 
-    public string IdCoach { get; set; } = null!;
+    public Guid CoachUid { get; set; }
 
-    public virtual Coach IdCoachNavigation { get; set; } = null!;
+    public virtual Coach Coach { get; set; } = null!;
 
-    public virtual Place IdPlaceNavigation { get; set; } = null!;
+    public virtual Place Place{ get; set; } = null!;
 
-    public virtual ICollection<Client> IdClients { get; set; } = new List<Client>();
+    public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
 }

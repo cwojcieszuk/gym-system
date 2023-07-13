@@ -8,18 +8,18 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
 {
     public void Configure(EntityTypeBuilder<Template> builder)
     {
-        builder.HasKey(e => e.IdTemplate).HasName("Template_pk");
+        builder.HasKey(e => e.TemplateUid).HasName("Template_pk");
 
         builder.ToTable("Template");
 
-        builder.Property(e => e.IdTemplate).ValueGeneratedNever().HasMaxLength(450);;
+        builder.Property(e => e.TemplateUid).ValueGeneratedNever();
         builder.Property(e => e.EstimatedTime).HasColumnType("numeric(3, 0)");
         builder.Property(e => e.TemplateName)
             .HasMaxLength(32)
             .IsUnicode(false);
 
-        builder.HasOne(d => d.IdDifficultyLevelNavigation).WithMany(p => p.Templates)
-            .HasForeignKey(d => d.IdDifficultyLevel)
+        builder.HasOne(d => d.DifficultyLevel).WithMany(p => p.Templates)
+            .HasForeignKey(d => d.DifficultyLevelUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Template_DifficultyLevel");
     }

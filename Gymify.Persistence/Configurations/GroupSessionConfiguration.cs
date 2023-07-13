@@ -8,32 +8,32 @@ public class GroupSessionConfiguration : IEntityTypeConfiguration<GroupSession>
 {
     public void Configure(EntityTypeBuilder<GroupSession> builder)
     {
-        builder.HasKey(e => e.IdGroupSession).HasName("GroupSession_pk");
+        builder.HasKey(e => e.GroupSessionUid).HasName("GroupSession_pk");
 
         builder.ToTable("GroupSession");
 
-        builder.Property(e => e.IdGroupSession).ValueGeneratedNever().HasMaxLength(450);;
+        builder.Property(e => e.GroupSessionUid).ValueGeneratedNever();
         builder.Property(e => e.Description)
             .HasMaxLength(300)
             .IsUnicode(false);
-        builder.Property(e => e.IdCoach).HasMaxLength(450);
+        
         builder.Property(e => e.SessionEndDate).HasColumnType("datetime");
         builder.Property(e => e.SessionName)
             .HasMaxLength(100)
             .IsUnicode(false);
         builder.Property(e => e.SessionStartDate).HasColumnType("datetime");
 
-        builder.HasOne(d => d.IdCoachNavigation).WithMany(p => p.GroupSessions)
-            .HasForeignKey(d => d.IdCoach)
+        builder.HasOne(d => d.Coach).WithMany(p => p.GroupSessions)
+            .HasForeignKey(d => d.CoachUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("GroupSession_Coach");
 
-        builder.HasOne(d => d.IdPlaceNavigation).WithMany(p => p.GroupSessions)
-            .HasForeignKey(d => d.IdPlace)
+        builder.HasOne(d => d.Place).WithMany(p => p.GroupSessions)
+            .HasForeignKey(d => d.PlaceUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("GroupSession_Place");
 
-        builder.HasMany(d => d.IdClients).WithMany(p => p.IdGroupSessions)
+        builder.HasMany(d => d.Clients).WithMany(p => p.IdGroupSessions)
             .UsingEntity<Dictionary<string, object>>(
                 "ClientGroupSession",
                 r => r.HasOne<Client>().WithMany()

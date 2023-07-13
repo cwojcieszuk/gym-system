@@ -5,7 +5,7 @@ namespace Gymify.Domain.Entities;
 
 public partial class Target
 {
-    public string IdTarget { get; set; }
+    public Guid TargetUid { get; set; }
 
     public string TargetName { get; set; } = null!;
 
