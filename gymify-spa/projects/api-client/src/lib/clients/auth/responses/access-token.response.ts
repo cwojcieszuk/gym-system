@@ -11,7 +11,7 @@ export class AccessTokenResponse {
     const decoded = jwtDecode<JwtDecodedToken>(accessToken);
 
     this.user = {
-      userId: +decoded.nameId,
+      userId: decoded.nameId,
       name: decoded.name,
       email: decoded.email,
       exp: decoded.exp,
