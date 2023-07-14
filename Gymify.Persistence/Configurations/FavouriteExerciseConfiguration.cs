@@ -8,9 +8,9 @@ public class FavouriteExerciseConfiguration : IEntityTypeConfiguration<Favourite
 {
     public void Configure(EntityTypeBuilder<FavouriteExercise> builder)
     {
+        builder.ToTable(nameof(FavouriteExercise));
+        
         builder.HasKey(e => new { e.FavouriteExerciseUid, e.UserUid, e.ExerciseUid }).HasName("FavouriteExercise_pk");
-
-        builder.ToTable("FavouriteExercise");
 
         builder.Property(e => e.FavouriteExerciseUid).HasColumnName("FavouriteExercise");
         

@@ -1,4 +1,5 @@
-﻿using Gymify.Domain.Entities;
+﻿using Gymify.Domain.Constants.Column;
+using Gymify.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,14 +9,14 @@ public class TemplateExerciseConfiguration : IEntityTypeConfiguration<TemplateEx
 {
     public void Configure(EntityTypeBuilder<TemplateExercise> builder)
     {
+        builder.ToTable(nameof(TemplateExercise));
+        
         builder.HasKey(e => new { e.TemplateExerciseUid, e.ExerciseUid, e.TemplateUid }).HasName("TemplateExercise_pk");
 
-        builder.ToTable("TemplateExercise");
-        
         builder.Property(e => e.TemplateExerciseUid).ValueGeneratedNever();
         
         builder.Property(e => e.Comments)
-            .HasMaxLength(160)
+            .HasMaxLength(TemplateColumnConstants.TemplateCommentsLimit)
             .IsUnicode(false);
 
         builder.HasOne(d => d.Exercise).WithMany(p => p.TemplateExercises)

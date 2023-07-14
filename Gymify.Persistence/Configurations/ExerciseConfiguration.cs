@@ -1,4 +1,5 @@
-﻿using Gymify.Domain.Entities;
+﻿using Gymify.Domain.Constants.Column;
+using Gymify.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,17 +9,18 @@ public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
 {
     public void Configure(EntityTypeBuilder<Exercise> builder)
     {
+        builder.ToTable(nameof(Exercise));
+        
         builder.HasKey(e => e.ExerciseUid).HasName("Exercise_pk");
-
-        builder.ToTable("Exercise");
 
         builder.Property(e => e.ExerciseUid).ValueGeneratedNever();
         
         builder.Property(e => e.ExerciseName)
-            .HasMaxLength(128)
+            .HasMaxLength(ExerciseColumnConstants.ExerciseNameLimit)
             .IsUnicode(false);
+        
         builder.Property(e => e.GifUrl)
-            .HasMaxLength(256)
+            .HasMaxLength(ExerciseColumnConstants.ExerciseGifUrlLimit)
             .IsUnicode(false);
 
         builder.HasOne(d => d.BodyPart).WithMany(p => p.Exercises)

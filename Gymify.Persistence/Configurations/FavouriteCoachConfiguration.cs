@@ -8,10 +8,10 @@ public class FavouriteCoachConfiguration : IEntityTypeConfiguration<FavouriteCoa
 {
     public void Configure(EntityTypeBuilder<FavouriteCoach> builder)
     {
+        builder.ToTable(nameof(FavouriteCoach));
+        
         builder.HasKey(e => new { e.FavouriteCoachUid, e.ClientUid, e.CoachUid }).HasName("FavouriteCoach_pk");
-        
-        builder.ToTable("FavouriteCoach");
-        
+
         builder.Property(e => e.FavouriteCoachUid).ValueGeneratedNever();
         
         builder.HasOne(d => d.Client).WithMany(p => p.FavouriteCoaches)

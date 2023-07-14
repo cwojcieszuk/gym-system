@@ -1,4 +1,5 @@
-﻿using Gymify.Domain.Entities;
+﻿using Gymify.Domain.Constants.Column;
+using Gymify.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,18 +9,18 @@ public class GroupSessionConfiguration : IEntityTypeConfiguration<GroupSession>
 {
     public void Configure(EntityTypeBuilder<GroupSession> builder)
     {
+        builder.ToTable(nameof(GroupSession));
+        
         builder.HasKey(e => e.GroupSessionUid).HasName("GroupSession_pk");
-
-        builder.ToTable("GroupSession");
 
         builder.Property(e => e.GroupSessionUid).ValueGeneratedNever();
         builder.Property(e => e.Description)
-            .HasMaxLength(300)
+            .HasMaxLength(GroupSessionColumnConstants.SessionDescriptionLimit)
             .IsUnicode(false);
         
         builder.Property(e => e.SessionEndDate).HasColumnType("datetime");
         builder.Property(e => e.SessionName)
-            .HasMaxLength(100)
+            .HasMaxLength(GroupSessionColumnConstants.SessionNameLimit)
             .IsUnicode(false);
         builder.Property(e => e.SessionStartDate).HasColumnType("datetime");
 

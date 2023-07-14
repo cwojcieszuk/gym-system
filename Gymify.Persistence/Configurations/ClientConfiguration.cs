@@ -8,10 +8,11 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
 {
     public void Configure(EntityTypeBuilder<Client> builder)
     {
+        builder.ToTable(nameof(Client));
+        
         builder.HasKey(e => e.ClientUid).HasName("Client_pk");
         
         builder.Property(e => e.ClientUid).ValueGeneratedNever();
-        builder.ToTable("Client");
 
         builder.HasOne(d => d.User).WithOne(p => p.Client)
             .HasForeignKey<Client>(d => d.ClientUid)

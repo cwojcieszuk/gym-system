@@ -1,4 +1,5 @@
-﻿using Gymify.Domain.Entities;
+﻿using Gymify.Domain.Constants.Column;
+using Gymify.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,14 +11,14 @@ public class AspNetUserConfiguration : IEntityTypeConfiguration<AspNetUser>
     {
         builder.Property(e => e.Birthdate).HasColumnType("date");
         builder.Property(e => e.CreatedAt).HasColumnType("datetime");
-        builder.Property(e => e.Email).HasMaxLength(256);
-        builder.Property(e => e.FirstName).HasMaxLength(100);
+        builder.Property(e => e.Email).HasMaxLength(UserColumnConstants.EmailLimit);
+        builder.Property(e => e.FirstName).HasMaxLength(UserColumnConstants.FirstNameLimit);
         builder.Property(e => e.Gender)
-            .HasMaxLength(30)
+            .HasMaxLength(UserColumnConstants.GenderLimit)
             .IsUnicode(false);
-        builder.Property(e => e.LastName).HasMaxLength(100);
-        builder.Property(e => e.NormalizedEmail).HasMaxLength(256);
-        builder.Property(e => e.NormalizedUserName).HasMaxLength(256);
-        builder.Property(e => e.UserName).HasMaxLength(256);
+        builder.Property(e => e.LastName).HasMaxLength(UserColumnConstants.LastNameLimit);
+        builder.Property(e => e.NormalizedEmail).HasMaxLength(UserColumnConstants.EmailLimit);
+        builder.Property(e => e.NormalizedUserName).HasMaxLength(UserColumnConstants.UsernameLimit);
+        builder.Property(e => e.UserName).HasMaxLength(UserColumnConstants.UsernameLimit);
     }
 }

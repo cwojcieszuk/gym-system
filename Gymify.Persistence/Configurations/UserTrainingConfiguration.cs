@@ -8,10 +8,10 @@ public class UserTrainingConfiguration : IEntityTypeConfiguration<UserTraining>
 {
     public void Configure(EntityTypeBuilder<UserTraining> builder)
     {
+        builder.ToTable(nameof(UserTraining));
+        
         builder.HasKey(e => new { e.UserTrainingUid, e.UserUid, e.TrainingUid }).HasName("UserTraining_pk");
 
-        builder.ToTable("UserTraining");
-        
         builder.Property(e => e.UserTrainingUid).ValueGeneratedNever();
 
         builder.HasOne(d => d.Training).WithMany(p => p.UserTrainings)

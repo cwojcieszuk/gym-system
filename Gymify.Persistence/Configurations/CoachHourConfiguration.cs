@@ -8,9 +8,9 @@ public class CoachHourConfiguration : IEntityTypeConfiguration<CoachHour>
 {
     public void Configure(EntityTypeBuilder<CoachHour> builder)
     {
+        builder.ToTable(nameof(CoachHour));
+        
         builder.HasKey(e => e.CoachHourUid).HasName("CoachHour_pk");
-
-        builder.ToTable("CoachHour");
 
         builder.Property(e => e.CoachHourUid).ValueGeneratedNever();
         builder.Property(e => e.EndDate).HasColumnType("datetime");

@@ -1,4 +1,5 @@
-﻿using Gymify.Domain.Entities;
+﻿using Gymify.Domain.Constants.Column;
+using Gymify.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,7 +13,7 @@ public class EquipmentConfiguration : IEntityTypeConfiguration<Equipment>
 
         builder.Property(e => e.EquipmentUid).ValueGeneratedNever();
         builder.Property(e => e.EquipmentName)
-            .HasMaxLength(64)
+            .HasMaxLength(ExerciseColumnConstants.EquipmentNameLimit)
             .IsUnicode(false);
     }
 }

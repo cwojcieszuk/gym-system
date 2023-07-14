@@ -1,4 +1,5 @@
-﻿using Gymify.Domain.Entities;
+﻿using Gymify.Domain.Constants.Column;
+using Gymify.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,7 +14,7 @@ public class TrainingConfiguration : IEntityTypeConfiguration<Training>
         builder.Property(e => e.TrainingUid).ValueGeneratedNever();
         builder.Property(e => e.TrainingDate).HasColumnType("date");
         builder.Property(e => e.TrainingName)
-            .HasMaxLength(32)
+            .HasMaxLength(TrainingColumnConstants.TrainingNameLimit)
             .IsUnicode(false);
 
         builder.HasOne(d => d.Template).WithMany(p => p.Training)
