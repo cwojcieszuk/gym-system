@@ -1,4 +1,5 @@
 ﻿using Gymify.Application.Auth.Commands.Login;
+using Gymify.Application.Auth.Commands.Refresh;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,13 +19,27 @@ public class AuthController : ControllerBase
     [Route("login")]
     public async Task<IActionResult> Login([FromBody]LoginCommand loginCommand)
     {
-        var authResult = await _mediator.Send(loginCommand);
+        AuthResponse? authResult = await _mediator.Send(loginCommand);
         
-        if (authResult == null)
+        if (authResult is null)
         {
-            return BadRequest();
+            return Forbid();
         }
         
         return Ok(authResult);
-    } 
+    }
+
+    [HttpPost]
+    [Route("refresh")]
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
+    {
+        AuthResponse authResult = await _mediator.Send(command);
+
+        if (authResult is null)
+        {
+            return Forbid();
+        }
+
+        return Ok(authResult);
+    }
 }

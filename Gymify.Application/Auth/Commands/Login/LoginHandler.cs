@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Gymify.Application.Auth.Commands.Login;
 
-public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse>
+public class LoginHandler : IRequestHandler<LoginCommand, AuthResponse?>
 {
     private readonly JwtHandler _jwtHandler;
     private readonly UserManager<AspNetUser> _userManager;
@@ -18,39 +18,31 @@ public class LoginHandler : IRequestHandler<LoginCommand, LoginResponse>
         _signInManager = signInManager;
     }
     
-    public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
+    public async Task<AuthResponse?> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
-        var result = await _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
+        SignInResult result = await _signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
         
         if(!result.Succeeded)
         {
             return null;
         }
         
-        var user = await _userManager.FindByEmailAsync(request.Email);
+        AspNetUser? user = await _userManager.FindByEmailAsync(request.Email);
 
-        if (user == null)
+        if (user is null)
         {
             return null;
         }
         
+        JwtSecurityToken tokenOptions = _jwtHandler.GenerateTokenOptions(user);
+        string accessToken = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        string refreshToken = _jwtHandler.GenerateRefreshToken();
         
+        await _userManager.SetAuthenticationTokenAsync(user, "MyApp", "RefreshToken", refreshToken);
         
-        var signingCredentials = _jwtHandler.GetSigningCredentials();
-        var claims = _jwtHandler.GetClaims(user);
-        var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
-        var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-        var refreshToken = _jwtHandler.GenerateRefreshToken();
-        
-        await _userManager.SetAuthenticationTokenAsync(
-            user,
-            "MyApp",
-            "RefreshToken",
-            refreshToken);
-        
-        return new LoginResponse()
+        return new AuthResponse
         {
-            AccessToken = token,
+            AccessToken = accessToken,
             RefreshToken = refreshToken
         };
     }

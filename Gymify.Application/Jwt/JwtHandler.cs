@@ -20,34 +20,14 @@ public class JwtHandler
         _jwtSettings = _configuration.GetSection("JwtSettings");
     }
 
-    public SigningCredentials GetSigningCredentials()
-    {
-        var key = Encoding.UTF8.GetBytes(_jwtSettings.GetSection("securityKey").Value);
-        var secret = new SymmetricSecurityKey(key);
-
-        return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
-    }
-    
-    public List<Claim> GetClaims(AspNetUser user)
-    {
-        var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        };
-
-        return claims;
-    }
-
-    public JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
+    public JwtSecurityToken GenerateTokenOptions(AspNetUser user)
     {
         var tokenOptions = new JwtSecurityToken(
             issuer: _jwtSettings["validIssuer"],
             audience: _jwtSettings["validAudience"],
-            claims: claims,
+            claims: GetClaims(user),
             expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings["expiryInMinutes"])),
-            signingCredentials: signingCredentials);
+            signingCredentials: GetSigningCredentials());
 
         return tokenOptions;
     }
@@ -58,5 +38,25 @@ public class JwtHandler
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(randomNumber);
         return Convert.ToBase64String(randomNumber);
+    }
+    
+    private SigningCredentials GetSigningCredentials()
+    {
+        var key = Encoding.UTF8.GetBytes(_jwtSettings.GetSection("securityKey").Value);
+        var secret = new SymmetricSecurityKey(key);
+
+        return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
+    }
+    
+    private List<Claim> GetClaims(AspNetUser user)
+    {
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        };
+
+        return claims;
     }
 }
