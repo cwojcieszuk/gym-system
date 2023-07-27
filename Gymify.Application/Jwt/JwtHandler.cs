@@ -26,7 +26,7 @@ public class JwtHandler
             issuer: _jwtSettings["validIssuer"],
             audience: _jwtSettings["validAudience"],
             claims: GetClaims(user),
-            expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings["expiryInMinutes"])),
+            expires: DateTime.Now.AddMinutes(GetRefreshTokenExpiration()),
             signingCredentials: GetSigningCredentials());
 
         return tokenOptions;
@@ -38,6 +38,11 @@ public class JwtHandler
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(randomNumber);
         return Convert.ToBase64String(randomNumber);
+    }
+
+    public double GetRefreshTokenExpiration()
+    {
+        return Convert.ToDouble(_jwtSettings["expiryInMinutes"]);
     }
     
     private SigningCredentials GetSigningCredentials()

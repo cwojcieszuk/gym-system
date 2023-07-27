@@ -20,5 +20,6 @@ public class AspNetUserConfiguration : IEntityTypeConfiguration<AspNetUser>
         builder.Property(e => e.NormalizedEmail).HasMaxLength(UserColumnConstants.EmailLimit);
         builder.Property(e => e.NormalizedUserName).HasMaxLength(UserColumnConstants.UsernameLimit);
         builder.Property(e => e.UserName).HasMaxLength(UserColumnConstants.UsernameLimit);
+        builder.Property(e => e.RefreshToken).HasMaxLength(UserColumnConstants.RefreshTokenLimit);
     }
 }

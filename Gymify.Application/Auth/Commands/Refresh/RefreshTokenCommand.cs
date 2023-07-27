@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Gymify.Application.Auth.Commands.Refresh;
 
-public record RefreshTokenCommand(string RefreshToken, string Email): IRequest<AuthResponse>;
+public record RefreshTokenCommand(string RefreshToken): IRequest<AuthResponse>;

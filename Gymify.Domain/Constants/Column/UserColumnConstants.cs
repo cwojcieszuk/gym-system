@@ -7,4 +7,5 @@ public class UserColumnConstants
     public const int GenderLimit = 30;
     public const int EmailLimit = 256;
     public const int UsernameLimit = 256;
+    public const int RefreshTokenLimit = 200;
 }

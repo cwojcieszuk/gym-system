@@ -1,44 +1,43 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Gymify.Application.Auth.Commands.Login;
+using Gymify.Application.Interfaces;
 using Gymify.Application.JWT;
 using Gymify.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Gymify.Application.Auth.Commands.Refresh;
 
 public class RefreshTokenHandler: IRequestHandler<RefreshTokenCommand, AuthResponse?>
 {
-    private readonly UserManager<AspNetUser> _userManager;
+    private readonly IGymifyDbContext _gymifyDbContext;
     private readonly JwtHandler _jwtHandler;
     
-    public RefreshTokenHandler(UserManager<AspNetUser> userManager, JwtHandler jwtHandler)
+    public RefreshTokenHandler(IGymifyDbContext gymifyDbContext, JwtHandler jwtHandler)
     {
-        _userManager = userManager;
+        _gymifyDbContext = gymifyDbContext;
         _jwtHandler = jwtHandler;
     }
     
     public async Task<AuthResponse?> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
-        AspNetUser? user = await _userManager.FindByEmailAsync(request.Email);
+        AspNetUser? user = await _gymifyDbContext.AspNetUsers.FirstOrDefaultAsync(u => u.RefreshToken == request.RefreshToken, cancellationToken);
 
-        if (user is null)
+        if (user is null || user.RefreshTokenExpiration < DateTime.UtcNow)
         {
             return null;
         }
-        
-        bool isValid = await _userManager.VerifyUserTokenAsync(user, "MyApp", "RefreshToken", request.RefreshToken);
 
-        if (!isValid)
-        {
-            return null;
-        }
-        
         JwtSecurityToken tokenOptions = _jwtHandler.GenerateTokenOptions(user);
         string accessToken = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         string refreshToken = _jwtHandler.GenerateRefreshToken();
 
-        return new AuthResponse()
+        user.RefreshToken = refreshToken;
+        user.RefreshTokenExpiration = DateTime.UtcNow.AddMinutes(_jwtHandler.GetRefreshTokenExpiration());
+
+        await _gymifyDbContext.SaveChangesAsync(cancellationToken);
+
+        return new AuthResponse
         {
             AccessToken = accessToken,
             RefreshToken = refreshToken

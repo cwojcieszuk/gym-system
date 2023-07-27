@@ -40,4 +40,6 @@ public interface IGymifyDbContext
     DbSet<Training> Training { get; set; }
 
     DbSet<UserTraining> UserTrainings { get; set; }
+
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
