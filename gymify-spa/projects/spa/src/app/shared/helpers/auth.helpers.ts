@@ -1,5 +1,7 @@
 import { LocalStorageHelpers } from './local-storage.helpers';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
+import { DecodedUserData } from '../../../../../api-client/src/lib/clients/auth/responses/decoded-user-data';
+import { AccessTokenResponse } from '../../../../../api-client/src/lib/clients/auth/responses/access-token.response';
 
 export class AuthHelpers {
   static getAccessTokenExp(token: string | null): number | null {
@@ -35,6 +37,16 @@ export class AuthHelpers {
     return name ?? '';
   }
 
+  static getUser(token: string | undefined): DecodedUserData | undefined {
+    if (!token) {
+      return undefined;
+    }
+
+    const resp = new AccessTokenResponse(token);
+
+    return resp.user;
+  }
+
   // static getInitialStatus(): AuthStatus {
   //   const token = LocalStorageHelpers.getAccessToken();
   //   const exp = this.getAccessTokenExp(token);
@@ -45,7 +57,7 @@ export class AuthHelpers {
   //   return AuthStatus.LoggedOut;
   // }
 
-  static setLocalStorageValues(values: { accessToken?: string; refreshToken?: string; refresh_token_expires_in?: string }): void {
+  static setLocalStorageValues(values: { accessToken?: string; refreshToken?: string; refreshTokenExpiresIn?: string }): void {
     if(values.accessToken) {
       LocalStorageHelpers.setAccessToken(values.accessToken);
     }
@@ -54,9 +66,9 @@ export class AuthHelpers {
       LocalStorageHelpers.setRefreshToken(values.refreshToken);
     }
 
-    if(values.refresh_token_expires_in) {
+    if(values.refreshTokenExpiresIn) {
       const currentTime = new Date();
-      LocalStorageHelpers.setRefreshTokenExp(currentTime.setSeconds(currentTime.getSeconds() + Number(values.refresh_token_expires_in)));
+      LocalStorageHelpers.setRefreshTokenExp(currentTime.setSeconds(currentTime.getSeconds() + Number(values.refreshTokenExpiresIn)));
     }
   }
 

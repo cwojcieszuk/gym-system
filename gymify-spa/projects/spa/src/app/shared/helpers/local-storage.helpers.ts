@@ -5,8 +5,8 @@ export class LocalStorageHelpers {
     this.setItem(LocalStorageKeys.accessToken, token);
   }
 
-  static getAccessToken(): string | null {
-    return this.getItem(LocalStorageKeys.accessToken, null);
+  static getAccessToken(): string | undefined {
+    return this.getItem(LocalStorageKeys.accessToken, undefined);
   }
 
   static removeAccessToken(): void {
@@ -17,8 +17,8 @@ export class LocalStorageHelpers {
     this.setItem(LocalStorageKeys.refreshToken, token);
   }
 
-  static getRefreshToken(): string | null {
-    return this.getItem(LocalStorageKeys.refreshToken, null);
+  static getRefreshToken(): string | undefined {
+    return this.getItem(LocalStorageKeys.refreshToken, undefined);
   }
 
   static removeRefreshToken(): void {

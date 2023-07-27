@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthFacade } from '../../auth/+state/auth.facade';
 
 @Component({
   selector: 'gym-menu',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent {
-
+  constructor(
+    public facade: AuthFacade
+  ) {}
 }

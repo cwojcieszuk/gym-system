@@ -13,6 +13,16 @@ export const getAccessToken = createSelector(
   state => state.accessToken
 );
 
+export const getRefreshToken = createSelector(
+  getAuthState,
+  state => state.refreshToken
+);
+
+export const getRefreshTokenExp = createSelector(
+  getAuthState,
+  state => state.refreshTokenExp
+);
+
 export const getUser = createSelector(
   getAuthState,
   state => state.user

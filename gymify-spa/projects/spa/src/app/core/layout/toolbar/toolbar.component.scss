@@ -1,0 +1,10 @@
+mat-toolbar {
+  background-color: var(--color-white);
+  height: 58px;
+}
+
+::ng-deep {
+  .mat-mdc-menu-panel {
+    max-width: unset !important;
+  }
+}

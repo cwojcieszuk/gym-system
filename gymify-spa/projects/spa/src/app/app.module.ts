@@ -7,15 +7,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LayoutModule } from './layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ApiClientModule } from '../../../api-client/api-client.module';
 import { environment } from '../environments/environment';
-import { RootTemplateComponent } from './root-template/root-template.component';
-import { BootstrapComponent } from './bootstrap/bootstrap.component';
-import { AuthStoreModule } from './auth/+state/auth-store.module';
+import { RootTemplateComponent } from './core/root-template/root-template.component';
+import { BootstrapComponent } from './core/bootstrap/bootstrap.component';
+import { AuthStoreModule } from './core/auth/+state/auth-store.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AccessTokenInterceptor } from './auth/interceptors/access-token.interceptor';
+import { AccessTokenInterceptor } from './core/auth/interceptors/access-token.interceptor';
+import { LayoutModule } from './core/layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -33,8 +33,8 @@ import { AccessTokenInterceptor } from './auth/interceptors/access-token.interce
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
     ApiClientModule.forRoot(environment.baseApiUrl),
     MatSidenavModule,
-    LayoutModule,
     AuthStoreModule,
+    LayoutModule,
   ],
   providers: [
     {

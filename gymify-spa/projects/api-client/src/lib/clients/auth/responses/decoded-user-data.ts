@@ -1,8 +1,8 @@
-import { JwtDecodedToken } from './jwt-decoded-token';
+import { JwtClaimTypes, JwtDecodedToken } from './jwt-decoded-token';
 
 export interface DecodedUserData {
-  userId: number;
-  name: string;
-  email: string;
+  userUid: JwtDecodedToken[JwtClaimTypes.NAME_IDENTIFIER];
+  name: JwtDecodedToken[JwtClaimTypes.NAME];
+  email: JwtDecodedToken[JwtClaimTypes.EMAIL];
   exp: JwtDecodedToken['exp'];
 }

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RootTemplateComponent } from './root-template/root-template.component';
+import { RootTemplateComponent } from './core/root-template/root-template.component';
 import { AppComponent } from './app.component';
-import { AuthenticatedGuard } from './auth/guards/authenticated.guard';
+import { AuthenticatedGuard } from './core/auth/guards/authenticated.guard';
+import { UnauthenticatedGuard } from './core/auth/guards/unauthenticated.guard';
 
 const routes: Routes = [
   {
@@ -11,7 +12,9 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
+        loadChildren: () => import('./core/login/login.module').then(m => m.LoginModule),
+        // runGuardsAndResolvers: 'always',
+        // canActivate: [UnauthenticatedGuard],
       },
       {
         path: '',

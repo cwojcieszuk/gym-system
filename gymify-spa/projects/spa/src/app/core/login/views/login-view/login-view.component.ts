@@ -9,7 +9,7 @@ import { AuthFacade } from '../../../auth/+state/auth.facade';
 })
 export class LoginViewComponent {
   readonly form = this.fb.group({
-    login: this.fb.control<string>('', Validators.required),
+    email: this.fb.control<string>('', Validators.required),
     password: this.fb.control<string>('', Validators.required),
   });
 
