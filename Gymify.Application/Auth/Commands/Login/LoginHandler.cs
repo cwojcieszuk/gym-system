@@ -20,7 +20,7 @@ public class LoginHandler : IRequestHandler<LoginCommand, AuthResponse>
     {
         AspNetUser user = await _userManager.FindByEmailAsync(request.Email);
 
-        JwtSecurityToken tokenOptions = _jwtHandler.GenerateTokenOptions(user);
+        JwtSecurityToken tokenOptions = await _jwtHandler.GenerateTokenOptions(user);
         string accessToken = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         string refreshToken = _jwtHandler.GenerateRefreshToken();
 

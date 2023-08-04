@@ -1,7 +1,10 @@
 ﻿using Gymify.Application.Auth.Commands.Login;
 using Gymify.Application.Auth.Commands.Logout;
 using Gymify.Application.Auth.Commands.Refresh;
+using GymifyApi.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymifyApi.Controllers;
@@ -18,6 +21,7 @@ public class AuthController : ControllerBase
     
     [HttpPost]
     [Route("login")]
+    [AllowAnonymous]
     public async Task<IActionResult> Login([FromBody]LoginCommand loginCommand)
     {
         AuthResponse authResult = await _mediator.Send(loginCommand);
@@ -27,6 +31,7 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("refresh")]
+    [AllowAnonymous]
     public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
     {
         AuthResponse? authResult = await _mediator.Send(command);
@@ -41,8 +46,10 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("logout")]
-    public async Task<IActionResult> Logout([FromBody] LogoutCommand command)
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public async Task<IActionResult> Logout()
     {
+        LogoutCommand command = new LogoutCommand(User.GetEmail());
         await _mediator.Send(command);
 
         return NoContent();

@@ -31,6 +31,12 @@ public static class DependencyInjection
                     .GetBytes(jwtSettings.GetSection("securityKey").Value))
             };
         });
+
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("Rights", policy => policy.RequireRole("Admin", "Coach", "User"));
+        });
+        
         return services;
     }
 }

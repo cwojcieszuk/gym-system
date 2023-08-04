@@ -13,19 +13,21 @@ public class JwtHandler
 {
     private readonly IConfiguration _configuration;
     private readonly IConfigurationSection _jwtSettings;
+    private readonly UserManager<AspNetUser> _userManager;
 
-    public JwtHandler(IConfiguration configuration)
+    public JwtHandler(IConfiguration configuration, UserManager<AspNetUser> userManager)
     {
         _configuration = configuration;
         _jwtSettings = _configuration.GetSection("JwtSettings");
+        _userManager = userManager;
     }
 
-    public JwtSecurityToken GenerateTokenOptions(AspNetUser user)
+    public async Task<JwtSecurityToken> GenerateTokenOptions(AspNetUser user)
     {
         var tokenOptions = new JwtSecurityToken(
             issuer: _jwtSettings["validIssuer"],
             audience: _jwtSettings["validAudience"],
-            claims: GetClaims(user),
+            claims: await GetClaims(user),
             expires: DateTime.Now.AddMinutes(GetRefreshTokenExpiration()),
             signingCredentials: GetSigningCredentials());
 
@@ -53,14 +55,18 @@ public class JwtHandler
         return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
     }
     
-    private List<Claim> GetClaims(AspNetUser user)
+    private async Task<List<Claim>> GetClaims(AspNetUser user)
     {
+        var role = await _userManager.GetRolesAsync(user);
+        
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, user.FirstName + " " + user.LastName),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
         };
+        
+        claims.AddRange(role.Select(role => new Claim(ClaimTypes.Role, role)));
 
         return claims;
     }

@@ -2,7 +2,6 @@ using Gymify.Application;
 using Gymify.Persistence;
 using GymifyApi;
 using GymifyApi.Middlewares;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
