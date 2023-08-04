@@ -15,6 +15,7 @@ export class AccessTokenResponse {
       name: decoded[JwtClaimTypes.NAME],
       email: decoded[JwtClaimTypes.EMAIL],
       exp: decoded.exp,
+      role: decoded[JwtClaimTypes.ROLE],
     };
   }
 }

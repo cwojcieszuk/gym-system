@@ -40,7 +40,7 @@ const reducer = createReducer(
     ...state,
     isLoading: false,
   })),
-  on(AuthActions.logoutSuccess, AuthActions.refreshFailure, state => ({
+  on(AuthActions.logoutSuccess, AuthActions.refreshFailure, AuthActions.logoutFailure, state => ({
     ...state,
     user: undefined,
     accessToken: undefined,

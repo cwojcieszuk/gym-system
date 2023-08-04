@@ -5,4 +5,5 @@ export interface DecodedUserData {
   name: JwtDecodedToken[JwtClaimTypes.NAME];
   email: JwtDecodedToken[JwtClaimTypes.EMAIL];
   exp: JwtDecodedToken['exp'];
+  role: JwtDecodedToken[JwtClaimTypes.ROLE];
 }

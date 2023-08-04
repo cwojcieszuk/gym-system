@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { LoginRequest } from '../../../../../../api-client/src/lib/clients/auth/requests/login.request';
 import * as AuthActions from './auth.actions';
 import * as AuthSelectors from './auth.selectors';
-import { filter, Subscription, timer } from 'rxjs';
+import { debounceTime, filter, Subscription, timer } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
@@ -13,6 +13,7 @@ export class AuthFacade {
   refreshTokenExp$ = this.store.select(AuthSelectors.getRefreshTokenExp);
   user$ = this.store.select(AuthSelectors.getUser);
   isAuthenticated$ = this.store.select(AuthSelectors.getIsAuthenticated);
+  isAdmin$ = this.store.select(AuthSelectors.getIsAdmin);
 
   private _refresh$?: Subscription;
 
@@ -20,8 +21,22 @@ export class AuthFacade {
 
   init(): void {
     this.refreshTokenExp$
-      .pipe(filter(Boolean))
-      .subscribe(value => this.setupRefresh(value));
+      .pipe(filter(Boolean), debounceTime(1000))
+      .subscribe(exp => {
+        const timeToExpiry = exp - Date.now();
+        if(timeToExpiry < 0) {
+          return;
+        }
+
+        const timeToRefresh = timeToExpiry - 30000;
+
+        if(timeToRefresh < 0) {
+          this.store.dispatch(AuthActions.refresh());
+          return;
+        }
+
+        this.setupRefresh(timeToRefresh);
+      });
   }
 
   login(params: LoginRequest): void {
@@ -46,6 +61,7 @@ export class AuthFacade {
   clearRefreshTimer(): void {
     this._refresh$?.unsubscribe();
   }
+
   redirectToLogin(): void {
     this.store.dispatch(AuthActions.redirectToLogin());
   }

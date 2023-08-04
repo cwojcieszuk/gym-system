@@ -13,8 +13,7 @@ const routes: Routes = [
       {
         path: 'login',
         loadChildren: () => import('./core/login/login.module').then(m => m.LoginModule),
-        // runGuardsAndResolvers: 'always',
-        // canActivate: [UnauthenticatedGuard],
+        canActivate: [UnauthenticatedGuard],
       },
       {
         path: '',

@@ -47,7 +47,7 @@ export class AuthEffects {
 
   redirectToLogin$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.redirectToLogin),
+      ofType(AuthActions.redirectToLogin, AuthActions.refreshFailure),
       tap(() => {
         void this.router.navigateByUrl('/login');
       })
@@ -72,7 +72,7 @@ export class AuthEffects {
 
   logoutSuccess$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.logoutSuccess),
+      ofType(AuthActions.logoutSuccess, AuthActions.logoutFailure),
       tap(() => {
         AuthHelpers.removeLocalStorageValues();
         this.facade.redirectToLogin();
