@@ -1,0 +1,15 @@
+<div class="content">
+    <form [formGroup]="form">
+        <img src="../../../../../assets/logo.svg" alt="logo">
+        <div class="flex w-full flex-col pt-8 gap-y-4">
+            <gym-text-input label="Email" formControlName="email" type="text"></gym-text-input>
+
+            <gym-text-input label="Password" formControlName="password" type="password"></gym-text-input>
+
+            <button mat-raised-button (click)="submit()" [disabled]="facade.isLoading$ | async">
+                <mat-progress-spinner diameter="30" mode="indeterminate" *ngIf="facade.isLoading$ | async"></mat-progress-spinner>
+                <span *ngIf="(facade.isLoading$ | async) === false">Log in</span>
+            </button>
+        </div>
+    </form>
+</div>

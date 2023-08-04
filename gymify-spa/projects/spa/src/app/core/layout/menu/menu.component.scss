@@ -1,4 +1,8 @@
-@use 'typography';
+@use '../../../../styles/typography';
+
+:host {
+  height: 100%;
+}
 
 img {
   padding: 48px;
@@ -13,4 +17,5 @@ img {
 mat-nav-list {
   display: flex;
   flex-direction: column;
+  height: 80%;
 }

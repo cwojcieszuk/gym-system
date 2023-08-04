@@ -2,13 +2,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-body {
-  height: 100vh;
-  width: 100vw;
+html, body, root {
+  @apply w-screen h-screen overflow-hidden;
 }
 
-app-root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+root {
+  @apply flex flex-col p-0;
 }

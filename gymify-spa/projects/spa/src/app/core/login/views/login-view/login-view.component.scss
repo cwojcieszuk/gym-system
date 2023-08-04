@@ -1,0 +1,20 @@
+:host {
+  @apply flex flex-1 overflow-hidden items-center justify-center;
+
+  background-image: linear-gradient(hsla(229, 32%, 13%, .85), hsla(229, 32%, 13%, .85)), url("../../../../../assets/login-background-image.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+form {
+  @apply flex flex-col w-[400px] items-center rounded-md p-10 bg-white;
+}
+
+img {
+  @apply w-[169px] h-[69px];
+}
+
+button {
+  background-color: var(--color-purple) !important;
+  color: white !important;
+}

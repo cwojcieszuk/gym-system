@@ -1,0 +1,10 @@
+:host {
+  @apply flex flex-col relative pb-5;
+  &.simple {
+    @apply pb-0;
+  }
+
+  .base-error {
+    @apply absolute bottom-0 left-0 w-full;
+  }
+}

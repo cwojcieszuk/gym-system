@@ -1,0 +1,19 @@
+<mat-toolbar class="w-full">
+    <div class="flex items-center ml-auto">
+        <span class="text-[16px]">Welcome, <span class="font-bold">{{userFirstName | async}}</span></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+    <div class="flex gap-x-32 px-4 pb-4">
+        <span class="font-bold text-[13px]">{{(facade.user$ | async)?.name}}</span>
+        <span class="font-bold text-[13px]">{{(facade.user$ | async)?.email}}</span>
+    </div>
+    <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>Profile settings</span>
+    </button>
+</mat-menu>
