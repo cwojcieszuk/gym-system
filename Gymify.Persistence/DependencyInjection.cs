@@ -13,7 +13,11 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
     {
         services.AddDbContext<GymifyDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("gymify")));
-        services.AddIdentity<AspNetUser, IdentityRole>().AddEntityFrameworkStores<GymifyDbContext>();
+        services
+            .AddIdentity<AspNetUser, IdentityRole<Guid>>()
+            .AddRoles<IdentityRole<Guid>>()
+            .AddEntityFrameworkStores<GymifyDbContext>()
+            .AddTokenProvider("MyApp", typeof(DataProtectorTokenProvider<AspNetUser>));
         services.AddScoped<IGymifyDbContext, GymifyDbContext>();
         
         return services;

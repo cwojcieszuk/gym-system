@@ -5,13 +5,13 @@ namespace Gymify.Domain.Entities;
 
 public partial class UserTraining
 {
-    public int IdUserTraining { get; set; }
+    public Guid UserTrainingUid { get; set; }
 
-    public int IdTraining { get; set; }
+    public Guid TrainingUid { get; set; }
 
-    public string IdUser { get; set; } = null!;
+    public Guid UserUid { get; set; }
 
-    public virtual Training IdTrainingNavigation { get; set; } = null!;
+    public virtual Training Training { get; set; } = null!;
 
-    public virtual AspNetUser IdUserNavigation { get; set; } = null!;
+    public virtual AspNetUser User { get; set; } = null!;
 }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Gymify.Domain.Entities;
 
-public partial class AspNetUser : IdentityUser
+public partial class AspNetUser : IdentityUser<Guid>
 {
     public string FirstName { get; set; } = null!;
 
@@ -17,6 +17,10 @@ public partial class AspNetUser : IdentityUser
     public DateTime Birthdate { get; set; }
 
     public byte[] Avatar { get; set; } = null!;
+    
+    public string? RefreshToken { get; set; }
+    
+    public DateTime? RefreshTokenExpiration { get; set; }
 
     public virtual Client? Client { get; set; }
 

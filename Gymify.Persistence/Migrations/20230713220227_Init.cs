@@ -15,7 +15,7 @@ namespace Gymify.Persistence.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -29,10 +29,9 @@ namespace Gymify.Persistence.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    IsMale = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                     Gender = table.Column<string>(type: "varchar(30)", unicode: false, maxLength: 30, nullable: false),
                     Birthdate = table.Column<DateTime>(type: "date", nullable: false),
@@ -61,72 +60,72 @@ namespace Gymify.Persistence.Migrations
                 name: "BodyPart",
                 columns: table => new
                 {
-                    IdBodyPart = table.Column<int>(type: "int", nullable: false),
+                    BodyPartUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BodyPartName = table.Column<string>(type: "varchar(64)", unicode: false, maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("BodyPart_pk", x => x.IdBodyPart);
+                    table.PrimaryKey("BodyPart_pk", x => x.BodyPartUid);
                 });
 
             migrationBuilder.CreateTable(
                 name: "CoachCategory",
                 columns: table => new
                 {
-                    IdCoachCategory = table.Column<int>(type: "int", nullable: false),
+                    CoachCategoryUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CoachCategoryName = table.Column<string>(type: "varchar(32)", unicode: false, maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("CoachCategory_pk", x => x.IdCoachCategory);
+                    table.PrimaryKey("CoachCategory_pk", x => x.CoachCategoryUid);
                 });
 
             migrationBuilder.CreateTable(
                 name: "DifficultyLevel",
                 columns: table => new
                 {
-                    IdDifficultyLevel = table.Column<int>(type: "int", nullable: false),
+                    DifficultyLevelUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DifficultyLevelName = table.Column<string>(type: "varchar(32)", unicode: false, maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("DifficultyLevel_pk", x => x.IdDifficultyLevel);
+                    table.PrimaryKey("DifficultyLevel_pk", x => x.DifficultyLevelUid);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Equipment",
                 columns: table => new
                 {
-                    IdEquipment = table.Column<int>(type: "int", nullable: false),
+                    EquipmentUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EquipmentName = table.Column<string>(type: "varchar(64)", unicode: false, maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Equipment_pk", x => x.IdEquipment);
+                    table.PrimaryKey("Equipment_pk", x => x.EquipmentUid);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Place",
                 columns: table => new
                 {
-                    IdPlace = table.Column<int>(type: "int", nullable: false),
+                    PlaceUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Place = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Place_pk", x => x.IdPlace);
+                    table.PrimaryKey("Place_pk", x => x.PlaceUid);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Target",
                 columns: table => new
                 {
-                    IdTarget = table.Column<int>(type: "int", nullable: false),
+                    TargetUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TargetName = table.Column<string>(type: "varchar(64)", unicode: false, maxLength: 64, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Target_pk", x => x.IdTarget);
+                    table.PrimaryKey("Target_pk", x => x.TargetUid);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,7 +134,7 @@ namespace Gymify.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -156,7 +155,7 @@ namespace Gymify.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -178,7 +177,7 @@ namespace Gymify.Persistence.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -195,8 +194,8 @@ namespace Gymify.Persistence.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -219,7 +218,7 @@ namespace Gymify.Persistence.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -239,14 +238,14 @@ namespace Gymify.Persistence.Migrations
                 name: "Client",
                 columns: table => new
                 {
-                    IdClient = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ClientUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Client_pk", x => x.IdClient);
+                    table.PrimaryKey("Client_pk", x => x.ClientUid);
                     table.ForeignKey(
                         name: "Client_AspNetUsers",
-                        column: x => x.IdClient,
+                        column: x => x.ClientUid,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -255,15 +254,15 @@ namespace Gymify.Persistence.Migrations
                 name: "Coach",
                 columns: table => new
                 {
-                    IdCoach = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CoachUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "varchar(300)", unicode: false, maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Coach_pk", x => x.IdCoach);
+                    table.PrimaryKey("Coach_pk", x => x.CoachUid);
                     table.ForeignKey(
                         name: "Coach_AspNetUsers",
-                        column: x => x.IdCoach,
+                        column: x => x.CoachUid,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -272,84 +271,84 @@ namespace Gymify.Persistence.Migrations
                 name: "Template",
                 columns: table => new
                 {
-                    IdTemplate = table.Column<int>(type: "int", nullable: false),
+                    TemplateUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TemplateName = table.Column<string>(type: "varchar(32)", unicode: false, maxLength: 32, nullable: false),
-                    IdDifficultyLevel = table.Column<int>(type: "int", nullable: false),
+                    DifficultyLevelUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     EstimatedTime = table.Column<decimal>(type: "numeric(3,0)", nullable: false),
                     IsShared = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Template_pk", x => x.IdTemplate);
+                    table.PrimaryKey("Template_pk", x => x.TemplateUid);
                     table.ForeignKey(
                         name: "Template_DifficultyLevel",
-                        column: x => x.IdDifficultyLevel,
+                        column: x => x.DifficultyLevelUid,
                         principalTable: "DifficultyLevel",
-                        principalColumn: "IdDifficultyLevel");
+                        principalColumn: "DifficultyLevelUid");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Exercise",
                 columns: table => new
                 {
-                    IdExercise = table.Column<int>(type: "int", nullable: false),
+                    ExerciseUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ExerciseName = table.Column<string>(type: "varchar(128)", unicode: false, maxLength: 128, nullable: false),
-                    IdBodyPart = table.Column<int>(type: "int", nullable: false),
-                    IdTarget = table.Column<int>(type: "int", nullable: false),
-                    IdEquipment = table.Column<int>(type: "int", nullable: false),
+                    BodyPartUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TargetUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EquipmentUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     GifUrl = table.Column<string>(type: "varchar(256)", unicode: false, maxLength: 256, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Exercise_pk", x => x.IdExercise);
+                    table.PrimaryKey("Exercise_pk", x => x.ExerciseUid);
                     table.ForeignKey(
                         name: "Exercise_BodyPart",
-                        column: x => x.IdBodyPart,
+                        column: x => x.BodyPartUid,
                         principalTable: "BodyPart",
-                        principalColumn: "IdBodyPart");
+                        principalColumn: "BodyPartUid");
                     table.ForeignKey(
                         name: "Exercise_Equipment",
-                        column: x => x.IdEquipment,
+                        column: x => x.EquipmentUid,
                         principalTable: "Equipment",
-                        principalColumn: "IdEquipment");
+                        principalColumn: "EquipmentUid");
                     table.ForeignKey(
                         name: "Exercise_Target",
-                        column: x => x.IdTarget,
+                        column: x => x.TargetUid,
                         principalTable: "Target",
-                        principalColumn: "IdTarget");
+                        principalColumn: "TargetUid");
                 });
 
             migrationBuilder.CreateTable(
                 name: "CoachHour",
                 columns: table => new
                 {
-                    CoachHourId = table.Column<int>(type: "int", nullable: false),
+                    CoachHourUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime", nullable: false),
-                    IdCoach = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
-                    IdClient = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true)
+                    CoachUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ClientUid = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("CoachHour_pk", x => x.CoachHourId);
+                    table.PrimaryKey("CoachHour_pk", x => x.CoachHourUid);
                     table.ForeignKey(
                         name: "CoachHour_Client",
-                        column: x => x.IdClient,
+                        column: x => x.ClientUid,
                         principalTable: "Client",
-                        principalColumn: "IdClient");
+                        principalColumn: "ClientUid");
                     table.ForeignKey(
                         name: "CoachHour_Coach",
-                        column: x => x.IdCoach,
+                        column: x => x.CoachUid,
                         principalTable: "Coach",
-                        principalColumn: "IdCoach");
+                        principalColumn: "CoachUid");
                 });
 
             migrationBuilder.CreateTable(
                 name: "CoachType",
                 columns: table => new
                 {
-                    IdCoachCategory = table.Column<int>(type: "int", nullable: false),
-                    IdCoach = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    IdCoachCategory = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdCoach = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -358,139 +357,139 @@ namespace Gymify.Persistence.Migrations
                         name: "CoachType_Coach",
                         column: x => x.IdCoach,
                         principalTable: "Coach",
-                        principalColumn: "IdCoach");
+                        principalColumn: "CoachUid");
                     table.ForeignKey(
                         name: "CoachType_CoachCategory",
                         column: x => x.IdCoachCategory,
                         principalTable: "CoachCategory",
-                        principalColumn: "IdCoachCategory");
+                        principalColumn: "CoachCategoryUid");
                 });
 
             migrationBuilder.CreateTable(
                 name: "FavouriteCoach",
                 columns: table => new
                 {
-                    IdFavouriteCoach = table.Column<int>(type: "int", nullable: false),
-                    IdClient = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IdCoach = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    FavouriteCoachUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ClientUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CoachUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("FavouriteCoach_pk", x => new { x.IdFavouriteCoach, x.IdClient, x.IdCoach });
+                    table.PrimaryKey("FavouriteCoach_pk", x => new { x.FavouriteCoachUid, x.ClientUid, x.CoachUid });
                     table.ForeignKey(
                         name: "FavouriteCoach_Client",
-                        column: x => x.IdClient,
+                        column: x => x.ClientUid,
                         principalTable: "Client",
-                        principalColumn: "IdClient");
+                        principalColumn: "ClientUid");
                     table.ForeignKey(
                         name: "FavouriteCoach_Coach",
-                        column: x => x.IdCoach,
+                        column: x => x.CoachUid,
                         principalTable: "Coach",
-                        principalColumn: "IdCoach");
+                        principalColumn: "CoachUid");
                 });
 
             migrationBuilder.CreateTable(
                 name: "GroupSession",
                 columns: table => new
                 {
-                    IdGroupSession = table.Column<int>(type: "int", nullable: false),
+                    GroupSessionUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SessionName = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
                     Slots = table.Column<int>(type: "int", nullable: false),
                     SessionStartDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     SessionEndDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     Description = table.Column<string>(type: "varchar(300)", unicode: false, maxLength: 300, nullable: false),
-                    IdPlace = table.Column<int>(type: "int", nullable: false),
-                    IdCoach = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false)
+                    PlaceUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CoachUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("GroupSession_pk", x => x.IdGroupSession);
+                    table.PrimaryKey("GroupSession_pk", x => x.GroupSessionUid);
                     table.ForeignKey(
                         name: "GroupSession_Coach",
-                        column: x => x.IdCoach,
+                        column: x => x.CoachUid,
                         principalTable: "Coach",
-                        principalColumn: "IdCoach");
+                        principalColumn: "CoachUid");
                     table.ForeignKey(
                         name: "GroupSession_Place",
-                        column: x => x.IdPlace,
+                        column: x => x.PlaceUid,
                         principalTable: "Place",
-                        principalColumn: "IdPlace");
+                        principalColumn: "PlaceUid");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Training",
                 columns: table => new
                 {
-                    IdTraining = table.Column<int>(type: "int", nullable: false),
+                    TrainingUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TrainingDate = table.Column<DateTime>(type: "date", nullable: false),
                     TrainingName = table.Column<string>(type: "varchar(32)", unicode: false, maxLength: 32, nullable: false),
-                    IdTemplate = table.Column<int>(type: "int", nullable: false)
+                    TemplateUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Training_pk", x => x.IdTraining);
+                    table.PrimaryKey("Training_pk", x => x.TrainingUid);
                     table.ForeignKey(
                         name: "Training_Template",
-                        column: x => x.IdTemplate,
+                        column: x => x.TemplateUid,
                         principalTable: "Template",
-                        principalColumn: "IdTemplate");
+                        principalColumn: "TemplateUid");
                 });
 
             migrationBuilder.CreateTable(
                 name: "FavouriteExercise",
                 columns: table => new
                 {
-                    FavouriteExercise = table.Column<int>(type: "int", nullable: false),
-                    IdExercise = table.Column<int>(type: "int", nullable: false),
-                    IdUser = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    FavouriteExercise = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExerciseUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("FavouriteExercise_pk", x => new { x.IdExercise, x.IdUser, x.FavouriteExercise });
+                    table.PrimaryKey("FavouriteExercise_pk", x => new { x.FavouriteExercise, x.UserUid, x.ExerciseUid });
                     table.ForeignKey(
                         name: "FavouriteExercise_AspNetUsers",
-                        column: x => x.IdUser,
+                        column: x => x.UserUid,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "UserExercise_Exercise",
-                        column: x => x.IdExercise,
+                        column: x => x.ExerciseUid,
                         principalTable: "Exercise",
-                        principalColumn: "IdExercise");
+                        principalColumn: "ExerciseUid");
                 });
 
             migrationBuilder.CreateTable(
                 name: "TemplateExercise",
                 columns: table => new
                 {
-                    IdTemplateExercise = table.Column<int>(type: "int", nullable: false),
-                    IdExercise = table.Column<int>(type: "int", nullable: false),
-                    IdTemplate = table.Column<int>(type: "int", nullable: false),
-                    NumberOfSets = table.Column<int>(type: "int", nullable: false),
-                    NumberOfReps = table.Column<int>(type: "int", nullable: false),
+                    TemplateExerciseUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExerciseUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TemplateUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NumberOfSets = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumberOfReps = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Comments = table.Column<string>(type: "varchar(160)", unicode: false, maxLength: 160, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("TemplateExercise_pk", x => new { x.IdExercise, x.IdTemplate, x.IdTemplateExercise });
+                    table.PrimaryKey("TemplateExercise_pk", x => new { x.TemplateExerciseUid, x.ExerciseUid, x.TemplateUid });
                     table.ForeignKey(
-                        name: "Table_9_Exercise",
-                        column: x => x.IdExercise,
+                        name: "TemplateExercise_Exercise",
+                        column: x => x.ExerciseUid,
                         principalTable: "Exercise",
-                        principalColumn: "IdExercise");
+                        principalColumn: "ExerciseUid");
                     table.ForeignKey(
                         name: "TemplateExercise_Template",
-                        column: x => x.IdTemplate,
+                        column: x => x.TemplateUid,
                         principalTable: "Template",
-                        principalColumn: "IdTemplate");
+                        principalColumn: "TemplateUid");
                 });
 
             migrationBuilder.CreateTable(
                 name: "ClientGroupSession",
                 columns: table => new
                 {
-                    IdGroupSession = table.Column<int>(type: "int", nullable: false),
-                    IdClient = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    IdGroupSession = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdClient = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -499,35 +498,35 @@ namespace Gymify.Persistence.Migrations
                         name: "ClientGroupSession_Client",
                         column: x => x.IdClient,
                         principalTable: "Client",
-                        principalColumn: "IdClient");
+                        principalColumn: "ClientUid");
                     table.ForeignKey(
                         name: "ClientGroupSession_GroupSession",
                         column: x => x.IdGroupSession,
                         principalTable: "GroupSession",
-                        principalColumn: "IdGroupSession");
+                        principalColumn: "GroupSessionUid");
                 });
 
             migrationBuilder.CreateTable(
                 name: "UserTraining",
                 columns: table => new
                 {
-                    IdUserTraining = table.Column<int>(type: "int", nullable: false),
-                    IdTraining = table.Column<int>(type: "int", nullable: false),
-                    IdUser = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserTrainingUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TrainingUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserUid = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("UserTraining_pk", x => new { x.IdTraining, x.IdUser, x.IdUserTraining });
+                    table.PrimaryKey("UserTraining_pk", x => new { x.UserTrainingUid, x.UserUid, x.TrainingUid });
                     table.ForeignKey(
                         name: "UserTraining_AspNetUsers",
-                        column: x => x.IdUser,
+                        column: x => x.UserUid,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "UserTraining_Training",
-                        column: x => x.IdTraining,
+                        column: x => x.TrainingUid,
                         principalTable: "Training",
-                        principalColumn: "IdTraining");
+                        principalColumn: "TrainingUid");
                 });
 
             migrationBuilder.CreateIndex(
@@ -575,14 +574,14 @@ namespace Gymify.Persistence.Migrations
                 column: "IdClient");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CoachHour_IdClient",
+                name: "IX_CoachHour_ClientUid",
                 table: "CoachHour",
-                column: "IdClient");
+                column: "ClientUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CoachHour_IdCoach",
+                name: "IX_CoachHour_CoachUid",
                 table: "CoachHour",
-                column: "IdCoach");
+                column: "CoachUid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CoachType_IdCoach",
@@ -590,64 +589,79 @@ namespace Gymify.Persistence.Migrations
                 column: "IdCoach");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exercise_IdBodyPart",
+                name: "IX_Exercise_BodyPartUid",
                 table: "Exercise",
-                column: "IdBodyPart");
+                column: "BodyPartUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exercise_IdEquipment",
+                name: "IX_Exercise_EquipmentUid",
                 table: "Exercise",
-                column: "IdEquipment");
+                column: "EquipmentUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exercise_IdTarget",
+                name: "IX_Exercise_TargetUid",
                 table: "Exercise",
-                column: "IdTarget");
+                column: "TargetUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FavouriteCoach_IdClient",
+                name: "IX_FavouriteCoach_ClientUid",
                 table: "FavouriteCoach",
-                column: "IdClient");
+                column: "ClientUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FavouriteCoach_IdCoach",
+                name: "IX_FavouriteCoach_CoachUid",
                 table: "FavouriteCoach",
-                column: "IdCoach");
+                column: "CoachUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FavouriteExercise_IdUser",
+                name: "IX_FavouriteExercise_ExerciseUid",
                 table: "FavouriteExercise",
-                column: "IdUser");
+                column: "ExerciseUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupSession_IdCoach",
+                name: "IX_FavouriteExercise_UserUid",
+                table: "FavouriteExercise",
+                column: "UserUid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GroupSession_CoachUid",
                 table: "GroupSession",
-                column: "IdCoach");
+                column: "CoachUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupSession_IdPlace",
+                name: "IX_GroupSession_PlaceUid",
                 table: "GroupSession",
-                column: "IdPlace");
+                column: "PlaceUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Template_IdDifficultyLevel",
+                name: "IX_Template_DifficultyLevelUid",
                 table: "Template",
-                column: "IdDifficultyLevel");
+                column: "DifficultyLevelUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TemplateExercise_IdTemplate",
+                name: "IX_TemplateExercise_ExerciseUid",
                 table: "TemplateExercise",
-                column: "IdTemplate");
+                column: "ExerciseUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Training_IdTemplate",
+                name: "IX_TemplateExercise_TemplateUid",
+                table: "TemplateExercise",
+                column: "TemplateUid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Training_TemplateUid",
                 table: "Training",
-                column: "IdTemplate");
+                column: "TemplateUid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserTraining_IdUser",
+                name: "IX_UserTraining_TrainingUid",
                 table: "UserTraining",
-                column: "IdUser");
+                column: "TrainingUid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserTraining_UserUid",
+                table: "UserTraining",
+                column: "UserUid");
         }
 
         /// <inheritdoc />

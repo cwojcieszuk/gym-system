@@ -5,7 +5,7 @@ namespace Gymify.Domain.Entities;
 
 public partial class Coach
 {
-    public string IdCoach { get; set; } = null!;
+    public Guid CoachUid { get; set; }
 
     public string Description { get; set; } = null!;
 
@@ -15,7 +15,7 @@ public partial class Coach
 
     public virtual ICollection<GroupSession> GroupSessions { get; set; } = new List<GroupSession>();
 
-    public virtual AspNetUser IdCoachNavigation { get; set; } = null!;
+    public virtual AspNetUser User { get; set; }
 
-    public virtual ICollection<CoachCategory> IdCoachCategories { get; set; } = new List<CoachCategory>();
+    public virtual ICollection<CoachCategory> CoachCategories { get; set; } = new List<CoachCategory>();
 }

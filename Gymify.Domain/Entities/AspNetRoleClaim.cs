@@ -5,7 +5,7 @@ namespace Gymify.Domain.Entities;
 
 public partial class AspNetRoleClaim
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     public string RoleId { get; set; } = null!;
 

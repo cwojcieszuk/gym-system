@@ -8,17 +8,19 @@ public class FavouriteCoachConfiguration : IEntityTypeConfiguration<FavouriteCoa
 {
     public void Configure(EntityTypeBuilder<FavouriteCoach> builder)
     {
-        builder.HasKey(e => new { e.IdFavouriteCoach, e.IdClient, e.IdCoach }).HasName("FavouriteCoach_pk");
+        builder.ToTable(nameof(FavouriteCoach));
+        
+        builder.HasKey(e => new { e.FavouriteCoachUid, e.ClientUid, e.CoachUid }).HasName("FavouriteCoach_pk");
 
-        builder.ToTable("FavouriteCoach");
-
-        builder.HasOne(d => d.IdClientNavigation).WithMany(p => p.FavouriteCoaches)
-            .HasForeignKey(d => d.IdClient)
+        builder.Property(e => e.FavouriteCoachUid).ValueGeneratedNever();
+        
+        builder.HasOne(d => d.Client).WithMany(p => p.FavouriteCoaches)
+            .HasForeignKey(d => d.ClientUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("FavouriteCoach_Client");
 
-        builder.HasOne(d => d.IdCoachNavigation).WithMany(p => p.FavouriteCoaches)
-            .HasForeignKey(d => d.IdCoach)
+        builder.HasOne(d => d.Coach).WithMany(p => p.FavouriteCoaches)
+            .HasForeignKey(d => d.CoachUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("FavouriteCoach_Coach");
     }

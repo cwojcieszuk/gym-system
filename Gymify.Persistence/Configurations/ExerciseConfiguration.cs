@@ -1,4 +1,5 @@
-﻿using Gymify.Domain.Entities;
+﻿using Gymify.Domain.Constants.Column;
+using Gymify.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,30 +9,32 @@ public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
 {
     public void Configure(EntityTypeBuilder<Exercise> builder)
     {
-        builder.HasKey(e => e.IdExercise).HasName("Exercise_pk");
+        builder.ToTable(nameof(Exercise));
+        
+        builder.HasKey(e => e.ExerciseUid).HasName("Exercise_pk");
 
-        builder.ToTable("Exercise");
-
-        builder.Property(e => e.IdExercise).ValueGeneratedNever();
+        builder.Property(e => e.ExerciseUid).ValueGeneratedNever();
+        
         builder.Property(e => e.ExerciseName)
-            .HasMaxLength(128)
+            .HasMaxLength(ExerciseColumnConstants.ExerciseNameLimit)
             .IsUnicode(false);
+        
         builder.Property(e => e.GifUrl)
-            .HasMaxLength(256)
+            .HasMaxLength(ExerciseColumnConstants.ExerciseGifUrlLimit)
             .IsUnicode(false);
 
-        builder.HasOne(d => d.IdBodyPartNavigation).WithMany(p => p.Exercises)
-            .HasForeignKey(d => d.IdBodyPart)
+        builder.HasOne(d => d.BodyPart).WithMany(p => p.Exercises)
+            .HasForeignKey(d => d.BodyPartUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Exercise_BodyPart");
 
-        builder.HasOne(d => d.IdEquipmentNavigation).WithMany(p => p.Exercises)
-            .HasForeignKey(d => d.IdEquipment)
+        builder.HasOne(d => d.Equipment).WithMany(p => p.Exercises)
+            .HasForeignKey(d => d.EquipmentUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Exercise_Equipment");
 
-        builder.HasOne(d => d.IdTargetNavigation).WithMany(p => p.Exercises)
-            .HasForeignKey(d => d.IdTarget)
+        builder.HasOne(d => d.Target).WithMany(p => p.Exercises)
+            .HasForeignKey(d => d.TargetUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Exercise_Target");
     }

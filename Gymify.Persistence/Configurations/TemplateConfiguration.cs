@@ -1,4 +1,5 @@
-﻿using Gymify.Domain.Entities;
+﻿using Gymify.Domain.Constants.Column;
+using Gymify.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,18 +9,18 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
 {
     public void Configure(EntityTypeBuilder<Template> builder)
     {
-        builder.HasKey(e => e.IdTemplate).HasName("Template_pk");
+        builder.ToTable(nameof(Template));
+        
+        builder.HasKey(e => e.TemplateUid).HasName("Template_pk");
 
-        builder.ToTable("Template");
-
-        builder.Property(e => e.IdTemplate).ValueGeneratedNever();
+        builder.Property(e => e.TemplateUid).ValueGeneratedNever();
         builder.Property(e => e.EstimatedTime).HasColumnType("numeric(3, 0)");
         builder.Property(e => e.TemplateName)
-            .HasMaxLength(32)
+            .HasMaxLength(TemplateColumnConstants.TemplateNameLimit)
             .IsUnicode(false);
 
-        builder.HasOne(d => d.IdDifficultyLevelNavigation).WithMany(p => p.Templates)
-            .HasForeignKey(d => d.IdDifficultyLevel)
+        builder.HasOne(d => d.DifficultyLevel).WithMany(p => p.Templates)
+            .HasForeignKey(d => d.DifficultyLevelUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Template_DifficultyLevel");
     }

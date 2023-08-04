@@ -5,9 +5,9 @@ namespace Gymify.Domain.Entities;
 
 public partial class Place
 {
-    public int IdPlace { get; set; }
+    public Guid PlaceUid { get; set; }
 
-    public string Place1 { get; set; } = null!;
+    public string PlaceName { get; set; } = null!;
 
     public virtual ICollection<GroupSession> GroupSessions { get; set; } = new List<GroupSession>();
 }

@@ -5,13 +5,13 @@ namespace Gymify.Domain.Entities;
 
 public partial class FavouriteCoach
 {
-    public int IdFavouriteCoach { get; set; }
+    public Guid FavouriteCoachUid { get; set; }
 
-    public string IdClient { get; set; } = null!;
+    public Guid ClientUid { get; set; }
 
-    public string IdCoach { get; set; } = null!;
+    public Guid CoachUid { get; set; }
 
-    public virtual Client IdClientNavigation { get; set; } = null!;
+    public virtual Client Client { get; set; } = null!;
 
-    public virtual Coach IdCoachNavigation { get; set; } = null!;
+    public virtual Coach Coach { get; set; } = null!;
 }
