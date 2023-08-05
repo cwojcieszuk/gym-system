@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Gymify.Domain\Gymify.Domain.csproj" />
+      <ProjectReference Include="..\Gymify.Shared\Gymify.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
