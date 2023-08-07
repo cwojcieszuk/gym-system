@@ -3,6 +3,7 @@ import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
 import { Store } from '@ngrx/store';
 import { UserListFilters } from '../../../../../../api-client/src/lib/clients/users/params/user-list.filters';
+import { AddUserParams } from '../../../../../../api-client/src/lib/clients/users/params/add-user.params';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -17,5 +18,9 @@ export class UsersFacade {
 
   setFilters(filters: Partial<UserListFilters>): void {
     this.store.dispatch(UsersActions.setFilters(filters));
+  }
+
+  addUser(params: AddUserParams): void {
+    this.store.dispatch(UsersActions.addUser(params));
   }
 }

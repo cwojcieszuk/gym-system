@@ -13,7 +13,7 @@ export class UsersFiltersComponent implements OnInit {
   form = this.fb.group({
     name: this.fb.control<string>(''),
     role: this.fb.control<UUID>(''),
-    registerDate: this.fb.control<Date | undefined>(undefined),
+    creationDate: this.fb.control<Date | undefined>(undefined),
   });
 
   @Output()

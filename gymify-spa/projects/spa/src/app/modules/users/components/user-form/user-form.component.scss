@@ -1,0 +1,14 @@
+@use '../../../../../styles/typography';
+
+:host {
+  @apply block w-[800px] p-8;
+}
+
+h1 {
+  @apply pb-6;
+  @extend .typography-subtitle1;
+}
+
+.generate-button {
+  @apply h-[70%];
+}

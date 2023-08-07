@@ -31,6 +31,30 @@ export class UsersEffects {
       tap(() => this.toastr.error('Unable to fetch users'))
     ), { dispatch: false });
 
+  addUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.addUser),
+      mergeMap(params => this.usersClient.addUser(params).pipe(
+        map(() => UsersActions.addUserSuccess()),
+        catchError(() => of(UsersActions.addUserFailure()))
+      ))
+    ));
+
+  addUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.addUserSuccess),
+      tap(() => this.toastr.success('Successfully added user')),
+      map(() => UsersActions.fetchUsers())
+    )
+  );
+
+  addUserFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.addUserFailure),
+      tap(() => this.toastr.error('Unable to add user'))
+    ), { dispatch: false });
+
+
   constructor(
     private actions$: Actions,
     private usersClient: UsersClient,

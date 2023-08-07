@@ -16,11 +16,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { PaginatorComponent } from '../../shared/ui/paginator/paginator.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     UsersListComponent,
     UsersFiltersComponent,
+    UserFormComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +41,7 @@ import { PaginatorComponent } from '../../shared/ui/paginator/paginator.componen
     MatInputModule,
     MatSidenavModule,
     PaginatorComponent,
+    MatDialogModule,
   ],
 })
 export class UsersModule { }

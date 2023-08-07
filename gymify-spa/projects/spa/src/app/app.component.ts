@@ -8,6 +8,6 @@ import { AuthFacade } from './core/auth/+state/auth.facade';
 })
 export class AppComponent {
   constructor(private authFacade: AuthFacade) {
-    authFacade.init();
+    //authFacade.init();
   }
 }

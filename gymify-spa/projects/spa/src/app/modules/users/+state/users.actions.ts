@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { UserListResponse } from '../../../../../../api-client/src/lib/clients/users/responses/user-list.response';
 import { UserListFilters } from '../../../../../../api-client/src/lib/clients/users/params/user-list.filters';
+import { AddUserParams } from '../../../../../../api-client/src/lib/clients/users/params/add-user.params';
 
 export const fetchUsers = createAction(
   '[Users/API] Fetch Users'
@@ -18,4 +19,17 @@ export const fetchUsersFailure = createAction(
 export const setFilters = createAction(
   '[Users] Set Filters',
   props<Partial<UserListFilters>>()
+);
+
+export const addUser = createAction(
+  '[Users/API] Add User',
+  props<AddUserParams>()
+);
+
+export const addUserSuccess = createAction(
+  '[Users/API] Add User Success'
+);
+
+export const addUserFailure = createAction(
+  '[Users/API] Add User Failure'
 );

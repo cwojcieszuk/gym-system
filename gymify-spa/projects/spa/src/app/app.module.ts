@@ -18,6 +18,7 @@ import { AccessTokenInterceptor } from './core/auth/interceptors/access-token.in
 import { LayoutModule } from './core/layout/layout.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DictionariesStoreModule } from './core/dictionaries-state/dictionaries-store.module';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,10 @@ import { DictionariesStoreModule } from './core/dictionaries-state/dictionaries-
       provide: HTTP_INTERCEPTORS,
       useClass: AccessTokenInterceptor,
       multi: true,
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
     },
   ],
   bootstrap: [BootstrapComponent],

@@ -5,6 +5,8 @@ import { User } from '../../../../../../../api-client/src/lib/clients/users/resp
 import { BaseComponent } from '../../../../shared/components/base.component';
 import { filter } from 'rxjs';
 import { UserListResponse } from '../../../../../../../api-client/src/lib/clients/users/responses/user-list.response';
+import { MatDialog } from '@angular/material/dialog';
+import { UserFormComponent } from '../../components/user-form/user-form.component';
 
 @Component({
   selector: 'gym-users-list',
@@ -17,7 +19,8 @@ export class UsersListComponent extends BaseComponent implements OnInit {
   usersResponse?: UserListResponse;
 
   constructor(
-    private facade: UsersFacade
+    private facade: UsersFacade,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -36,5 +39,15 @@ export class UsersListComponent extends BaseComponent implements OnInit {
 
   pageSizeChange(pageSize: number): void {
     this.facade.setFilters({ pageSize });
+  }
+
+  addUser(): void {
+    const dialog = this.dialog.open(UserFormComponent, {
+
+    });
+
+    this.observe(dialog.afterClosed())
+      .pipe(filter(Boolean))
+      .subscribe(value => this.facade.addUser(value));
   }
 }
