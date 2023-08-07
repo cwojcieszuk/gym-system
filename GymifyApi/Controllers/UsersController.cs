@@ -1,4 +1,5 @@
-﻿using Gymify.Application.Users.Queries.UsersListQuery;
+﻿using Gymify.Application.Users.Commands.AddUser;
+using Gymify.Application.Users.Queries.UsersListQuery;
 using Gymify.Shared.Params;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,9 +20,17 @@ public class UsersController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> GetUsers([FromBody] UsersListQuery query)
+    [HttpGet]
+    public async Task<IActionResult> GetUsers([FromQuery] UsersListQuery query)
     {
         return Ok(await _mediator.Send(query));
     }
+
+    [HttpPost]
+    public async Task<IActionResult> AddUser([FromBody] AddUserCommand command)
+    {
+        await _mediator.Send(command);
+
+        return NoContent();
+    } 
 }

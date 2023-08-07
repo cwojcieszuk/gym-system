@@ -16,7 +16,7 @@ public partial class AspNetUser : IdentityUser<Guid>
 
     public DateTime Birthdate { get; set; }
 
-    public byte[] Avatar { get; set; } = null!;
+    public byte[]? Avatar { get; set; }
     
     public string? RefreshToken { get; set; }
     
