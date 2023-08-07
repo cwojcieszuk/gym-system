@@ -1,4 +1,4 @@
-﻿namespace Gymify.Application.Wrappers;
+﻿namespace Gymify.Shared.Wrappers;
 
 public class PagedResponse<T>
 {
