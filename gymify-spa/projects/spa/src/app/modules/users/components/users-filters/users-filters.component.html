@@ -5,7 +5,7 @@
         <label>Role</label>
         <mat-form-field appearance="outline">
             <mat-select formControlName="role">
-                <mat-option></mat-option>
+                <mat-option *ngFor="let role of dictionariesFacade.userRoles$ | async" [value]="role.role">{{role.role}}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>

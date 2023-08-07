@@ -17,6 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccessTokenInterceptor } from './core/auth/interceptors/access-token.interceptor';
 import { LayoutModule } from './core/layout/layout.module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DictionariesStoreModule } from './core/dictionaries-state/dictionaries-store.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AuthStoreModule,
     LayoutModule,
     MatNativeDateModule,
+    DictionariesStoreModule,
   ],
   providers: [
     {
