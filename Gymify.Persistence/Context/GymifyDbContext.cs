@@ -17,7 +17,7 @@ public partial class GymifyDbContext : IdentityDbContext<AspNetUser, IdentityRol
     }
 
     public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-
+    
     public virtual DbSet<BodyPart> BodyParts { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }

@@ -6,7 +6,7 @@ namespace Gymify.Application.Interfaces;
 public interface IGymifyDbContext
 {
     DbSet<AspNetUser> AspNetUsers { get; set; }
-
+    
     DbSet<BodyPart> BodyParts { get; set; }
 
     DbSet<Client> Clients { get; set; }
