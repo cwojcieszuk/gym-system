@@ -1,0 +1,20 @@
+<div class="flex items-center gap-x-2">
+    <span>Items per page:</span>
+    <mat-form-field>
+        <mat-select [formControl]="formControl">
+            <mat-option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{ pageSize }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<div class="flex items-center">
+    <span>{{page}} of {{totalPages}}</span>
+
+    <button mat-icon-button (click)="previousPage()" [disabled]="canPreviousPage">
+        <mat-icon>arrow_left</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="nextPage()" [disabled]="canNextPage">
+        <mat-icon>arrow_right</mat-icon>
+    </button>
+</div>

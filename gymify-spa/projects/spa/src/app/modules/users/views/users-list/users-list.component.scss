@@ -1,0 +1,23 @@
+@use '../../../../../styles/typography';
+
+:host {
+  @apply flex flex-col h-full;
+}
+
+h1 {
+  @extend .typography-h3;
+}
+
+.example-container {
+  flex: 1 1 auto;
+}
+
+.example-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.example-sidenav {
+  padding: 20px;
+}

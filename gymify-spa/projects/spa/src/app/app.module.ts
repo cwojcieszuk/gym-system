@@ -16,6 +16,7 @@ import { AuthStoreModule } from './core/auth/+state/auth-store.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccessTokenInterceptor } from './core/auth/interceptors/access-token.interceptor';
 import { LayoutModule } from './core/layout/layout.module';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LayoutModule } from './core/layout/layout.module';
     MatSidenavModule,
     AuthStoreModule,
     LayoutModule,
+    MatNativeDateModule,
   ],
   providers: [
     {

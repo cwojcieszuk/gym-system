@@ -9,3 +9,7 @@ html, body, root {
 root {
   @apply flex flex-col p-0;
 }
+
+label {
+  @apply text-[.8rem] leading-[12.8px] text-black mb-[10px] flex items-center gap-x-2;
+}
