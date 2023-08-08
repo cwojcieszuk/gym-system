@@ -1,4 +1,5 @@
 ﻿using Gymify.Application.Users.Commands.AddUser;
+using Gymify.Application.Users.Commands.EditUser;
 using Gymify.Application.Users.Queries.UsersListQuery;
 using Gymify.Shared.Params;
 using MediatR;
@@ -32,5 +33,13 @@ public class UsersController : ControllerBase
         await _mediator.Send(command);
 
         return NoContent();
-    } 
+    }
+
+    [HttpPut("{userUid}")]
+    public async Task<IActionResult> EditUser([FromRoute] Guid userUid, [FromBody] EditUserCommand command)
+    {
+        await _mediator.Send(command);
+        
+        return NoContent();
+    }
 }
