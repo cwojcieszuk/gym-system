@@ -30,9 +30,9 @@ public class UsersListQueryHandler : IRequestHandler<UsersListQuery, PagedRespon
             }).ToList();
         }
 
-        if (request.CreationDate.HasValue)
+        if (request.BirthDate.HasValue)
         {
-            users = users.Where(user => user.CreatedAt == request.CreationDate).ToList();
+            users = users.Where(user => user.Birthdate.Date == Convert.ToDateTime(request.BirthDate).Date).ToList();
         }
 
         if (!String.IsNullOrWhiteSpace(request.Role))
@@ -53,8 +53,11 @@ public class UsersListQueryHandler : IRequestHandler<UsersListQuery, PagedRespon
                 user.FirstName,
                 user.LastName,
                 Role: _userManager.GetRolesAsync(user).Result[0],
-                user.CreatedAt,
-                user.Email
+                user.Birthdate,
+                user.Email,
+                user.Gender,
+                user.PhoneNumber,
+                user.UserName
             )
         ).ToList();
 
