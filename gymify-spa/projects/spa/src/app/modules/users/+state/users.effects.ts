@@ -54,6 +54,29 @@ export class UsersEffects {
       tap(() => this.toastr.error('Unable to add user'))
     ), { dispatch: false });
 
+  editUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.editUser),
+      mergeMap(params => this.usersClient.editUser(params).pipe(
+        map(() => UsersActions.editUserSuccess()),
+        catchError(() => of(UsersActions.editUserFailure()))
+      ))
+    )
+  );
+
+  editUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.editUserSuccess),
+      tap(() => this.toastr.success('Successfully edited user')),
+      map(() => UsersActions.fetchUsers())
+    )
+  );
+
+  editUserFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.editUserFailure),
+      tap(() => this.toastr.error('Unable to edit user'))
+    ), { dispatch: false });
 
   constructor(
     private actions$: Actions,

@@ -1,13 +1,15 @@
 import { UUID } from '../../../types/uuid.type';
 
-export interface User {
+export interface EditUserParams {
   userUid: UUID;
   firstName: string;
   lastName: string;
+  email: string;
+  login: string;
   role: string;
   birthDate: Date;
-  email: string;
   gender: string;
+  password?: string;
+  currentPassword?: string;
   phoneNumber: string;
-  login: string;
 }

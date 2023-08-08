@@ -1,4 +1,4 @@
-<h1>Add User</h1>
+<h1>{{ isNew ? 'Add User' : 'Edit User' }}</h1>
 
 <form [formGroup]="form" class="grid grid-cols-2 gap-4">
     <mat-form-field appearance="outline">
@@ -47,10 +47,18 @@
 
     <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput formControlName="password">
+        <input matInput formControlName="password" [type]="passwordInputType">
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+            <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
     </mat-form-field>
 
-    <button mat-raised-button color="accent" class="generate-button">
+    <mat-form-field *ngIf="!isNew">
+        <mat-label>Current password</mat-label>
+        <input matInput formControlName="currentPassword" type="password">
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" class="generate-button" *ngIf="isNew" (click)="generatePassword()">
         <span>Generate password</span>
     </button>
 

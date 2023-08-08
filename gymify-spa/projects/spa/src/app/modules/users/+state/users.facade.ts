@@ -4,6 +4,7 @@ import * as UsersSelectors from './users.selectors';
 import { Store } from '@ngrx/store';
 import { UserListFilters } from '../../../../../../api-client/src/lib/clients/users/params/user-list.filters';
 import { AddUserParams } from '../../../../../../api-client/src/lib/clients/users/params/add-user.params';
+import { EditUserParams } from '../../../../../../api-client/src/lib/clients/users/params/edit-user.params';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -22,5 +23,9 @@ export class UsersFacade {
 
   addUser(params: AddUserParams): void {
     this.store.dispatch(UsersActions.addUser(params));
+  }
+
+  editUser(params: EditUserParams): void {
+    this.store.dispatch(UsersActions.editUser(params));
   }
 }

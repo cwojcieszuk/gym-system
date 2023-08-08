@@ -43,11 +43,26 @@ export class UsersListComponent extends BaseComponent implements OnInit {
 
   addUser(): void {
     const dialog = this.dialog.open(UserFormComponent, {
-
+      data: {
+        isNew: true,
+      }
     });
 
     this.observe(dialog.afterClosed())
       .pipe(filter(Boolean))
       .subscribe(value => this.facade.addUser(value));
+  }
+
+  editUser(user: User): void {
+    const dialog = this.dialog.open(UserFormComponent, {
+      data: {
+        isNew: false,
+        user,
+      },
+    });
+
+    this.observe(dialog.afterClosed())
+      .pipe(filter(Boolean))
+      .subscribe(value => this.facade.editUser(value));
   }
 }

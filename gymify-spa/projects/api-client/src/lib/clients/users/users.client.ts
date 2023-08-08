@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UserListResponse } from './responses/user-list.response';
 import { AddUserParams } from './params/add-user.params';
 import { EmptyResponse } from '../../types/empty.response';
+import { EditUserParams } from './params/edit-user.params';
 
 @Injectable({ providedIn: 'root' })
 export class UsersClient {
@@ -22,5 +23,9 @@ export class UsersClient {
 
   addUser(params: AddUserParams): Observable<EmptyResponse> {
     return this.http.post<EmptyResponse>(`${this.url}`, params);
+  }
+
+  editUser(params: EditUserParams): Observable<EmptyResponse> {
+    return this.http.put<EmptyResponse>(`${this.url}/${params.userUid}`, params);
   }
 }
