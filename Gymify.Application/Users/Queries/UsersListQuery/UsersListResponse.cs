@@ -9,5 +9,6 @@ public record UsersListResponse(
     string Email,
     string Gender,
     string PhoneNumber,
-    string Login
+    string Login,
+    bool CanDelete
     );

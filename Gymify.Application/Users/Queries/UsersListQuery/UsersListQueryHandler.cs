@@ -1,4 +1,5 @@
 ﻿using Gymify.Application.Interfaces;
+using Gymify.Application.Users.Queries.CanDeleteUser;
 using Gymify.Domain.Entities;
 using Gymify.Shared.Wrappers;
 using MediatR;
@@ -11,11 +12,13 @@ public class UsersListQueryHandler : IRequestHandler<UsersListQuery, PagedRespon
 {
     private readonly IGymifyDbContext _gymifyDbContext;
     private readonly UserManager<AspNetUser> _userManager;
+    private readonly IMediator _mediator;
 
-    public UsersListQueryHandler(IGymifyDbContext gymifyDbContext, UserManager<AspNetUser> userManager)
+    public UsersListQueryHandler(IGymifyDbContext gymifyDbContext, UserManager<AspNetUser> userManager, IMediator mediator)
     {
         _gymifyDbContext = gymifyDbContext;
         _userManager = userManager;
+        _mediator = mediator;
     }
     
     public async Task<PagedResponse<UsersListResponse>> Handle(UsersListQuery request, CancellationToken cancellationToken)
@@ -26,11 +29,11 @@ public class UsersListQueryHandler : IRequestHandler<UsersListQuery, PagedRespon
             users = users.Where(user =>
             {
                 string fullName = user.FirstName + " " + user.LastName;
-                return fullName.Contains(request.Name);
+                return fullName.ToLower().Contains(request.Name);
             }).ToList();
         }
 
-        if (request.BirthDate.HasValue)
+        if (request.BirthDate is not null)
         {
             users = users.Where(user => user.Birthdate.Date == Convert.ToDateTime(request.BirthDate).Date).ToList();
         }
@@ -57,7 +60,8 @@ public class UsersListQueryHandler : IRequestHandler<UsersListQuery, PagedRespon
                 user.Email,
                 user.Gender,
                 user.PhoneNumber,
-                user.UserName
+                user.UserName,
+                CanDelete: _mediator.Send(new CanDeleteUserQuery(user.Id), cancellationToken).Result
             )
         ).ToList();
 
@@ -70,4 +74,6 @@ public class UsersListQueryHandler : IRequestHandler<UsersListQuery, PagedRespon
             TotalRecords = totalRecords
         };
     }
+
+    
 }

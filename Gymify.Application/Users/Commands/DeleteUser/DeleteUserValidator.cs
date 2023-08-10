@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Gymify.Application.Users.Queries.CanDeleteUser;
 using Gymify.Application.Users.Queries.UserUIdExistence;
 using MediatR;
 
@@ -9,7 +10,10 @@ public class DeleteUserValidator: AbstractValidator<DeleteUserCommand>
     public DeleteUserValidator(IMediator mediator)
     {
         RuleFor(x => x.UserUid)
-            .MustAsync(async (x, token) => await mediator.Send(new UserUidExistenceQuery(x)))
-            ;
+            .Cascade(CascadeMode.StopOnFirstFailure)
+            .MustAsync(async (x, token) => await mediator.Send(new UserUidExistenceQuery(x), token))
+            .WithMessage("User doesnt exist")
+            .MustAsync(async (x, token) => await mediator.Send(new CanDeleteUserQuery(x), token))
+            .WithMessage("Cannot delete user");
     }
 }
