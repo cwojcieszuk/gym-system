@@ -25,5 +25,5 @@ public partial class GroupSession
 
     public virtual Place Place{ get; set; } = null!;
 
-    public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
+    public virtual ICollection<ClientGroupSession> ClientGroupSessions { get; set; } = new List<ClientGroupSession>();
 }

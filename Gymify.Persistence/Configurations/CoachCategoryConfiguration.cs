@@ -18,22 +18,5 @@ public class CoachCategoryConfiguration : IEntityTypeConfiguration<CoachCategory
         builder.Property(e => e.CoachCategoryName)
             .HasMaxLength(CoachColumnConstants.CategoryNameLimit)
             .IsUnicode(false);
-
-        builder.HasMany(d => d.Coaches).WithMany(p => p.CoachCategories)
-            .UsingEntity<Dictionary<string, object>>(
-                "CoachType",
-                r => r.HasOne<Coach>().WithMany()
-                    .HasForeignKey("IdCoach")
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("CoachType_Coach"),
-                l => l.HasOne<CoachCategory>().WithMany()
-                    .HasForeignKey("IdCoachCategory")
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("CoachType_CoachCategory"),
-                j =>
-                {
-                    j.HasKey("IdCoachCategory", "IdCoach").HasName("CoachType_pk");
-                    j.ToTable("CoachType");
-                });
     }
 }

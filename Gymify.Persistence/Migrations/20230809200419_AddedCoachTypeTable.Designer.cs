@@ -4,6 +4,7 @@ using Gymify.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gymify.Persistence.Migrations
 {
     [DbContext(typeof(GymifyDbContext))]
-    partial class GymifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230809200419_AddedCoachTypeTable")]
+    partial class AddedCoachTypeTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,22 @@ namespace Gymify.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ClientGroupSession", b =>
+                {
+                    b.Property<Guid>("IdGroupSession")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdClient")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("IdGroupSession", "IdClient")
+                        .HasName("ClientGroupSession_pk");
+
+                    b.HasIndex("IdClient");
+
+                    b.ToTable("ClientGroupSession", (string)null);
+                });
 
             modelBuilder.Entity("Gymify.Domain.Entities.AspNetUser", b =>
                 {
@@ -146,27 +165,6 @@ namespace Gymify.Persistence.Migrations
                         .HasName("Client_pk");
 
                     b.ToTable("Client", (string)null);
-                });
-
-            modelBuilder.Entity("Gymify.Domain.Entities.ClientGroupSession", b =>
-                {
-                    b.Property<Guid>("ClientGroupSessionUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("GroupSessionUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ClientUid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ClientGroupSessionUid", "GroupSessionUid", "ClientUid")
-                        .HasName("ClientGroupSession_pk");
-
-                    b.HasIndex("ClientUid");
-
-                    b.HasIndex("GroupSessionUid");
-
-                    b.ToTable("ClientGroupSession", (string)null);
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Coach", b =>
@@ -347,7 +345,8 @@ namespace Gymify.Persistence.Migrations
             modelBuilder.Entity("Gymify.Domain.Entities.FavouriteExercise", b =>
                 {
                     b.Property<Guid>("FavouriteExerciseUid")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("FavouriteExercise");
 
                     b.Property<Guid>("UserUid")
                         .HasColumnType("uniqueidentifier");
@@ -682,6 +681,21 @@ namespace Gymify.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ClientGroupSession", b =>
+                {
+                    b.HasOne("Gymify.Domain.Entities.Client", null)
+                        .WithMany()
+                        .HasForeignKey("IdClient")
+                        .IsRequired()
+                        .HasConstraintName("ClientGroupSession_Client");
+
+                    b.HasOne("Gymify.Domain.Entities.GroupSession", null)
+                        .WithMany()
+                        .HasForeignKey("IdGroupSession")
+                        .IsRequired()
+                        .HasConstraintName("ClientGroupSession_GroupSession");
+                });
+
             modelBuilder.Entity("Gymify.Domain.Entities.Client", b =>
                 {
                     b.HasOne("Gymify.Domain.Entities.AspNetUser", "User")
@@ -691,25 +705,6 @@ namespace Gymify.Persistence.Migrations
                         .HasConstraintName("Client_AspNetUsers");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Gymify.Domain.Entities.ClientGroupSession", b =>
-                {
-                    b.HasOne("Gymify.Domain.Entities.Client", "Client")
-                        .WithMany("ClientGroupSessions")
-                        .HasForeignKey("ClientUid")
-                        .IsRequired()
-                        .HasConstraintName("ClientGroupSession_Client");
-
-                    b.HasOne("Gymify.Domain.Entities.GroupSession", "GroupSession")
-                        .WithMany("ClientGroupSessions")
-                        .HasForeignKey("GroupSessionUid")
-                        .IsRequired()
-                        .HasConstraintName("ClientGroupSession_GroupSession");
-
-                    b.Navigation("Client");
-
-                    b.Navigation("GroupSession");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Coach", b =>
@@ -973,8 +968,6 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Client", b =>
                 {
-                    b.Navigation("ClientGroupSessions");
-
                     b.Navigation("CoachHours");
 
                     b.Navigation("FavouriteCoaches");
@@ -1011,11 +1004,6 @@ namespace Gymify.Persistence.Migrations
                     b.Navigation("FavouriteExercises");
 
                     b.Navigation("TemplateExercises");
-                });
-
-            modelBuilder.Entity("Gymify.Domain.Entities.GroupSession", b =>
-                {
-                    b.Navigation("ClientGroupSessions");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Place", b =>

@@ -33,22 +33,5 @@ public class GroupSessionConfiguration : IEntityTypeConfiguration<GroupSession>
             .HasForeignKey(d => d.PlaceUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("GroupSession_Place");
-
-        builder.HasMany(d => d.Clients).WithMany(p => p.IdGroupSessions)
-            .UsingEntity<Dictionary<string, object>>(
-                "ClientGroupSession",
-                r => r.HasOne<Client>().WithMany()
-                    .HasForeignKey("IdClient")
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ClientGroupSession_Client"),
-                l => l.HasOne<GroupSession>().WithMany()
-                    .HasForeignKey("IdGroupSession")
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ClientGroupSession_GroupSession"),
-                j =>
-                {
-                    j.HasKey("IdGroupSession", "IdClient").HasName("ClientGroupSession_pk");
-                    j.ToTable("ClientGroupSession");
-                });
     }
 }

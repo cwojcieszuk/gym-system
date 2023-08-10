@@ -1,5 +1,6 @@
 ﻿using Gymify.Application.Interfaces;
 using Gymify.Domain.Entities;
+using Gymify.Shared.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
@@ -35,7 +36,7 @@ public class AddUserCommandHandler: IRequestHandler<AddUserCommand, Unit>
 
         switch (request.Role)
         {
-            case "User":
+            case RoleConstants.User:
             {
                 Client client = new Client()
                 {
@@ -47,7 +48,7 @@ public class AddUserCommandHandler: IRequestHandler<AddUserCommand, Unit>
                 
                 break;
             }
-            case "Coach":
+            case RoleConstants.Coach:
             {
                 Coach coach = new Coach()
                 {

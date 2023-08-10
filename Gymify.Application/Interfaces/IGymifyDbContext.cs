@@ -10,12 +10,16 @@ public interface IGymifyDbContext
     DbSet<BodyPart> BodyParts { get; set; }
 
     DbSet<Client> Clients { get; set; }
+    
+    DbSet<ClientGroupSession> ClientGroupSessions { get; set; }
 
     DbSet<Coach> Coaches { get; set; }
 
     DbSet<CoachCategory> CoachCategories { get; set; }
 
     DbSet<CoachHour> CoachHours { get; set; }
+    
+    DbSet<CoachType> CoachTypes { get; set; }
 
     DbSet<DifficultyLevel> DifficultyLevels { get; set; }
 

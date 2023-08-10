@@ -9,5 +9,5 @@ public partial class CoachCategory
 
     public string CoachCategoryName { get; set; } = null!;
 
-    public virtual ICollection<Coach> Coaches { get; set; } = new List<Coach>();
+    public virtual ICollection<CoachType> CoachTypes { get; set; } = new List<CoachType>();
 }

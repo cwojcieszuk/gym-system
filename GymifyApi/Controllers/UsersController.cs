@@ -1,4 +1,5 @@
 ﻿using Gymify.Application.Users.Commands.AddUser;
+using Gymify.Application.Users.Commands.DeleteUser;
 using Gymify.Application.Users.Commands.EditUser;
 using Gymify.Application.Users.Queries.UsersListQuery;
 using Gymify.Shared.Params;
@@ -40,6 +41,14 @@ public class UsersController : ControllerBase
     {
         await _mediator.Send(command);
         
+        return NoContent();
+    }
+
+    [HttpDelete("{userUid}")]
+    public async Task<IActionResult> DeleteUser([FromRoute] Guid userUid)
+    {
+        await _mediator.Send(new DeleteUserCommand(userUid));
+
         return NoContent();
     }
 }
