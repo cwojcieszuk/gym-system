@@ -31,7 +31,11 @@ export class UsersFiltersComponent implements OnInit {
   }
 
   save(): void {
-    this.facade.setFilters(this.form.value);
+    this.facade.setFilters({
+      name: this.form.value.name,
+      role: this.form.value.role,
+      birthDate: this.form.value.birthDate == null ? undefined : this.form.value.birthDate,
+    });
     this.saveEmitter.emit();
   }
 }

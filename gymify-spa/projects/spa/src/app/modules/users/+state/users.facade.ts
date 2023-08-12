@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { UserListFilters } from '../../../../../../api-client/src/lib/clients/users/params/user-list.filters';
 import { AddUserParams } from '../../../../../../api-client/src/lib/clients/users/params/add-user.params';
 import { EditUserParams } from '../../../../../../api-client/src/lib/clients/users/params/edit-user.params';
+import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
 
 @Injectable({ providedIn: 'root' })
 export class UsersFacade {
@@ -27,5 +28,9 @@ export class UsersFacade {
 
   editUser(params: EditUserParams): void {
     this.store.dispatch(UsersActions.editUser(params));
+  }
+
+  deleteUser(userUid: UUID): void {
+    this.store.dispatch(UsersActions.deleteUser({ userUid }));
   }
 }

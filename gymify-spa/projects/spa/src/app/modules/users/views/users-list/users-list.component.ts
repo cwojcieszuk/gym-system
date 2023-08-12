@@ -7,6 +7,10 @@ import { filter } from 'rxjs';
 import { UserListResponse } from '../../../../../../../api-client/src/lib/clients/users/responses/user-list.response';
 import { MatDialog } from '@angular/material/dialog';
 import { UserFormComponent } from '../../components/user-form/user-form.component';
+import { UUID } from '../../../../../../../api-client/src/lib/types/uuid.type';
+import {
+  ConfirmationDialogComponent
+} from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'gym-users-list',
@@ -64,5 +68,22 @@ export class UsersListComponent extends BaseComponent implements OnInit {
     this.observe(dialog.afterClosed())
       .pipe(filter(Boolean))
       .subscribe(value => this.facade.editUser(value));
+  }
+
+  deleteUser(userUid: UUID): void {
+    const dialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Save changes',
+        message: 'Are you sure to delete user?',
+      },
+    });
+
+    this.observe(dialog.afterClosed())
+      .pipe(filter(Boolean))
+      .subscribe(value => {
+        if (value) {
+          this.facade.deleteUser(userUid);
+        }
+      });
   }
 }

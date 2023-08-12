@@ -10,4 +10,5 @@ export interface User {
   gender: string;
   phoneNumber: string;
   login: string;
+  canDelete: boolean;
 }

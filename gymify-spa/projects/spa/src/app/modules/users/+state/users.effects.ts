@@ -78,6 +78,29 @@ export class UsersEffects {
       tap(() => this.toastr.error('Unable to edit user'))
     ), { dispatch: false });
 
+  deleteUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.deleteUser),
+      mergeMap(action => this.usersClient.deleteUser(action.userUid).pipe(
+        map(() => UsersActions.deleteUserSuccess()),
+        catchError(() => of(UsersActions.deleteUserFailure()))
+      ))
+    )
+  );
+
+  deleteUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.deleteUserSuccess),
+      tap(() => this.toastr.success('Successfully deleted user')),
+      map(() => UsersActions.fetchUsers())
+    ));
+
+  deleteUserFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UsersActions.deleteUserFailure),
+      tap(() => this.toastr.error('Unable to delete user'))
+    ), { dispatch: false });
+
   constructor(
     private actions$: Actions,
     private usersClient: UsersClient,

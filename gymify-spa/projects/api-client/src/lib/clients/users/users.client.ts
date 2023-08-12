@@ -6,6 +6,7 @@ import { UserListResponse } from './responses/user-list.response';
 import { AddUserParams } from './params/add-user.params';
 import { EmptyResponse } from '../../types/empty.response';
 import { EditUserParams } from './params/edit-user.params';
+import { UUID } from '../../types/uuid.type';
 
 @Injectable({ providedIn: 'root' })
 export class UsersClient {
@@ -27,5 +28,9 @@ export class UsersClient {
 
   editUser(params: EditUserParams): Observable<EmptyResponse> {
     return this.http.put<EmptyResponse>(`${this.url}/${params.userUid}`, params);
+  }
+
+  deleteUser(userUid: UUID): Observable<EmptyResponse> {
+    return this.http.delete(`${this.url}/${userUid}`);
   }
 }

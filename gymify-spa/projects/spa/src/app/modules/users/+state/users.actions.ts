@@ -3,6 +3,7 @@ import { UserListResponse } from '../../../../../../api-client/src/lib/clients/u
 import { UserListFilters } from '../../../../../../api-client/src/lib/clients/users/params/user-list.filters';
 import { AddUserParams } from '../../../../../../api-client/src/lib/clients/users/params/add-user.params';
 import { EditUserParams } from '../../../../../../api-client/src/lib/clients/users/params/edit-user.params';
+import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
 
 export const fetchUsers = createAction(
   '[Users/API] Fetch Users'
@@ -46,4 +47,17 @@ export const editUserSuccess = createAction(
 
 export const editUserFailure = createAction(
   '[Users/API] Edit User Failure'
+);
+
+export const deleteUser = createAction(
+  '[Users/API] Delete User',
+  props<{ userUid: UUID }>()
+);
+
+export const deleteUserSuccess = createAction(
+  '[Users/API] Delete User Success'
+);
+
+export const deleteUserFailure = createAction(
+  '[Users/API] Delete User Failure'
 );
