@@ -1,1 +1,124 @@
-<p>profile-view works!</p>
+<div class="flex justify-between pb-4">
+    <h1>General User Settings</h1>
+    <button mat-raised-button color="primary" (click)="profileFacade.toggleEdit()" *ngIf="(profileFacade.isEditing$ | async) === false">
+        <mat-icon>edit</mat-icon>
+        <div>Edit</div>
+    </button>
+    <div class="flex gap-2" *ngIf="profileFacade.isEditing$ | async">
+        <button mat-stroked-button color="primary" (click)="profileFacade.cancelEdit()">
+            <mat-icon>cancel</mat-icon>
+            <div>Cancel</div>
+        </button>
+
+        <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="save()">
+            <mat-icon>save</mat-icon>
+            <div>Save</div>
+        </button>
+    </div>
+</div>
+
+<div class="flex gap-6">
+    <div class="flex shadow-2xl rounded-md p-4 w-full">
+        <form [formGroup]="form" class="grid grid-cols-3 items-center w-full" [class.gap-y-6]="(profileFacade.isEditing$ | async) === false">
+            <span>First name</span>
+            <ng-container>
+                <mat-form-field *ngIf="profileFacade.isEditing$ | async">
+                    <input matInput formControlName="firstName">
+                </mat-form-field>
+
+                <span *ngIf="(profileFacade.isEditing$ | async) === false">{{ (profileFacade.user$ | async)?.firstName }}</span>
+            </ng-container>
+
+            <span class="col-start-1">Last name</span>
+
+            <ng-container>
+                <mat-form-field *ngIf="profileFacade.isEditing$ | async">
+                    <input matInput formControlName="lastName">
+                </mat-form-field>
+
+                <span *ngIf="(profileFacade.isEditing$ | async) === false">{{ (profileFacade.user$ | async)?.lastName }}</span>
+            </ng-container>
+
+
+            <span class="col-start-1">Birthdate</span>
+
+            <ng-container>
+                <mat-form-field *ngIf="profileFacade.isEditing$ | async">
+                    <input matInput [matDatepicker]="picker" formControlName="birthDate">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <span *ngIf="(profileFacade.isEditing$ | async) === false">{{ (profileFacade.user$ | async)?.birthDate | date }}</span>
+            </ng-container>
+
+            <span class="col-start-1">Email</span>
+
+            <ng-container>
+                <mat-form-field *ngIf="profileFacade.isEditing$ | async">
+                    <input matInput formControlName="email">
+                </mat-form-field>
+
+                <span *ngIf="(profileFacade.isEditing$ | async) === false">{{ (profileFacade.user$ | async)?.email }}</span>
+            </ng-container>
+
+            <span class="col-start-1">Login</span>
+
+            <ng-container>
+                <mat-form-field *ngIf="profileFacade.isEditing$ | async">
+                    <input matInput formControlName="login">
+                </mat-form-field>
+
+                <span *ngIf="(profileFacade.isEditing$ | async) === false">{{ (profileFacade.user$ | async)?.login }}</span>
+            </ng-container>
+
+            <span class="col-start-1">Password</span>
+
+            <ng-container>
+                <div class="flex items-center gap-x-8" *ngIf="(profileFacade.isPasswordEdit$ | async) === false">
+                    <span>*********</span>
+                    <button mat-stroked-button (click)="profileFacade.togglePasswordEdit()">
+                        <div>Change password</div>
+                        <mat-icon>lock</mat-icon>
+                    </button>
+                </div>
+
+                <mat-form-field *ngIf="profileFacade.isPasswordEdit$ | async">
+                    <input matInput formControlName="password" type="password">
+                </mat-form-field>
+
+                <div class="flex gap-2 justify-end" *ngIf="profileFacade.isPasswordEdit$ | async">
+
+                    <button mat-stroked-button color="primary" (click)="profileFacade.cancelPasswordEdit()">
+                        <mat-icon>cancel</mat-icon>
+                        <div>Cancel</div>
+                    </button>
+
+                    <button mat-raised-button color="primary" (click)="updateUserPassword()">
+                        <mat-icon>save</mat-icon>
+                        <div>Save</div>
+                    </button>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="profileFacade.isPasswordEdit$ | async">
+                <span class="col-start-1">New Password</span>
+
+                <mat-form-field class="col-span-1">
+                    <input matInput formControlName="newPassword">
+                </mat-form-field>
+
+                <span class="col-start-1">Confirm password</span>
+
+                <mat-form-field class="col-span-1">
+                    <input matInput formControlName="confirmPassword">
+                </mat-form-field>
+            </ng-container>
+        </form>
+    </div>
+
+    <div class="flex flex-col shadow-2xl rounded-md p-4 w-[40%]">
+        <span>Profile picture</span>
+    </div>
+</div>
+
