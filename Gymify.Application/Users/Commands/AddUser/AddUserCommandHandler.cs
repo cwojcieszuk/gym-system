@@ -60,6 +60,19 @@ public class AddUserCommandHandler: IRequestHandler<AddUserCommand, Unit>
                 
                 break;
             }
+            case RoleConstants.Admin:
+            {
+                Client client = new Client { ClientUid = user.Id };
+
+                Coach coach = new Coach { CoachUid = user.Id, };
+
+                _gymifyDbContext.Clients.Add(client);
+                _gymifyDbContext.Coaches.Add(coach);
+
+                await _gymifyDbContext.SaveChangesAsync(cancellationToken);
+                
+                break;
+            }
         }
 
         return Unit.Value;
