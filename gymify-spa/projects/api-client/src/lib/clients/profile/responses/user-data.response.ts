@@ -4,4 +4,5 @@ export interface UserDataResponse {
   email: string;
   login: string;
   birthDate: Date;
+  avatar: any;
 }

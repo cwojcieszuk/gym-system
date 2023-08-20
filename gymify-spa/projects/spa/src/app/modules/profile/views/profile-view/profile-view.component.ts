@@ -3,6 +3,7 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ProfileFacade } from '../../+state/profile.facade';
 import { BaseComponent } from '../../../../shared/components/base.component';
 import { filter } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'gym-profile-view',
@@ -18,12 +19,16 @@ export class ProfileViewComponent extends BaseComponent implements OnInit {
     login: this.fb.control<string>('', Validators.required),
     password: this.fb.control<string>(''),
     newPassword: this.fb.control<string>(''),
-    confirmPassword: this.fb.control<string>(''),
+    confirmPassword: this.fb.control<string>('')
   });
+
+  imgSrc: string | ArrayBuffer | null = null;
+  image: any;
 
   constructor(
     private fb: NonNullableFormBuilder,
-    public profileFacade: ProfileFacade
+    public profileFacade: ProfileFacade,
+    private sanitizer: DomSanitizer,
   ) {
     super();
   }
@@ -41,6 +46,9 @@ export class ProfileViewComponent extends BaseComponent implements OnInit {
           email: value.email,
           birthDate: value.birthDate,
         });
+
+        const objectUrl = 'data:image/jpeg;base64,' + value.avatar;
+        this.image = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
       });
   }
 
@@ -60,5 +68,16 @@ export class ProfileViewComponent extends BaseComponent implements OnInit {
       newPassword: this.form.controls.newPassword.value,
       confirmPassword: this.form.controls.confirmPassword.value,
     });
+  }
+
+  readURL(event: any): void {
+    if (event.target.files) {
+      const file: File = event.target.files[0];
+
+      this.profileFacade.setAvatar(file);
+      const reader = new FileReader();
+      reader.onload = e => this.imgSrc = reader.result;
+      reader.readAsDataURL(file);
+    }
   }
 }

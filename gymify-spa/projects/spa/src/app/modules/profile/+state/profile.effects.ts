@@ -3,7 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ProfileClient } from '../../../../../../api-client/src/lib/clients/profile/profile.client';
 import { AuthFacade } from '../../../core/auth/+state/auth.facade';
 import * as ProfileActions from './profile.actions';
-import { catchError, EMPTY, filter, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
+import {
+  catchError, EMPTY, filter, map, mergeMap, of, tap, withLatestFrom
+} from 'rxjs';
 import { ProfileFacade } from './profile.facade';
 import { ToastrService } from 'ngx-toastr';
 
@@ -89,6 +91,38 @@ export class ProfileEffects {
     this.actions$.pipe(
       ofType(ProfileActions.updateUserPasswordFailure),
       tap(() => this.toastr.error('Unable to update password'))
+    ), { dispatch: false });
+
+  uploadAvatar$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.uploadAvatar),
+      withLatestFrom(this.authFacade.user$, this.profileFacade.avatar$),
+      mergeMap(([, user, avatar]) => {
+        if (!user || !avatar) {
+          return EMPTY;
+        }
+
+        return this.profileClient.uploadAvatar(user.userUid, avatar).pipe(
+          map(() => ProfileActions.uploadAvatarSuccess()),
+          catchError(() => of(ProfileActions.uploadAvatarFailure()))
+        );
+      })
+    )
+  );
+
+  uploadAvatarSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.uploadAvatarSuccess),
+      tap(() => {
+        this.profileFacade.cancelEditAvatar();
+        this.toastr.success('Successfully updated avatar');
+      })
+    ), { dispatch: false });
+
+  uploadAvatarFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.uploadAvatarFailure),
+      tap(() => this.toastr.error('Unable to upload avatar'))
     ), { dispatch: false });
 
   constructor(

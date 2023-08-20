@@ -24,4 +24,11 @@ export class ProfileClient {
   updateUserPassword(userUid: UUID, body: UpdateUserPasswordParams): Observable<EmptyResponse> {
     return this.http.put<EmptyResponse>(`${this.url}/${userUid}/password`, { ...body, userUid });
   }
+
+  uploadAvatar(userUid: UUID, file: File): Observable<EmptyResponse> {
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    return this.http.post(`${this.url}/${userUid}/avatar`, formData);
+  }
 }

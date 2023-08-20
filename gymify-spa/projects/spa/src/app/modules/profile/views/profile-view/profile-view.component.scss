@@ -11,3 +11,7 @@ h1 {
 span {
   @extend .typography-button-18;
 }
+
+.avatar {
+  @apply h-[250px] object-contain;
+}

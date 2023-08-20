@@ -61,3 +61,29 @@ export const togglePasswordEdit = createAction(
 export const cancelPasswordEdit = createAction(
   '[Profile] Cancel Password edit'
 );
+
+export const setAvatar = createAction(
+  '[Profile] Set Avatar',
+  props<{ avatar: File }>()
+);
+
+export const uploadAvatar = createAction(
+  '[Profile/API] Upload Avatar'
+);
+
+export const uploadAvatarSuccess = createAction(
+  '[Profile/API] Upload Avatar Success'
+);
+
+export const uploadAvatarFailure = createAction(
+  '[Profile/API] Upload Avatar Failure'
+);
+
+export const editAvatar = createAction(
+  '[Profile] Edit Avatar'
+);
+
+export const cancelEditAvatar = createAction(
+  '[Profile] Cancel Edit Avatar'
+);
+

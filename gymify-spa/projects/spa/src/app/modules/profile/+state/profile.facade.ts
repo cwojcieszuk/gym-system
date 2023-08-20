@@ -14,6 +14,8 @@ export class ProfileFacade {
   user$ = this.store.select(ProfileSelectors.getUser);
   isEditing$ = this.store.select(ProfileSelectors.getIsEditing);
   isPasswordEdit$ = this.store.select(ProfileSelectors.getIsPasswordEdit);
+  avatar$ = this.store.select(ProfileSelectors.getAvatar);
+  isAvatarEdit$ = this.store.select(ProfileSelectors.getIsEditAvatar);
 
   constructor(private store: Store) {}
 
@@ -43,5 +45,21 @@ export class ProfileFacade {
 
   updateUserPassword(body: UpdateUserPasswordParams): void {
     this.store.dispatch(ProfileActions.updateUserPassword({ body }));
+  }
+
+  setAvatar(file: File): void {
+    this.store.dispatch(ProfileActions.setAvatar({ avatar: file }));
+  }
+
+  uploadAvatar(): void {
+    this.store.dispatch(ProfileActions.uploadAvatar());
+  }
+
+  editAvatar(): void {
+    this.store.dispatch(ProfileActions.editAvatar());
+  }
+
+  cancelEditAvatar(): void {
+    this.store.dispatch(ProfileActions.cancelEditAvatar());
   }
 }

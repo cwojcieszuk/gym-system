@@ -117,8 +117,21 @@
         </form>
     </div>
 
-    <div class="flex flex-col shadow-2xl rounded-md p-4 w-[40%]">
+    <div class="flex flex-col justify-between shadow-2xl rounded-md p-4 w-[40%] gap-y-8">
         <span>Profile picture</span>
+        <ng-container *ngIf="imgSrc || image">
+            <img class="avatar" [src]="imgSrc || image" alt="avatar">
+        </ng-container>
+        <ng-container *ngIf="(profileFacade.isAvatarEdit$ | async) === false">
+            <button mat-raised-button color="primary" (click)="profileFacade.editAvatar()">Edit avatar</button>
+        </ng-container>
+        <ng-container *ngIf="profileFacade.isAvatarEdit$ | async">
+            <input type="file" accept="image/*" (change)="readURL($event)">
+            <div class="flex justify-between">
+                <button mat-stroked-button color="primary" (click)="profileFacade.cancelEditAvatar()">Cancel</button>
+                <button mat-raised-button color="primary" (click)="profileFacade.uploadAvatar()">Save</button>
+            </div>
+        </ng-container>
     </div>
 </div>
 

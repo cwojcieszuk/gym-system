@@ -17,3 +17,13 @@ export const getIsPasswordEdit = createSelector(
   getProfileState,
   state => state.isPasswordEdit
 );
+
+export const getAvatar = createSelector(
+  getProfileState,
+  state => state.avatar
+);
+
+export const getIsEditAvatar = createSelector(
+  getProfileState,
+  state => state.isAvatarEdit
+);
