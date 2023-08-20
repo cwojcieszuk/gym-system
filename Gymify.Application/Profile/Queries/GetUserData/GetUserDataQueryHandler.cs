@@ -1,5 +1,6 @@
 ﻿using Gymify.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace Gymify.Application.Profile.Queries.GetUserData;
@@ -17,7 +18,7 @@ public class GetUserDataQueryHandler : IRequestHandler<GetUserDataQuery, UserDat
     {
         AspNetUser user = await _userManager.FindByIdAsync(request.UserUid.ToString());
 
-        UserDataResponse result = new UserDataResponse(user.FirstName, user.LastName, user.Email, user.UserName, user.Birthdate);
+        UserDataResponse result = new UserDataResponse(user.FirstName, user.LastName, user.Email, user.UserName, user.Birthdate, user.Avatar);
 
         return result;
     }

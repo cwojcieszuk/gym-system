@@ -1,5 +1,6 @@
 ﻿using Gymify.Application.Profile.Commands.UpdateUserData;
 using Gymify.Application.Profile.Commands.UpdateUserPassword;
+using Gymify.Application.Profile.Commands.UploadAvatar;
 using Gymify.Application.Profile.Queries.GetUserData;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -46,6 +47,17 @@ public class ProfileController : ControllerBase
         {
             return BadRequest("Passwords do not match");
         }
+
+        await _mediator.Send(command);
+
+        return NoContent();
+    }
+
+    [HttpPost]
+    [Route("{userUid}/avatar")]
+    public async Task<IActionResult> UploadAvatar([FromRoute] Guid userUid, [FromForm] IFormFile avatar)
+    {
+        UploadAvatarCommand command = new UploadAvatarCommand(userUid, avatar);
 
         await _mediator.Send(command);
 
