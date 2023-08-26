@@ -18,13 +18,16 @@
 
         <div class="grid grid-cols-5 grid-rows-2 gap-x-16 gap-y-6 h-full" *ngIf="(facade.isLoading$ | async) === false">
             <div class="card" *ngFor="let exercise of (facade.exerciseResponse$ | async)?.content">
-                <img [src]="exercise.gifUrl">
+                <img [src]="exercise.gifUrl" alt="image-gif">
                 <span class="font-bold overflow-ellipsis">{{ exercise.exerciseName | firstLetterUppercase }}</span>
                 <span>{{ exercise.bodyPart | firstLetterUppercase }}</span>
                 <span>{{ exercise.target | firstLetterUppercase }}</span>
                 <span>{{ exercise.equipment | firstLetterUppercase }}</span>
-                <button mat-icon-button>
-                    <mat-icon class="icon">favorite_border</mat-icon>
+                <button mat-icon-button *ngIf="!exercise.isFavorite" (click)="facade.likeExercise(exercise.exerciseUid)">
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="exercise.isFavorite" (click)="facade.dislikeExercise(exercise.exerciseUid)">
+                    <mat-icon>favorite</mat-icon>
                 </button>
             </div>
         </div>

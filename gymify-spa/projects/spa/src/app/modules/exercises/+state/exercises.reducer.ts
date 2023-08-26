@@ -42,5 +42,19 @@ export const exercisesReducer = createReducer(
   on(ExerciseActions.fetchExercisesSuccess, ExerciseActions.fetchExercisesFailure, state => ({
     ...state,
     isLoading: false,
+  })),
+  on(ExerciseActions.likeExerciseSuccess, (state, payload) => ({
+    ...state,
+    exerciseResponse: state.exerciseResponse == null ? undefined : {
+      ...state.exerciseResponse,
+      content: state.exerciseResponse.content.map(ex => ex.exerciseUid !== payload.exerciseUid ? ex : ({ ...ex, isFavorite: true })),
+    },
+  })),
+  on(ExerciseActions.dislikeExerciseSuccess, (state, payload) => ({
+    ...state,
+    exerciseResponse: state.exerciseResponse == null ? undefined : {
+      ...state.exerciseResponse,
+      content: state.exerciseResponse.content.map(ex => ex.exerciseUid !== payload.exerciseUid ? ex : ({ ...ex, isFavorite: false })),
+    },
   }))
 );

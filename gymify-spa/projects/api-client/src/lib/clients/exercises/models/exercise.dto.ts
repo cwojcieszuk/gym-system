@@ -7,4 +7,5 @@ export interface ExerciseDTO {
   bodyPart: string;
   target: string;
   equipment: string;
+  isFavorite: boolean;
 }
