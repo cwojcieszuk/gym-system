@@ -23,21 +23,11 @@ public class UsersListQueryHandler : IRequestHandler<UsersListQuery, PagedRespon
     
     public async Task<PagedResponse<UsersListResponse>> Handle(UsersListQuery request, CancellationToken cancellationToken)
     {
-        List<AspNetUser> users = await _gymifyDbContext.AspNetUsers.ToListAsync(cancellationToken);
-        if (!String.IsNullOrWhiteSpace(request.Name))
-        {
-            users = users.Where(user =>
-            {
-                string fullName = user.FirstName + " " + user.LastName;
-                return fullName.ToLower().Contains(request.Name);
-            }).ToList();
-        }
-
-        if (request.BirthDate is not null)
-        {
-            users = users.Where(user => user.Birthdate.Date == Convert.ToDateTime(request.BirthDate).Date).ToList();
-        }
-
+        List<AspNetUser> users = await _gymifyDbContext.AspNetUsers
+            .Where(user => request.Name == null || (user.FirstName + " " + user.LastName).ToLower().Contains(request.Name))
+            .Where(user => request.BirthDate == null || user.Birthdate.Date == Convert.ToDateTime(request.BirthDate).Date)
+            .ToListAsync(cancellationToken);
+        
         if (!String.IsNullOrWhiteSpace(request.Role))
         {
             IList<AspNetUser> result =  await _userManager.GetUsersInRoleAsync(request.Role);
