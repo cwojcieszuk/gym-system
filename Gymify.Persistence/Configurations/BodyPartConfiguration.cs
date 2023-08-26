@@ -11,9 +11,9 @@ public class BodyPartConfiguration : IEntityTypeConfiguration<BodyPart>
     {
         builder.ToTable(nameof(BodyPart));
         
-        builder.HasKey(e => e.BodyPartUid).HasName("BodyPart_pk");
+        builder.HasKey(e => e.BodyPartId).HasName("BodyPart_pk");
         
-        builder.Property(e => e.BodyPartUid).ValueGeneratedNever();
+        builder.Property(e => e.BodyPartId).ValueGeneratedNever();
             
         builder.Property(e => e.BodyPartName)
             .HasMaxLength(ExerciseColumnConstants.BodyPartNameLimit)

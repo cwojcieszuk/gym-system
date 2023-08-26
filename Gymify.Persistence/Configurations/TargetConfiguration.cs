@@ -11,9 +11,9 @@ public class TargetConfiguration : IEntityTypeConfiguration<Target>
     {
         builder.ToTable(nameof(Target));
         
-        builder.HasKey(e => e.TargetUid).HasName("Target_pk");
+        builder.HasKey(e => e.TargetId).HasName("Target_pk");
 
-        builder.Property(e => e.TargetUid).ValueGeneratedNever();
+        builder.Property(e => e.TargetId).ValueGeneratedNever();
         builder.Property(e => e.TargetName)
             .HasMaxLength(ExerciseColumnConstants.TargetNameLimit)
             .IsUnicode(false);

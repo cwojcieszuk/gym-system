@@ -5,7 +5,7 @@ namespace Gymify.Domain.Entities;
 
 public partial class Equipment
 {
-    public Guid EquipmentUid { get; set; }
+    public int EquipmentId { get; set; }
 
     public string EquipmentName { get; set; } = null!;
 
