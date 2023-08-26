@@ -17,6 +17,36 @@ export class DictionariesEffects {
     )
   );
 
+  fetchBodyParts$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DictionariesActions.fetchBodyParts),
+      mergeMap(() => this.dictionariesClient.getBodyParts().pipe(
+        map(data => DictionariesActions.fetchBodyPartsSuccess({ data })),
+        catchError(() => of(DictionariesActions.fetchBodyPartsFailure()))
+      ))
+    )
+  );
+
+  fetchEquipments$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DictionariesActions.fetchEquipments),
+      mergeMap(() => this.dictionariesClient.getEquipments().pipe(
+        map(data => DictionariesActions.fetchEquipmentsSuccess({ data })),
+        catchError(() => of(DictionariesActions.fetchEquipmentsFailure()))
+      ))
+    )
+  );
+
+  fetchTargets$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DictionariesActions.fetchTargets),
+      mergeMap(() => this.dictionariesClient.getTargets().pipe(
+        map(data => DictionariesActions.fetchTargetsSuccess({ data })),
+        catchError(() => of(DictionariesActions.fetchTargetsFailure()))
+      ))
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private dictionariesClient: DictionariesClient

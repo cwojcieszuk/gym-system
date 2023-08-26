@@ -2,9 +2,13 @@
 
 <mat-nav-list>
     <span class="menu-header">Main menu</span>
+    <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">
+        <mat-icon class="rotate-[135deg]">fitness_center</mat-icon>
+        <a routerLink="exercises">Exercises</a>
+    </div>
 
     <ng-container *ngIf="facade.isAdmin$ | async">
-        <span class="menu-header">Admin</span>
+        <span class="menu-header pt-8">Admin</span>
         <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">
             <mat-icon>person</mat-icon>
             <a routerLink="users">Users</a>

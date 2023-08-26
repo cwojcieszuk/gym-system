@@ -1,0 +1,37 @@
+<form [formGroup]="form" class="flex flex-col gap-y-4">
+    <mat-form-field>
+        <mat-label>Body part</mat-label>
+        <mat-select formControlName="bodyPartId">
+            <mat-option *ngFor="let bodyPart of dictionariesFacade.bodyParts$ | async" [value]="bodyPart.bodyPartId">{{ bodyPart.bodyPartName }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Equipment</mat-label>
+        <mat-select formControlName="equipmentId">
+            <mat-option *ngFor="let eq of dictionariesFacade.equipments$ | async" [value]="eq.equipmentId">{{ eq.equipmentName }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Target</mat-label>
+        <mat-select formControlName="targetId">
+            <mat-option *ngFor="let target of dictionariesFacade.targets$ | async" [value]="target.targetId"> {{ target.targetName }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+    </mat-form-field>
+
+    <button mat-stroked-button color="primary" (click)="clear()">
+        <mat-icon>delete</mat-icon>
+        <span>Clear</span>
+    </button>
+
+    <button mat-raised-button color="primary" (click)="submit()">
+        <mat-icon>add</mat-icon>
+        <span>Save</span>
+    </button>
+</form>

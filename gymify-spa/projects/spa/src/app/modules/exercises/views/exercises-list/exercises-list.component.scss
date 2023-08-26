@@ -1,0 +1,42 @@
+@use 'typography';
+
+:host {
+  @apply flex flex-col h-full;
+}
+
+h1 {
+  @extend .typography-h3;
+}
+
+.example-container {
+  flex: 1 1 auto;
+}
+
+.example-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+
+.card {
+  @apply flex flex-col gap-y-1 rounded-md px-2 shadow-base items-center justify-center bg-white;
+
+  span {
+    @apply text-[14px];
+  }
+
+  img {
+    @apply w-[150px] h-[150px];
+  }
+}
+
+.spinner {
+  ::ng-deep circle {
+    stroke: #660033 !important;
+  }
+}
+

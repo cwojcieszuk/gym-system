@@ -1,0 +1,42 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer class="example-sidenav" #drawer mode="over" position="end">
+        <gym-exercise-filters (save)="drawer.close()"></gym-exercise-filters>
+    </mat-drawer>
+
+    <div class="p-8 example-sidenav-content">
+        <div class="grid grid-cols-3 items-center pb-6">
+            <h1 class="col-start-2 place-self-center">Exercises list</h1>
+
+            <button class="col-start-3 place-self-end" mat-icon-button color="primary" (click)="drawer.toggle()">
+                <mat-icon>filter_list</mat-icon>
+            </button>
+        </div>
+
+        <div *ngIf="facade.isLoading$ | async" class="flex justify-center items-center h-full">
+            <mat-progress-spinner class="spinner" mode="indeterminate" diameter="40"></mat-progress-spinner>
+        </div>
+
+        <div class="grid grid-cols-5 grid-rows-2 gap-x-16 gap-y-6 h-full" *ngIf="(facade.isLoading$ | async) === false">
+            <div class="card" *ngFor="let exercise of (facade.exerciseResponse$ | async)?.content">
+                <img [src]="exercise.gifUrl">
+                <span class="font-bold overflow-ellipsis">{{ exercise.exerciseName | firstLetterUppercase }}</span>
+                <span>{{ exercise.bodyPart | firstLetterUppercase }}</span>
+                <span>{{ exercise.target | firstLetterUppercase }}</span>
+                <span>{{ exercise.equipment | firstLetterUppercase }}</span>
+                <button mat-icon-button>
+                    <mat-icon class="icon">favorite_border</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <gym-paginator *ngIf="exerciseResponse"
+            class="pt-4"
+            [pageSizeOptions]="[10, 15, 20]"
+            [totalRecords]="exerciseResponse.totalRecords"
+            [totalPages]="exerciseResponse.totalPages"
+            [showPageSize]="false"
+            [page]="exerciseResponse.pageNumber"
+            (pageChange)="pageChange($event)">
+        </gym-paginator>
+    </div>
+</mat-drawer-container>
