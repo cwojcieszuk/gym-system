@@ -38,7 +38,8 @@ public class GetExercisesListQueryHandler : IRequestHandler<GetExercisesListQuer
             ex.GifUrl,
             ex.BodyPart.BodyPartName,
             ex.Target.TargetName,
-            ex.Equipment.EquipmentName
+            ex.Equipment.EquipmentName,
+            IsFavorite: IsFavorite(ex.ExerciseUid, request.UserUid)
             )).ToList();
 
         return new PagedResponse<ExerciseListResponse>()
@@ -49,5 +50,10 @@ public class GetExercisesListQueryHandler : IRequestHandler<GetExercisesListQuer
             PageNumber = request.PageNumber,
             PageSize = request.PageSize
         };
+    }
+
+    private bool IsFavorite(Guid exerciseUid, Guid userUid)
+    {
+        return _gymifyDbContext.FavouriteExercises.Any(x => x.ExerciseUid == exerciseUid && x.UserUid == userUid);
     }
 }

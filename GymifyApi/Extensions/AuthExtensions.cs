@@ -8,4 +8,9 @@ public static class AuthExtensions
     {
         return principal.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress").Value;
     }
+
+    public static string GetUserUid(this ClaimsPrincipal principal)
+    {
+        return principal.Claims.FirstOrDefault(x => x.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
+    }
 }
