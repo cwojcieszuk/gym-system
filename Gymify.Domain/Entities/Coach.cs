@@ -7,7 +7,7 @@ public partial class Coach
 {
     public Guid CoachUid { get; set; }
 
-    public string Description { get; set; } = null!;
+    public string? Description { get; set; }
 
     public virtual ICollection<CoachHour> CoachHours { get; set; } = new List<CoachHour>();
 
@@ -17,5 +17,5 @@ public partial class Coach
 
     public virtual AspNetUser User { get; set; }
 
-    public virtual ICollection<CoachCategory> CoachCategories { get; set; } = new List<CoachCategory>();
+    public virtual ICollection<CoachType> CoachTypes { get; set; } = new List<CoachType>();
 }

@@ -17,16 +17,20 @@ public partial class GymifyDbContext : IdentityDbContext<AspNetUser, IdentityRol
     }
 
     public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-
+    
     public virtual DbSet<BodyPart> BodyParts { get; set; }
 
     public virtual DbSet<Client> Clients { get; set; }
+    
+    public virtual DbSet<ClientGroupSession> ClientGroupSessions { get; set; }
 
     public virtual DbSet<Coach> Coaches { get; set; }
 
     public virtual DbSet<CoachCategory> CoachCategories { get; set; }
 
     public virtual DbSet<CoachHour> CoachHours { get; set; }
+    
+    public virtual DbSet<CoachType> CoachTypes { get; set; }
 
     public virtual DbSet<DifficultyLevel> DifficultyLevels { get; set; }
 

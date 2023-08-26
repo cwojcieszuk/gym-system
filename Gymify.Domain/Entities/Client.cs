@@ -13,5 +13,5 @@ public partial class Client
 
     public virtual AspNetUser User { get; set; } = null!;
 
-    public virtual ICollection<GroupSession> IdGroupSessions { get; set; } = new List<GroupSession>();
+    public virtual ICollection<ClientGroupSession> ClientGroupSessions { get; set; } = new List<ClientGroupSession>();
 }

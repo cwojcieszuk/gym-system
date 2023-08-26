@@ -12,7 +12,7 @@ public class FavouriteExerciseConfiguration : IEntityTypeConfiguration<Favourite
         
         builder.HasKey(e => new { e.FavouriteExerciseUid, e.UserUid, e.ExerciseUid }).HasName("FavouriteExercise_pk");
 
-        builder.Property(e => e.FavouriteExerciseUid).HasColumnName("FavouriteExercise");
+        builder.Property(e => e.FavouriteExerciseUid).ValueGeneratedNever();
         
         builder.HasOne(d => d.Exercise).WithMany(p => p.FavouriteExercises)
             .HasForeignKey(d => d.ExerciseUid)
