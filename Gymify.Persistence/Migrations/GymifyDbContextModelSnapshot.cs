@@ -122,8 +122,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.BodyPart", b =>
                 {
-                    b.Property<Guid>("BodyPartUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BodyPartId")
+                        .HasColumnType("int");
 
                     b.Property<string>("BodyPartName")
                         .IsRequired()
@@ -131,7 +131,7 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(128)");
 
-                    b.HasKey("BodyPartUid")
+                    b.HasKey("BodyPartId")
                         .HasName("BodyPart_pk");
 
                     b.ToTable("BodyPart", (string)null);
@@ -269,8 +269,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Equipment", b =>
                 {
-                    b.Property<Guid>("EquipmentUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("EquipmentName")
                         .IsRequired()
@@ -278,7 +278,7 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(128)");
 
-                    b.HasKey("EquipmentUid")
+                    b.HasKey("EquipmentId")
                         .HasName("Equipment_pk");
 
                     b.ToTable("Equipment");
@@ -289,11 +289,11 @@ namespace Gymify.Persistence.Migrations
                     b.Property<Guid>("ExerciseUid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BodyPartUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BodyPartId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("EquipmentUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ExerciseName")
                         .IsRequired()
@@ -307,17 +307,17 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<Guid>("TargetUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("TargetId")
+                        .HasColumnType("int");
 
                     b.HasKey("ExerciseUid")
                         .HasName("Exercise_pk");
 
-                    b.HasIndex("BodyPartUid");
+                    b.HasIndex("BodyPartId");
 
-                    b.HasIndex("EquipmentUid");
+                    b.HasIndex("EquipmentId");
 
-                    b.HasIndex("TargetUid");
+                    b.HasIndex("TargetId");
 
                     b.ToTable("Exercise", (string)null);
                 });
@@ -426,8 +426,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.Target", b =>
                 {
-                    b.Property<Guid>("TargetUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("TargetId")
+                        .HasColumnType("int");
 
                     b.Property<string>("TargetName")
                         .IsRequired()
@@ -435,7 +435,7 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(128)");
 
-                    b.HasKey("TargetUid")
+                    b.HasKey("TargetId")
                         .HasName("Target_pk");
 
                     b.ToTable("Target", (string)null);
@@ -763,19 +763,19 @@ namespace Gymify.Persistence.Migrations
                 {
                     b.HasOne("Gymify.Domain.Entities.BodyPart", "BodyPart")
                         .WithMany("Exercises")
-                        .HasForeignKey("BodyPartUid")
+                        .HasForeignKey("BodyPartId")
                         .IsRequired()
                         .HasConstraintName("Exercise_BodyPart");
 
                     b.HasOne("Gymify.Domain.Entities.Equipment", "Equipment")
                         .WithMany("Exercises")
-                        .HasForeignKey("EquipmentUid")
+                        .HasForeignKey("EquipmentId")
                         .IsRequired()
                         .HasConstraintName("Exercise_Equipment");
 
                     b.HasOne("Gymify.Domain.Entities.Target", "Target")
                         .WithMany("Exercises")
-                        .HasForeignKey("TargetUid")
+                        .HasForeignKey("TargetId")
                         .IsRequired()
                         .HasConstraintName("Exercise_Target");
 

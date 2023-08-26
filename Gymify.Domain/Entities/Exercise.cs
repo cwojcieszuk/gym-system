@@ -9,11 +9,11 @@ public partial class Exercise
 
     public string ExerciseName { get; set; } = null!;
 
-    public Guid BodyPartUid { get; set; }
+    public int BodyPartId { get; set; }
 
-    public Guid TargetUid { get; set; }
+    public int TargetId { get; set; }
 
-    public Guid EquipmentUid { get; set; }
+    public int EquipmentId { get; set; }
 
     public string GifUrl { get; set; } = null!;
 
