@@ -1,0 +1,26 @@
+<form [formGroup]="form" class="flex flex-col gap-y-8">
+    <gym-text-input label="Name" formControlName="name"></gym-text-input>
+
+    <div class="flex flex-col">
+        <label>Role</label>
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="role">
+                <mat-option *ngFor="let role of dictionariesFacade.userRoles$ | async" [value]="role.role">{{role.role}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="flex flex-col">
+        <label>Birth date</label>
+        <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="picker" formControlName="birthDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="save()">
+        <mat-icon>add</mat-icon>
+        <span>Save</span>
+    </button>
+</form>

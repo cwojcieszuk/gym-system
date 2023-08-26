@@ -38,7 +38,7 @@ $primary-light-palette: (
 $gymify-theme: mat.define-light-theme((
   color: (
     primary: mat.define-palette($primary-light-palette),
-    accent: mat.define-palette(mat.$teal-palette),
+    accent: mat.define-palette(mat.$blue-palette),
     warn: mat.define-palette(mat.$red-palette),
   )
 ));

@@ -3,6 +3,14 @@
 <mat-nav-list>
     <span class="menu-header">Main menu</span>
 
+    <ng-container *ngIf="facade.isAdmin$ | async">
+        <span class="menu-header">Admin</span>
+        <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">
+            <mat-icon>person</mat-icon>
+            <a routerLink="users">Users</a>
+        </div>
+    </ng-container>
+
     <div class="mt-auto pl-4">
         <button mat-button (click)="facade.logout()">
             <mat-icon>logout</mat-icon>

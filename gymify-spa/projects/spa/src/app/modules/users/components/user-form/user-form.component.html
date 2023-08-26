@@ -1,0 +1,75 @@
+<h1>{{ isNew ? 'Add User' : 'Edit User' }}</h1>
+
+<form [formGroup]="form" class="grid grid-cols-2 gap-4">
+    <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Login</mat-label>
+        <input matInput formControlName="login">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+            <mat-option *ngFor="let role of dictionariesFacade.userRoles$ | async" [value]="role.role">{{role.role}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Birth date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <input matInput formControlName="gender">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Phone number</mat-label>
+        <input matInput formControlName="phoneNumber">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" [type]="passwordInputType">
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+            <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!isNew">
+        <mat-label>Current password</mat-label>
+        <input matInput formControlName="currentPassword" type="password">
+    </mat-form-field>
+
+    <button mat-raised-button color="accent" class="generate-button" *ngIf="isNew" (click)="generatePassword()">
+        <span>Generate password</span>
+    </button>
+
+    <button mat-stroked-button color="primary" (click)="cancel()">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">
+        <mat-icon>save</mat-icon>
+        <span>Save</span>
+    </button>
+</form>
+

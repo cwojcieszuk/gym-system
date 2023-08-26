@@ -21,6 +21,16 @@ const routes: Routes = [
         component: AppComponent,
         runGuardsAndResolvers: 'always',
         canActivate: [AuthenticatedGuard],
+        children: [
+          {
+            path: 'users',
+            loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule),
+          },
+          {
+            path: 'profile',
+            loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule),
+          },
+        ],
       },
     ],
   },

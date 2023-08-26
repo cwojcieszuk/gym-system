@@ -8,11 +8,11 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-    <div class="flex gap-x-32 px-4 pb-4">
+    <div class="flex gap-x-20 px-4 pb-4">
         <span class="font-bold text-[13px]">{{(facade.user$ | async)?.name}}</span>
         <span class="font-bold text-[13px]">{{(facade.user$ | async)?.email}}</span>
     </div>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="navigateToProfile()">
         <mat-icon>person</mat-icon>
         <span>Profile settings</span>
     </button>

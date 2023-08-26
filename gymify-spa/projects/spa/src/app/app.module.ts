@@ -16,6 +16,9 @@ import { AuthStoreModule } from './core/auth/+state/auth-store.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccessTokenInterceptor } from './core/auth/interceptors/access-token.interceptor';
 import { LayoutModule } from './core/layout/layout.module';
+import { MatNativeDateModule } from '@angular/material/core';
+import { DictionariesStoreModule } from './core/dictionaries-state/dictionaries-store.module';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -35,12 +38,18 @@ import { LayoutModule } from './core/layout/layout.module';
     MatSidenavModule,
     AuthStoreModule,
     LayoutModule,
+    MatNativeDateModule,
+    DictionariesStoreModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AccessTokenInterceptor,
       multi: true,
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
     },
   ],
   bootstrap: [BootstrapComponent],
