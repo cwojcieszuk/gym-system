@@ -34,6 +34,10 @@ const routes: Routes = [
             path: 'exercises',
             loadChildren: () => import('./modules/exercises/exercises.module').then(m => m.ExercisesModule),
           },
+          {
+            path: 'personal-templates',
+            loadChildren: () => import('./modules/templates/templates.module').then(m => m.TemplatesModule),
+          },
         ],
       },
     ],
