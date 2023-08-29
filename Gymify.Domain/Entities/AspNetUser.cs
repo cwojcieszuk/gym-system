@@ -29,4 +29,6 @@ public partial class AspNetUser : IdentityUser<Guid>
     public virtual ICollection<FavouriteExercise> FavouriteExercises { get; set; } = new List<FavouriteExercise>();
 
     public virtual ICollection<UserTraining> UserTrainings { get; set; } = new List<UserTraining>();
+
+    public virtual ICollection<Template> Templates { get; set; } = new List<Template>();
 }

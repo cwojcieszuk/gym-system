@@ -23,5 +23,10 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
             .HasForeignKey(d => d.DifficultyLevelUid)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Template_DifficultyLevel");
+
+        builder.HasOne(x => x.User).WithMany(x => x.Templates)
+            .HasForeignKey(x => x.UserUid)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .HasConstraintName("Template_User");
     }
 }
