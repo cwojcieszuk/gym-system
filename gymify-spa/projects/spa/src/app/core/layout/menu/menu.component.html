@@ -12,6 +12,11 @@
         <a routerLink="personal-templates">Personal templates</a>
     </div>
 
+    <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">
+        <mat-icon>dashboard</mat-icon>
+        <a routerLink="community-templates">Community templates</a>
+    </div>
+
     <ng-container *ngIf="facade.isAdmin$ | async">
         <span class="menu-header">Admin</span>
         <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { PagedRequest } from '../../models/paged-request';
 import { Observable } from 'rxjs';
 import { TemplatesResponse } from './responses/templates.response';
+import { mapToHttpParams } from '../../mappers/map-to-http-params';
 
 @Injectable({ providedIn: 'root' })
 export class TemplatesClient {
@@ -11,10 +12,10 @@ export class TemplatesClient {
   constructor(private http: HttpClient) {}
 
   getPersonalTemplates(query: PagedRequest): Observable<TemplatesResponse> {
-    const params = new HttpParams({
-      fromObject: JSON.parse(JSON.stringify(query)),
-    });
+    return this.http.get<TemplatesResponse>(`${this.url}/personal`, { params: mapToHttpParams(query) });
+  }
 
-    return this.http.get<TemplatesResponse>(`${this.url}/personal`, { params });
+  getCommunityTemplates(query: PagedRequest): Observable<TemplatesResponse> {
+    return this.http.get<TemplatesResponse>(`${this.url}/community`, { params: mapToHttpParams(query) });
   }
 }

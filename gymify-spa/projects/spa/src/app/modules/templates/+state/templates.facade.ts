@@ -11,8 +11,12 @@ export class TemplatesFacade {
 
   constructor(private store: Store) {}
 
-  fetchTemplates(): void {
-    this.store.dispatch(TemplateActions.fetchTemplates());
+  fetchPersonalTemplates(): void {
+    this.store.dispatch(TemplateActions.fetchPersonalTemplates());
+  }
+
+  fetchCommunityTemplates(): void {
+    this.store.dispatch(TemplateActions.fetchCommunityTemplates());
   }
 
   setQuery(query: Partial<PagedRequest>): void {

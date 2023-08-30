@@ -19,7 +19,7 @@ const initialState: TemplatesState = {
 
 export const templatesReducer = createReducer(
   initialState,
-  on(TemplateActions.fetchTemplatesSuccess, (state, action) => ({
+  on(TemplateActions.fetchPersonalTemplatesSuccess, TemplateActions.fetchCommunityTemplatesSuccess, (state, action) => ({
     ...state,
     templatesResponse: action.response,
   })),

@@ -37,6 +37,16 @@ const routes: Routes = [
           {
             path: 'personal-templates',
             loadChildren: () => import('./modules/templates/templates.module').then(m => m.TemplatesModule),
+            data: {
+              isCommunity: false,
+            },
+          },
+          {
+            path: 'community-templates',
+            loadChildren: () => import('./modules/templates/templates.module').then(m => m.TemplatesModule),
+            data: {
+              isCommunity: true,
+            },
           },
         ],
       },
