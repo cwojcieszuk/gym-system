@@ -1,4 +1,5 @@
-﻿using Gymify.Application.Templates.Queries.GetCommunityTemplates;
+﻿using Gymify.Application.Templates.Commands.ShareTemplate;
+using Gymify.Application.Templates.Queries.GetCommunityTemplates;
 using Gymify.Application.Templates.Queries.GetPersonalTemplates;
 using Gymify.Shared.Params;
 using GymifyApi.Extensions;
@@ -44,5 +45,14 @@ public class TemplatesController : ControllerBase
         GetCommunityTemplatesQuery query = new GetCommunityTemplatesQuery(parameters.PageNumber, parameters.PageSize);
 
         return Ok(await _mediator.Send(query));
+    }
+
+    [HttpPost]
+    [Route("share")]
+    public async Task<IActionResult> ShareTemplate([FromBody] ShareTemplateCommand command)
+    {
+        await _mediator.Send(command);
+
+        return NoContent();
     }
 }
