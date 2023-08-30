@@ -1,4 +1,5 @@
-﻿using Gymify.Application.Templates.Queries.GetPersonalTemplates;
+﻿using Gymify.Application.Templates.Queries.GetCommunityTemplates;
+using Gymify.Application.Templates.Queries.GetPersonalTemplates;
 using Gymify.Shared.Params;
 using GymifyApi.Extensions;
 using MediatR;
@@ -32,6 +33,15 @@ public class TemplatesController : ControllerBase
         }
 
         GetPersonalTemplatesQuery query = new GetPersonalTemplatesQuery(Guid.Parse(userUid), parameters.PageNumber, parameters.PageSize);
+
+        return Ok(await _mediator.Send(query));
+    }
+
+    [HttpGet]
+    [Route("community")]
+    public async Task<IActionResult> GetCommunityTemplates([FromQuery] PageParameters parameters)
+    {
+        GetCommunityTemplatesQuery query = new GetCommunityTemplatesQuery(parameters.PageNumber, parameters.PageSize);
 
         return Ok(await _mediator.Send(query));
     }
