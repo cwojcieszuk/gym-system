@@ -3,6 +3,7 @@ import { UserRole } from '../../../../../api-client/src/lib/clients/dictionaries
 import { BodyPartDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/body-part.dto';
 import { EquipmentDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/equipment.dto';
 import { TargetDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/target.dto';
+import { DifficultyLevelDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/difficulty-level.dto';
 
 export const fetchUserRoles = createAction(
   '[Dictionaries/API] Fetch User Roles'
@@ -54,4 +55,17 @@ export const fetchTargetsSuccess = createAction(
 
 export const fetchTargetsFailure = createAction(
   '[Dictionaries/API] Fetch Targets Failure'
+);
+
+export const fetchDifficultyLevels = createAction(
+  '[Dictionaries/API] Fetch Difficulty Levels'
+);
+
+export const fetchDifficultyLevelsSuccess = createAction(
+  '[Dictionaries/API] Fetch Difficulty Levels Success',
+  props<{ data: DifficultyLevelDTO[] }>()
+);
+
+export const fetchDifficultyLevelsFailure = createAction(
+  '[Dictionaries/API] Fetch Difficulty Levels Failure'
 );

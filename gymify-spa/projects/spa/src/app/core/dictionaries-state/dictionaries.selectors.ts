@@ -22,3 +22,8 @@ export const getTargets = createSelector(
   getDictionariesState,
   state => state.targets
 );
+
+export const getDifficultyLevels = createSelector(
+  getDictionariesState,
+  state => state.difficultyLevels
+);

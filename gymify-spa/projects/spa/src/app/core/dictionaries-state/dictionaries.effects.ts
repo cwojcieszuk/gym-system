@@ -47,6 +47,16 @@ export class DictionariesEffects {
     )
   );
 
+  fetchDifficultyLevels$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DictionariesActions.fetchDifficultyLevels),
+      mergeMap(() => this.dictionariesClient.getDifficultyLevels().pipe(
+        map(data => DictionariesActions.fetchDifficultyLevelsSuccess({ data })),
+        catchError(() => of(DictionariesActions.fetchDifficultyLevelsFailure()))
+      ))
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private dictionariesClient: DictionariesClient

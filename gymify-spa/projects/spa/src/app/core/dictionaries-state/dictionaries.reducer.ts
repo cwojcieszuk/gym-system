@@ -4,6 +4,7 @@ import * as DictionariesActions from './dictionaries.actions';
 import { BodyPartDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/body-part.dto';
 import { EquipmentDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/equipment.dto';
 import { TargetDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/target.dto';
+import { DifficultyLevelDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/difficulty-level.dto';
 
 export const DICTIONARIES_FEATURE_KEY = 'dictionaries';
 
@@ -12,6 +13,7 @@ export interface DictionariesState {
   bodyParts: BodyPartDTO[];
   equipments: EquipmentDTO[];
   targets: TargetDTO[];
+  difficultyLevels: DifficultyLevelDTO[];
 }
 
 const initialState: DictionariesState = {
@@ -19,6 +21,7 @@ const initialState: DictionariesState = {
   bodyParts: [],
   equipments: [],
   targets: [],
+  difficultyLevels: [],
 };
 
 export const dictionariesReducer = createReducer<DictionariesState>(
@@ -38,5 +41,9 @@ export const dictionariesReducer = createReducer<DictionariesState>(
   on(DictionariesActions.fetchTargetsSuccess, (state, payload) => ({
     ...state,
     targets: payload.data,
+  })),
+  on(DictionariesActions.fetchDifficultyLevelsSuccess, (state, payload) => ({
+    ...state,
+    difficultyLevels: payload.data,
   }))
 );
