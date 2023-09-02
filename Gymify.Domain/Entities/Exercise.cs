@@ -15,7 +15,7 @@ public partial class Exercise
 
     public int EquipmentId { get; set; }
 
-    public string GifUrl { get; set; } = null!;
+    public byte[] ExerciseGif { get; set; }
 
     public virtual ICollection<FavouriteExercise> FavouriteExercises { get; set; } = new List<FavouriteExercise>();
 

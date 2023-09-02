@@ -35,7 +35,7 @@ public class GetExercisesListQueryHandler : IRequestHandler<GetExercisesListQuer
         List<ExerciseListResponse> result = exercises.Select(ex => new ExerciseListResponse(
             ex.ExerciseUid, 
             ex.ExerciseName, 
-            ex.GifUrl,
+            ex.ExerciseGif,
             ex.BodyPart.BodyPartName,
             ex.Target.TargetName,
             ex.Equipment.EquipmentName,
