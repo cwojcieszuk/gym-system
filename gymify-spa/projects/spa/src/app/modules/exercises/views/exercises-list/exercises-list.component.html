@@ -18,8 +18,11 @@
 
         <div class="grid grid-cols-5 grid-rows-2 gap-x-16 gap-y-6 h-full" *ngIf="(facade.isLoading$ | async) === false">
             <div class="card" *ngFor="let exercise of (facade.exerciseResponse$ | async)?.content">
-                <img [src]="exercise.gifUrl" alt="image-gif">
-                <span class="font-bold overflow-ellipsis">{{ exercise.exerciseName | firstLetterUppercase }}</span>
+                <img [src]="imgService.getGif(exercise.exerciseGif)" alt="image-gif">
+                <span class="font-bold overflow-ellipsis line-clamp-1"
+                      [matTooltip]="exercise.exerciseName | firstLetterUppercase"
+                      [matTooltipDisabled]="exercise.exerciseName.length < 23"
+                >{{ exercise.exerciseName | firstLetterUppercase }}</span>
                 <span>{{ exercise.bodyPart | firstLetterUppercase }}</span>
                 <span>{{ exercise.target | firstLetterUppercase }}</span>
                 <span>{{ exercise.equipment | firstLetterUppercase }}</span>

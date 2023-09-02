@@ -5,6 +5,7 @@ import {
 } from '../../../../../../../api-client/src/lib/clients/exercises/responses/exercise-list.response';
 import { BaseComponent } from '../../../../shared/components/base.component';
 import { filter } from 'rxjs';
+import { ImageService } from '../../../../shared/services/image.service';
 
 @Component({
   templateUrl: './exercises-list.component.html',
@@ -14,7 +15,8 @@ export class ExercisesListComponent extends BaseComponent implements OnInit {
   exerciseResponse?: ExerciseListResponse;
 
   constructor(
-    public facade: ExercisesFacade
+    public facade: ExercisesFacade,
+    public imgService: ImageService
   ) {
     super();
   }

@@ -3,7 +3,7 @@ import { UUID } from '../../../types/uuid.type';
 export interface ExerciseDTO {
   exerciseUid: UUID;
   exerciseName: string;
-  gifUrl: string;
+  exerciseGif: any;
   bodyPart: string;
   target: string;
   equipment: string;
