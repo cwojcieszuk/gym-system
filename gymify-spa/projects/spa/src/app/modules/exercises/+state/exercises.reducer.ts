@@ -11,7 +11,7 @@ export const EXERCISES_FEATURE_KEY = 'exercises';
 export interface ExercisesState {
   exerciseResponse?: ExerciseListResponse;
   query: ExerciseListParams;
-  isLoading: boolean
+  isLoading: boolean;
 }
 
 const initialState: ExercisesState = {
@@ -33,6 +33,7 @@ export const exercisesReducer = createReducer(
     query: {
       ...state.query,
       ...payload.filters,
+      pageNumber: payload.filters.pageNumber == null ? 1 : payload.filters.pageNumber,
     },
   })),
   on(ExerciseActions.fetchExercises, state => ({

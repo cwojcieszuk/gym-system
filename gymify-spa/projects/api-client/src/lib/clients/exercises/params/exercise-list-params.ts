@@ -5,4 +5,5 @@ export interface ExerciseListParams extends PagedRequest {
   equipmentId?: number;
   targetId?: number;
   name?: string;
+  showFavorite?: boolean;
 }
