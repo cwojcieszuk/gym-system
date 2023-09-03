@@ -19,6 +19,7 @@ import { LayoutModule } from './core/layout/layout.module';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DictionariesStoreModule } from './core/dictionaries-state/dictionaries-store.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { ErrorsInterceptor } from './core/auth/interceptors/errors.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,11 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AccessTokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorsInterceptor,
       multi: true,
     },
     {
