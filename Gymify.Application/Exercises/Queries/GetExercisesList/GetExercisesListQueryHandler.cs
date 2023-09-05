@@ -25,6 +25,7 @@ public class GetExercisesListQueryHandler : IRequestHandler<GetExercisesListQuer
             .Where(ex => request.BodyPartId == null || ex.BodyPartId == request.BodyPartId)
             .Where(ex => request.TargetId == null || ex.TargetId == request.TargetId)
             .Where(ex => request.Name == null || ex.ExerciseName.ToLower().Contains(request.Name.ToLower()))
+            .Where(ex => request.ShowFavorite == false || (request.ShowFavorite == true && _gymifyDbContext.FavouriteExercises.Any(x => x.ExerciseUid == ex.ExerciseUid && x.UserUid == request.UserUid)))
             .ToListAsync(cancellationToken);
 
         int totalRecords = exercises.Count;
