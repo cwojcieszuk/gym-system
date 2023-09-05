@@ -2,6 +2,7 @@
 using Gymify.Application.Templates.Commands.ShareTemplate;
 using Gymify.Application.Templates.Queries.GetCommunityTemplates;
 using Gymify.Application.Templates.Queries.GetPersonalTemplates;
+using Gymify.Application.Templates.Queries.GetTemplate;
 using Gymify.Shared.Params;
 using GymifyApi.Extensions;
 using MediatR;
@@ -70,5 +71,19 @@ public class TemplatesController : ControllerBase
         await _mediator.Send(command with { UserUid = userUid });
 
         return NoContent();
+    }
+
+    [HttpGet]
+    [Route("{templateUid}")]
+    public async Task<IActionResult> GetTemplate([FromRoute] GetTemplateCommand command)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        return Ok(await _mediator.Send(command with { UserUid = userUid }));
     }
 }
