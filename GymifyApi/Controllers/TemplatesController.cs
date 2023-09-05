@@ -1,4 +1,5 @@
-﻿using Gymify.Application.Templates.Commands.ShareTemplate;
+﻿using Gymify.Application.Templates.Commands.AddTemplate;
+using Gymify.Application.Templates.Commands.ShareTemplate;
 using Gymify.Application.Templates.Queries.GetCommunityTemplates;
 using Gymify.Application.Templates.Queries.GetPersonalTemplates;
 using Gymify.Shared.Params;
@@ -52,6 +53,21 @@ public class TemplatesController : ControllerBase
     public async Task<IActionResult> ShareTemplate([FromBody] ShareTemplateCommand command)
     {
         await _mediator.Send(command);
+
+        return NoContent();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddTemplate([FromBody] AddTemplateCommand command)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+        
+        await _mediator.Send(command with { UserUid = userUid });
 
         return NoContent();
     }

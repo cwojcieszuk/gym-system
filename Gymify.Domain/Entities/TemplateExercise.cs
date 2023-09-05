@@ -11,11 +11,11 @@ public partial class TemplateExercise
 
     public Guid TemplateUid { get; set; }
 
-    public string NumberOfSets { get; set; }
+    public int NumberOfSets { get; set; }
 
-    public string NumberOfReps { get; set; }
+    public int NumberOfReps { get; set; }
 
-    public string Comments { get; set; } = null!;
+    public string? Comments { get; set; }
 
     public virtual Exercise Exercise { get; set; } = null!;
 
