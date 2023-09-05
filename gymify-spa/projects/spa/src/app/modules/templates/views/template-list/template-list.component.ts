@@ -7,6 +7,8 @@ import { TemplateDTO } from '../../../../../../../api-client/src/lib/clients/tem
 import { TemplatesResponse } from '../../../../../../../api-client/src/lib/clients/templates/responses/templates.response';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UUID } from '../../../../../../../api-client/src/lib/types/uuid.type';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   templateUrl: './template-list.component.html',
@@ -22,7 +24,8 @@ export class TemplateListComponent extends BaseComponent implements OnInit {
   constructor(
     private facade: TemplatesFacade,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -57,5 +60,18 @@ export class TemplateListComponent extends BaseComponent implements OnInit {
   goToEdit(templateUid: UUID): void {
     this.facade.selectTemplate(templateUid);
     this.router.navigate([templateUid], { relativeTo: this.route });
+  }
+
+  shareTemplate(templateUid: UUID): void {
+    const dialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Share template',
+        message: 'Are you sure to share template?',
+      },
+    });
+
+    dialog.afterClosed()
+      .pipe(filter(Boolean))
+      .subscribe(() => this.facade.shareTemplate(templateUid));
   }
 }

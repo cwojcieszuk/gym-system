@@ -95,6 +95,19 @@ export const fetchTemplateFailure = createAction(
   '[Templates/API] Fetch Template Failure'
 );
 
+export const shareTemplate = createAction(
+  '[Templates/API] Share Template',
+  props<{ templateUid: UUID }>()
+);
+
+export const shareTemplateSuccess = createAction(
+  '[Templates/API] Share Template Success'
+);
+
+export const shareTemplateFailure = createAction(
+  '[Templates/API] Share Template Failure'
+);
+
 export const reset = createAction(
   '[Templates] Reset'
 );

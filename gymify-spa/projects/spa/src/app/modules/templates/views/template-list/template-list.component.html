@@ -38,7 +38,7 @@
                         <mat-icon>edit</mat-icon>
                     </button>
 
-                    <button mat-icon-button color="primary" *ngIf="!isCommunity">
+                    <button mat-icon-button color="primary" *ngIf="!isCommunity" (click)="shareTemplate(template.templateUid)">
                         <mat-icon>share</mat-icon>
                     </button>
 

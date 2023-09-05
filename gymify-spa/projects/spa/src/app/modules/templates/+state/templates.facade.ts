@@ -60,6 +60,10 @@ export class TemplatesFacade {
     this.store.dispatch(TemplateActions.fetchTemplate());
   }
 
+  shareTemplate(templateUid: UUID): void {
+    this.store.dispatch(TemplateActions.shareTemplate({ templateUid }));
+  }
+
   reset(): void {
     this.store.dispatch(TemplateActions.reset());
   }

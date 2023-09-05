@@ -3,7 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TemplatesClient } from '../../../../../../api-client/src/lib/clients/templates/templates.client';
 import * as TemplateActions from './templates.actions';
 import { TemplatesFacade } from './templates.facade';
-import { catchError, filter, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
+import {
+  catchError, filter, map, mergeMap, of, tap, withLatestFrom
+} from 'rxjs';
 import { ExercisesClient } from '../../../../../../api-client/src/lib/clients/exercises/exercises.client';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -88,6 +90,30 @@ export class TemplatesEffects {
       ))
     )
   );
+
+  shareTemplate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.shareTemplate),
+      mergeMap(({ templateUid }) => this.client.shareTemplate(templateUid).pipe(
+        map(() => TemplateActions.shareTemplateSuccess()),
+        catchError(() => of(TemplateActions.shareTemplateFailure()))
+      ))
+    )
+  );
+
+  shareTemplateSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.shareTemplateSuccess),
+      tap(() => this.toastr.success('Successfully shared template')),
+      map(() => TemplateActions.fetchPersonalTemplates())
+    )
+  );
+
+  shareTemplateFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.shareTemplateFailure),
+      tap(() => this.toastr.error('Unable to share template'))
+    ), { dispatch: false });
 
   constructor(
     private actions$: Actions,

@@ -30,4 +30,8 @@ export class TemplatesClient {
   getTemplate(templateUid: UUID): Observable<TemplateDetailsDTO> {
     return this.http.get<TemplateDetailsDTO>(`${this.url}/${templateUid}`);
   }
+
+  shareTemplate(templateUid: UUID): Observable<EmptyResponse> {
+    return this.http.post<TemplateDetailsDTO>(`${this.url}/${templateUid}/share`, { templateUid });
+  }
 }
