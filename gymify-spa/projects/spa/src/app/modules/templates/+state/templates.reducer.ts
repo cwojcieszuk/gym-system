@@ -4,6 +4,8 @@ import { PagedRequest } from '../../../../../../api-client/src/lib/models/paged-
 import { TemplatesResponse } from '../../../../../../api-client/src/lib/clients/templates/responses/templates.response';
 import { ExerciseDTO } from '../../../../../../api-client/src/lib/clients/exercises/models/exercise.dto';
 import { ExerciseListParams } from '../../../../../../api-client/src/lib/clients/exercises/params/exercise-list-params';
+import { TemplateDetailsDTO } from '../../../../../../api-client/src/lib/clients/templates/models/template.details.dto';
+import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
 
 export const TEMPLATES_FEATURE_KEY = 'templates';
 
@@ -15,6 +17,9 @@ export interface TemplatesState {
   totalExercises: number;
   isLoadingExercises: boolean;
   exerciseQuery: ExerciseListParams;
+
+  selectedTemplateUid?: UUID;
+  template?: TemplateDetailsDTO;
 }
 
 const initialState: TemplatesState = {
@@ -72,5 +77,13 @@ export const templatesReducer = createReducer(
       pageNumber: state.exerciseQuery.pageNumber + 1,
     },
   })),
-  on(TemplateActions.reset, () => initialState),
+  on(TemplateActions.fetchTemplateSuccess, (state, payload) => ({
+    ...state,
+    template: payload.template,
+  })),
+  on(TemplateActions.selectTemplate, (state, payload) => ({
+    ...state,
+    selectedTemplateUid: payload.templateUid,
+  })),
+  on(TemplateActions.reset, () => initialState)
 );

@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'new',
     component: TemplateAddComponent,
-  }
+  },
+  {
+    path: ':uid',
+    component: TemplateAddComponent,
+  },
 ];
 
 @NgModule({

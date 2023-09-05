@@ -7,6 +7,7 @@ import { ExerciseListParams } from '../../../../../../api-client/src/lib/clients
 import {
   CreateTemplateParams
 } from '../../../../../../api-client/src/lib/clients/templates/params/create-template.params';
+import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
 
 @Injectable({ providedIn: 'root' })
 export class TemplatesFacade {
@@ -17,6 +18,9 @@ export class TemplatesFacade {
   exercisesQuery$ = this.store.select(TemplateSelectors.getExercisesQuery);
   areAllExercisesLoaded$ = this.store.select(TemplateSelectors.areAllExercisesLoaded);
   isLoadingExercises$ = this.store.select(TemplateSelectors.isLoadingExercises);
+
+  template$ = this.store.select(TemplateSelectors.getTemplate);
+  selectedTemplateUid$ = this.store.select(TemplateSelectors.getSelectedTemplateUid);
 
   constructor(private store: Store) {}
 
@@ -46,6 +50,14 @@ export class TemplatesFacade {
 
   createTemplate(params: CreateTemplateParams): void {
     this.store.dispatch(TemplateActions.createTemplate({ params }));
+  }
+
+  selectTemplate(templateUid: UUID): void {
+    this.store.dispatch(TemplateActions.selectTemplate({ templateUid }));
+  }
+
+  fetchTemplate(): void {
+    this.store.dispatch(TemplateActions.fetchTemplate());
   }
 
   reset(): void {

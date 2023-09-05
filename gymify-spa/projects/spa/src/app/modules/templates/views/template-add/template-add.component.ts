@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ExerciseChoiceDialogComponent } from '../../components/exercise-choice.dialog/exercise-choice.dialog.component';
 import { filter } from 'rxjs';
 import { TemplatesFacade } from '../../+state/templates.facade';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './template-add.component.html',
@@ -43,13 +44,42 @@ export class TemplateAddComponent extends BaseComponent implements OnInit {
     public dictionariesFacade: DictionariesFacade,
     public imgService: ImageService,
     private dialog: MatDialog,
-    private facade: TemplatesFacade
+    private facade: TemplatesFacade,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.dictionariesFacade.fetchDifficultyLevels();
+    //this.facade.fetchTemplate();
+
+    this.observe(this.route.paramMap)
+      .subscribe(value => {
+        const uid = value.get('uid');
+
+        if (uid) {
+          this.facade.selectTemplate(uid);
+          this.facade.fetchTemplate();
+        }
+      });
+
+    this.observe(this.facade.template$)
+      .pipe(filter(Boolean))
+      .subscribe(value => {
+        this.form.patchValue({
+          templateName: value.templateName,
+          difficultyLevelUid: value.difficultyLevelUid,
+          estimatedTime: value.estimatedTime,
+        });
+
+        this.exercisesForm.patchValue(value.exercises);
+      });
+  }
+
+  goBack(): void {
+    this.router.navigate(['..'], { relativeTo: this.route });
   }
 
   addExercise(): void {

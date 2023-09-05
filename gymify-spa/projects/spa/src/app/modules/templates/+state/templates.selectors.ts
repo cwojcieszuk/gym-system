@@ -32,3 +32,13 @@ export const isLoadingExercises = createSelector(
   getTemplatesState,
   state => state.isLoadingExercises
 );
+
+export const getTemplate = createSelector(
+  getTemplatesState,
+  state => state.template
+);
+
+export const getSelectedTemplateUid = createSelector(
+  getTemplatesState,
+  state => state.selectedTemplateUid
+);

@@ -5,7 +5,8 @@ import { filter } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { TemplateDTO } from '../../../../../../../api-client/src/lib/clients/templates/models/template.dto';
 import { TemplatesResponse } from '../../../../../../../api-client/src/lib/clients/templates/responses/templates.response';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UUID } from '../../../../../../../api-client/src/lib/types/uuid.type';
 
 @Component({
   templateUrl: './template-list.component.html',
@@ -20,7 +21,8 @@ export class TemplateListComponent extends BaseComponent implements OnInit {
 
   constructor(
     private facade: TemplatesFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     super();
   }
@@ -50,5 +52,10 @@ export class TemplateListComponent extends BaseComponent implements OnInit {
 
   pageSizeChange(pageSize: number): void {
     this.facade.setQuery({ pageSize });
+  }
+
+  goToEdit(templateUid: UUID): void {
+    this.facade.selectTemplate(templateUid);
+    this.router.navigate([templateUid], { relativeTo: this.route });
   }
 }

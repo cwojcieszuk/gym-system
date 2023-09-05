@@ -8,6 +8,8 @@ import { ExerciseListParams } from '../../../../../../api-client/src/lib/clients
 import {
   CreateTemplateParams
 } from '../../../../../../api-client/src/lib/clients/templates/params/create-template.params';
+import { TemplateDetailsDTO } from '../../../../../../api-client/src/lib/clients/templates/models/template.details.dto';
+import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
 
 export const fetchPersonalTemplates = createAction(
   '[Templates/API] Fetch Personal Templates'
@@ -73,6 +75,24 @@ export const createTemplateSuccess = createAction(
 
 export const createTemplateFailure = createAction(
   '[Templates/API] Create Template Failure'
+);
+
+export const selectTemplate = createAction(
+  '[Templates] Select Template',
+  props<{ templateUid: UUID }>()
+);
+
+export const fetchTemplate = createAction(
+  '[Templates/API] Fetch Template'
+);
+
+export const fetchTemplateSuccess = createAction(
+  '[Templates/API] Fetch Template Success',
+  props<{ template: TemplateDetailsDTO }>()
+);
+
+export const fetchTemplateFailure = createAction(
+  '[Templates/API] Fetch Template Failure'
 );
 
 export const reset = createAction(

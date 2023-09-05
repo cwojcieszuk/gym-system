@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TemplatesClient } from '../../../../../../api-client/src/lib/clients/templates/templates.client';
 import * as TemplateActions from './templates.actions';
 import { TemplatesFacade } from './templates.facade';
-import { catchError, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
+import { catchError, filter, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
 import { ExercisesClient } from '../../../../../../api-client/src/lib/clients/exercises/exercises.client';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -75,6 +75,19 @@ export class TemplatesEffects {
         this.router.navigate(['personal-templates']);
       })
     ), { dispatch: false });
+
+  fetchTemplate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.fetchTemplate),
+      withLatestFrom(this.facade.selectedTemplateUid$),
+      map(([, templateUid]) => templateUid),
+      filter(Boolean),
+      mergeMap(templateUid => this.client.getTemplate(templateUid).pipe(
+        map(template => TemplateActions.fetchTemplateSuccess({ template })),
+        catchError(() => of(TemplateActions.fetchTemplateFailure()))
+      ))
+    )
+  );
 
   constructor(
     private actions$: Actions,
