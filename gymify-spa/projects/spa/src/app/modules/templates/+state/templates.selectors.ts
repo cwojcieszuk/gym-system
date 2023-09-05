@@ -12,3 +12,23 @@ export const getQuery = createSelector(
   getTemplatesState,
   state => state.query
 );
+
+export const getExercises = createSelector(
+  getTemplatesState,
+  state => state.exercises
+);
+
+export const getExercisesQuery = createSelector(
+  getTemplatesState,
+  state => state.exerciseQuery
+);
+
+export const areAllExercisesLoaded = createSelector(
+  getTemplatesState,
+  state => state.exercises.length === state.totalExercises
+);
+
+export const isLoadingExercises = createSelector(
+  getTemplatesState,
+  state => state.isLoadingExercises
+);

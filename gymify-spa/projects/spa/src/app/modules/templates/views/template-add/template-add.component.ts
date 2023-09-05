@@ -1,0 +1,103 @@
+import { Component, OnInit } from '@angular/core';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { DictionariesFacade } from '../../../../core/dictionaries-state/dictionaries.facade';
+import { BaseComponent } from '../../../../shared/components/base.component';
+import { UUID } from '../../../../../../../api-client/src/lib/types/uuid.type';
+import { ExerciseDTO } from '../../../../../../../api-client/src/lib/clients/exercises/models/exercise.dto';
+import { ImageService } from '../../../../shared/services/image.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ExerciseChoiceDialogComponent } from '../../components/exercise-choice.dialog/exercise-choice.dialog.component';
+import { filter } from 'rxjs';
+import { TemplatesFacade } from '../../+state/templates.facade';
+
+@Component({
+  templateUrl: './template-add.component.html',
+  styleUrls: ['./template-add.component.scss'],
+})
+export class TemplateAddComponent extends BaseComponent implements OnInit {
+  readonly form = this.fb.group({
+    templateName: this.fb.control<string>('', Validators.required),
+    difficultyLevelUid: this.fb.control<UUID | null>(null, Validators.required),
+    estimatedTime: this.fb.control<number>(0, Validators.required),
+  });
+
+  readonly exercisesForm = this.fb.array([
+    this.fb.group({
+      exercise: this.fb.control<ExerciseDTO | null>(null),
+      numberOfSets: this.fb.control<number>(0),
+      numberOfReps: this.fb.control<number>(0),
+      comments: this.fb.control<string>(''),
+    }),
+  ]);
+
+  exerciseControl(index: number): ExerciseDTO | null {
+    return this.exercisesForm.at(index).controls.exercise.value;
+  }
+
+  get canSave(): boolean {
+    return this.form.valid && this.exercisesForm.controls.every(c => c.controls.exercise.value !== null);
+  }
+
+  constructor(
+    private fb: NonNullableFormBuilder,
+    public dictionariesFacade: DictionariesFacade,
+    public imgService: ImageService,
+    private dialog: MatDialog,
+    private facade: TemplatesFacade
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.dictionariesFacade.fetchDifficultyLevels();
+  }
+
+  addExercise(): void {
+    this.exercisesForm.push(this.fb.group({
+      exercise: this.fb.control<ExerciseDTO | null>(null),
+      numberOfSets: this.fb.control<number>(0),
+      numberOfReps: this.fb.control<number>(0),
+      comments: this.fb.control<string>(''),
+    }));
+  }
+
+  removeExercise(index: number): void {
+    this.exercisesForm.removeAt(index);
+  }
+
+  chooseExercise(index: number): void {
+    const dialog = this.dialog.open(ExerciseChoiceDialogComponent, {
+      width: '900px',
+      height: '800px',
+      data: {
+        index,
+      },
+    });
+
+    dialog.afterClosed()
+      .pipe(filter(Boolean))
+      .subscribe(value => {
+        this.exercisesForm.at(value.index).patchValue({
+          exercise: value.exercise,
+        });
+      });
+  }
+
+  save(): void {
+    if (!this.canSave) {
+      return;
+    }
+
+    this.facade.createTemplate({
+      templateName: this.form.controls.templateName.value,
+      estimatedTime: this.form.controls.estimatedTime.value,
+      difficultyLevelUid: this.form.controls.difficultyLevelUid.value as string,
+      exercises: this.exercisesForm.controls.map(x => ({
+        exerciseUid: x.controls.exercise.value?.exerciseUid as string,
+        numberOfReps: x.controls.numberOfReps.value,
+        numberOfSets: x.controls.numberOfSets.value,
+        comments: x.controls.comments.value,
+      })),
+    });
+  }
+}
