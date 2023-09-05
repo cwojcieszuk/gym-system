@@ -50,8 +50,8 @@ public class TemplatesController : ControllerBase
     }
 
     [HttpPost]
-    [Route("share")]
-    public async Task<IActionResult> ShareTemplate([FromBody] ShareTemplateCommand command)
+    [Route("{templateUid}/share")]
+    public async Task<IActionResult> ShareTemplate([FromRoute] ShareTemplateCommand command)
     {
         await _mediator.Send(command);
 

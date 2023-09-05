@@ -13,7 +13,7 @@ public class ShareTemplateCommandValidator: AbstractValidator<ShareTemplateComma
             .Cascade(CascadeMode.StopOnFirstFailure)
             .MustAsync(async (x, token) => await mediator.Send(new TemplateUidExistenceQuery(x), token))
             .WithMessage("Template doesn't exist")
-            .MustAsync(async (x, token) => await mediator.Send(new IsTemplateSharedQuery(x), token))
+            .MustAsync(async (x, token) => !await mediator.Send(new IsTemplateSharedQuery(x), token))
             .WithMessage("Template is already shared!");
     }
 }
