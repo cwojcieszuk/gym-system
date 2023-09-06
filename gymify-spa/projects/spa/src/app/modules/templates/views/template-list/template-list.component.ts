@@ -74,4 +74,17 @@ export class TemplateListComponent extends BaseComponent implements OnInit {
       .pipe(filter(Boolean))
       .subscribe(() => this.facade.shareTemplate(templateUid));
   }
+
+  deleteTemplate(templateUid: UUID): void {
+    const dialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Delete template',
+        message: 'Are you sure to delete template?',
+      },
+    });
+
+    dialog.afterClosed()
+      .pipe(filter(Boolean))
+      .subscribe(() => this.facade.deleteTemplate(templateUid));
+  }
 }

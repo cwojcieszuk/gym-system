@@ -115,6 +115,30 @@ export class TemplatesEffects {
       tap(() => this.toastr.error('Unable to share template'))
     ), { dispatch: false });
 
+  deleteTemplate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.deleteTemplate),
+      mergeMap(({ templateUid }) => this.client.deleteTemplate(templateUid).pipe(
+        map(() => TemplateActions.deleteTemplateSuccess()),
+        catchError(() => of(TemplateActions.deleteTemplateFailure()))
+      ))
+    )
+  );
+
+  deleteTemplateSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.deleteTemplateSuccess),
+      tap(() => this.toastr.success('Successfully deleted template')),
+      map(() => TemplateActions.fetchPersonalTemplates())
+    )
+  );
+
+  deleteTemplateFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.deleteTemplateFailure),
+      tap(() => this.toastr.error('Unable to delete template'))
+    ), { dispatch: false });
+
   constructor(
     private actions$: Actions,
     private client: TemplatesClient,

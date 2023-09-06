@@ -34,4 +34,8 @@ export class TemplatesClient {
   shareTemplate(templateUid: UUID): Observable<EmptyResponse> {
     return this.http.post<TemplateDetailsDTO>(`${this.url}/${templateUid}/share`, { templateUid });
   }
+
+  deleteTemplate(templateUid: UUID): Observable<EmptyResponse> {
+    return this.http.delete<EmptyResponse>(`${this.url}/${templateUid}`);
+  }
 }

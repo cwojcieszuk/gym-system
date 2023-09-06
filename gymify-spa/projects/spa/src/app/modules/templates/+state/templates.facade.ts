@@ -64,6 +64,10 @@ export class TemplatesFacade {
     this.store.dispatch(TemplateActions.shareTemplate({ templateUid }));
   }
 
+  deleteTemplate(templateUid: UUID): void {
+    this.store.dispatch(TemplateActions.deleteTemplate({ templateUid }));
+  }
+
   reset(): void {
     this.store.dispatch(TemplateActions.reset());
   }

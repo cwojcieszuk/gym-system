@@ -108,6 +108,19 @@ export const shareTemplateFailure = createAction(
   '[Templates/API] Share Template Failure'
 );
 
+export const deleteTemplate = createAction(
+  '[Templates/API] Delete Template',
+  props<{ templateUid: UUID }>()
+);
+
+export const deleteTemplateSuccess = createAction(
+  '[Templates/API] Delete Template Success'
+);
+
+export const deleteTemplateFailure = createAction(
+  '[Templates/API] Delete Template Failure'
+);
+
 export const reset = createAction(
   '[Templates] Reset'
 );
