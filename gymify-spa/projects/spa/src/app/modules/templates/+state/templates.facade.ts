@@ -75,6 +75,10 @@ export class TemplatesFacade {
     this.store.dispatch(TemplateActions.updateTemplate({ params }));
   }
 
+  importTemplate(templateUid: UUID): void {
+    this.store.dispatch(TemplateActions.importTemplate({ templateUid }));
+  }
+
   reset(): void {
     this.store.dispatch(TemplateActions.reset());
   }

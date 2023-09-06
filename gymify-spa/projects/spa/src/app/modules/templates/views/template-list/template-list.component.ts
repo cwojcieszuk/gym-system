@@ -87,4 +87,17 @@ export class TemplateListComponent extends BaseComponent implements OnInit {
       .pipe(filter(Boolean))
       .subscribe(() => this.facade.deleteTemplate(templateUid));
   }
+
+  importTemplate(templateUid: UUID): void {
+    const dialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Import template',
+        message: 'Are you sure to import template?',
+      },
+    });
+
+    dialog.afterClosed()
+      .pipe(filter(Boolean))
+      .subscribe(() => this.facade.importTemplate(templateUid));
+  }
 }

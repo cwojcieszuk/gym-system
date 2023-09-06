@@ -19,7 +19,7 @@ export class ErrorsInterceptor implements HttpInterceptor {
 
   private handleError(err: HttpErrorResponse): Observable<any> {
     if (err.status === 401) {
-      this.facade.logout();
+      this.facade.redirectToLogin();
     }
 
     return throwError(() => err);

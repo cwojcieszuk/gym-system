@@ -137,6 +137,19 @@ export const updateTemplateFailure = createAction(
   '[Templates/API] Update Template Failure'
 );
 
+export const importTemplate = createAction(
+  '[Templates/API] Import Template',
+  props<{ templateUid: UUID }>()
+);
+
+export const importTemplateSuccess = createAction(
+  '[Templates/API] Import Template Success'
+);
+
+export const importTemplateFailure = createAction(
+  '[Templates/API] Import Template Failure'
+);
+
 export const reset = createAction(
   '[Templates] Reset'
 );

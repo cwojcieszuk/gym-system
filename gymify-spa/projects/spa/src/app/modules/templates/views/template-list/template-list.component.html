@@ -50,7 +50,7 @@
                         <mat-icon>info</mat-icon>
                     </button>
 
-                    <button mat-icon-button color="primary" *ngIf="isCommunity">
+                    <button mat-icon-button color="primary" *ngIf="isCommunity" (click)="importTemplate(template.templateUid)">
                         <mat-icon>download</mat-icon>
                     </button>
                 </div>

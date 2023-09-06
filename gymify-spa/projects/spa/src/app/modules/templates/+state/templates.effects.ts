@@ -161,6 +161,28 @@ export class TemplatesEffects {
       tap(() => this.toastr.error('Unable to update template'))
     ), { dispatch: false });
 
+  importTemplate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.importTemplate),
+      mergeMap(({ templateUid }) => this.client.importTemplate(templateUid).pipe(
+        map(() => TemplateActions.importTemplateSuccess()),
+        catchError(() => of(TemplateActions.importTemplateFailure()))
+      ))
+    )
+  );
+
+  importTemplateSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.importTemplateSuccess),
+      tap(() => this.toastr.success('Successfully imported template'))
+    ), { dispatch: false });
+
+  importTemplateFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.importTemplateFailure),
+      tap(() => this.toastr.error('Unable to import template'))
+    ), { dispatch: false });
+
   constructor(
     private actions$: Actions,
     private client: TemplatesClient,

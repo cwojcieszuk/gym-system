@@ -43,4 +43,8 @@ export class TemplatesClient {
   updateTemplate(params: UpdateTemplateParams): Observable<EmptyResponse> {
     return this.http.put<EmptyResponse>(`${this.url}/${params.templateUid}`, params);
   }
+
+  importTemplate(templateUid: UUID): Observable<EmptyResponse> {
+    return this.http.post<EmptyResponse>(`${this.url}/import`, { templateUid });
+  }
 }
