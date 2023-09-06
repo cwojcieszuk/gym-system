@@ -1,6 +1,7 @@
 ﻿using Gymify.Application.Templates.Commands.AddTemplate;
 using Gymify.Application.Templates.Commands.DeleteTemplate;
 using Gymify.Application.Templates.Commands.ShareTemplate;
+using Gymify.Application.Templates.Commands.UpdateTemplate;
 using Gymify.Application.Templates.Queries.GetCommunityTemplates;
 using Gymify.Application.Templates.Queries.GetPersonalTemplates;
 using Gymify.Application.Templates.Queries.GetTemplate;
@@ -95,6 +96,23 @@ public class TemplatesController : ControllerBase
     {
         await _mediator.Send(command);
 
+        return NoContent();
+    }
+
+    [HttpPut]
+    [Route("{templateUid}")]
+    //TemplateOwnerCheckFilter
+    public async Task<IActionResult> UpdateTemplate([FromRoute] Guid templateUid, [FromBody] UpdateTemplateCommand command)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        await _mediator.Send(command with { UserUid = userUid });
+        
         return NoContent();
     }
 }

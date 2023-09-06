@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Gymify.Application.Exercises.Queries.ExerciseUidExistence;
 using Gymify.Application.Users.Queries.UserUIdExistence;
 using Gymify.Domain.Constants.Column;
 using MediatR;
@@ -16,11 +15,5 @@ public class AddTemplateCommandValidator: AbstractValidator<AddTemplateCommand>
 
         RuleFor(x => x.TemplateName)
             .MaximumLength(TemplateColumnConstants.TemplateNameLimit);
-
-        RuleForEach(x => x.Exercises.Select(e => e.Comments))
-            .MaximumLength(TemplateColumnConstants.TemplateCommentsLimit);
-
-        RuleForEach(x => x.Exercises.Select(e => e.ExerciseUid))
-            .MustAsync(async (x, token) => await mediator.Send(new ExerciseUidExistenceQuery(x), token));
     }
 }
