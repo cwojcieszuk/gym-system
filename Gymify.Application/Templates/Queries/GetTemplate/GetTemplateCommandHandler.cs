@@ -19,6 +19,7 @@ public class GetTemplateCommandHandler: IRequestHandler<GetTemplateCommand, Temp
     public async Task<TemplateDetailsDTO> Handle(GetTemplateCommand request, CancellationToken cancellationToken)
     {
         Template template = await _gymifyDbContext.Templates
+            .Include(x => x.DifficultyLevel)
             .Include(x => x.TemplateExercises)
             .ThenInclude(x => x.Exercise)
             .ThenInclude(x => x.Equipment)
@@ -26,12 +27,13 @@ public class GetTemplateCommandHandler: IRequestHandler<GetTemplateCommand, Temp
             .ThenInclude(x => x.Exercise.Target)
             .Include(x => x.TemplateExercises)
             .ThenInclude(x => x.Exercise.BodyPart)
-            .SingleOrDefaultAsync(x => x.TemplateUid == request.TemplateUid);
+            .SingleAsync(x => x.TemplateUid == request.TemplateUid, cancellationToken);
 
         return new TemplateDetailsDTO(
             template.TemplateUid,
             template.TemplateName,
             template.DifficultyLevelUid,
+            template.DifficultyLevel.DifficultyLevelName,
             template.EstimatedTime,
             template.IsShared,
             template.UserUid,
