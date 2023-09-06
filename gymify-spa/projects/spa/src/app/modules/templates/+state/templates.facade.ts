@@ -8,6 +8,9 @@ import {
   CreateTemplateParams
 } from '../../../../../../api-client/src/lib/clients/templates/params/create-template.params';
 import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
+import {
+  UpdateTemplateParams
+} from '../../../../../../api-client/src/lib/clients/templates/params/update-template.params';
 
 @Injectable({ providedIn: 'root' })
 export class TemplatesFacade {
@@ -66,6 +69,10 @@ export class TemplatesFacade {
 
   deleteTemplate(templateUid: UUID): void {
     this.store.dispatch(TemplateActions.deleteTemplate({ templateUid }));
+  }
+
+  updateTemplate(params: UpdateTemplateParams): void {
+    this.store.dispatch(TemplateActions.updateTemplate({ params }));
   }
 
   reset(): void {

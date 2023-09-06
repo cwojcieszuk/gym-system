@@ -8,6 +8,7 @@ import { CreateTemplateParams } from './params/create-template.params';
 import { EmptyResponse } from '../../types/empty.response';
 import { UUID } from '../../types/uuid.type';
 import { TemplateDetailsDTO } from './models/template.details.dto';
+import { UpdateTemplateParams } from './params/update-template.params';
 
 @Injectable({ providedIn: 'root' })
 export class TemplatesClient {
@@ -37,5 +38,9 @@ export class TemplatesClient {
 
   deleteTemplate(templateUid: UUID): Observable<EmptyResponse> {
     return this.http.delete<EmptyResponse>(`${this.url}/${templateUid}`);
+  }
+
+  updateTemplate(params: UpdateTemplateParams): Observable<EmptyResponse> {
+    return this.http.put<EmptyResponse>(`${this.url}/${params.templateUid}`, params);
   }
 }

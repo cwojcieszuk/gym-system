@@ -10,6 +10,9 @@ import {
 } from '../../../../../../api-client/src/lib/clients/templates/params/create-template.params';
 import { TemplateDetailsDTO } from '../../../../../../api-client/src/lib/clients/templates/models/template.details.dto';
 import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
+import {
+  UpdateTemplateParams
+} from '../../../../../../api-client/src/lib/clients/templates/params/update-template.params';
 
 export const fetchPersonalTemplates = createAction(
   '[Templates/API] Fetch Personal Templates'
@@ -119,6 +122,19 @@ export const deleteTemplateSuccess = createAction(
 
 export const deleteTemplateFailure = createAction(
   '[Templates/API] Delete Template Failure'
+);
+
+export const updateTemplate = createAction(
+  '[Templates/API] Update Template',
+  props<{ params: UpdateTemplateParams }>()
+);
+
+export const updateTemplateSuccess = createAction(
+  '[Templates/API] Update Template Success'
+);
+
+export const updateTemplateFailure = createAction(
+  '[Templates/API] Update Template Failure'
 );
 
 export const reset = createAction(

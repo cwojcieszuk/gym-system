@@ -139,6 +139,28 @@ export class TemplatesEffects {
       tap(() => this.toastr.error('Unable to delete template'))
     ), { dispatch: false });
 
+  updateTemplate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.updateTemplate),
+      mergeMap(({ params }) => this.client.updateTemplate(params).pipe(
+        map(() => TemplateActions.updateTemplateSuccess()),
+        catchError(() => of(TemplateActions.updateTemplateFailure()))
+      ))
+    )
+  );
+
+  updateTemplateSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.updateTemplateSuccess),
+      tap(() => this.toastr.success('Successfully updated template'))
+    ), { dispatch: false });
+
+  updateTemplateFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TemplateActions.updateTemplateFailure),
+      tap(() => this.toastr.error('Unable to update template'))
+    ), { dispatch: false });
+
   constructor(
     private actions$: Actions,
     private client: TemplatesClient,

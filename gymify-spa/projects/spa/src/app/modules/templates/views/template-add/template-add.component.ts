@@ -33,6 +33,7 @@ export class TemplateAddComponent extends BaseComponent implements OnInit, OnDes
 
   isShared = false;
   difficultyLevel = '';
+  templateUid?: UUID;
 
   exerciseControl(index: number): ExerciseDTO | null {
     return this.exercisesForm.at(index).controls.exercise.value;
@@ -63,6 +64,7 @@ export class TemplateAddComponent extends BaseComponent implements OnInit, OnDes
         const uid = value.get('uid');
 
         if (uid) {
+          this.templateUid = uid;
           this.facade.selectTemplate(uid);
           this.facade.fetchTemplate();
         }
@@ -77,7 +79,12 @@ export class TemplateAddComponent extends BaseComponent implements OnInit, OnDes
           estimatedTime: value.estimatedTime,
         }, { emitEvent: false });
 
-        this.exercisesForm.patchValue(value.exercises);
+        this.exercisesForm.removeAt(0);
+
+        value.exercises.forEach(ex => {
+          this.exercisesForm.push(this.fb.group({ exercise: ex.exercise, numberOfReps: ex.numberOfReps, numberOfSets: ex.numberOfSets, comments: ex.comments ?? '' }), { emitEvent: false });
+        });
+
         this.isShared = value.isShared;
         this.difficultyLevel = value.difficultyLevelName;
       });
@@ -129,7 +136,16 @@ export class TemplateAddComponent extends BaseComponent implements OnInit, OnDes
       return;
     }
 
-    this.facade.createTemplate({
+    if (this.templateUid) {
+      this.facade.updateTemplate({ templateUid: this.templateUid, ...this.getTemplateParams() });
+    } else {
+      this.facade.createTemplate(this.getTemplateParams());
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  private getTemplateParams() {
+    return {
       templateName: this.form.controls.templateName.value,
       estimatedTime: this.form.controls.estimatedTime.value,
       difficultyLevelUid: this.form.controls.difficultyLevelUid.value as string,
@@ -138,7 +154,7 @@ export class TemplateAddComponent extends BaseComponent implements OnInit, OnDes
         numberOfReps: x.controls.numberOfReps.value,
         numberOfSets: x.controls.numberOfSets.value,
         comments: x.controls.comments.value,
-      })),
-    });
+      }))
+    }
   }
 }

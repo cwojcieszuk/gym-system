@@ -1,5 +1,5 @@
 import { UUID } from '../../../types/uuid.type';
-import { ExerciseModel } from './exercise.model';
+import { ExerciseDTO } from '../../exercises/models/exercise.dto';
 
 export interface TemplateDetailsDTO {
   templateUid: UUID;
@@ -9,5 +9,5 @@ export interface TemplateDetailsDTO {
   estimatedTime: number;
   isShared: boolean;
   userUid: UUID;
-  exercises: ExerciseModel[];
+  exercises: { exercise: ExerciseDTO |null; numberOfSets: number; numberOfReps: number; comments?: string }[];
 }
