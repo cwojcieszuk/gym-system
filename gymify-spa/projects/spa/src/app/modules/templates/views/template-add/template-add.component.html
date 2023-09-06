@@ -1,12 +1,12 @@
-<div class="flex justify-between">
-    <button mat-stroked-button color="primary" (click)="goBack()">
+<div class="grid grid-cols-3">
+    <button mat-stroked-button class="w-fit" color="primary" (click)="goBack()">
         <mat-icon>arrow_left</mat-icon>
         <span>Back</span>
     </button>
 
-    <h1>New template</h1>
+    <h1 class="place-self-center">{{ isShared ? 'Template' : 'New template' }}</h1>
 
-    <button mat-raised-button color="primary" (click)="save()" [disabled]="!canSave">
+    <button mat-raised-button color="primary" class="place-self-end w-fit" (click)="save()" [disabled]="!canSave" *ngIf="!isShared">
         <mat-icon>save</mat-icon>
         <span>Save</span>
     </button>
@@ -15,10 +15,15 @@
 <form class="flex gap-x-10 shadow-base p-4 rounded-md" [formGroup]="form">
     <mat-form-field>
         <mat-label>Template name</mat-label>
-        <input matInput formControlName="templateName">
+        <input matInput formControlName="templateName" [readonly]="isShared">
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field *ngIf="isShared">
+        <mat-label>Difficulty level</mat-label>
+        <input matInput [readonly]="isShared" [value]="difficultyLevel">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!isShared">
         <mat-label>Difficulty level</mat-label>
         <mat-select formControlName="difficultyLevelUid">
             <mat-option *ngFor="let level of dictionariesFacade.difficultyLevels$ | async" [value]="level.difficultyLevelUid">{{ level.difficultyLevelName }}</mat-option>
@@ -27,14 +32,14 @@
 
     <mat-form-field>
         <mat-label>Estimated time</mat-label>
-        <input matInput type="number" formControlName="estimatedTime">
+        <input matInput type="number" formControlName="estimatedTime" [readonly]="isShared">
     </mat-form-field>
 </form>
 
 <div class="flex flex-col overflow-y-auto p-1 gap-y-4 max-h-[508px]" style="scrollbar-gutter: stable">
     <div class="grid grid-cols-3 shadow-base p-4 rounded-md" *ngFor="let ex of exercisesForm.controls; index as i">
         <ng-template [ngIf]="exerciseControl(i) === null" [ngIfElse]="exercise">
-            <button mat-stroked-button class="w-fit" (click)="chooseExercise(i)">
+            <button mat-stroked-button class="w-fit" (click)="chooseExercise(i)" [disabled]="isShared">
                 <mat-icon class="rotate-[135deg]">fitness_center</mat-icon>
                 <span>Choose exercise</span>
             </button>
@@ -52,7 +57,7 @@
                     </div>
                 </div>
 
-                <button mat-stroked-button class="w-fit" (click)="chooseExercise(i)">
+                <button mat-stroked-button class="w-fit" (click)="chooseExercise(i)" *ngIf="!isShared">
                     <mat-icon>edit</mat-icon>
                     <span>Change exercise</span>
                 </button>
@@ -62,26 +67,26 @@
         <div class="grid grid-cols-2 gap-4">
             <mat-form-field>
                 <mat-label>Number of sets</mat-label>
-                <input matInput type="number" [readonly]="ex.controls.exercise.value === null" [formControl]="ex.controls.numberOfSets">
+                <input matInput type="number" [readonly]="ex.controls.exercise.value === null || isShared" [formControl]="ex.controls.numberOfSets">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Number of reps</mat-label>
-                <input matInput type="number" [readonly]="ex.controls.exercise.value === null" [formControl]="ex.controls.numberOfReps">
+                <input matInput type="number" [readonly]="ex.controls.exercise.value === null || isShared" [formControl]="ex.controls.numberOfReps">
             </mat-form-field>
 
             <mat-form-field class="col-span-2">
                 <mat-label>Comments</mat-label>
-                <input matInput [readonly]="ex.controls.exercise.value === null" [formControl]="ex.controls.comments">
+                <input matInput [readonly]="ex.controls.exercise.value === null || isShared" [formControl]="ex.controls.comments">
             </mat-form-field>
         </div>
 
-        <button mat-icon-button (click)="removeExercise(i)" class="justify-self-end">
+        <button mat-icon-button (click)="removeExercise(i)" class="justify-self-end" *ngIf="!isShared">
             <mat-icon>delete</mat-icon>
         </button>
     </div>
 </div>
 
-<button mat-raised-button color="primary" class="ml-auto mt-auto" (click)="addExercise()">
+<button mat-raised-button color="primary" class="ml-auto mt-auto" (click)="addExercise()" *ngIf="!isShared">
     <mat-icon>add</mat-icon>
 </button>

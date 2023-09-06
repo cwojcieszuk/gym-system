@@ -5,6 +5,7 @@ export interface TemplateDetailsDTO {
   templateUid: UUID;
   templateName: string;
   difficultyLevelUid: UUID;
+  difficultyLevelName: string;
   estimatedTime: number;
   isShared: boolean;
   userUid: UUID;

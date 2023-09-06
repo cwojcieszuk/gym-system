@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { DictionariesFacade } from '../../../../core/dictionaries-state/dictionaries.facade';
 import { BaseComponent } from '../../../../shared/components/base.component';
@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './template-add.component.html',
   styleUrls: ['./template-add.component.scss'],
 })
-export class TemplateAddComponent extends BaseComponent implements OnInit {
+export class TemplateAddComponent extends BaseComponent implements OnInit, OnDestroy {
   readonly form = this.fb.group({
     templateName: this.fb.control<string>('', Validators.required),
     difficultyLevelUid: this.fb.control<UUID | null>(null, Validators.required),
@@ -30,6 +30,9 @@ export class TemplateAddComponent extends BaseComponent implements OnInit {
       comments: this.fb.control<string>(''),
     }),
   ]);
+
+  isShared = false;
+  difficultyLevel = '';
 
   exerciseControl(index: number): ExerciseDTO | null {
     return this.exercisesForm.at(index).controls.exercise.value;
@@ -72,10 +75,18 @@ export class TemplateAddComponent extends BaseComponent implements OnInit {
           templateName: value.templateName,
           difficultyLevelUid: value.difficultyLevelUid,
           estimatedTime: value.estimatedTime,
-        });
+        }, { emitEvent: false });
 
         this.exercisesForm.patchValue(value.exercises);
+        this.isShared = value.isShared;
+        this.difficultyLevel = value.difficultyLevelName;
       });
+  }
+
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
+    this.facade.reset();
   }
 
   goBack(): void {
