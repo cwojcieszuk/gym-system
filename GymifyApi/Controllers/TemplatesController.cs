@@ -1,4 +1,5 @@
 ﻿using Gymify.Application.Templates.Commands.AddTemplate;
+using Gymify.Application.Templates.Commands.DeleteTemplate;
 using Gymify.Application.Templates.Commands.ShareTemplate;
 using Gymify.Application.Templates.Queries.GetCommunityTemplates;
 using Gymify.Application.Templates.Queries.GetPersonalTemplates;
@@ -85,5 +86,15 @@ public class TemplatesController : ControllerBase
         }
 
         return Ok(await _mediator.Send(command with { UserUid = userUid }));
+    }
+
+    [HttpDelete]
+    [Route("{templateUid}")]
+    //TemplateOwnerCheckFilter
+    public async Task<IActionResult> DeleteTemplate([FromRoute] DeleteTemplateCommand command)
+    {
+        await _mediator.Send(command);
+
+        return NoContent();
     }
 }
