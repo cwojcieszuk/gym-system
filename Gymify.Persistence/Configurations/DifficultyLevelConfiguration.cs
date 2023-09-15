@@ -11,9 +11,9 @@ public class DifficultyLevelConfiguration : IEntityTypeConfiguration<DifficultyL
     {
         builder.ToTable(nameof(DifficultyLevel));
         
-        builder.HasKey(e => e.DifficultyLevelUid).HasName("DifficultyLevel_pk");
+        builder.HasKey(e => e.DifficultyLevelId).HasName("DifficultyLevel_pk");
 
-        builder.Property(e => e.DifficultyLevelUid).ValueGeneratedNever();
+        builder.Property(e => e.DifficultyLevelId).ValueGeneratedNever();
         builder.Property(e => e.DifficultyLevelName)
             .HasMaxLength(TemplateColumnConstants.DifficultyLevelNameLimit)
             .IsUnicode(false);

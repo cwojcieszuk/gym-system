@@ -15,6 +15,6 @@ public class DifficultyLevelQueryHandler : IRequestHandler<GetDifficultyLevelsQu
     
     public async Task<IEnumerable<DifficultyLevelDTO>> Handle(GetDifficultyLevelsQuery request, CancellationToken cancellationToken)
     {
-        return await _gymifyDbContext.DifficultyLevels.Select(x => new DifficultyLevelDTO(x.DifficultyLevelUid, x.DifficultyLevelName)).ToListAsync(cancellationToken);
+        return await _gymifyDbContext.DifficultyLevels.Select(x => new DifficultyLevelDTO(x.DifficultyLevelId, x.DifficultyLevelName)).ToListAsync(cancellationToken);
     }
 }

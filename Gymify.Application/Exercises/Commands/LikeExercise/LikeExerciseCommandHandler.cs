@@ -16,7 +16,10 @@ public class LikeExerciseCommandHandler: IRequestHandler<LikeExerciseCommand, Un
     
     public async Task<Unit> Handle(LikeExerciseCommand request, CancellationToken cancellationToken)
     {
-        _gymifyDbContext.FavouriteExercises.Add(new FavouriteExercise { FavouriteExerciseUid = Guid.NewGuid(), ExerciseUid = request.ExerciseUid, UserUid = request.UserUid });
+        _gymifyDbContext.FavouriteExercises.Add(new FavouriteExercise
+        {
+            FavouriteExerciseUid = Guid.NewGuid(), ExerciseUid = request.ExerciseUid, UserUid = request.UserUid
+        });
         await _gymifyDbContext.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;

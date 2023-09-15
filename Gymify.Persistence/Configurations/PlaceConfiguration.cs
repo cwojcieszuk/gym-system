@@ -11,9 +11,9 @@ public class PlaceConfiguration : IEntityTypeConfiguration<Place>
     {
         builder.ToTable(nameof(Place));
         
-        builder.HasKey(e => e.PlaceUid).HasName("Place_pk");
+        builder.HasKey(e => e.PlaceId).HasName("Place_pk");
 
-        builder.Property(e => e.PlaceUid).ValueGeneratedNever();
+        builder.Property(e => e.PlaceId).ValueGeneratedNever();
         builder.Property(e => e.PlaceName)
             .HasMaxLength(GroupSessionColumnConstants.PlaceNameLimit)
             .IsUnicode(false)
