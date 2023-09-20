@@ -21,7 +21,7 @@ public class UpdateTemplateCommandHandler : IRequestHandler<UpdateTemplateComman
             .SingleAsync(x => x.TemplateUid == request.TemplateUid, cancellationToken);
 
         template.TemplateName = request.TemplateName;
-        template.DifficultyLevelId = request.DifficultyLevelUid;
+        template.DifficultyLevelId = request.DifficultyLevelId;
         template.EstimatedTime = request.EstimatedTime;
         
         template.TemplateExercises.Clear();
