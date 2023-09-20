@@ -35,7 +35,8 @@ public class GetCommunityTemplatesQueryHandler: IRequestHandler<GetCommunityTemp
                 template.EstimatedTime,
                 template.DifficultyLevel.DifficultyLevelName,
                 template.User.FirstName,
-                template.User.LastName
+                template.User.LastName,
+                template.IsShared
             )
         ).ToList();
 

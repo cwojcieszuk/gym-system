@@ -21,7 +21,6 @@ public class GetPersonalTemplatesQueryHandler: IRequestHandler<GetPersonalTempla
         List<Template> templates = await _gymifyDbContext.Templates
             .Include(t => t.DifficultyLevel)
             .Include(t => t.User)
-            .Where(t => !t.IsShared)
             .Where(u => u.UserUid == request.UserUid)
             .ToListAsync(cancellationToken);
 
@@ -36,7 +35,8 @@ public class GetPersonalTemplatesQueryHandler: IRequestHandler<GetPersonalTempla
                 template.EstimatedTime,
                 template.DifficultyLevel.DifficultyLevelName,
                 template.User.FirstName,
-                template.User.LastName
+                template.User.LastName,
+                template.IsShared
             )
         ).ToList();
 
