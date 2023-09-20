@@ -1,3 +1,9 @@
+@use 'typography';
+
 :host {
   @apply flex flex-col flex-1 p-8;
+}
+
+h1 {
+  @extend .typography-h3;
 }
