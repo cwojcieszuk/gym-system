@@ -48,6 +48,10 @@ const routes: Routes = [
               isCommunity: true,
             },
           },
+          {
+            path: 'trainings',
+            loadChildren: () => import('./modules/trainings/trainings.module').then(m => m.TrainingsModule),
+          },
         ],
       },
     ],
