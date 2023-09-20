@@ -1,6 +1,4 @@
-import { UUID } from '../../../types/uuid.type';
-
 export interface DifficultyLevelDTO {
-  difficultyLevelUid: UUID;
+  difficultyLevelId: number;
   difficultyLevelName: string;
 }

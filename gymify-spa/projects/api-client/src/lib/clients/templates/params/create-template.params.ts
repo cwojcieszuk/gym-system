@@ -1,9 +1,8 @@
-import { UUID } from '../../../types/uuid.type';
 import { ExerciseModel } from '../models/exercise.model';
 
 export interface CreateTemplateParams {
   templateName: string;
-  difficultyLevelUid: UUID;
+  difficultyLevelId: number;
   estimatedTime: number;
   exercises: ExerciseModel[];
 }

@@ -25,8 +25,8 @@
 
     <mat-form-field *ngIf="!isShared">
         <mat-label>Difficulty level</mat-label>
-        <mat-select formControlName="difficultyLevelUid">
-            <mat-option *ngFor="let level of dictionariesFacade.difficultyLevels$ | async" [value]="level.difficultyLevelUid">{{ level.difficultyLevelName }}</mat-option>
+        <mat-select formControlName="difficultyLevelId">
+            <mat-option *ngFor="let level of dictionariesFacade.difficultyLevels$ | async" [value]="level.difficultyLevelId">{{ level.difficultyLevelName }}</mat-option>
         </mat-select>
     </mat-form-field>
 

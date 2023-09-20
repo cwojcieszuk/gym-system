@@ -18,7 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TemplateAddComponent extends BaseComponent implements OnInit, OnDestroy {
   readonly form = this.fb.group({
     templateName: this.fb.control<string>('', Validators.required),
-    difficultyLevelUid: this.fb.control<UUID | null>(null, Validators.required),
+    difficultyLevelId: this.fb.control<number | null>(null, Validators.required),
     estimatedTime: this.fb.control<number>(0, Validators.required),
   });
 
@@ -75,7 +75,7 @@ export class TemplateAddComponent extends BaseComponent implements OnInit, OnDes
       .subscribe(value => {
         this.form.patchValue({
           templateName: value.templateName,
-          difficultyLevelUid: value.difficultyLevelUid,
+          difficultyLevelId: value.difficultyLevelId,
           estimatedTime: value.estimatedTime,
         }, { emitEvent: false });
 
@@ -148,7 +148,7 @@ export class TemplateAddComponent extends BaseComponent implements OnInit, OnDes
     return {
       templateName: this.form.controls.templateName.value,
       estimatedTime: this.form.controls.estimatedTime.value,
-      difficultyLevelUid: this.form.controls.difficultyLevelUid.value as string,
+      difficultyLevelId: this.form.controls.difficultyLevelId.value as number,
       exercises: this.exercisesForm.controls.map(x => ({
         exerciseUid: x.controls.exercise.value?.exerciseUid as string,
         numberOfReps: x.controls.numberOfReps.value,

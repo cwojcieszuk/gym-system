@@ -4,7 +4,7 @@ import { ExerciseModel } from '../models/exercise.model';
 export interface UpdateTemplateParams {
   templateUid: UUID;
   templateName: string;
-  difficultyLevelUid: UUID;
+  difficultyLevelId: number;
   estimatedTime: number;
   exercises: ExerciseModel[];
 }

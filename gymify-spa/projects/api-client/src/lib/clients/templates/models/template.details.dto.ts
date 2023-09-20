@@ -4,7 +4,7 @@ import { ExerciseDTO } from '../../exercises/models/exercise.dto';
 export interface TemplateDetailsDTO {
   templateUid: UUID;
   templateName: string;
-  difficultyLevelUid: UUID;
+  difficultyLevelId: number;
   difficultyLevelName: string;
   estimatedTime: number;
   isShared: boolean;
