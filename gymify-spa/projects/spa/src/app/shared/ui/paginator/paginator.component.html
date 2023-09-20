@@ -1,4 +1,4 @@
-<div class="flex items-center gap-x-2">
+<div class="flex items-center gap-x-2" *ngIf="showPageSize">
     <span>Items per page:</span>
     <mat-form-field>
         <mat-select [formControl]="formControl">
@@ -8,7 +8,7 @@
 </div>
 
 <div class="flex items-center">
-    <span>{{page}} of {{totalPages}}</span>
+    <span>Page {{page}} of {{totalPages}}</span>
 
     <button mat-icon-button (click)="previousPage()" [disabled]="canPreviousPage">
         <mat-icon>arrow_left</mat-icon>

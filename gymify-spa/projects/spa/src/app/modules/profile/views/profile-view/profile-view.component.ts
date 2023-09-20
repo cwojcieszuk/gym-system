@@ -3,7 +3,7 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ProfileFacade } from '../../+state/profile.facade';
 import { BaseComponent } from '../../../../shared/components/base.component';
 import { filter } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ImageService } from '../../../../shared/services/image.service';
 
 @Component({
   selector: 'gym-profile-view',
@@ -28,7 +28,7 @@ export class ProfileViewComponent extends BaseComponent implements OnInit {
   constructor(
     private fb: NonNullableFormBuilder,
     public profileFacade: ProfileFacade,
-    private sanitizer: DomSanitizer,
+    private imgService: ImageService,
   ) {
     super();
   }
@@ -47,8 +47,7 @@ export class ProfileViewComponent extends BaseComponent implements OnInit {
           birthDate: value.birthDate,
         });
 
-        const objectUrl = 'data:image/jpeg;base64,' + value.avatar;
-        this.image = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
+        this.image = this.imgService.getJpeg(value.avatar);
       });
   }
 

@@ -26,6 +26,9 @@ export class PaginatorComponent extends BaseComponent {
   pageSize = 10;
 
   @Input()
+  showPageSize = true;
+
+  @Input()
   totalPages!: number;
 
   @Input()

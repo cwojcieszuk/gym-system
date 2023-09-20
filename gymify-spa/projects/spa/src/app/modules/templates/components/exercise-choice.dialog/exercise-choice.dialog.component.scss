@@ -1,0 +1,13 @@
+:host {
+  @apply flex flex-col p-8 h-full;
+}
+
+.spinner {
+  ::ng-deep circle {
+    stroke: #660033 !important;
+  }
+}
+
+.active {
+  @apply border-primary border-solid border-[1px];
+}

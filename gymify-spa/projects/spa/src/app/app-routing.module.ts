@@ -30,6 +30,24 @@ const routes: Routes = [
             path: 'profile',
             loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule),
           },
+          {
+            path: 'exercises',
+            loadChildren: () => import('./modules/exercises/exercises.module').then(m => m.ExercisesModule),
+          },
+          {
+            path: 'personal-templates',
+            loadChildren: () => import('./modules/templates/templates.module').then(m => m.TemplatesModule),
+            data: {
+              isCommunity: false,
+            },
+          },
+          {
+            path: 'community-templates',
+            loadChildren: () => import('./modules/templates/templates.module').then(m => m.TemplatesModule),
+            data: {
+              isCommunity: true,
+            },
+          },
         ],
       },
     ],

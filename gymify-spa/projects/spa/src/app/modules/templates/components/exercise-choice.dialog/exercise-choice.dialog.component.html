@@ -1,0 +1,59 @@
+<form [formGroup]="form" class="flex gap-x-3">
+    <mat-form-field>
+        <mat-label>Body part</mat-label>
+        <mat-select formControlName="bodyPartId">
+            <mat-option *ngFor="let bodyPart of dictionariesFacade.bodyParts$ | async" [value]="bodyPart.bodyPartId">{{ bodyPart.bodyPartName | firstLetterUppercase }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Equipment</mat-label>
+        <mat-select formControlName="equipmentId">
+            <mat-option *ngFor="let eq of dictionariesFacade.equipments$ | async" [value]="eq.equipmentId">{{ eq.equipmentName | firstLetterUppercase }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Target</mat-label>
+        <mat-select formControlName="targetId">
+            <mat-option *ngFor="let target of dictionariesFacade.targets$ | async" [value]="target.targetId"> {{ target.targetName | firstLetterUppercase }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-checkbox formControlName="showFavorite">Show favorite</mat-checkbox>
+</form>
+
+<div class="flex flex-col gap-y-2 max-h-[550px] overflow-y-auto" style="scrollbar-gutter: stable">
+    <div class="flex gap-x-3 cursor-pointer m-[1px]" *ngFor="let ex of facade.exercises$ | async" (click)="selectExercise(ex)" [class.active]="ex.exerciseUid === selectedExercise?.exerciseUid">
+        <img class="w-[150px] h-[150px]" [src]="imgService.getGif(ex.exerciseGif)">
+        <div class="flex flex-col">
+            <span class="font-bold">{{ ex.exerciseName | firstLetterUppercase }}</span>
+            <span>{{ ex.target | firstLetterUppercase }}</span>
+            <span>{{ ex.bodyPart | firstLetterUppercase }}</span>
+            <span>{{ ex.equipment | firstLetterUppercase }}</span>
+        </div>
+    </div>
+
+    <div *ngIf="facade.isLoadingExercises$ | async" class="flex justify-center items-center h-full">
+        <mat-progress-spinner class="spinner" mode="indeterminate" diameter="40"></mat-progress-spinner>
+    </div>
+
+    <div *ngIf="(facade.isLoadingExercises$ | async) === false && (facade.areAllExercisesLoaded$ | async) === false" gymIntersectionObserver (visible)="facade.nextPage()">
+
+    </div>
+</div>
+
+<div class="flex justify-between mt-auto">
+    <button mat-stroked-button color="primary" (click)="close()">
+        <span>Close</span>
+    </button>
+
+    <button mat-raised-button color="primary" (click)="choose()" [disabled]="selectedExercise === undefined">
+        <span>Choose</span>
+    </button>
+</div>

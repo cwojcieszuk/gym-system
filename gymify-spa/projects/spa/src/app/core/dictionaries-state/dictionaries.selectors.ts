@@ -7,3 +7,23 @@ export const getUserRoles = createSelector(
   getDictionariesState,
   state => state.userRoles
 );
+
+export const getBodyParts = createSelector(
+  getDictionariesState,
+  state => state.bodyParts
+);
+
+export const getEquipments = createSelector(
+  getDictionariesState,
+  state => state.equipments
+);
+
+export const getTargets = createSelector(
+  getDictionariesState,
+  state => state.targets
+);
+
+export const getDifficultyLevels = createSelector(
+  getDictionariesState,
+  state => state.difficultyLevels
+);

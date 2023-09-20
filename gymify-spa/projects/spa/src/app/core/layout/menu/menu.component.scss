@@ -12,15 +12,15 @@ img {
   @extend .typography-regular-12;
   color: var(--color-dark-grey);
   padding-left: 16px;
-  padding-bottom: 8px;
 }
 
 mat-nav-list {
   display: flex;
   flex-direction: column;
+  row-gap: 20px;
   height: 80%;
 }
 
 .active {
-  @apply text-primary;
+  @apply bg-primary py-2 text-white rounded-tr-xl rounded-br-xl mr-4;
 }

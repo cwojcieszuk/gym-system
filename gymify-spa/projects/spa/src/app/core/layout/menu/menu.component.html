@@ -2,6 +2,20 @@
 
 <mat-nav-list>
     <span class="menu-header">Main menu</span>
+    <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">
+        <mat-icon class="rotate-[135deg]">fitness_center</mat-icon>
+        <a routerLink="exercises">Exercises</a>
+    </div>
+
+    <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">
+        <mat-icon>person_outline</mat-icon>
+        <a routerLink="personal-templates">Personal templates</a>
+    </div>
+
+    <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">
+        <mat-icon>dashboard</mat-icon>
+        <a routerLink="community-templates">Community templates</a>
+    </div>
 
     <ng-container *ngIf="facade.isAdmin$ | async">
         <span class="menu-header">Admin</span>
