@@ -12,42 +12,42 @@ public static class CoachCategorySeed
             new()
             {
                 CoachCategoryId    = 0,
-                CoachCategoryName = "FITNESS"
+                CoachCategoryName = "Fitness"
             },
             new()
             {
                 CoachCategoryId    = 1,
-                CoachCategoryName = "GROUP FITNESS INSTRUCTOR"
+                CoachCategoryName = "Group fitness instructor"
             },
             new()
             {
                 CoachCategoryId    = 2,
-                CoachCategoryName = "CROSS FIT TRAINER"
+                CoachCategoryName = "Cross fit trainer"
             },
             new()
             {
                 CoachCategoryId    = 3,
-                CoachCategoryName = "REHABILITATION"
+                CoachCategoryName = "Rehabilitation"
             },
             new()
             {
                 CoachCategoryId    = 4,
-                CoachCategoryName = "CORE STRENGTHENING"
+                CoachCategoryName = "Core Strengthening"
             },
             new()
             {
                 CoachCategoryId    = 5,
-                CoachCategoryName = "BODYBUILDING"
+                CoachCategoryName = "Bodybuilding"
             },
             new()
             {
                 CoachCategoryId    = 6,
-                CoachCategoryName = "WEIGHT LOSS"
+                CoachCategoryName = "Weight loss"
             },
             new()
             {
                 CoachCategoryId    = 7,
-                CoachCategoryName = "CARDIOVASCULAR"
+                CoachCategoryName = "Cardiovascular"
             },
         };
         modelBuilder.HasData(coachCategories);

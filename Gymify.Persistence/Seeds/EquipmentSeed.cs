@@ -12,142 +12,142 @@ public static class EquipmentSeed
             new Equipment()
             {
                 EquipmentId = 0,
-                EquipmentName = "BODY WEIGHT"
+                EquipmentName = "Body weight"
             },
             new Equipment()
             {
                 EquipmentId = 1,
-                EquipmentName = "CABLE"
+                EquipmentName = "Cable"
             },
             new Equipment()
             {
                 EquipmentId = 2,
-                EquipmentName = "LEVERAGE MACHINE"
+                EquipmentName = "Leverage machine"
             },
             new Equipment()
             {
                 EquipmentId = 3,
-                EquipmentName = "ASSISTED"
+                EquipmentName = "Assisted"
             },
             new Equipment()
             {
                 EquipmentId = 4,
-                EquipmentName = "MEDICINE BALL"
+                EquipmentName = "Medicine ball"
             },
             new Equipment()
             {
                 EquipmentId = 5,
-                EquipmentName = "STABILITY BALL"
+                EquipmentName = "Stability ball"
             },
             new Equipment()
             {
                 EquipmentId = 6,
-                EquipmentName = "BAND"
+                EquipmentName = "Band"
             },
             new Equipment()
             {
                 EquipmentId = 7,
-                EquipmentName = "BARBELL"
+                EquipmentName = "Barbell"
             },
             new Equipment()
             {
                 EquipmentId = 8,
-                EquipmentName = "ROPE"
+                EquipmentName = "Rope"
             },
             new Equipment()
             {
                 EquipmentId = 9,
-                EquipmentName = "DUMBBELL"
+                EquipmentName = "Dumbell"
             },
             new Equipment()
             {
                 EquipmentId = 10,
-                EquipmentName = "EZ BARBELL"
+                EquipmentName = "Ez barbell"
             },
             new Equipment()
             {
                 EquipmentId = 11,
-                EquipmentName = "SLED MACHINE"
+                EquipmentName = "Sled machine"
             },  
             new Equipment()
             {
                 EquipmentId = 12,
-                EquipmentName = "UPPER BODY ERGOMETER"
+                EquipmentName = "Upper body ergometer"
             },
             new Equipment()
             {
                 EquipmentId = 13,
-                EquipmentName = "KETTLEBELL"
+                EquipmentName = "Kettlebell"
             },
             new Equipment()
             {
                 EquipmentId = 14,
-                EquipmentName = "OLYMPIC BARBELL"
+                EquipmentName = "Olympic barbell"
             },
             new Equipment()
             {
                 EquipmentId = 15,
-                EquipmentName = "WEIGHTED"
+                EquipmentName = "Weighted"
             },
             new Equipment()
             {
                 EquipmentId = 16,
-                EquipmentName = "BOSU BALL"
+                EquipmentName = "Bosu ball"
             },
             new Equipment()
             {
                 EquipmentId = 17,
-                EquipmentName = "RESISTANCE BAND"
+                EquipmentName = "Resistance band"
             },
             new Equipment()
             {
                 EquipmentId = 18,
-                EquipmentName = "ROLLER"
+                EquipmentName = "Roller"
             },
             new Equipment()
             {
                 EquipmentId = 19,
-                EquipmentName = "SKIERG MACHINE"
+                EquipmentName = "Skierg machine"
             },
             new Equipment()
             {
                 EquipmentId = 20,
-                EquipmentName = "HAMMER"
+                EquipmentName = "Hammer"
             },
             new Equipment()
             {
                 EquipmentId = 21,
-                EquipmentName = "SMITH MACHINE"
+                EquipmentName = "Smith machine"
             },
             new Equipment()
             {
                 EquipmentId = 22,
-                EquipmentName = "WHEEL ROLLER"
+                EquipmentName = "Wheel roller"
             },
             new Equipment()
             {
                 EquipmentId = 23,
-                EquipmentName = "STATIONARY BIKE"
+                EquipmentName = "Stationary bike"
             },
             new Equipment()
             {
                 EquipmentId = 24,
-                EquipmentName = "TIRE"
+                EquipmentName = "Tire"
             },
             new Equipment()
             {
                 EquipmentId = 25,
-                EquipmentName = "TRAP BAR"
+                EquipmentName = "Trap bar"
             },
             new Equipment()
             {
                 EquipmentId = 26,
-                EquipmentName = "ELLIPTICAL MACHINE"
+                EquipmentName = "Elliptical machine"
             },
             new Equipment()
             {
                 EquipmentId = 27,
-                EquipmentName = "STEPMILL MACHINE"
+                EquipmentName = "Stepmill machine"
             },
         };
         modelBuilder.HasData(equipments);

@@ -12,52 +12,52 @@ public static class PlaceSeed
             new()
             {
                 PlaceId = 0,
-                PlaceName = "CARDIO AREA"
+                PlaceName = "Cardio area"
             },
             new()
             {
                 PlaceId = 1,
-                PlaceName = "WEIGHTLIFTING ZONE"
+                PlaceName = "Weightlifting zone"
             },
             new()
             {
                 PlaceId = 2,
-                PlaceName = "FREE WEIGHTS ZONE"
+                PlaceName = "Free weights zone"
             },
             new()
             {
                 PlaceId = 3,
-                PlaceName = "WEIGHTLIFTING SECTION"
+                PlaceName = "Weightlifting section"
             },
             new()
             {
                 PlaceId = 4,
-                PlaceName = "STRETCHING ZONE"
+                PlaceName = "Stretching zone"
             },
             new()
             {
                 PlaceId = 5,
-                PlaceName = "GROUP FITNESS STUDIO"
+                PlaceName = "Group fitness studio"
             },
             new()
             {
                 PlaceId = 6,
-                PlaceName = "MARTIAL ARTS AREA"
+                PlaceName = "Martial arts area"
             },
             new()
             {
                 PlaceId = 7,
-                PlaceName = "LOCKER ROOM"
+                PlaceName = "Locker room"
             },
             new()
             {
                 PlaceId = 8,
-                PlaceName = "SAUNA"
+                PlaceName = "Sauna"
             },
             new()
             {
                 PlaceId = 9,
-                PlaceName = "MASSAGE AND RECOVERY CENTER"
+                PlaceName = "Massage and recovery center"
             },
         };
         modelBuilder.HasData(places);

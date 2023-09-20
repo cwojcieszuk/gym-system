@@ -12,52 +12,52 @@ public static class BodyPartSeed
             new()
             {
                 BodyPartId = 0,
-                BodyPartName = "WAIST"
+                BodyPartName = "Waist"
             },
             new()
             {
                 BodyPartId = 1,
-                BodyPartName = "UPPER LEGS"
+                BodyPartName = "Upper legs"
             },
             new()
             {
                 BodyPartId = 2,
-                BodyPartName = "BACK"
+                BodyPartName = "Back"
             },
             new()
             {
                 BodyPartId = 3,
-                BodyPartName = "LOWER LEGS"
+                BodyPartName = "Lower legs"
             },
             new()
             {
                 BodyPartId = 4,
-                BodyPartName = "CHEST"
+                BodyPartName = "Chest"
             },
             new()
             {
                 BodyPartId = 5,
-                BodyPartName = "UPPER ARMS"
+                BodyPartName = "Upper arms"
             },
             new()
             {
                 BodyPartId = 6,
-                BodyPartName = "CARDIO"
+                BodyPartName = "Cardio"
             },
             new()
             {
                 BodyPartId = 7,
-                BodyPartName = "SHOULDERS"
+                BodyPartName = "Shoulders"
             },
             new()
             {
                 BodyPartId = 8,
-                BodyPartName = "LOWER ARMS"
+                BodyPartName = "Lower arms"
             },
             new()
             {
                 BodyPartId = 9,
-                BodyPartName = "NECK"
+                BodyPartName = "Neck"
             },
         };
         modelBuilder.HasData(bodyParts);

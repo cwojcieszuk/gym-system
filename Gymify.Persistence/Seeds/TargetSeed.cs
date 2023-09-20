@@ -12,96 +12,96 @@ public static class TargetSeed
             new Target()
             {
               TargetId  = 0,
-              TargetName = "ABS"
+              TargetName = "Abs"
             },
             new Target()
             {
                 TargetId  = 1,
-                TargetName = "QUADS"
+                TargetName = "Quads"
             },
             new Target()
             {
                 TargetId  = 2,
-                TargetName = "LATS"
+                TargetName = "Lats"
             },
             new Target()
             {
                 TargetId  = 3,
-                TargetName = "CALVES"
+                TargetName = "Calves"
             },
             new Target()
             {
                 TargetId  = 4,
-                TargetName = "PECTORALS"
+                TargetName = "Pectorals"
             },
             new Target()
             {
                 TargetId  = 5,
-                TargetName = "GLUTES"
+                TargetName = "Glutes"
             },
             new Target()
             {
                 TargetId  = 6,
-                TargetName = "HAMSTRINGS"
+                TargetName = "Hamstrings"
             },
             new Target()
             {
                 TargetId  = 7,
-                TargetName = "ADDUCTORS"
+                TargetName = "Adductors"
             },new Target()
             {
                 TargetId  = 8,
-                TargetName = "TRICEPS"
+                TargetName = "Triceps"
             },
             new Target()
             {
                 TargetId  = 9,
-                TargetName = "CARDIOVASCULAR SYSTEM"
+                TargetName = "Cardiovascular system"
             },
             new Target()
             {
                 TargetId  = 10,
-                TargetName = "SPINE"
+                TargetName = "Spine"
             },
             new Target()
             {
                 TargetId  = 11,
-                TargetName = "UPPER BACK"
+                TargetName = "Upper back"
             },
             new Target()
             {
                 TargetId  = 12,
-                TargetName = "BICEPS"
+                TargetName = "Biceps"
             },
             new Target()
             {
                 TargetId  = 13,
-                TargetName = "DELTS"
+                TargetName = "Delts"
             },
             new Target()
             {
                 TargetId  = 14,
-                TargetName = "FOREARMS"
+                TargetName = "Forearms"
             },
             new Target()
             {
                 TargetId  = 15,
-                TargetName = "TRAPS"
+                TargetName = "Traps"
             },
             new Target()
             {
                 TargetId  = 16,
-                TargetName = "SERRATUS ANTERIOR"
+                TargetName = "Serratus anterior"
             },
             new Target()
             {
                 TargetId  = 17,
-                TargetName = "ABDUCTORS"
+                TargetName = "Abductors"
             },
             new Target()
             {
                 TargetId  = 18,
-                TargetName = "LEVATOR SCAPULAE"
+                TargetName = "Levator scapulae"
             },
         };
         modelBuilder.HasData(targets);
