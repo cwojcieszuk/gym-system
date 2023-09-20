@@ -1,5 +1,6 @@
 ﻿using Gymify.Domain.Constants.Column;
 using Gymify.Domain.Entities;
+using Gymify.Persistence.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,5 +19,6 @@ public class CoachCategoryConfiguration : IEntityTypeConfiguration<CoachCategory
         builder.Property(e => e.CoachCategoryName)
             .HasMaxLength(CoachColumnConstants.CategoryNameLimit)
             .IsUnicode(false);
+        builder.Seed();
     }
 }

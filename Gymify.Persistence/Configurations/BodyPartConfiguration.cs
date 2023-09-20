@@ -1,5 +1,6 @@
 ﻿using Gymify.Domain.Constants.Column;
 using Gymify.Domain.Entities;
+using Gymify.Persistence.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,5 +19,6 @@ public class BodyPartConfiguration : IEntityTypeConfiguration<BodyPart>
         builder.Property(e => e.BodyPartName)
             .HasMaxLength(ExerciseColumnConstants.BodyPartNameLimit)
             .IsUnicode(false);
+        builder.Seed();
     }
 }
