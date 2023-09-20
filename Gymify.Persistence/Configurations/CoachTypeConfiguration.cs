@@ -10,7 +10,7 @@ public class CoachTypeConfiguration : IEntityTypeConfiguration<CoachType>
     {
         builder.ToTable(nameof(CoachType));
 
-        builder.HasKey(c => new { c.CoachTypeUid, c.CoachUid, c.CoachCategoryUid}).HasName("CoachType_pk");
+        builder.HasKey(c => new { c.CoachTypeUid, c.CoachUid, c.CoachCategoryId}).HasName("CoachType_pk");
 
         builder.Property(c => c.CoachTypeUid).ValueGeneratedNever();
 
@@ -20,7 +20,7 @@ public class CoachTypeConfiguration : IEntityTypeConfiguration<CoachType>
             .HasConstraintName("CoachType_Coach");
 
         builder.HasOne(c => c.CoachCategory).WithMany(e => e.CoachTypes)
-            .HasForeignKey(c => c.CoachCategoryUid)
+            .HasForeignKey(c => c.CoachCategoryId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("CoachType_CoachCategory");
     }

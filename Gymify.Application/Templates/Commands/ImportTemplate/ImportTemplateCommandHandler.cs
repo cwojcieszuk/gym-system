@@ -26,7 +26,7 @@ public class ImportTemplateCommandHandler: IRequestHandler<ImportTemplateCommand
             UserUid = request.UserUid,
             TemplateName = template.TemplateName,
             EstimatedTime = template.EstimatedTime,
-            DifficultyLevelUid = template.DifficultyLevelUid,
+            DifficultyLevelId = template.DifficultyLevelId,
             IsShared = false
         };
 

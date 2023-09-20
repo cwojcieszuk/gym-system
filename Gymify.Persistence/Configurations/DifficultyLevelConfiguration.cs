@@ -1,5 +1,6 @@
 ﻿using Gymify.Domain.Constants.Column;
 using Gymify.Domain.Entities;
+using Gymify.Persistence.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,5 +18,6 @@ public class DifficultyLevelConfiguration : IEntityTypeConfiguration<DifficultyL
         builder.Property(e => e.DifficultyLevelName)
             .HasMaxLength(TemplateColumnConstants.DifficultyLevelNameLimit)
             .IsUnicode(false);
+        builder.Seed();
     }
 }

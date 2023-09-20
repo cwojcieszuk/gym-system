@@ -20,7 +20,7 @@ public class AddTemplateCommandHandler: IRequestHandler<AddTemplateCommand, Unit
             TemplateUid = Guid.NewGuid(),
             TemplateName = request.TemplateName,
             EstimatedTime = request.EstimatedTime,
-            DifficultyLevelUid = request.DifficultyLevelUid,
+            DifficultyLevelId = request.DifficultyLevelId,
             IsShared = false,
             UserUid = request.UserUid
         };

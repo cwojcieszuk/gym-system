@@ -2,4 +2,4 @@
 
 namespace Gymify.Application.Templates.Commands.AddTemplate;
 
-public record AddTemplateCommand(string TemplateName, Guid DifficultyLevelUid, decimal EstimatedTime, Guid UserUid, List<TemplateExerciseDTO> Exercises): IRequest<Unit>;
+public record AddTemplateCommand(string TemplateName, int DifficultyLevelId, decimal EstimatedTime, Guid UserUid, List<TemplateExerciseDTO> Exercises): IRequest<Unit>;

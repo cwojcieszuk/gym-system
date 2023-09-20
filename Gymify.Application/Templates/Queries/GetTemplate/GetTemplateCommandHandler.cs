@@ -32,7 +32,7 @@ public class GetTemplateCommandHandler: IRequestHandler<GetTemplateCommand, Temp
         return new TemplateDetailsDTO(
             template.TemplateUid,
             template.TemplateName,
-            template.DifficultyLevelUid,
+            template.DifficultyLevelId,
             template.DifficultyLevel.DifficultyLevelName,
             template.EstimatedTime,
             template.IsShared,

@@ -4,6 +4,7 @@ using Gymify.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gymify.Persistence.Migrations
 {
     [DbContext(typeof(GymifyDbContext))]
-    partial class GymifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230920113727_ChangedSomeGuidToInt")]
+    partial class ChangedSomeGuidToInt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,23 +268,6 @@ namespace Gymify.Persistence.Migrations
                         .HasName("DifficultyLevel_pk");
 
                     b.ToTable("DifficultyLevel", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            DifficultyLevelId = 0,
-                            DifficultyLevelName = "Easy"
-                        },
-                        new
-                        {
-                            DifficultyLevelId = 1,
-                            DifficultyLevelName = "Medium"
-                        },
-                        new
-                        {
-                            DifficultyLevelId = 2,
-                            DifficultyLevelName = "Hard"
-                        });
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Equipment", b =>

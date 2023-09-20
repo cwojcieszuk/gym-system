@@ -6,7 +6,7 @@ public class Template
 
     public string TemplateName { get; set; } = null!;
 
-    public Guid DifficultyLevelUid { get; set; }
+    public int DifficultyLevelId { get; set; }
 
     public decimal EstimatedTime { get; set; }
     

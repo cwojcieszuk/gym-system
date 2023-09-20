@@ -6,7 +6,7 @@ public class CoachType
     
     public Guid CoachUid { get; set; }
     
-    public Guid CoachCategoryUid { get; set; }
+    public int CoachCategoryId { get; set; }
     
     public virtual Coach Coach { get; set; }
     
