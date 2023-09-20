@@ -1,5 +1,6 @@
 ﻿using Gymify.Domain.Constants.Column;
 using Gymify.Domain.Entities;
+using Gymify.Persistence.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,11 +10,12 @@ public class EquipmentConfiguration : IEntityTypeConfiguration<Equipment>
 {
     public void Configure(EntityTypeBuilder<Equipment> builder)
     {
-        builder.HasKey(e => e.EquipmentUid).HasName("Equipment_pk");
+        builder.HasKey(e => e.EquipmentId).HasName("Equipment_pk");
 
-        builder.Property(e => e.EquipmentUid).ValueGeneratedNever();
+        builder.Property(e => e.EquipmentId).ValueGeneratedNever();
         builder.Property(e => e.EquipmentName)
             .HasMaxLength(ExerciseColumnConstants.EquipmentNameLimit)
             .IsUnicode(false);
+        builder.Seed();
     }
 }

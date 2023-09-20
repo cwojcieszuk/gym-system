@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Gymify.Domain.Entities;
 
-namespace Gymify.Domain.Entities;
-
-public partial class Template
+public class Template
 {
     public Guid TemplateUid { get; set; }
 
     public string TemplateName { get; set; } = null!;
 
-    public Guid DifficultyLevelUid { get; set; }
+    public int DifficultyLevelId { get; set; }
 
     public decimal EstimatedTime { get; set; }
+    
+    public Guid UserUid { get; set; }
 
     public bool IsShared { get; set; }
+    
+    public virtual AspNetUser User { get; set; }
 
     public virtual DifficultyLevel DifficultyLevel { get; set; } = null!;
 

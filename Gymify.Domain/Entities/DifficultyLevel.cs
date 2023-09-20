@@ -5,7 +5,7 @@ namespace Gymify.Domain.Entities;
 
 public partial class DifficultyLevel
 {
-    public Guid DifficultyLevelUid { get; set; }
+    public int DifficultyLevelId { get; set; }
 
     public string DifficultyLevelName { get; set; } = null!;
 

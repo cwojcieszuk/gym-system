@@ -18,23 +18,19 @@ public class ExerciseConfiguration : IEntityTypeConfiguration<Exercise>
         builder.Property(e => e.ExerciseName)
             .HasMaxLength(ExerciseColumnConstants.ExerciseNameLimit)
             .IsUnicode(false);
-        
-        builder.Property(e => e.GifUrl)
-            .HasMaxLength(ExerciseColumnConstants.ExerciseGifUrlLimit)
-            .IsUnicode(false);
 
         builder.HasOne(d => d.BodyPart).WithMany(p => p.Exercises)
-            .HasForeignKey(d => d.BodyPartUid)
+            .HasForeignKey(d => d.BodyPartId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Exercise_BodyPart");
 
         builder.HasOne(d => d.Equipment).WithMany(p => p.Exercises)
-            .HasForeignKey(d => d.EquipmentUid)
+            .HasForeignKey(d => d.EquipmentId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Exercise_Equipment");
 
         builder.HasOne(d => d.Target).WithMany(p => p.Exercises)
-            .HasForeignKey(d => d.TargetUid)
+            .HasForeignKey(d => d.TargetId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Exercise_Target");
     }

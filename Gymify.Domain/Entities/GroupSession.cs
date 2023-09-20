@@ -17,7 +17,7 @@ public partial class GroupSession
 
     public string Description { get; set; } = null!;
 
-    public Guid PlaceUid { get; set; }
+    public int PlaceId { get; set; }
 
     public Guid CoachUid { get; set; }
 

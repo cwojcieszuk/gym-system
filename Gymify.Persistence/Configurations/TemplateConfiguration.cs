@@ -20,8 +20,13 @@ public class TemplateConfiguration : IEntityTypeConfiguration<Template>
             .IsUnicode(false);
 
         builder.HasOne(d => d.DifficultyLevel).WithMany(p => p.Templates)
-            .HasForeignKey(d => d.DifficultyLevelUid)
+            .HasForeignKey(d => d.DifficultyLevelId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("Template_DifficultyLevel");
+
+        builder.HasOne(x => x.User).WithMany(x => x.Templates)
+            .HasForeignKey(x => x.UserUid)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .HasConstraintName("Template_User");
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Gymify.Domain.Entities;
+using GymifyApi.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -31,6 +32,9 @@ public static class DependencyInjection
                     .GetBytes(jwtSettings.GetSection("securityKey").Value))
             };
         });
+        
+        services.AddScoped<TemplateExistenceCheckFilter>();
+        services.AddScoped<TemplateOwnerCheckFilter>();
 
         services.AddAuthorization(options =>
         {

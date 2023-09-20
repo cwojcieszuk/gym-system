@@ -122,8 +122,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.BodyPart", b =>
                 {
-                    b.Property<Guid>("BodyPartUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BodyPartId")
+                        .HasColumnType("int");
 
                     b.Property<string>("BodyPartName")
                         .IsRequired()
@@ -131,10 +131,62 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(128)");
 
-                    b.HasKey("BodyPartUid")
+                    b.HasKey("BodyPartId")
                         .HasName("BodyPart_pk");
 
                     b.ToTable("BodyPart", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            BodyPartId = 0,
+                            BodyPartName = "Waist"
+                        },
+                        new
+                        {
+                            BodyPartId = 1,
+                            BodyPartName = "Upper legs"
+                        },
+                        new
+                        {
+                            BodyPartId = 2,
+                            BodyPartName = "Back"
+                        },
+                        new
+                        {
+                            BodyPartId = 3,
+                            BodyPartName = "Lower legs"
+                        },
+                        new
+                        {
+                            BodyPartId = 4,
+                            BodyPartName = "Chest"
+                        },
+                        new
+                        {
+                            BodyPartId = 5,
+                            BodyPartName = "Upper arms"
+                        },
+                        new
+                        {
+                            BodyPartId = 6,
+                            BodyPartName = "Cardio"
+                        },
+                        new
+                        {
+                            BodyPartId = 7,
+                            BodyPartName = "Shoulders"
+                        },
+                        new
+                        {
+                            BodyPartId = 8,
+                            BodyPartName = "Lower arms"
+                        },
+                        new
+                        {
+                            BodyPartId = 9,
+                            BodyPartName = "Neck"
+                        });
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Client", b =>
@@ -187,8 +239,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.CoachCategory", b =>
                 {
-                    b.Property<Guid>("CoachCategoryUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CoachCategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CoachCategoryName")
                         .IsRequired()
@@ -196,10 +248,52 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(64)");
 
-                    b.HasKey("CoachCategoryUid")
+                    b.HasKey("CoachCategoryId")
                         .HasName("CoachCategory_pk");
 
                     b.ToTable("CoachCategory", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CoachCategoryId = 0,
+                            CoachCategoryName = "Fitness"
+                        },
+                        new
+                        {
+                            CoachCategoryId = 1,
+                            CoachCategoryName = "Group fitness instructor"
+                        },
+                        new
+                        {
+                            CoachCategoryId = 2,
+                            CoachCategoryName = "Cross fit trainer"
+                        },
+                        new
+                        {
+                            CoachCategoryId = 3,
+                            CoachCategoryName = "Rehabilitation"
+                        },
+                        new
+                        {
+                            CoachCategoryId = 4,
+                            CoachCategoryName = "Core Strengthening"
+                        },
+                        new
+                        {
+                            CoachCategoryId = 5,
+                            CoachCategoryName = "Bodybuilding"
+                        },
+                        new
+                        {
+                            CoachCategoryId = 6,
+                            CoachCategoryName = "Weight loss"
+                        },
+                        new
+                        {
+                            CoachCategoryId = 7,
+                            CoachCategoryName = "Cardiovascular"
+                        });
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.CoachHour", b =>
@@ -237,13 +331,13 @@ namespace Gymify.Persistence.Migrations
                     b.Property<Guid>("CoachUid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CoachCategoryUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CoachCategoryId")
+                        .HasColumnType("int");
 
-                    b.HasKey("CoachTypeUid", "CoachUid", "CoachCategoryUid")
+                    b.HasKey("CoachTypeUid", "CoachUid", "CoachCategoryId")
                         .HasName("CoachType_pk");
 
-                    b.HasIndex("CoachCategoryUid");
+                    b.HasIndex("CoachCategoryId");
 
                     b.HasIndex("CoachUid");
 
@@ -252,8 +346,8 @@ namespace Gymify.Persistence.Migrations
 
             modelBuilder.Entity("Gymify.Domain.Entities.DifficultyLevel", b =>
                 {
-                    b.Property<Guid>("DifficultyLevelUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("DifficultyLevelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("DifficultyLevelName")
                         .IsRequired()
@@ -261,16 +355,33 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(64)");
 
-                    b.HasKey("DifficultyLevelUid")
+                    b.HasKey("DifficultyLevelId")
                         .HasName("DifficultyLevel_pk");
 
                     b.ToTable("DifficultyLevel", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            DifficultyLevelId = 0,
+                            DifficultyLevelName = "Easy"
+                        },
+                        new
+                        {
+                            DifficultyLevelId = 1,
+                            DifficultyLevelName = "Medium"
+                        },
+                        new
+                        {
+                            DifficultyLevelId = 2,
+                            DifficultyLevelName = "Hard"
+                        });
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Equipment", b =>
                 {
-                    b.Property<Guid>("EquipmentUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("EquipmentName")
                         .IsRequired()
@@ -278,10 +389,152 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(128)");
 
-                    b.HasKey("EquipmentUid")
+                    b.HasKey("EquipmentId")
                         .HasName("Equipment_pk");
 
                     b.ToTable("Equipment");
+
+                    b.HasData(
+                        new
+                        {
+                            EquipmentId = 0,
+                            EquipmentName = "Body weight"
+                        },
+                        new
+                        {
+                            EquipmentId = 1,
+                            EquipmentName = "Cable"
+                        },
+                        new
+                        {
+                            EquipmentId = 2,
+                            EquipmentName = "Leverage machine"
+                        },
+                        new
+                        {
+                            EquipmentId = 3,
+                            EquipmentName = "Assisted"
+                        },
+                        new
+                        {
+                            EquipmentId = 4,
+                            EquipmentName = "Medicine ball"
+                        },
+                        new
+                        {
+                            EquipmentId = 5,
+                            EquipmentName = "Stability ball"
+                        },
+                        new
+                        {
+                            EquipmentId = 6,
+                            EquipmentName = "Band"
+                        },
+                        new
+                        {
+                            EquipmentId = 7,
+                            EquipmentName = "Barbell"
+                        },
+                        new
+                        {
+                            EquipmentId = 8,
+                            EquipmentName = "Rope"
+                        },
+                        new
+                        {
+                            EquipmentId = 9,
+                            EquipmentName = "Dumbell"
+                        },
+                        new
+                        {
+                            EquipmentId = 10,
+                            EquipmentName = "Ez barbell"
+                        },
+                        new
+                        {
+                            EquipmentId = 11,
+                            EquipmentName = "Sled machine"
+                        },
+                        new
+                        {
+                            EquipmentId = 12,
+                            EquipmentName = "Upper body ergometer"
+                        },
+                        new
+                        {
+                            EquipmentId = 13,
+                            EquipmentName = "Kettlebell"
+                        },
+                        new
+                        {
+                            EquipmentId = 14,
+                            EquipmentName = "Olympic barbell"
+                        },
+                        new
+                        {
+                            EquipmentId = 15,
+                            EquipmentName = "Weighted"
+                        },
+                        new
+                        {
+                            EquipmentId = 16,
+                            EquipmentName = "Bosu ball"
+                        },
+                        new
+                        {
+                            EquipmentId = 17,
+                            EquipmentName = "Resistance band"
+                        },
+                        new
+                        {
+                            EquipmentId = 18,
+                            EquipmentName = "Roller"
+                        },
+                        new
+                        {
+                            EquipmentId = 19,
+                            EquipmentName = "Skierg machine"
+                        },
+                        new
+                        {
+                            EquipmentId = 20,
+                            EquipmentName = "Hammer"
+                        },
+                        new
+                        {
+                            EquipmentId = 21,
+                            EquipmentName = "Smith machine"
+                        },
+                        new
+                        {
+                            EquipmentId = 22,
+                            EquipmentName = "Wheel roller"
+                        },
+                        new
+                        {
+                            EquipmentId = 23,
+                            EquipmentName = "Stationary bike"
+                        },
+                        new
+                        {
+                            EquipmentId = 24,
+                            EquipmentName = "Tire"
+                        },
+                        new
+                        {
+                            EquipmentId = 25,
+                            EquipmentName = "Trap bar"
+                        },
+                        new
+                        {
+                            EquipmentId = 26,
+                            EquipmentName = "Elliptical machine"
+                        },
+                        new
+                        {
+                            EquipmentId = 27,
+                            EquipmentName = "Stepmill machine"
+                        });
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Exercise", b =>
@@ -289,11 +542,15 @@ namespace Gymify.Persistence.Migrations
                     b.Property<Guid>("ExerciseUid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BodyPartUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("BodyPartId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("EquipmentUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("ExerciseGif")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ExerciseName")
                         .IsRequired()
@@ -301,23 +558,17 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<string>("GifUrl")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<Guid>("TargetUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("TargetId")
+                        .HasColumnType("int");
 
                     b.HasKey("ExerciseUid")
                         .HasName("Exercise_pk");
 
-                    b.HasIndex("BodyPartUid");
+                    b.HasIndex("BodyPartId");
 
-                    b.HasIndex("EquipmentUid");
+                    b.HasIndex("EquipmentId");
 
-                    b.HasIndex("TargetUid");
+                    b.HasIndex("TargetId");
 
                     b.ToTable("Exercise", (string)null);
                 });
@@ -378,8 +629,8 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(300)");
 
-                    b.Property<Guid>("PlaceUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("PlaceId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("SessionEndDate")
                         .HasColumnType("datetime");
@@ -401,15 +652,15 @@ namespace Gymify.Persistence.Migrations
 
                     b.HasIndex("CoachUid");
 
-                    b.HasIndex("PlaceUid");
+                    b.HasIndex("PlaceId");
 
                     b.ToTable("GroupSession", (string)null);
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Place", b =>
                 {
-                    b.Property<Guid>("PlaceUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("PlaceId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PlaceName")
                         .IsRequired()
@@ -418,16 +669,68 @@ namespace Gymify.Persistence.Migrations
                         .HasColumnType("varchar(256)")
                         .HasColumnName("PlaceName");
 
-                    b.HasKey("PlaceUid")
+                    b.HasKey("PlaceId")
                         .HasName("Place_pk");
 
                     b.ToTable("Place", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            PlaceId = 0,
+                            PlaceName = "Cardio area"
+                        },
+                        new
+                        {
+                            PlaceId = 1,
+                            PlaceName = "Weightlifting zone"
+                        },
+                        new
+                        {
+                            PlaceId = 2,
+                            PlaceName = "Free weights zone"
+                        },
+                        new
+                        {
+                            PlaceId = 3,
+                            PlaceName = "Weightlifting section"
+                        },
+                        new
+                        {
+                            PlaceId = 4,
+                            PlaceName = "Stretching zone"
+                        },
+                        new
+                        {
+                            PlaceId = 5,
+                            PlaceName = "Group fitness studio"
+                        },
+                        new
+                        {
+                            PlaceId = 6,
+                            PlaceName = "Martial arts area"
+                        },
+                        new
+                        {
+                            PlaceId = 7,
+                            PlaceName = "Locker room"
+                        },
+                        new
+                        {
+                            PlaceId = 8,
+                            PlaceName = "Sauna"
+                        },
+                        new
+                        {
+                            PlaceId = 9,
+                            PlaceName = "Massage and recovery center"
+                        });
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Target", b =>
                 {
-                    b.Property<Guid>("TargetUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("TargetId")
+                        .HasColumnType("int");
 
                     b.Property<string>("TargetName")
                         .IsRequired()
@@ -435,10 +738,107 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(128)");
 
-                    b.HasKey("TargetUid")
+                    b.HasKey("TargetId")
                         .HasName("Target_pk");
 
                     b.ToTable("Target", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            TargetId = 0,
+                            TargetName = "Abs"
+                        },
+                        new
+                        {
+                            TargetId = 1,
+                            TargetName = "Quads"
+                        },
+                        new
+                        {
+                            TargetId = 2,
+                            TargetName = "Lats"
+                        },
+                        new
+                        {
+                            TargetId = 3,
+                            TargetName = "Calves"
+                        },
+                        new
+                        {
+                            TargetId = 4,
+                            TargetName = "Pectorals"
+                        },
+                        new
+                        {
+                            TargetId = 5,
+                            TargetName = "Glutes"
+                        },
+                        new
+                        {
+                            TargetId = 6,
+                            TargetName = "Hamstrings"
+                        },
+                        new
+                        {
+                            TargetId = 7,
+                            TargetName = "Adductors"
+                        },
+                        new
+                        {
+                            TargetId = 8,
+                            TargetName = "Triceps"
+                        },
+                        new
+                        {
+                            TargetId = 9,
+                            TargetName = "Cardiovascular system"
+                        },
+                        new
+                        {
+                            TargetId = 10,
+                            TargetName = "Spine"
+                        },
+                        new
+                        {
+                            TargetId = 11,
+                            TargetName = "Upper back"
+                        },
+                        new
+                        {
+                            TargetId = 12,
+                            TargetName = "Biceps"
+                        },
+                        new
+                        {
+                            TargetId = 13,
+                            TargetName = "Delts"
+                        },
+                        new
+                        {
+                            TargetId = 14,
+                            TargetName = "Forearms"
+                        },
+                        new
+                        {
+                            TargetId = 15,
+                            TargetName = "Traps"
+                        },
+                        new
+                        {
+                            TargetId = 16,
+                            TargetName = "Serratus anterior"
+                        },
+                        new
+                        {
+                            TargetId = 17,
+                            TargetName = "Abductors"
+                        },
+                        new
+                        {
+                            TargetId = 18,
+                            TargetName = "Levator scapulae"
+                        });
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.Template", b =>
@@ -446,8 +846,8 @@ namespace Gymify.Persistence.Migrations
                     b.Property<Guid>("TemplateUid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DifficultyLevelUid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("DifficultyLevelId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("EstimatedTime")
                         .HasColumnType("numeric(3, 0)");
@@ -461,10 +861,15 @@ namespace Gymify.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(128)");
 
+                    b.Property<Guid>("UserUid")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("TemplateUid")
                         .HasName("Template_pk");
 
-                    b.HasIndex("DifficultyLevelUid");
+                    b.HasIndex("DifficultyLevelId");
+
+                    b.HasIndex("UserUid");
 
                     b.ToTable("Template", (string)null);
                 });
@@ -481,18 +886,15 @@ namespace Gymify.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comments")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .IsUnicode(false)
                         .HasColumnType("varchar(300)");
 
-                    b.Property<string>("NumberOfReps")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("NumberOfReps")
+                        .HasColumnType("int");
 
-                    b.Property<string>("NumberOfSets")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("NumberOfSets")
+                        .HasColumnType("int");
 
                     b.HasKey("TemplateExerciseUid", "ExerciseUid", "TemplateUid")
                         .HasName("TemplateExercise_pk");
@@ -744,7 +1146,7 @@ namespace Gymify.Persistence.Migrations
                 {
                     b.HasOne("Gymify.Domain.Entities.CoachCategory", "CoachCategory")
                         .WithMany("CoachTypes")
-                        .HasForeignKey("CoachCategoryUid")
+                        .HasForeignKey("CoachCategoryId")
                         .IsRequired()
                         .HasConstraintName("CoachType_CoachCategory");
 
@@ -763,19 +1165,19 @@ namespace Gymify.Persistence.Migrations
                 {
                     b.HasOne("Gymify.Domain.Entities.BodyPart", "BodyPart")
                         .WithMany("Exercises")
-                        .HasForeignKey("BodyPartUid")
+                        .HasForeignKey("BodyPartId")
                         .IsRequired()
                         .HasConstraintName("Exercise_BodyPart");
 
                     b.HasOne("Gymify.Domain.Entities.Equipment", "Equipment")
                         .WithMany("Exercises")
-                        .HasForeignKey("EquipmentUid")
+                        .HasForeignKey("EquipmentId")
                         .IsRequired()
                         .HasConstraintName("Exercise_Equipment");
 
                     b.HasOne("Gymify.Domain.Entities.Target", "Target")
                         .WithMany("Exercises")
-                        .HasForeignKey("TargetUid")
+                        .HasForeignKey("TargetId")
                         .IsRequired()
                         .HasConstraintName("Exercise_Target");
 
@@ -834,7 +1236,7 @@ namespace Gymify.Persistence.Migrations
 
                     b.HasOne("Gymify.Domain.Entities.Place", "Place")
                         .WithMany("GroupSessions")
-                        .HasForeignKey("PlaceUid")
+                        .HasForeignKey("PlaceId")
                         .IsRequired()
                         .HasConstraintName("GroupSession_Place");
 
@@ -847,11 +1249,19 @@ namespace Gymify.Persistence.Migrations
                 {
                     b.HasOne("Gymify.Domain.Entities.DifficultyLevel", "DifficultyLevel")
                         .WithMany("Templates")
-                        .HasForeignKey("DifficultyLevelUid")
+                        .HasForeignKey("DifficultyLevelId")
                         .IsRequired()
                         .HasConstraintName("Template_DifficultyLevel");
 
+                    b.HasOne("Gymify.Domain.Entities.AspNetUser", "User")
+                        .WithMany("Templates")
+                        .HasForeignKey("UserUid")
+                        .IsRequired()
+                        .HasConstraintName("Template_User");
+
                     b.Navigation("DifficultyLevel");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Gymify.Domain.Entities.TemplateExercise", b =>
@@ -961,6 +1371,8 @@ namespace Gymify.Persistence.Migrations
                     b.Navigation("Coach");
 
                     b.Navigation("FavouriteExercises");
+
+                    b.Navigation("Templates");
 
                     b.Navigation("UserTrainings");
                 });

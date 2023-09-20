@@ -30,7 +30,7 @@ public class GroupSessionConfiguration : IEntityTypeConfiguration<GroupSession>
             .HasConstraintName("GroupSession_Coach");
 
         builder.HasOne(d => d.Place).WithMany(p => p.GroupSessions)
-            .HasForeignKey(d => d.PlaceUid)
+            .HasForeignKey(d => d.PlaceId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("GroupSession_Place");
     }
