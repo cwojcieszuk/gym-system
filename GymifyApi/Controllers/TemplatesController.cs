@@ -8,6 +8,7 @@ using Gymify.Application.Templates.Queries.GetPersonalTemplates;
 using Gymify.Application.Templates.Queries.GetTemplate;
 using Gymify.Shared.Params;
 using GymifyApi.Extensions;
+using GymifyApi.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -54,9 +55,11 @@ public class TemplatesController : ControllerBase
 
     [HttpPost]
     [Route("{templateUid}/share")]
-    public async Task<IActionResult> ShareTemplate([FromRoute] ShareTemplateCommand command)
+    [ServiceFilter(typeof(TemplateExistenceCheckFilter))]
+    [ServiceFilter(typeof(TemplateOwnerCheckFilter))]
+    public async Task<IActionResult> ShareTemplate([FromRoute] ShareTemplateCommand request)
     {
-        await _mediator.Send(command);
+        await _mediator.Send(request);
 
         return NoContent();
     }
@@ -78,7 +81,8 @@ public class TemplatesController : ControllerBase
 
     [HttpGet]
     [Route("{templateUid}")]
-    public async Task<IActionResult> GetTemplate([FromRoute] GetTemplateCommand command)
+    [ServiceFilter(typeof(TemplateExistenceCheckFilter))]
+    public async Task<IActionResult> GetTemplate([FromRoute] GetTemplateCommand request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
 
@@ -87,23 +91,25 @@ public class TemplatesController : ControllerBase
             return Forbid();
         }
 
-        return Ok(await _mediator.Send(command with { UserUid = userUid }));
+        return Ok(await _mediator.Send(request with { UserUid = userUid }));
     }
 
     [HttpDelete]
     [Route("{templateUid}")]
-    //TemplateOwnerCheckFilter
-    public async Task<IActionResult> DeleteTemplate([FromRoute] DeleteTemplateCommand command)
+    [ServiceFilter(typeof(TemplateExistenceCheckFilter))]
+    [ServiceFilter(typeof(TemplateOwnerCheckFilter))]
+    public async Task<IActionResult> DeleteTemplate([FromRoute] DeleteTemplateCommand request)
     {
-        await _mediator.Send(command);
+        await _mediator.Send(request);
 
         return NoContent();
     }
 
     [HttpPut]
     [Route("{templateUid}")]
-    //TemplateOwnerCheckFilter
-    public async Task<IActionResult> UpdateTemplate([FromRoute] Guid templateUid, [FromBody] UpdateTemplateCommand command)
+    [ServiceFilter(typeof(TemplateExistenceCheckFilter))]
+    [ServiceFilter(typeof(TemplateOwnerCheckFilter))]
+    public async Task<IActionResult> UpdateTemplate([FromRoute] Guid templateUid, [FromBody] UpdateTemplateCommand request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
 
@@ -112,14 +118,15 @@ public class TemplatesController : ControllerBase
             return Forbid();
         }
 
-        await _mediator.Send(command with { UserUid = userUid });
+        await _mediator.Send(request with { UserUid = userUid });
         
         return NoContent();
     }
 
     [HttpPost]
     [Route("import")]
-    public async Task<IActionResult> ImportTemplate([FromBody] ImportTemplateCommand command)
+    [ServiceFilter(typeof(TemplateExistenceCheckFilter))]
+    public async Task<IActionResult> ImportTemplate([FromBody] ImportTemplateCommand request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
 
@@ -128,7 +135,7 @@ public class TemplatesController : ControllerBase
             return Forbid();
         }
 
-        await _mediator.Send(command with { UserUid = userUid });
+        await _mediator.Send(request with { UserUid = userUid });
 
         return NoContent();
     }
