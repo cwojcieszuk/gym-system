@@ -53,6 +53,8 @@ export class TemplateAddComponent extends BaseComponent implements OnInit, OnDes
     private route: ActivatedRoute
   ) {
     super();
+
+    this.isShared = !this.router.url.includes('personal-templates');
   }
 
   ngOnInit(): void {
@@ -85,7 +87,6 @@ export class TemplateAddComponent extends BaseComponent implements OnInit, OnDes
           this.exercisesForm.push(this.fb.group({ exercise: ex.exercise, numberOfReps: ex.numberOfReps, numberOfSets: ex.numberOfSets, comments: ex.comments ?? '' }), { emitEvent: false });
         });
 
-        this.isShared = value.isShared;
         this.difficultyLevel = value.difficultyLevelName;
       });
   }

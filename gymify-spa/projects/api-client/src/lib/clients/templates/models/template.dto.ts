@@ -7,4 +7,5 @@ export interface TemplateDTO {
   estimatedTime: number;
   firstName: string;
   lastName: string;
+  isShared: boolean;
 }
