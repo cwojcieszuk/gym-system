@@ -12,3 +12,13 @@ export const getQuery = createSelector(
   getTrainingsState,
   state => state.query
 );
+
+export const getTrainingDetails = createSelector(
+  getTrainingsState,
+  state => state.trainingDetails
+);
+
+export const getTrainingUid = createSelector(
+  getTrainingsState,
+  state => state.selectedTraining
+);

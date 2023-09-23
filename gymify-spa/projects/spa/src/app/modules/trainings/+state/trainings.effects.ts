@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TrainingsClient } from '../../../../../../api-client/src/lib/clients/trainings/trainings.client';
 import * as TrainingActions from './trainings.actions';
-import { catchError, map, mergeMap, of, withLatestFrom } from 'rxjs';
+import {
+  catchError, EMPTY, filter, map, mergeMap, of, withLatestFrom
+} from 'rxjs';
 import { TrainingsFacade } from './trainings.facade';
 
 @Injectable({ providedIn: 'root' })
@@ -23,6 +25,46 @@ export class TrainingsEffects {
     this.actions$.pipe(
       ofType(TrainingActions.setQuery),
       map(() => TrainingActions.fetchTrainings())
+    )
+  );
+
+  createTraining$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.createTraining),
+      mergeMap(action => this.client.createTraining(action).pipe(
+        map(() => TrainingActions.createTrainingSuccess()),
+        catchError(() => of(TrainingActions.createTrainingFailure()))
+      ))
+    )
+  );
+
+  fetchTrainingDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.fetchTrainingDetails),
+      withLatestFrom(this.facade.trainingUid$),
+      map(([, trainingUid]) => trainingUid),
+      filter(Boolean),
+      mergeMap(trainingUid => this.client.getTraining(trainingUid).pipe(
+        map(response => TrainingActions.fetchTrainingDetailsSuccess(response)),
+        catchError(() => of(TrainingActions.fetchTrainingDetailsFailure()))
+      ))
+    )
+  );
+
+  updateTraining$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.updateTraining),
+      withLatestFrom(this.facade.trainingUid$),
+      mergeMap(([action, trainingUid]) => {
+        if (!trainingUid) {
+          return EMPTY;
+        }
+
+        return this.client.updateTraining({ trainingUid, trainingName: action.trainingName, trainingDate: action.trainingDate, templateUid: action.templateUid }).pipe(
+          map(() => TrainingActions.updateTrainingSuccess()),
+          catchError(() => of(TrainingActions.updateTrainingFailure()))
+        );
+      })
     )
   );
 

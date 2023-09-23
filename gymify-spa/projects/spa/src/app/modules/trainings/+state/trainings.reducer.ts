@@ -2,12 +2,17 @@ import { createReducer, on } from '@ngrx/store';
 import { TrainingsResponse } from '../../../../../../api-client/src/lib/clients/trainings/responses/trainings.response';
 import { PagedRequest } from '../../../../../../api-client/src/lib/models/paged-request';
 import * as TrainingActions from './trainings.actions';
+import { TrainingDetailsDTO } from '../../../../../../api-client/src/lib/clients/trainings/models/training-details.dto';
+import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
 
 export const TRAININGS_FEATURE_KEY = 'trainings';
 
 export interface TrainingsState {
   trainingsResponse?: TrainingsResponse;
   query: PagedRequest;
+  trainingDetails?: TrainingDetailsDTO;
+
+  selectedTraining?: UUID;
 }
 
 const initialState: TrainingsState = {
@@ -29,6 +34,14 @@ export const trainingsReducer = createReducer<TrainingsState>(
       ...state.query,
       ...payload,
     },
+  })),
+  on(TrainingActions.selectTraining, (state, payload) => ({
+    ...state,
+    selectedTraining: payload.trainingUid,
+  })),
+  on(TrainingActions.fetchTrainingDetailsSuccess, (state, payload) => ({
+    ...state,
+    trainingDetails: payload,
   }))
 );
 

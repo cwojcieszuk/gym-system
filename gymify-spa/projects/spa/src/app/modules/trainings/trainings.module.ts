@@ -7,10 +7,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { PaginatorComponent } from '../../shared/ui/paginator/paginator.component';
+import { TrainingAddComponent } from './views/training-add/training-add.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from '@angular-material-components/datetime-picker';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
-    TrainingsListComponent
+    TrainingsListComponent,
+    TrainingAddComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +33,15 @@ import { PaginatorComponent } from '../../shared/ui/paginator/paginator.componen
     MatIconModule,
     MatTableModule,
     PaginatorComponent,
+    MatCardModule,
+    MatInputModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    NgxMatNativeDateModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
   ],
 })
 export class TrainingsModule { }
