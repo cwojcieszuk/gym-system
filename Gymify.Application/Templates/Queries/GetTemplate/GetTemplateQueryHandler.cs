@@ -7,16 +7,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gymify.Application.Templates.Queries.GetTemplate;
 
-public class GetTemplateCommandHandler: IRequestHandler<GetTemplateCommand, TemplateDetailsDTO>
+public class GetTemplateQueryHandler: IRequestHandler<GetTemplateQuery, TemplateDetailsDTO>
 {
     private readonly IGymifyDbContext _gymifyDbContext;
 
-    public GetTemplateCommandHandler(IGymifyDbContext gymifyDbContext)
+    public GetTemplateQueryHandler(IGymifyDbContext gymifyDbContext)
     {
         _gymifyDbContext = gymifyDbContext;
     }
     
-    public async Task<TemplateDetailsDTO> Handle(GetTemplateCommand request, CancellationToken cancellationToken)
+    public async Task<TemplateDetailsDTO> Handle(GetTemplateQuery request, CancellationToken cancellationToken)
     {
         Template template = await _gymifyDbContext.Templates
             .Include(x => x.DifficultyLevel)

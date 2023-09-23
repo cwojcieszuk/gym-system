@@ -82,7 +82,7 @@ public class TemplatesController : ControllerBase
     [HttpGet]
     [Route("{templateUid}")]
     [ServiceFilter(typeof(TemplateExistenceCheckFilter))]
-    public async Task<IActionResult> GetTemplate([FromRoute] GetTemplateCommand request)
+    public async Task<IActionResult> GetTemplate([FromRoute] GetTemplateQuery request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
 
