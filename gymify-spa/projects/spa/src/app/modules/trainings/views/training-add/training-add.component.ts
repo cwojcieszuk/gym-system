@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../../../../shared/components/base.component';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { UUID } from '../../../../../../../api-client/src/lib/types/uuid.type';
@@ -22,7 +22,8 @@ export class TrainingAddComponent extends BaseComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
-    private facade: TrainingsFacade
+    private facade: TrainingsFacade,
+    private router: Router
   ) {
     super();
   }
@@ -48,6 +49,10 @@ export class TrainingAddComponent extends BaseComponent implements OnInit {
           templateUid: value.templateUid,
         });
       });
+  }
+
+  moveBack(): void {
+    this.router.navigate(['trainings']);
   }
 
   save(): void {

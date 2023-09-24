@@ -4,14 +4,14 @@ import { BaseComponent } from '../../../../shared/components/base.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { TrainingDTO } from '../../../../../../../api-client/src/lib/clients/trainings/models/training.dto';
 import { filter } from 'rxjs';
-import {
-  TrainingsResponse
-} from '../../../../../../../api-client/src/lib/clients/trainings/responses/trainings.response';
+import { TrainingsResponse } from '../../../../../../../api-client/src/lib/clients/trainings/responses/trainings.response';
+import { UUID } from '../../../../../../../api-client/src/lib/types/uuid.type';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gym-trainings-list',
   templateUrl: './trainings-list.component.html',
-  styleUrls: ['./trainings-list.component.scss']
+  styleUrls: ['./trainings-list.component.scss'],
 })
 export class TrainingsListComponent extends BaseComponent implements OnInit {
   displayedColumns = ['trainingName', 'templateName', 'day', 'hour', 'estimatedTime'];
@@ -19,7 +19,8 @@ export class TrainingsListComponent extends BaseComponent implements OnInit {
   trainingsResponse?: TrainingsResponse;
 
   constructor(
-    private facade: TrainingsFacade
+    private facade: TrainingsFacade,
+    private router: Router
   ) {
     super();
   }
@@ -41,5 +42,9 @@ export class TrainingsListComponent extends BaseComponent implements OnInit {
 
   pageSizeChange(pageSize: number): void {
     this.facade.setQuery({ pageSize });
+  }
+
+  navigateToTraining(uid: UUID): void {
+    this.router.navigate(['trainings', uid]);
   }
 }
