@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../../../../shared/components/base.component';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
-import { UUID } from '../../../../../../../api-client/src/lib/types/uuid.type';
 import { TrainingsFacade } from '../../+state/trainings.facade';
-import { filter } from 'rxjs';
+import { debounceTime, filter, startWith } from 'rxjs';
+import { TemplateDetailsDTO } from '../../../../../../../api-client/src/lib/clients/templates/models/template.details.dto';
+import { ImageService } from '../../../../shared/services/image.service';
 
 @Component({
   templateUrl: './training-add.component.html',
@@ -14,16 +15,18 @@ export class TrainingAddComponent extends BaseComponent implements OnInit {
   readonly form = this.fb.group({
     name: this.fb.control<string>('', Validators.required),
     datetime: this.fb.control<Date | null>(null, Validators.required),
-    templateUid: this.fb.control<UUID>('', Validators.required),
+    templateSearch: this.fb.control<string>('', Validators.required),
   });
 
   isNew = true;
+  selectedTemplate?: TemplateDetailsDTO;
 
   constructor(
     private route: ActivatedRoute,
     private fb: NonNullableFormBuilder,
-    private facade: TrainingsFacade,
-    private router: Router
+    public facade: TrainingsFacade,
+    private router: Router,
+    public imgService: ImageService
   ) {
     super();
   }
@@ -46,9 +49,15 @@ export class TrainingAddComponent extends BaseComponent implements OnInit {
         this.form.patchValue({
           name: value.trainingName,
           datetime: new Date(value.trainingDate),
-          templateUid: value.templateUid,
+          templateSearch: value.template.templateName,
         });
+
+        this.setTemplate(value.template);
       });
+
+    this.observe(this.form.controls.templateSearch.valueChanges)
+      .pipe(debounceTime(500), startWith(''))
+      .subscribe(value => this.facade.fetchTemplatesBySearch(value));
   }
 
   moveBack(): void {
@@ -56,7 +65,7 @@ export class TrainingAddComponent extends BaseComponent implements OnInit {
   }
 
   save(): void {
-    if (this.form.invalid) {
+    if (this.form.invalid || !this.selectedTemplate) {
       return;
     }
 
@@ -64,10 +73,14 @@ export class TrainingAddComponent extends BaseComponent implements OnInit {
       this.facade.createTraining({
         trainingName: this.form.controls.name.value,
         trainingDate: this.form.controls.datetime.value!,
-        templateUid: this.form.controls.templateUid.value,
+        templateUid: this.selectedTemplate.templateUid,
       });
     } else {
-      this.facade.updateTraining(this.form.controls.name.value, this.form.controls.datetime.value!, this.form.controls.templateUid.value);
+      this.facade.updateTraining(this.form.controls.name.value, this.form.controls.datetime.value!, this.selectedTemplate.templateUid);
     }
+  }
+
+  setTemplate(template: TemplateDetailsDTO): void {
+    this.selectedTemplate = template;
   }
 }

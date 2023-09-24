@@ -4,6 +4,7 @@ import { PagedRequest } from '../../../../../../api-client/src/lib/models/paged-
 import * as TrainingActions from './trainings.actions';
 import { TrainingDetailsDTO } from '../../../../../../api-client/src/lib/clients/trainings/models/training-details.dto';
 import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
+import { TemplateDetailsDTO } from '../../../../../../api-client/src/lib/clients/templates/models/template.details.dto';
 
 export const TRAININGS_FEATURE_KEY = 'trainings';
 
@@ -13,6 +14,7 @@ export interface TrainingsState {
   trainingDetails?: TrainingDetailsDTO;
 
   selectedTraining?: UUID;
+  searchedTemplates: TemplateDetailsDTO[];
 }
 
 const initialState: TrainingsState = {
@@ -20,6 +22,7 @@ const initialState: TrainingsState = {
     pageNumber: 1,
     pageSize: 10,
   },
+  searchedTemplates: [],
 };
 
 export const trainingsReducer = createReducer<TrainingsState>(
@@ -42,6 +45,10 @@ export const trainingsReducer = createReducer<TrainingsState>(
   on(TrainingActions.fetchTrainingDetailsSuccess, (state, payload) => ({
     ...state,
     trainingDetails: payload,
+  })),
+  on(TrainingActions.fetchTemplatesBySearchSuccess, (state, payload) => ({
+    ...state,
+    searchedTemplates: payload.response,
   }))
 );
 

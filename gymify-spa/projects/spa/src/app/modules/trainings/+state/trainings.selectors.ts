@@ -22,3 +22,8 @@ export const getTrainingUid = createSelector(
   getTrainingsState,
   state => state.selectedTraining
 );
+
+export const getSearchTemplates = createSelector(
+  getTrainingsState,
+  state => state.searchedTemplates
+);

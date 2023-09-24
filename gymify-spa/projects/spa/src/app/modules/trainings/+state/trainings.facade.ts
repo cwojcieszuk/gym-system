@@ -12,6 +12,7 @@ export class TrainingsFacade {
   query$ = this.store.select(TrainingSelectors.getQuery);
   trainingUid$ = this.store.select(TrainingSelectors.getTrainingUid);
   trainingDetails$ = this.store.select(TrainingSelectors.getTrainingDetails);
+  searchedTemplates$ = this.store.select(TrainingSelectors.getSearchTemplates);
 
   constructor(private store: Store) {}
 
@@ -37,5 +38,9 @@ export class TrainingsFacade {
 
   updateTraining(trainingName: string, trainingDate: Date, templateUid: UUID): void {
     this.store.dispatch(TrainingActions.updateTraining({ trainingName, trainingDate, templateUid }));
+  }
+
+  fetchTemplatesBySearch(search: string): void {
+    this.store.dispatch(TrainingActions.fetchTemplatesBySearch({ search }));
   }
 }

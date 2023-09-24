@@ -1,9 +1,9 @@
-import { UUID } from '../../../types/uuid.type';
 import { ExerciseDetailsDTO } from '../../templates/models/exercise-details.dto';
+import { TemplateDetailsDTO } from '../../templates/models/template.details.dto';
 
 export interface TrainingDetailsDTO {
   trainingName: string;
   trainingDate: Date;
-  templateUid: UUID;
+  template: TemplateDetailsDTO;
   exercises: ExerciseDetailsDTO[];
 }

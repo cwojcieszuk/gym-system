@@ -4,6 +4,7 @@ import { TrainingsResponse } from '../../../../../../api-client/src/lib/clients/
 import { CreateTrainingParams } from '../../../../../../api-client/src/lib/clients/trainings/params/create-training.params';
 import { TrainingDetailsDTO } from '../../../../../../api-client/src/lib/clients/trainings/models/training-details.dto';
 import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
+import { TemplateDetailsDTO } from '../../../../../../api-client/src/lib/clients/templates/models/template.details.dto';
 
 
 export const fetchTrainings = createAction(
@@ -66,4 +67,18 @@ export const updateTrainingSuccess = createAction(
 
 export const updateTrainingFailure = createAction(
   '[Trainings/API] Update Training Failure'
+);
+
+export const fetchTemplatesBySearch = createAction(
+  '[Trainings/API] Fetch Templates By Search',
+  props<{ search: string }>()
+);
+
+export const fetchTemplatesBySearchSuccess = createAction(
+  '[Trainings/API] Fetch Templates By Search Success',
+  props<{ response: TemplateDetailsDTO[] }>()
+);
+
+export const fetchTemplatesBySearchFailure = createAction(
+  '[Trainings/API] Fetch Templates By Search Failure'
 );

@@ -47,4 +47,8 @@ export class TemplatesClient {
   importTemplate(templateUid: UUID): Observable<EmptyResponse> {
     return this.http.post<EmptyResponse>(`${this.url}/import`, { templateUid });
   }
+
+  getTemplatesBySearch(search: string): Observable<TemplateDetailsDTO[]> {
+    return this.http.get<TemplateDetailsDTO[]>(`${this.url}/search`, { params: mapToHttpParams({ search: search ?? '' }) });
+  }
 }

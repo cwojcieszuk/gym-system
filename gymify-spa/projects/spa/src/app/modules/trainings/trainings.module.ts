@@ -17,6 +17,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DateHourPipe } from '../../shared/pipe/date-hour.pipe';
 import { DateDayPipe } from '../../shared/pipe/date-day.pipe';
+import { FirstLetterUppercasePipe } from '../../shared/pipe/first-letter-uppercase.pipe';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { DateDayPipe } from '../../shared/pipe/date-day.pipe';
     MatFormFieldModule,
     DateHourPipe,
     DateDayPipe,
+    FirstLetterUppercasePipe,
   ],
 })
 export class TrainingsModule { }

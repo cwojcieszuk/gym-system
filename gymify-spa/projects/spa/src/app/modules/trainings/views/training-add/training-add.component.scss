@@ -7,3 +7,9 @@
 h1 {
   @extend .typography-h3;
 }
+
+.exercise {
+  @apply justify-between;
+
+  display: flex !important;
+}

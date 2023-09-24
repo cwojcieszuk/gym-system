@@ -6,6 +6,7 @@ import {
   catchError, EMPTY, filter, map, mergeMap, of, withLatestFrom
 } from 'rxjs';
 import { TrainingsFacade } from './trainings.facade';
+import { TemplatesClient } from '../../../../../../api-client/src/lib/clients/templates/templates.client';
 
 @Injectable({ providedIn: 'root' })
 export class TrainingsEffects {
@@ -68,9 +69,20 @@ export class TrainingsEffects {
     )
   );
 
+  fetchTemplatesBySearch$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.fetchTemplatesBySearch),
+      mergeMap(({ search }) => this.templateClient.getTemplatesBySearch(search).pipe(
+        map(response => TrainingActions.fetchTemplatesBySearchSuccess({ response })),
+        catchError(() => of(TrainingActions.fetchTemplatesBySearchFailure()))
+      ))
+    )
+  );
+
   constructor(
     private readonly actions$: Actions,
     private readonly client: TrainingsClient,
-    private readonly facade: TrainingsFacade
+    private readonly facade: TrainingsFacade,
+    private readonly templateClient: TemplatesClient
   ) {}
 }
