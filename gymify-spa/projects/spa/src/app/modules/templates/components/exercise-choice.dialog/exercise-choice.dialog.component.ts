@@ -46,6 +46,7 @@ export class ExerciseChoiceDialogComponent extends BaseComponent implements OnIn
         bodyPartId: value.bodyPartId ?? undefined,
         targetId: value.targetId ?? undefined,
         equipmentId: value.equipmentId ?? undefined,
+        pageNumber: 1,
       }));
   }
 
