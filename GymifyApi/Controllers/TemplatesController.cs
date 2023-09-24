@@ -6,6 +6,7 @@ using Gymify.Application.Templates.Commands.UpdateTemplate;
 using Gymify.Application.Templates.Queries.GetCommunityTemplates;
 using Gymify.Application.Templates.Queries.GetPersonalTemplates;
 using Gymify.Application.Templates.Queries.GetTemplate;
+using Gymify.Application.Templates.Queries.GetTemplatesBySearch;
 using Gymify.Shared.Params;
 using GymifyApi.Extensions;
 using GymifyApi.Filters;
@@ -138,5 +139,19 @@ public class TemplatesController : ControllerBase
         await _mediator.Send(request with { UserUid = userUid });
 
         return NoContent();
+    }
+
+    [HttpGet]
+    [Route("search")]
+    public async Task<IActionResult> GetTemplatesBySearch([FromQuery] GetTemplatesBySearchQuery request)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        return Ok(await _mediator.Send(request with { UserUid = userUid }));
     }
 }
