@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DateHourPipe } from '../../shared/pipe/date-hour.pipe';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     NgxMatNativeDateModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    DateHourPipe,
   ],
 })
 export class TrainingsModule { }
