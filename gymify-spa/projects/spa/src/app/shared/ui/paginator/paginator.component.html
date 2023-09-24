@@ -1,10 +1,15 @@
 <div class="flex items-center gap-x-2" *ngIf="showPageSize">
-    <span>Items per page:</span>
-    <mat-form-field>
-        <mat-select [formControl]="formControl">
-            <mat-option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{ pageSize }}</mat-option>
-        </mat-select>
-    </mat-form-field>
+    <span>Items per page: <span class="ml-2">{{ pageSize }}</span></span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button
+            mat-menu-item
+            *ngFor="let pageSize of pageSizeOptions"
+            (click)="pageSizeEmit(pageSize)"
+        >{{ pageSize }}</button>
+    </mat-menu>
 </div>
 
 <div class="flex items-center">
