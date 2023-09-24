@@ -21,7 +21,7 @@ export const fetchTrainingsFailure = createAction(
 
 export const setQuery = createAction(
   '[Trainings] Set Query',
-  props<Partial<PagedRequest>>()
+  props<{ query: Partial<PagedRequest> }>()
 );
 
 export const createTraining = createAction(

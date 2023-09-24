@@ -20,7 +20,7 @@ export class TrainingsFacade {
   }
 
   setQuery(query: Partial<PagedRequest>): void {
-    this.store.dispatch(TrainingActions.setQuery(query));
+    this.store.dispatch(TrainingActions.setQuery({ query }));
   }
 
   createTraining(params: CreateTrainingParams): void {

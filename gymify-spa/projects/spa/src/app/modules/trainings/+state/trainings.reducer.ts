@@ -32,7 +32,7 @@ export const trainingsReducer = createReducer<TrainingsState>(
     ...state,
     query: {
       ...state.query,
-      ...payload,
+      ...payload.query,
     },
   })),
   on(TrainingActions.selectTraining, (state, payload) => ({
