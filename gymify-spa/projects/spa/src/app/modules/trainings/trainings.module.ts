@@ -10,16 +10,13 @@ import { PaginatorComponent } from '../../shared/ui/paginator/paginator.componen
 import { TrainingAddComponent } from './views/training-add/training-add.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import {
-  NgxMatDatetimePickerModule,
-  NgxMatNativeDateModule,
-  NgxMatTimepickerModule
-} from '@angular-material-components/datetime-picker';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DateHourPipe } from '../../shared/pipe/date-hour.pipe';
+import { DateDayPipe } from '../../shared/pipe/date-day.pipe';
 
 @NgModule({
   declarations: [
@@ -44,6 +41,7 @@ import { DateHourPipe } from '../../shared/pipe/date-hour.pipe';
     MatAutocompleteModule,
     MatFormFieldModule,
     DateHourPipe,
+    DateDayPipe,
   ],
 })
 export class TrainingsModule { }
