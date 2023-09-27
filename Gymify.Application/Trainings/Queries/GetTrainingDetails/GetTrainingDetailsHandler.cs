@@ -20,9 +20,8 @@ public class GetTrainingDetailsHandler : IRequestHandler<GetTrainingDetailsQuery
     public async Task<TrainingDetailsDTO> Handle(GetTrainingDetailsQuery request, CancellationToken cancellationToken)
     {
         Training training = await _gymifyDbContext.Training
-            .Include(x => x.TrainingName)
             .Include(x => x.TrainingDate)
-            .Include(x => x.Template)
+            .Include(x => x.TrainingName)
             .SingleAsync(x => x.TrainingUid == request.TrainingUid, cancellationToken);
 
         Template template = await _gymifyDbContext.Templates
@@ -34,7 +33,7 @@ public class GetTrainingDetailsHandler : IRequestHandler<GetTrainingDetailsQuery
             .ThenInclude(x => x.Exercise.Target)
             .Include(x => x.TemplateExercises)
             .ThenInclude(x => x.Exercise.BodyPart)
-            .SingleAsync(x => x.TemplateUid == training.TemplateUid);
+            .SingleAsync(x => x.TemplateUid == training.TemplateUid, cancellationToken);
         
         TemplateDetailsDTO templateDetailsDto = new TemplateDetailsDTO(
             template.TemplateUid,
@@ -53,7 +52,6 @@ public class GetTrainingDetailsHandler : IRequestHandler<GetTrainingDetailsQuery
             training.TrainingUid,
             training.TrainingName,
             training.TrainingDate,
-            templateDetailsDto
-            );
+            templateDetailsDto);
     }
 }
