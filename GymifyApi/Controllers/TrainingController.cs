@@ -1,7 +1,9 @@
 ﻿using Gymify.Application.Trainings.Commands.AddTreining;
+using Gymify.Application.Trainings.Commands.UpdateTraining;
 using Gymify.Application.Trainings.Queries.GetTraining;
 using Gymify.Shared.Params;
 using GymifyApi.Extensions;
+using GymifyApi.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -46,4 +48,23 @@ public class TrainingController : ControllerBase
         await _mediator.Send(command with { UserUid = userUid });
         return NoContent();
     }
+
+    [HttpPut]
+    [Route("{trainingUid}")]
+    [ServiceFilter(typeof(TrainingExistenceCheckFilter))]
+    public async Task<IActionResult> UpdateTraining([FromRoute] Guid trainingUid,
+        [FromBody] UpdateTrainingCommand request)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        await _mediator.Send(request with { UserUid = userUid });
+
+        return NoContent();
+    }
+
 }
