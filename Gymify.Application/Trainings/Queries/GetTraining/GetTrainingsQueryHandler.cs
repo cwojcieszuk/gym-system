@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gymify.Application.Trainings.Queries.GetTraining;
 
-public class GetTrainingQueryHandler : IRequestHandler<GetTrainingQuery, PagedResponse<TrainingDTO>>
+public class GetTrainingsQueryHandler : IRequestHandler<GetTrainingQuery, PagedResponse<TrainingDTO>>
 {
     private readonly IGymifyDbContext _gymifyDbContext;
 
-    public GetTrainingQueryHandler(IGymifyDbContext gymifyDbContext)
+    public GetTrainingsQueryHandler(IGymifyDbContext gymifyDbContext)
     {
         _gymifyDbContext = gymifyDbContext;
     }
