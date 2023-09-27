@@ -1,6 +1,7 @@
 ﻿using Gymify.Application.Trainings.Commands.AddTreining;
 using Gymify.Application.Trainings.Commands.UpdateTraining;
 using Gymify.Application.Trainings.Queries.GetTraining;
+using Gymify.Application.Trainings.Queries.GetTrainingDetails;
 using Gymify.Shared.Params;
 using GymifyApi.Extensions;
 using GymifyApi.Filters;
@@ -34,6 +35,21 @@ public class TrainingController : ControllerBase
 
         GetTrainingQuery query = new GetTrainingQuery(Guid.Parse(userUid), parameters.PageNumber, parameters.PageSize);
         return Ok(await _mediator.Send(query));
+    }
+
+    [HttpGet]
+    [Route("{trainingUid}")]
+    [ServiceFilter(typeof(TrainingExistenceCheckFilter))]
+    public async Task<IActionResult> GetTrainingDetails([FromRoute] GetTrainingDetailsQuery request)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        return Ok(await _mediator.Send(request with { UserUid = userUid }));
     }
 
     [HttpPost]
