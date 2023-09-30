@@ -1,4 +1,5 @@
 ﻿using Gymify.Application.Trainings.Commands.AddTreining;
+using Gymify.Application.Trainings.Commands.DeleteTraining;
 using Gymify.Application.Trainings.Commands.UpdateTraining;
 using Gymify.Application.Trainings.Queries.GetTraining;
 using Gymify.Application.Trainings.Queries.GetTrainingDetails;
@@ -80,6 +81,15 @@ public class TrainingController : ControllerBase
 
         await _mediator.Send(request with { UserUid = userUid });
 
+        return NoContent();
+    }
+
+    [HttpDelete]
+    [Route("{trainingUid}")]
+    [ServiceFilter(typeof(TrainingExistenceCheckFilter))]
+    public async Task<IActionResult> DeleteTraining([FromRoute] DeleteTrainingCommand request)
+    {
+        await _mediator.Send(request);
         return NoContent();
     }
 

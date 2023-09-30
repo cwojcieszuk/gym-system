@@ -28,7 +28,7 @@ public class TrainingExistenceCheckFilter : IAsyncActionFilter, IOrderedFilter
         else
         {
             object body = context.ActionArguments["request"];
-            trainingUid = Guid.Parse(body.GetType().GetProperty("trainingUid").GetValue(body).ToString());
+            trainingUid = Guid.Parse(body.GetType().GetProperty("TrainingUid").GetValue(body).ToString());
         }
 
         if (await _mediator.Send(new TrainingUidExistenceQuery(trainingUid)))
