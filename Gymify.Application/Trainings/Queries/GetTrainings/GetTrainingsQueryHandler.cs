@@ -36,6 +36,7 @@ public class GetTrainingsQueryHandler : IRequestHandler<GetTrainingQuery, PagedR
                 training.TrainingUid,
                 training.TrainingName,
                 training.TrainingDate,
+                training.IsCyclical,
                 training.Template.EstimatedTime,
                 training.Template.TemplateName
             )

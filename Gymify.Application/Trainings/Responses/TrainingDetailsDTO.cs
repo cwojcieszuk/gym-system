@@ -2,4 +2,4 @@
 
 namespace Gymify.Application.Trainings.Responses;
 
-public record TrainingDetailsDTO(Guid TrainingUid, string TrainingName, DateTime TrainingDate, TemplateDetailsDTO TemplateDetailsDTO);
+public record TrainingDetailsDTO(Guid TrainingUid, string TrainingName, DateTime TrainingDate, bool IsCyclical, TemplateDetailsDTO TemplateDetailsDTO);

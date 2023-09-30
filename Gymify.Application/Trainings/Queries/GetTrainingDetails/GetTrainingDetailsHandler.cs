@@ -55,6 +55,7 @@ public class GetTrainingDetailsHandler : IRequestHandler<GetTrainingDetailsQuery
             training.TrainingUid,
             training.TrainingName,
             training.TrainingDate,
+            training.IsCyclical,
             templateDetailsDto);
     }
 }

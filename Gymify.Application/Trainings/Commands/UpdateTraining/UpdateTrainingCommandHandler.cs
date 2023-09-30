@@ -21,6 +21,7 @@ public class UpdateTrainingCommandHandler : IRequestHandler<UpdateTrainingComman
         
         training.TrainingDate = request.TrainingDate;
         training.TrainingName = request.TrainingName;
+        training.IsCyclical = request.IsCyclical;
         training.TemplateUid = request.TemplateUid;
         
         await _gymifyDbContext.SaveChangesAsync(cancellationToken);

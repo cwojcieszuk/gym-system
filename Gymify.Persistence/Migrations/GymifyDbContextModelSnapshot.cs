@@ -911,6 +911,9 @@ namespace Gymify.Persistence.Migrations
                     b.Property<Guid>("TrainingUid")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("IsCyclical")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("TemplateUid")
                         .HasColumnType("uniqueidentifier");
 

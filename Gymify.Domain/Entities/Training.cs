@@ -10,6 +10,8 @@ public partial class Training
     public DateTime TrainingDate { get; set; }
 
     public string TrainingName { get; set; } = null!;
+    
+    public bool IsCyclical { get; set; }
 
     public Guid TemplateUid { get; set; }
 

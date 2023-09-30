@@ -20,6 +20,7 @@ public class AddTrainingCommandHandler : IRequestHandler<AddTrainingCommand, Uni
             TrainingUid = Guid.NewGuid(),
             TrainingDate = request.TrainingDate,
             TrainingName = request.TrainingName,
+            IsCyclical = request.IsCyclical,
             TemplateUid = request.TemplateUid
         };
 
