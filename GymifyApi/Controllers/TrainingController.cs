@@ -39,7 +39,7 @@ public class TrainingController : ControllerBase
 
     [HttpGet]
     [Route("{trainingUid}")]
-    [ServiceFilter(typeof(TrainingExistenceCheckFilter))]
+    //[ServiceFilter(typeof(TrainingExistenceCheckFilter))]
     public async Task<IActionResult> GetTrainingDetails([FromRoute] GetTrainingDetailsQuery request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
