@@ -18,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DateHourPipe } from '../../shared/pipe/date-hour.pipe';
 import { DateDayPipe } from '../../shared/pipe/date-day.pipe';
 import { FirstLetterUppercasePipe } from '../../shared/pipe/first-letter-uppercase.pipe';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { FirstLetterUppercasePipe } from '../../shared/pipe/first-letter-upperca
     DateHourPipe,
     DateDayPipe,
     FirstLetterUppercasePipe,
+    MatCheckboxModule,
   ],
 })
 export class TrainingsModule { }

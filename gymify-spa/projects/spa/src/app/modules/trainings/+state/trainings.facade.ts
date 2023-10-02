@@ -36,8 +36,8 @@ export class TrainingsFacade {
     this.store.dispatch(TrainingActions.fetchTrainingDetails());
   }
 
-  updateTraining(trainingName: string, trainingDate: Date, templateUid: UUID): void {
-    this.store.dispatch(TrainingActions.updateTraining({ trainingName, trainingDate, templateUid }));
+  updateTraining(trainingName: string, trainingDate: Date, templateUid: UUID, isCyclical: boolean): void {
+    this.store.dispatch(TrainingActions.updateTraining({ trainingName, trainingDate, templateUid, isCyclical }));
   }
 
   fetchTemplatesBySearch(search: string): void {

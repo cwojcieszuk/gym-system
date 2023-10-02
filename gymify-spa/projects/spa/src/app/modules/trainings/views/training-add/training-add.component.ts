@@ -16,6 +16,7 @@ export class TrainingAddComponent extends BaseComponent implements OnInit {
     name: this.fb.control<string>('', Validators.required),
     datetime: this.fb.control<Date | null>(null, Validators.required),
     templateSearch: this.fb.control<string>('', Validators.required),
+    isCyclical: this.fb.control<boolean>(false, Validators.required),
   });
 
   isNew = true;
@@ -50,6 +51,7 @@ export class TrainingAddComponent extends BaseComponent implements OnInit {
           name: value.trainingName,
           datetime: new Date(value.trainingDate),
           templateSearch: value.template.templateName,
+          isCyclical: value.isCyclical,
         });
 
         this.setTemplate(value.template);
@@ -74,9 +76,10 @@ export class TrainingAddComponent extends BaseComponent implements OnInit {
         trainingName: this.form.controls.name.value,
         trainingDate: this.form.controls.datetime.value!,
         templateUid: this.selectedTemplate.templateUid,
+        isCyclical: this.form.controls.isCyclical.value,
       });
     } else {
-      this.facade.updateTraining(this.form.controls.name.value, this.form.controls.datetime.value!, this.selectedTemplate.templateUid);
+      this.facade.updateTraining(this.form.controls.name.value, this.form.controls.datetime.value!, this.selectedTemplate.templateUid, this.form.controls.isCyclical.value);
     }
   }
 

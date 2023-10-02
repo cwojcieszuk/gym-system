@@ -6,4 +6,5 @@ export interface TrainingDetailsDTO {
   trainingDate: Date;
   template: TemplateDetailsDTO;
   exercises: ExerciseDetailsDTO[];
+  isCyclical: boolean;
 }

@@ -4,4 +4,5 @@ export interface CreateTrainingParams {
   trainingName: string;
   trainingDate: Date;
   templateUid: UUID;
+  isCyclical: boolean;
 }

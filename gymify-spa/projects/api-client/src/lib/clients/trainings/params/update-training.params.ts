@@ -5,4 +5,5 @@ export interface UpdateTrainingParams {
   trainingName: string;
   trainingDate: Date;
   templateUid: UUID;
+  isCyclical: boolean;
 }

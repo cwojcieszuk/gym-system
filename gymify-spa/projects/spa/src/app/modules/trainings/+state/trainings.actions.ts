@@ -58,7 +58,7 @@ export const fetchTrainingDetailsFailure = createAction(
 
 export const updateTraining = createAction(
   '[Trainings/API] Update Training',
-  props<{ trainingName: string; trainingDate: Date; templateUid: UUID }>()
+  props<{ trainingName: string; trainingDate: Date; templateUid: UUID; isCyclical: boolean }>()
 );
 
 export const updateTrainingSuccess = createAction(

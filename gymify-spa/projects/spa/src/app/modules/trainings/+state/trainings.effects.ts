@@ -61,7 +61,7 @@ export class TrainingsEffects {
           return EMPTY;
         }
 
-        return this.client.updateTraining({ trainingUid, trainingName: action.trainingName, trainingDate: action.trainingDate, templateUid: action.templateUid }).pipe(
+        return this.client.updateTraining({ trainingUid, trainingName: action.trainingName, trainingDate: action.trainingDate, templateUid: action.templateUid, isCyclical: action.isCyclical }).pipe(
           map(() => TrainingActions.updateTrainingSuccess()),
           catchError(() => of(TrainingActions.updateTrainingFailure()))
         );
