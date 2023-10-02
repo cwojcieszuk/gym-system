@@ -108,6 +108,30 @@ export class TrainingsEffects {
     )
   );
 
+  deleteTraining$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.deleteTraining),
+      mergeMap(({ trainingUid }) => this.client.deleteTraining(trainingUid).pipe(
+        map(() => TrainingActions.deleteTrainingSuccess()),
+        catchError(() => of(TrainingActions.deleteTrainingFailure()))
+      ))
+    )
+  );
+
+  deleteTrainingSuccess$  = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.deleteTrainingSuccess),
+      tap(() => this.toastr.success('Successfully deleted training')),
+      map(() => TrainingActions.fetchTrainings())
+    )
+  );
+
+  deleteTrainingFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.deleteTrainingFailure),
+      tap(() => this.toastr.error('Unable to delete training'))
+    ), { dispatch: false });
+
   constructor(
     private readonly actions$: Actions,
     private readonly client: TrainingsClient,

@@ -7,6 +7,8 @@ import { filter } from 'rxjs';
 import { TrainingsResponse } from '../../../../../../../api-client/src/lib/clients/trainings/responses/trainings.response';
 import { UUID } from '../../../../../../../api-client/src/lib/types/uuid.type';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'gym-trainings-list',
@@ -14,13 +16,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./trainings-list.component.scss'],
 })
 export class TrainingsListComponent extends BaseComponent implements OnInit {
-  displayedColumns = ['trainingName', 'templateName', 'day', 'hour', 'estimatedTime'];
+  displayedColumns = ['trainingName', 'templateName', 'day', 'hour', 'estimatedTime', 'actions'];
   datasource = new MatTableDataSource<TrainingDTO>([]);
   trainingsResponse?: TrainingsResponse;
 
   constructor(
     private facade: TrainingsFacade,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -46,5 +49,18 @@ export class TrainingsListComponent extends BaseComponent implements OnInit {
 
   navigateToTraining(uid: UUID): void {
     this.router.navigate(['trainings', uid]);
+  }
+
+  deleteTraining(trainingUid: UUID): void {
+    const dialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Delete training',
+        message: 'Are you sure to delete training?',
+      },
+    });
+
+    dialog.afterClosed()
+      .pipe(filter(Boolean))
+      .subscribe(() => this.facade.deleteTraining(trainingUid));
   }
 }

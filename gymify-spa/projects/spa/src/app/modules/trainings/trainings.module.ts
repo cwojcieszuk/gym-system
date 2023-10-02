@@ -19,6 +19,7 @@ import { DateHourPipe } from '../../shared/pipe/date-hour.pipe';
 import { DateDayPipe } from '../../shared/pipe/date-day.pipe';
 import { FirstLetterUppercasePipe } from '../../shared/pipe/first-letter-uppercase.pipe';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     DateDayPipe,
     FirstLetterUppercasePipe,
     MatCheckboxModule,
+    MatDialogModule,
   ],
 })
 export class TrainingsModule { }

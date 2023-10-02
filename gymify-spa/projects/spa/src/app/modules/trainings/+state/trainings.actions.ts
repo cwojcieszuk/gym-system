@@ -83,6 +83,19 @@ export const fetchTemplatesBySearchFailure = createAction(
   '[Trainings/API] Fetch Templates By Search Failure'
 );
 
+export const deleteTraining = createAction(
+  '[Trainings/API] Delete Training',
+  props<{ trainingUid: UUID }>()
+);
+
+export const deleteTrainingSuccess = createAction(
+  '[Trainings/API] Delete Training Success'
+);
+
+export const deleteTrainingFailure = createAction(
+  '[Trainings/API] Delete Training Failure'
+);
+
 export const reset = createAction(
   '[Trainings/API] Reset'
 );

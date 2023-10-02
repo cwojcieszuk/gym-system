@@ -31,4 +31,8 @@ export class TrainingsClient {
   updateTraining(params: UpdateTrainingParams): Observable<EmptyResponse> {
     return this.http.put<EmptyResponse>(`${this.url}/${params.trainingUid}`, params);
   }
+
+  deleteTraining(trainingUid: UUID): Observable<EmptyResponse> {
+    return this.http.delete<EmptyResponse>(`${this.url}/${trainingUid}`);
+  }
 }

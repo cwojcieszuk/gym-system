@@ -44,6 +44,10 @@ export class TrainingsFacade {
     this.store.dispatch(TrainingActions.fetchTemplatesBySearch({ search }));
   }
 
+  deleteTraining(trainingUid: UUID): void {
+    this.store.dispatch(TrainingActions.deleteTraining({ trainingUid }));
+  }
+
   reset(): void {
     this.store.dispatch(TrainingActions.reset());
   }
