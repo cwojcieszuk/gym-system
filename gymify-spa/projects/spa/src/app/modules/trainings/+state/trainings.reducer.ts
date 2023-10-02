@@ -49,6 +49,7 @@ export const trainingsReducer = createReducer<TrainingsState>(
   on(TrainingActions.fetchTemplatesBySearchSuccess, (state, payload) => ({
     ...state,
     searchedTemplates: payload.response,
-  }))
+  })),
+  on(TrainingActions.reset, () => initialState)
 );
 

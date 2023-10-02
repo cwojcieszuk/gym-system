@@ -3,10 +3,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TrainingsClient } from '../../../../../../api-client/src/lib/clients/trainings/trainings.client';
 import * as TrainingActions from './trainings.actions';
 import {
-  catchError, EMPTY, filter, map, mergeMap, of, withLatestFrom
+  catchError, EMPTY, filter, map, mergeMap, of, tap, withLatestFrom
 } from 'rxjs';
 import { TrainingsFacade } from './trainings.facade';
 import { TemplatesClient } from '../../../../../../api-client/src/lib/clients/templates/templates.client';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class TrainingsEffects {
@@ -39,6 +41,21 @@ export class TrainingsEffects {
     )
   );
 
+  createTrainingSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.createTrainingSuccess),
+      tap(() => {
+        this.toastr.success('Successfully created training');
+        this.router.navigate(['trainings']);
+      })
+    ), { dispatch: false });
+
+  createTrainingFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.createTrainingFailure),
+      tap(() => this.toastr.error('Unable to create training'))
+    ), { dispatch: false });
+
   fetchTrainingDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TrainingActions.fetchTrainingDetails),
@@ -69,6 +86,18 @@ export class TrainingsEffects {
     )
   );
 
+  updateTrainingSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.updateTrainingSuccess),
+      tap(() => this.toastr.success('Successfully updated training'))
+    ), { dispatch: false });
+
+  updateTrainingFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TrainingActions.updateTrainingFailure),
+      tap(() => this.toastr.error('Unable to update training'))
+    ), { dispatch: false });
+
   fetchTemplatesBySearch$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TrainingActions.fetchTemplatesBySearch),
@@ -83,6 +112,8 @@ export class TrainingsEffects {
     private readonly actions$: Actions,
     private readonly client: TrainingsClient,
     private readonly facade: TrainingsFacade,
-    private readonly templateClient: TemplatesClient
+    private readonly templateClient: TemplatesClient,
+    private readonly toastr: ToastrService,
+    private readonly router: Router
   ) {}
 }

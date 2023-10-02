@@ -82,3 +82,7 @@ export const fetchTemplatesBySearchSuccess = createAction(
 export const fetchTemplatesBySearchFailure = createAction(
   '[Trainings/API] Fetch Templates By Search Failure'
 );
+
+export const reset = createAction(
+  '[Trainings/API] Reset'
+);

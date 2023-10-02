@@ -43,4 +43,8 @@ export class TrainingsFacade {
   fetchTemplatesBySearch(search: string): void {
     this.store.dispatch(TrainingActions.fetchTemplatesBySearch({ search }));
   }
+
+  reset(): void {
+    this.store.dispatch(TrainingActions.reset());
+  }
 }

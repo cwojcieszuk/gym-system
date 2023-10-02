@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../../../../shared/components/base.component';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { ImageService } from '../../../../shared/services/image.service';
   templateUrl: './training-add.component.html',
   styleUrls: ['./training-add.component.scss'],
 })
-export class TrainingAddComponent extends BaseComponent implements OnInit {
+export class TrainingAddComponent extends BaseComponent implements OnInit, OnDestroy {
   readonly form = this.fb.group({
     name: this.fb.control<string>('', Validators.required),
     datetime: this.fb.control<Date | null>(null, Validators.required),
@@ -60,6 +60,12 @@ export class TrainingAddComponent extends BaseComponent implements OnInit {
     this.observe(this.form.controls.templateSearch.valueChanges)
       .pipe(debounceTime(500), startWith(''))
       .subscribe(value => this.facade.fetchTemplatesBySearch(value));
+  }
+
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+
+    this.facade.reset();
   }
 
   moveBack(): void {
