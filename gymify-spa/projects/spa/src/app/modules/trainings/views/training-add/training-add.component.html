@@ -48,7 +48,7 @@
         </mat-card-content>
     </mat-card>
 
-    <div class="col-span-2">
+    <div class="col-span-2 max-h-[650px] overflow-y-scroll px-2 pb-1">
         <ng-container *ngIf="selectedTemplate">
             <div class="flex flex-col gap-y-4">
                 <mat-card *ngFor="let exercise of selectedTemplate.exercises">
