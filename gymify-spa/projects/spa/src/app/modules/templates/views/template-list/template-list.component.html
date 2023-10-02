@@ -42,7 +42,7 @@
                         <mat-icon>share</mat-icon>
                     </button>
 
-                    <button mat-icon-button color="warn" *ngIf="!isCommunity" (click)="deleteTemplate(template.templateUid)">
+                    <button mat-icon-button color="warn" *ngIf="!isCommunity" [disabled]="!template.canDelete" (click)="deleteTemplate(template.templateUid)">
                         <mat-icon>delete</mat-icon>
                     </button>
 

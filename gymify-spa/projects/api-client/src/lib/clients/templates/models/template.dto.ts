@@ -8,4 +8,5 @@ export interface TemplateDTO {
   firstName: string;
   lastName: string;
   isShared: boolean;
+  canDelete: boolean;
 }
