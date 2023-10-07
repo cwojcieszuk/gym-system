@@ -80,16 +80,22 @@ export class TrainingAddComponent extends BaseComponent implements OnInit, OnDes
     if (this.isNew) {
       this.facade.createTraining({
         trainingName: this.form.controls.name.value,
-        trainingDate: this.form.controls.datetime.value!,
+        trainingDate: this.fixDateHour(this.form.controls.datetime.value!),
         templateUid: this.selectedTemplate.templateUid,
         isCyclical: this.form.controls.isCyclical.value,
       });
     } else {
-      this.facade.updateTraining(this.form.controls.name.value, this.form.controls.datetime.value!, this.selectedTemplate.templateUid, this.form.controls.isCyclical.value);
+      this.facade.updateTraining(this.form.controls.name.value, this.fixDateHour(this.form.controls.datetime.value!), this.selectedTemplate.templateUid, this.form.controls.isCyclical.value);
     }
   }
 
   setTemplate(template: TemplateDetailsDTO): void {
     this.selectedTemplate = template;
+  }
+
+  private fixDateHour(date: Date): Date {
+    date.setHours(date.getHours() + 2, date.getMinutes());
+
+    return date;
   }
 }
