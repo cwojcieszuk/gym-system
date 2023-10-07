@@ -1,5 +1,8 @@
-﻿using Gymify.Application.Coaches.Queries;
+﻿using Gymify.Application.Coaches.Commands.DislikeCoach;
+using Gymify.Application.Coaches.Commands.LikeCoach;
+using Gymify.Application.Coaches.Queries;
 using GymifyApi.Extensions;
+using GymifyApi.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -30,5 +33,37 @@ public class CoachesController : ControllerBase
         }
 
         return Ok(await _mediator.Send(request with { UserUid = userUid }));
+    }
+
+    [HttpPost("like")]
+    [ServiceFilter(typeof(CoachExistenceCheckFilter))]
+    public async Task<IActionResult> LikeCoach([FromBody] LikeCoachCommand request)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        await _mediator.Send(request with { UserUid = userUid });
+
+        return NoContent();
+    }
+
+    [HttpPost("dislike")]
+    [ServiceFilter(typeof(CoachExistenceCheckFilter))]
+    public async Task<IActionResult> DislikeCoach([FromBody] DislikeCoachCommand request)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        await _mediator.Send(request with { UserUid = userUid });
+
+        return NoContent();
     }
 }

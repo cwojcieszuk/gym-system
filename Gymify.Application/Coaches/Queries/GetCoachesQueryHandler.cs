@@ -37,7 +37,7 @@ public class GetCoachesQueryHandler : IRequestHandler<GetCoachesQuery, PagedResp
             c.User.Avatar,
             c.CoachTypes.Where(x => x.CoachUid == c.CoachUid).Select(x => x.CoachCategory.CoachCategoryName),
             c.Description,
-            false
+            IsFavorite: IsFavorite(c.CoachUid, request.UserUid)
         )).ToList();
 
         return new PagedResponse<CoachDTO>()
@@ -48,5 +48,10 @@ public class GetCoachesQueryHandler : IRequestHandler<GetCoachesQuery, PagedResp
             PageSize = request.PageSize,
             PageNumber = request.PageNumber
         };
+    }
+
+    private bool IsFavorite(Guid coachUid, Guid userUid)
+    {
+        return _gymifyDbContext.FavouriteCoaches.Any(x => x.CoachUid == coachUid && x.ClientUid == userUid);
     }
 }

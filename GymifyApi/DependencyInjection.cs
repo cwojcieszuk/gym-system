@@ -36,6 +36,7 @@ public static class DependencyInjection
         services.AddScoped<TemplateExistenceCheckFilter>();
         services.AddScoped<TemplateOwnerCheckFilter>();
         services.AddScoped<TrainingExistenceCheckFilter>();
+        services.AddScoped<CoachExistenceCheckFilter>();
 
         services.AddAuthorization(options =>
         {
