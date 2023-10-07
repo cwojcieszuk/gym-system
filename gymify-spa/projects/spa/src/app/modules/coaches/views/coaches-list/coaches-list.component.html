@@ -21,6 +21,12 @@
                 <img class="w-[240px] h-[240px]" [src]="coach.avatar == null ? '../../../../../assets/default-user.png' : imgService.getJpeg(coach.avatar)">
                 <span>{{ coach.coachName }}</span>
                 <span>{{ coach.categories[0] }}</span>
+                <button mat-icon-button *ngIf="!coach.isFavorite" (click)="coachesFacade.likeCoach(coach.coachUid)">
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="coach.isFavorite" (click)="coachesFacade.dislikeCoach(coach.coachUid)">
+                    <mat-icon>favorite</mat-icon>
+                </button>
             </div>
         </div>
 

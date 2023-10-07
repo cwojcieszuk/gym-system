@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import * as CoachSelectors from './coaches.selectors';
 import * as CoachActions from './coaches.actions';
 import { GetCoachesParams } from '../../../../../../api-client/src/lib/clients/coaches/params/get-coaches.params';
+import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
 
 @Injectable({ providedIn: 'root' })
 export class CoachesFacade {
@@ -23,5 +24,13 @@ export class CoachesFacade {
 
   setCoachesQuery(query: Partial<GetCoachesParams>): void {
     this.store.dispatch(CoachActions.setCoachesQuery({ query }));
+  }
+
+  likeCoach(coachUid: UUID): void {
+    this.store.dispatch(CoachActions.likeCoach({ coachUid }));
+  }
+
+  dislikeCoach(coachUid: UUID): void {
+    this.store.dispatch(CoachActions.dislikeCoach({ coachUid }));
   }
 }

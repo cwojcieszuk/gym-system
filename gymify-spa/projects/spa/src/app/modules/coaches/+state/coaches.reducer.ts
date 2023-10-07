@@ -49,5 +49,19 @@ export const coachesReducer = createReducer<CoachesState>(
       ...state.coachesQuery,
       pageNumber: payload.page,
     },
+  })),
+  on(CoachActions.likeCoachSuccess, (state, payload) => ({
+    ...state,
+    coachesResponse: state.coachesResponse == null ? undefined : {
+      ...state.coachesResponse,
+      content: state.coachesResponse.content.map(coach => coach.coachUid === payload.coachUid ? ({ ...coach, isFavorite: true }) : coach),
+    },
+  })),
+  on(CoachActions.dislikeCoachSuccess, (state, payload) => ({
+    ...state,
+    coachesResponse: state.coachesResponse == null ? undefined : {
+      ...state.coachesResponse,
+      content: state.coachesResponse.content.map(coach => coach.coachUid === payload.coachUid ? ({ ...coach, isFavorite: false }) : coach),
+    },
   }))
 );

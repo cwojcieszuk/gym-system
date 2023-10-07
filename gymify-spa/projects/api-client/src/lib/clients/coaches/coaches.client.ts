@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { PagedResponse } from '../../models/paged-response';
 import { CoachDTO } from './models/coach.dto';
 import { mapToHttpParams } from '../../mappers/map-to-http-params';
+import { UUID } from '../../types/uuid.type';
+import { EmptyResponse } from '../../types/empty.response';
 
 @Injectable({ providedIn: 'root' })
 export class CoachesClient {
@@ -14,5 +16,13 @@ export class CoachesClient {
 
   getCoaches(params: GetCoachesParams): Observable<PagedResponse<CoachDTO>> {
     return this.http.get<PagedResponse<CoachDTO>>(this.url, { params: mapToHttpParams(params) });
+  }
+
+  likeCoach(coachUid: UUID): Observable<EmptyResponse> {
+    return this.http.post<EmptyResponse>(`${this.url}/like`, { coachUid });
+  }
+
+  dislikeCoach(coachUid: UUID): Observable<EmptyResponse> {
+    return this.http.post<EmptyResponse>(`${this.url}/dislike`, { coachUid });
   }
 }
