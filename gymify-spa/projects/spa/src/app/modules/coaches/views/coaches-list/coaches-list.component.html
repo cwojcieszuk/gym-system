@@ -1,1 +1,37 @@
-<p>coaches-list works!</p>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer class="example-sidenav" #drawer mode="over" [position]="'end'">
+        <gym-coaches-list-filters (saveEmitter)="drawer.close()"></gym-coaches-list-filters>
+    </mat-drawer>
+
+    <div class="p-8 example-sidenav-content">
+        <div class="grid grid-cols-3 items-center pb-6">
+            <h1 class="col-start-2 text-center">Coaches</h1>
+
+            <button mat-icon-button color="primary" class="place-self-end" (click)="drawer.toggle()">
+                <mat-icon>filter_list</mat-icon>
+            </button>
+        </div>
+
+        <div *ngIf="coachesFacade.areCoachesLoading$ | async" class="flex justify-center items-center h-full">
+            <mat-progress-spinner class="spinner" mode="indeterminate" diameter="40"></mat-progress-spinner>
+        </div>
+
+        <div class="grid grid-cols-5 gap-8" *ngIf="(coachesFacade.areCoachesLoading$ | async) === false">
+            <div class="shadow-base rounded-md p-2 flex flex-col items-center gap-y-4" *ngFor="let coach of (coachesResponse)?.content">
+                <img class="w-[240px] h-[240px]" [src]="coach.avatar == null ? '../../../../../assets/default-user.png' : imgService.getJpeg(coach.avatar)">
+                <span>{{ coach.coachName }}</span>
+                <span>{{ coach.categories[0] }}</span>
+            </div>
+        </div>
+
+        <gym-paginator *ngIf="coachesResponse"
+                       class="pt-4 mt-auto"
+                       [pageSizeOptions]="[10, 15, 20]"
+                       [totalRecords]="coachesResponse.totalRecords"
+                       [totalPages]="coachesResponse.totalPages"
+                       [showPageSize]="false"
+                       [page]="coachesResponse.pageNumber"
+                       (pageChange)="pageChange($event)">
+        </gym-paginator>
+    </div>
+</mat-drawer-container>
