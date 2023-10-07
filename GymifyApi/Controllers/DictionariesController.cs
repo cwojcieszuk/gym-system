@@ -1,4 +1,5 @@
 ﻿using Gymify.Application.Dictionaries.Queries.BodyParts;
+using Gymify.Application.Dictionaries.Queries.CoachCategories;
 using Gymify.Application.Dictionaries.Queries.DifficultyLevels;
 using Gymify.Application.Dictionaries.Queries.Equipments;
 using Gymify.Application.Dictionaries.Queries.Targets;
@@ -58,6 +59,14 @@ public class DictionariesController: ControllerBase
     public async Task<IActionResult> GetDifficultyLevels()
     {
         GetDifficultyLevelsQuery query = new GetDifficultyLevelsQuery();
+
+        return Ok(await _mediator.Send(query));
+    }
+
+    [HttpGet("coach-categories")]
+    public async Task<IActionResult> GetCoachCategories()
+    {
+        GetCoachCategoriesQuery query = new GetCoachCategoriesQuery();
 
         return Ok(await _mediator.Send(query));
     }
