@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Gymify.Application.Templates.Queries.GetTemplate;
 
-public record GetTemplateCommand(Guid TemplateUid, Guid UserUid): IRequest<TemplateDetailsDTO>;
+public record GetTemplateQuery(Guid TemplateUid, Guid UserUid): IRequest<TemplateDetailsDTO>;

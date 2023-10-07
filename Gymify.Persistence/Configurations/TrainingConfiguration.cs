@@ -12,7 +12,7 @@ public class TrainingConfiguration : IEntityTypeConfiguration<Training>
         builder.HasKey(e => e.TrainingUid).HasName("Training_pk");
 
         builder.Property(e => e.TrainingUid).ValueGeneratedNever();
-        builder.Property(e => e.TrainingDate).HasColumnType("date");
+        builder.Property(e => e.TrainingDate).HasColumnType("datetime");
         builder.Property(e => e.TrainingName)
             .HasMaxLength(TrainingColumnConstants.TrainingNameLimit)
             .IsUnicode(false);
