@@ -57,6 +57,16 @@ export class DictionariesEffects {
     )
   );
 
+  fetchCoachCategories$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DictionariesActions.fetchCoachCategories),
+      mergeMap(() => this.dictionariesClient.getCoachCategories().pipe(
+        map(data => DictionariesActions.fetchCoachCategoriesSuccess({ data })),
+        catchError(() => of(DictionariesActions.fetchCoachCategoriesFailure()))
+      ))
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private dictionariesClient: DictionariesClient

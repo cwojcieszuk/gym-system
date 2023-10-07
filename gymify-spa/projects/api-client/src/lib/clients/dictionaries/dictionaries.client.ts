@@ -6,6 +6,7 @@ import { BodyPartDTO } from './models/body-part.dto';
 import { EquipmentDTO } from './models/equipment.dto';
 import { TargetDTO } from './models/target.dto';
 import { DifficultyLevelDTO } from './models/difficulty-level.dto';
+import { CoachCategoryDTO } from './models/coach-category.dto';
 
 @Injectable({ providedIn: 'root' })
 export class DictionariesClient {
@@ -31,5 +32,9 @@ export class DictionariesClient {
 
   getDifficultyLevels(): Observable<DifficultyLevelDTO[]> {
     return this.http.get<DifficultyLevelDTO[]>(`${this.url}/difficulty-levels`);
+  }
+
+  getCoachCategories(): Observable<CoachCategoryDTO[]> {
+    return this.http.get<CoachCategoryDTO[]>(`${this.url}/coach-categories`);
   }
 }

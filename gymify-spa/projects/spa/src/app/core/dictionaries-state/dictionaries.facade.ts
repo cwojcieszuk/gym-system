@@ -10,6 +10,7 @@ export class DictionariesFacade {
   equipments$ = this.store.select(DictionariesSelectors.getEquipments);
   targets$ = this.store.select(DictionariesSelectors.getTargets);
   difficultyLevels$ = this.store.select(DictionariesSelectors.getDifficultyLevels);
+  coachCategories$ = this.store.select(DictionariesSelectors.getCoachCategories);
 
   constructor(private store: Store) {}
 
@@ -31,5 +32,9 @@ export class DictionariesFacade {
 
   fetchDifficultyLevels(): void {
     this.store.dispatch(DictionariesActions.fetchDifficultyLevels());
+  }
+
+  fetchCoachCategories(): void {
+    this.store.dispatch(DictionariesActions.fetchCoachCategories());
   }
 }
