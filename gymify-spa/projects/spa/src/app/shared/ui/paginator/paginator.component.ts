@@ -5,17 +5,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { BaseComponent } from '../../components/base.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'gym-paginator',
   standalone: true,
-  imports: [CommonModule, MatInputModule, MatFormFieldModule, MatIconModule, MatButtonModule, MatSelectModule, ReactiveFormsModule],
+  imports: [CommonModule, MatInputModule, MatFormFieldModule, MatIconModule, MatButtonModule, MatSelectModule, MatMenuModule],
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
 })
-export class PaginatorComponent extends BaseComponent {
+export class PaginatorComponent {
   @Input()
   pageSizeOptions: number[] = [10, 15, 25];
 
@@ -40,7 +39,6 @@ export class PaginatorComponent extends BaseComponent {
   @Output()
   pageChange = new EventEmitter<number>();
 
-  formControl = new FormControl<number>(10, { nonNullable: true });
 
   get canPreviousPage(): boolean {
     return this.page === 1;
@@ -51,10 +49,6 @@ export class PaginatorComponent extends BaseComponent {
   }
 
   constructor() {
-    super();
-
-    this.observe(this.formControl.valueChanges)
-      .subscribe(value => this.pageSizeChange.emit(value));
   }
 
   previousPage(): void {
@@ -73,5 +67,10 @@ export class PaginatorComponent extends BaseComponent {
 
     this.page += 1;
     this.pageChange.emit(this.page);
+  }
+
+  pageSizeEmit(pageSize: number): void {
+    this.pageSize = pageSize;
+    this.pageSizeChange.emit(pageSize);
   }
 }

@@ -1,3 +1,9 @@
+@use 'typography';
+
 :host {
   @apply block w-[500px] p-8;
+}
+
+h1 {
+  @extend .typography-subtitle1;
 }

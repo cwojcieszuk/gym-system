@@ -69,6 +69,8 @@ export const templatesReducer = createReducer(
       ...state.exerciseQuery,
       ...payload.query,
     },
+    exercises: [],
+    totalExercises: 0,
   })),
   on(TemplateActions.nextPage, state => ({
     ...state,
