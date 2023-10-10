@@ -14,6 +14,7 @@ export class AuthFacade {
   user$ = this.store.select(AuthSelectors.getUser);
   isAuthenticated$ = this.store.select(AuthSelectors.getIsAuthenticated);
   isAdmin$ = this.store.select(AuthSelectors.getIsAdmin);
+  isCoach$ = this.store.select(AuthSelectors.getIsCoach);
 
   private _refresh$?: Subscription;
 

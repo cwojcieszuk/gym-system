@@ -87,3 +87,15 @@ export const cancelEditAvatar = createAction(
   '[Profile] Cancel Edit Avatar'
 );
 
+export const updateCoachDescription = createAction(
+  '[Profile/API] Update Coach Description',
+  props<{ description: string; categoryId: number[] }>()
+);
+
+export const updateCoachDescriptionSuccess = createAction(
+  '[Profile/API] Update Coach Description Success'
+);
+
+export const updateCoachDescriptionFailure = createAction(
+  '[Profile/API] Update Coach Description Failure'
+);
