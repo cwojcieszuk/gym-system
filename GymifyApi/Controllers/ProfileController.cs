@@ -1,4 +1,5 @@
-﻿using Gymify.Application.Profile.Commands.UpdateUserData;
+﻿using Gymify.Application.Profile.Commands.UpdateCoachData;
+using Gymify.Application.Profile.Commands.UpdateUserData;
 using Gymify.Application.Profile.Commands.UpdateUserPassword;
 using Gymify.Application.Profile.Commands.UploadAvatar;
 using Gymify.Application.Profile.Queries.GetUserData;
@@ -60,6 +61,17 @@ public class ProfileController : ControllerBase
         UploadAvatarCommand command = new UploadAvatarCommand(userUid, avatar);
 
         await _mediator.Send(command);
+
+        return NoContent();
+    }
+
+    [HttpPut]
+    [Route("{userUid}/coach-data")]
+    public async Task<IActionResult> UpdateCoachData(
+        [FromRoute] Guid userUid,
+        [FromBody] UpdateCoachDataCommand request)
+    {
+        await _mediator.Send(request);
 
         return NoContent();
     }
