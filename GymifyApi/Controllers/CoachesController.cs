@@ -1,6 +1,7 @@
 ﻿using Gymify.Application.Coaches.Commands.DislikeCoach;
 using Gymify.Application.Coaches.Commands.LikeCoach;
-using Gymify.Application.Coaches.Queries;
+using Gymify.Application.Coaches.Queries.GetCoaches;
+using Gymify.Application.Coaches.Queries.GetCoachHoursByDate;
 using GymifyApi.Extensions;
 using GymifyApi.Filters;
 using MediatR;
@@ -65,5 +66,12 @@ public class CoachesController : ControllerBase
         await _mediator.Send(request with { UserUid = userUid });
 
         return NoContent();
+    }
+
+    [HttpGet("hours")]
+    [ServiceFilter(typeof(CoachExistenceCheckFilter))]
+    public async Task<IActionResult> GetCoachHoursByDate([FromQuery] GetCoachHoursByDateQuery request)
+    {
+        return Ok(await _mediator.Send(request));
     }
 }

@@ -4,7 +4,7 @@ using Gymify.Shared.Wrappers;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Gymify.Application.Coaches.Queries;
+namespace Gymify.Application.Coaches.Queries.GetCoaches;
 
 public class GetCoachesQueryHandler : IRequestHandler<GetCoachesQuery, PagedResponse<CoachDTO>>
 {
