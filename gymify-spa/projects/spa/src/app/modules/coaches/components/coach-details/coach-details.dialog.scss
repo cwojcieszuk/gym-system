@@ -5,3 +5,7 @@
 .close-btn {
   @apply absolute top-0 right-0;
 }
+
+.active {
+  @apply bg-primary text-white border-0;
+}

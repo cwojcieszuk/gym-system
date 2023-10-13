@@ -3,6 +3,7 @@ import { PagedResponse } from '../../../../../../api-client/src/lib/models/paged
 import { CoachDTO } from '../../../../../../api-client/src/lib/clients/coaches/models/coach.dto';
 import { GetCoachesParams } from '../../../../../../api-client/src/lib/clients/coaches/params/get-coaches.params';
 import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
+import { CoachHourDTO } from '../../../../../../api-client/src/lib/clients/coaches/models/coach-hour.dto';
 
 export const fetchCoaches = createAction(
   '[Coaches/API] Fetch Coaches'
@@ -53,4 +54,18 @@ export const dislikeCoachSuccess = createAction(
 
 export const dislikeCoachFailure = createAction(
   '[Coaches/API] Dislike Coach Failure'
+);
+
+export const getCoachHoursByDate = createAction(
+  '[Coaches/API] Get Coach Hours By Date',
+  props<{ coachUid: UUID; date: Date }>()
+);
+
+export const getCoachHoursByDateSuccess = createAction(
+  '[Coaches/API] Get Coach Hours By Date Success',
+  props<{ hours: CoachHourDTO[] }>()
+);
+
+export const getCoachHoursByDateFailure = createAction(
+  '[Coaches/API] Get Coach Hours By Date Failure'
 );

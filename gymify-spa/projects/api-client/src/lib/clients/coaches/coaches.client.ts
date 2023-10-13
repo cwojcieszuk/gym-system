@@ -7,6 +7,7 @@ import { CoachDTO } from './models/coach.dto';
 import { mapToHttpParams } from '../../mappers/map-to-http-params';
 import { UUID } from '../../types/uuid.type';
 import { EmptyResponse } from '../../types/empty.response';
+import { CoachHourDTO } from './models/coach-hour.dto';
 
 @Injectable({ providedIn: 'root' })
 export class CoachesClient {
@@ -24,5 +25,9 @@ export class CoachesClient {
 
   dislikeCoach(coachUid: UUID): Observable<EmptyResponse> {
     return this.http.post<EmptyResponse>(`${this.url}/dislike`, { coachUid });
+  }
+
+  getCoachHoursByDate(coachUid: UUID, date: Date): Observable<CoachHourDTO[]> {
+    return this.http.get<CoachHourDTO[]>(`${this.url}/hours`,{ params: mapToHttpParams({ coachUid, date }) });
   }
 }

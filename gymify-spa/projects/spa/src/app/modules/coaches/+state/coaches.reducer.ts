@@ -4,6 +4,7 @@ import { CoachDTO } from '../../../../../../api-client/src/lib/clients/coaches/m
 import { GetCoachesParams } from '../../../../../../api-client/src/lib/clients/coaches/params/get-coaches.params';
 
 import * as CoachActions from './coaches.actions';
+import { CoachHourDTO } from '../../../../../../api-client/src/lib/clients/coaches/models/coach-hour.dto';
 
 export const COACHES_FEATURE_KEY = 'coaches';
 
@@ -11,6 +12,7 @@ export interface CoachesState {
   coachesResponse?: PagedResponse<CoachDTO>;
   coachesQuery: GetCoachesParams;
   areCoachesLoading: boolean;
+  coachHours: CoachHourDTO[];
 }
 
 const initialState: CoachesState = {
@@ -19,6 +21,7 @@ const initialState: CoachesState = {
     pageSize: 10,
   },
   areCoachesLoading: false,
+  coachHours: [],
 };
 
 export const coachesReducer = createReducer<CoachesState>(
@@ -63,5 +66,9 @@ export const coachesReducer = createReducer<CoachesState>(
       ...state.coachesResponse,
       content: state.coachesResponse.content.map(coach => coach.coachUid === payload.coachUid ? ({ ...coach, isFavorite: false }) : coach),
     },
+  })),
+  on(CoachActions.getCoachHoursByDateSuccess, (state, payload) => ({
+    ...state,
+    coachHours: payload.hours,
   }))
 );

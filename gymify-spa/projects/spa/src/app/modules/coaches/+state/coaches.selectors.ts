@@ -17,3 +17,8 @@ export const areCoachesLoading = createSelector(
   getCoachesState,
   state => state.areCoachesLoading
 );
+
+export const getCoachHours$ = createSelector(
+  getCoachesState,
+  state => state.coachHours
+);

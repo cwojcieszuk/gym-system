@@ -71,6 +71,16 @@ export class CoachesEffects {
       tap(() => this.toastr.error('Unable to unlike coach'))
     ), { dispatch: false });
 
+  getCoachHoursByDate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CoachActions.getCoachHoursByDate),
+      mergeMap(({ coachUid, date }) => this.coachesClient.getCoachHoursByDate(coachUid, date).pipe(
+        map(hours => CoachActions.getCoachHoursByDateSuccess({ hours })),
+        catchError(() => of(CoachActions.getCoachHoursByDateFailure()))
+      ))
+    )
+  );
+
   constructor(
     private readonly actions$: Actions,
     private readonly coachesClient: CoachesClient,

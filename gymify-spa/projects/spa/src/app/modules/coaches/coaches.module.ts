@@ -15,6 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CoachDetailsDialog } from './components/coach-details/coach-details.dialog';
 import { JoinPipe } from '../../shared/pipe/join.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatProgressSpinnerModule,
     JoinPipe,
     MatDialogModule,
+    MatDatepickerModule,
   ],
 })
 export class CoachesModule { }
