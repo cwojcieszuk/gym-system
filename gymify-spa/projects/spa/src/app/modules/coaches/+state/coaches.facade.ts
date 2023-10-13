@@ -43,4 +43,8 @@ export class CoachesFacade {
   selectCoachHour(coachHourUid: UUID): void {
     this.store.dispatch(CoachActions.selectHour({ coachHourUid }));
   }
+
+  signupForCoach(): void {
+    this.store.dispatch(CoachActions.signupForCoach());
+  }
 }

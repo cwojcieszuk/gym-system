@@ -74,3 +74,15 @@ export const selectHour = createAction(
   '[Coaches] Select Hour',
   props<{ coachHourUid: UUID }>()
 );
+
+export const signupForCoach = createAction(
+  '[Coaches/API] Sign Up For Coach'
+);
+
+export const signupForCoachSuccess = createAction(
+  '[Coaches/API] Sign Up For Coach Success'
+);
+
+export const signupForCoachFailure = createAction(
+  '[Coaches/API] Sign Up For Coach'
+);

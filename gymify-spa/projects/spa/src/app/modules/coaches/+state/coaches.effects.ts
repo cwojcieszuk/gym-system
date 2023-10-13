@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CoachesClient } from '../../../../../../api-client/src/lib/clients/coaches/coaches.client';
 import * as CoachActions from './coaches.actions';
-import { catchError, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
+import { catchError, filter, map, mergeMap, of, tap, withLatestFrom } from 'rxjs';
 import { CoachesFacade } from './coaches.facade';
 import { ToastrService } from 'ngx-toastr';
 
@@ -80,6 +80,31 @@ export class CoachesEffects {
       ))
     )
   );
+
+  signupForCoach$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CoachActions.signupForCoach),
+      withLatestFrom(this.coachesFacade.selectedCoachHour$),
+      map(([, coachHourUid]) => coachHourUid),
+      filter(Boolean),
+      mergeMap(coachHourUid => this.coachesClient.signupForCoach(coachHourUid).pipe(
+        map(() => CoachActions.signupForCoachSuccess()),
+        catchError(() => of(CoachActions.signupForCoachFailure()))
+      ))
+    )
+  );
+
+  signupForCoachSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CoachActions.signupForCoachSuccess),
+      tap(() => this.toastr.success('Successfully signed up for coach'))
+    ), { dispatch: false });
+
+  signupForCoachFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CoachActions.signupForCoachFailure),
+      tap(() => this.toastr.error('Unable to sign up for coach'))
+    ), { dispatch: false });
 
   constructor(
     private readonly actions$: Actions,

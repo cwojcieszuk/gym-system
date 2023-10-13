@@ -30,4 +30,8 @@ export class CoachesClient {
   getCoachHoursByDate(coachUid: UUID, date: Date): Observable<CoachHourDTO[]> {
     return this.http.get<CoachHourDTO[]>(`${this.url}/hours`,{ params: mapToHttpParams({ coachUid, date }) });
   }
+
+  signupForCoach(coachHourUid: UUID): Observable<EmptyResponse> {
+    return this.http.post<EmptyResponse>(`${this.url}/signup`, { coachHourUid });
+  }
 }

@@ -27,3 +27,8 @@ export const getSelectedCoachHour = createSelector(
   getCoachesState,
   state => state.selectedCoachHour
 );
+
+export const getCoachHoursDate = createSelector(
+  getCoachesState,
+  state => state.coachHoursDate
+);

@@ -15,6 +15,7 @@ export interface CoachesState {
   areCoachesLoading: boolean;
   coachHours: CoachHourDTO[];
   selectedCoachHour?: UUID;
+  coachHoursDate: Date | null;
 }
 
 const initialState: CoachesState = {
@@ -24,6 +25,7 @@ const initialState: CoachesState = {
   },
   areCoachesLoading: false,
   coachHours: [],
+  coachHoursDate: null,
 };
 
 export const coachesReducer = createReducer<CoachesState>(
@@ -77,5 +79,9 @@ export const coachesReducer = createReducer<CoachesState>(
   on(CoachActions.selectHour, (state, payload) => ({
     ...state,
     selectedCoachHour: payload.coachHourUid,
+  })),
+  on(CoachActions.signupForCoachSuccess, state => ({
+    ...state,
+    selectedCoachHour: undefined,
   }))
 );
