@@ -4,12 +4,13 @@ import { CoachDTO } from '../../../../../../../api-client/src/lib/clients/coache
 import { ImageService } from '../../../../shared/services/image.service';
 import { CoachesFacade } from '../../+state/coaches.facade';
 import { UUID } from '../../../../../../../api-client/src/lib/types/uuid.type';
+import { BaseComponent } from '../../../../shared/components/base.component';
 
 @Component({
   templateUrl: './coach-details.dialog.html',
   styleUrls: ['./coach-details.dialog.scss'],
 })
-export class CoachDetailsDialog {
+export class CoachDetailsDialog extends BaseComponent {
   minDate = new Date();
   selectedHour?: UUID;
 
@@ -18,7 +19,12 @@ export class CoachDetailsDialog {
     private dialogRef: MatDialogRef<CoachDetailsDialog>,
     public imgService: ImageService,
     public facade: CoachesFacade
-  ) {}
+  ) {
+    super();
+
+    this.observe(this.facade.selectedCoachHour$)
+      .subscribe(value => { this.selectedHour = value });
+  }
 
   close(): void {
     this.dialogRef.close();
@@ -28,9 +34,5 @@ export class CoachDetailsDialog {
     const value = new Date(date);
 
     return `${value.getHours()} : ${value.getMinutes()}`;
-  }
-
-  selectHour(coachHourUid: UUID): void {
-    this.selectedHour = coachHourUid;
   }
 }

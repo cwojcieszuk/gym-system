@@ -12,6 +12,7 @@ export class CoachesFacade {
   coachesResponse$ = this.store.select(CoachSelectors.getCoachesResponse);
   areCoachesLoading$ = this.store.select(CoachSelectors.areCoachesLoading);
   coachHours$ = this.store.select(CoachSelectors.getCoachHours$);
+  selectedCoachHour$ = this.store.select(CoachSelectors.getSelectedCoachHour);
 
   constructor(private store: Store) {}
 
@@ -37,5 +38,9 @@ export class CoachesFacade {
 
   getCoachHoursByDate(coachUid: UUID, date: Date): void {
     this.store.dispatch(CoachActions.getCoachHoursByDate({ coachUid, date }));
+  }
+
+  selectCoachHour(coachHourUid: UUID): void {
+    this.store.dispatch(CoachActions.selectHour({ coachHourUid }));
   }
 }

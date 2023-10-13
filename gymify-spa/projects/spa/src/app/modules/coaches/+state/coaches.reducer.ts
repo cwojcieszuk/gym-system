@@ -5,6 +5,7 @@ import { GetCoachesParams } from '../../../../../../api-client/src/lib/clients/c
 
 import * as CoachActions from './coaches.actions';
 import { CoachHourDTO } from '../../../../../../api-client/src/lib/clients/coaches/models/coach-hour.dto';
+import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
 
 export const COACHES_FEATURE_KEY = 'coaches';
 
@@ -13,6 +14,7 @@ export interface CoachesState {
   coachesQuery: GetCoachesParams;
   areCoachesLoading: boolean;
   coachHours: CoachHourDTO[];
+  selectedCoachHour?: UUID;
 }
 
 const initialState: CoachesState = {
@@ -70,5 +72,10 @@ export const coachesReducer = createReducer<CoachesState>(
   on(CoachActions.getCoachHoursByDateSuccess, (state, payload) => ({
     ...state,
     coachHours: payload.hours,
+    selectedCoachHour: undefined,
+  })),
+  on(CoachActions.selectHour, (state, payload) => ({
+    ...state,
+    selectedCoachHour: payload.coachHourUid,
   }))
 );

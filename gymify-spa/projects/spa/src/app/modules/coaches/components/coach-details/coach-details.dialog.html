@@ -29,7 +29,7 @@
         <div class="p-2 border-solid border-black border rounded-md w-fit cursor-pointer"
              [class.active]="selectedHour === hour.coachHourUid"
              *ngFor="let hour of facade.coachHours$ | async"
-             (click)="selectHour(hour.coachHourUid)"
+             (click)="facade.selectCoachHour(hour.coachHourUid)"
         >
             <span>{{ getHours(hour.date) }}</span>
         </div>

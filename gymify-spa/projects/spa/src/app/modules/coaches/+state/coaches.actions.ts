@@ -69,3 +69,8 @@ export const getCoachHoursByDateSuccess = createAction(
 export const getCoachHoursByDateFailure = createAction(
   '[Coaches/API] Get Coach Hours By Date Failure'
 );
+
+export const selectHour = createAction(
+  '[Coaches] Select Hour',
+  props<{ coachHourUid: UUID }>()
+);
