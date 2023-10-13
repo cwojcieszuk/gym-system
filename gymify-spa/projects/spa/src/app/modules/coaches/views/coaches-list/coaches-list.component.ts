@@ -5,6 +5,8 @@ import { ImageService } from '../../../../shared/services/image.service';
 import { PagedResponse } from '../../../../../../../api-client/src/lib/models/paged-response';
 import { CoachDTO } from '../../../../../../../api-client/src/lib/clients/coaches/models/coach.dto';
 import { filter } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { CoachDetailsDialog } from '../../components/coach-details/coach-details.dialog';
 
 @Component({
   templateUrl: './coaches-list.component.html',
@@ -16,7 +18,9 @@ export class CoachesListComponent extends BaseComponent implements OnInit {
 
   coachesResponse?: PagedResponse<CoachDTO>;
 
-  constructor() {
+  constructor(
+    private dialog: MatDialog
+  ) {
     super();
   }
 
@@ -30,5 +34,13 @@ export class CoachesListComponent extends BaseComponent implements OnInit {
 
   pageChange(event: number): void {
     this.coachesFacade.pageChange(event);
+  }
+
+  openCoachDialog(coach: CoachDTO): void {
+    this.dialog.open(CoachDetailsDialog, {
+      data: {
+        coach,
+      },
+    });
   }
 }

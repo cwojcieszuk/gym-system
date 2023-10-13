@@ -12,11 +12,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CoachDetailsDialog } from './components/coach-details/coach-details.dialog';
+import { JoinPipe } from '../../shared/pipe/join.pipe';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     CoachesListComponent,
     CoachesListFiltersComponent,
+    CoachDetailsDialog,
   ],
   imports: [
     CommonModule,
@@ -30,6 +34,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    JoinPipe,
+    MatDialogModule,
   ],
 })
 export class CoachesModule { }

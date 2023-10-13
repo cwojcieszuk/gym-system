@@ -18,7 +18,7 @@
 
         <div class="grid grid-cols-5 gap-8" *ngIf="(coachesFacade.areCoachesLoading$ | async) === false">
             <div class="shadow-base rounded-md p-2 flex flex-col items-center gap-y-4" *ngFor="let coach of (coachesResponse)?.content">
-                <img class="w-[240px] h-[240px]" [src]="coach.avatar == null ? '../../../../../assets/default-user.png' : imgService.getJpeg(coach.avatar)">
+                <img class="w-[240px] h-[240px]" [src]="coach.avatar == null ? '../../../../../assets/default-user.png' : imgService.getJpeg(coach.avatar)" (click)="openCoachDialog(coach)">
                 <span>{{ coach.coachName }}</span>
                 <span>{{ coach.categories[0] }}</span>
                 <button mat-icon-button *ngIf="!coach.isFavorite" (click)="coachesFacade.likeCoach(coach.coachUid)">
