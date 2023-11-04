@@ -56,6 +56,10 @@ const routes: Routes = [
             path: 'coaches',
             loadChildren: () => import('./modules/coaches/coaches.module').then(m => m.CoachesModule),
           },
+          {
+            path: 'group-sessions',
+            loadChildren: () => import('./modules/group-sessions/group-sessions.module').then(m => m.GroupSessionsModule),
+          },
         ],
       },
     ],
