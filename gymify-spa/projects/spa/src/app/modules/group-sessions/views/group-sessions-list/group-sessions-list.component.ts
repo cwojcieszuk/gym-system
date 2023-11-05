@@ -5,6 +5,8 @@ import { GroupSessionListResponse } from '../../../../../../../api-client/src/li
 import { BaseComponent } from '../../../../shared/components/base.component';
 import { GroupSessionsFacade } from '../../+state/group-sessions.facade';
 import { filter } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { BookInGroupSessionComponent } from '../../dialogs/book-in-group-session/book-in-group-session.component';
 
 @Component({
   templateUrl: './group-sessions-list.component.html',
@@ -15,7 +17,10 @@ export class GroupSessionsListComponent extends BaseComponent {
   dataSource = new MatTableDataSource<GroupSessionDTO>([]);
   groupSessionsResponse?: GroupSessionListResponse;
 
-  constructor(private facade: GroupSessionsFacade) {
+  constructor(
+    private facade: GroupSessionsFacade,
+    private dialog: MatDialog
+  ) {
     super();
 
     this.facade.fetchGroupSessions();
@@ -31,5 +36,11 @@ export class GroupSessionsListComponent extends BaseComponent {
 
   pageSizeChange(pageSize: number): void {
     this.facade.setFilters({ pageSize });
+  }
+
+  bookIn(groupSession: GroupSessionDTO): void {
+    const dialog = this.dialog.open(BookInGroupSessionComponent, {
+      data: groupSession,
+    });
   }
 }

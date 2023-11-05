@@ -9,4 +9,6 @@ export interface GroupSessionDTO {
   duration: string;
   availableSlots: number;
   takenSlots: number;
+  description: string;
+  isBookedIn: boolean;
 }
