@@ -1,9 +1,35 @@
 import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { GroupSessionDTO } from '../../../../../../../api-client/src/lib/clients/group-sessions/models/group-session.dto';
+import { GroupSessionListResponse } from '../../../../../../../api-client/src/lib/clients/group-sessions/responses/group-session-list.response';
+import { BaseComponent } from '../../../../shared/components/base.component';
+import { GroupSessionsFacade } from '../../+state/group-sessions.facade';
+import { filter } from 'rxjs';
 
 @Component({
   templateUrl: './group-sessions-list.component.html',
   styleUrls: ['./group-sessions-list.component.scss'],
 })
-export class GroupSessionsListComponent {
+export class GroupSessionsListComponent extends BaseComponent {
+  displayedColumns = ['hour', 'sessionName', 'place', 'coachName', 'duration', 'slots', 'bookin'];
+  dataSource = new MatTableDataSource<GroupSessionDTO>([]);
+  groupSessionsResponse?: GroupSessionListResponse;
 
+  constructor(private facade: GroupSessionsFacade) {
+    super();
+
+    this.facade.fetchGroupSessions();
+
+    this.observe(this.facade.groupSessionsResponse$)
+      .pipe(filter(Boolean))
+      .subscribe(value => { this.groupSessionsResponse = value; });
+  }
+
+  pageChange(pageNumber: number): void {
+    this.facade.setFilters({ pageNumber });
+  }
+
+  pageSizeChange(pageSize: number): void {
+    this.facade.setFilters({ pageSize });
+  }
 }

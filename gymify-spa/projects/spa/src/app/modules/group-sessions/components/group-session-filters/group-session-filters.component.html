@@ -1,0 +1,28 @@
+<form [formGroup]="form" class="flex flex-col gap-y-8">
+    <div class="flex flex-col">
+        <label>Category</label>
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let cat of dictionariesFacade.coachCategories$ | async" [value]="cat.coachCategoryId">{{cat.coachCategoryName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="flex flex-col">
+        <label>Date</label>
+        <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <input matInput formControlName="name">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="save()">
+        <mat-icon>add</mat-icon>
+        <span>Save</span>
+    </button>
+</form>
