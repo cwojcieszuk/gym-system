@@ -18,7 +18,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { TextInputComponent } from '../../shared/ui/text-input/text-input.component';
 import { BookInGroupSessionComponent } from './dialogs/book-in-group-session/book-in-group-session.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { BookInGroupSessionComponent } from './dialogs/book-in-group-session/boo
     MatSelectModule,
     ReactiveFormsModule,
     TextInputComponent,
+    MatDialogModule,
   ],
 })
 export class GroupSessionsModule { }

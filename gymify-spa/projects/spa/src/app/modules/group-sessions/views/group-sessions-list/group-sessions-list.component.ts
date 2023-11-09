@@ -27,7 +27,10 @@ export class GroupSessionsListComponent extends BaseComponent {
 
     this.observe(this.facade.groupSessionsResponse$)
       .pipe(filter(Boolean))
-      .subscribe(value => { this.groupSessionsResponse = value; });
+      .subscribe(value => {
+        this.groupSessionsResponse = value;
+        this.dataSource.data = value.content;
+      });
   }
 
   pageChange(pageNumber: number): void {
@@ -39,7 +42,7 @@ export class GroupSessionsListComponent extends BaseComponent {
   }
 
   bookIn(groupSession: GroupSessionDTO): void {
-    const dialog = this.dialog.open(BookInGroupSessionComponent, {
+    this.dialog.open(BookInGroupSessionComponent, {
       data: groupSession,
     });
   }

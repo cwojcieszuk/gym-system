@@ -16,7 +16,7 @@ export class GroupSessionFiltersComponent {
   readonly form = new FormGroup({
     category: new FormControl<number | null>(null),
     coachUid: new FormControl<UUID | null>(null),
-    date: new FormControl<Date | null>(null),
+    date: new FormControl<Date>(new Date(), { nonNullable: true }),
     name: new FormControl<string>(''),
   });
 
@@ -30,7 +30,7 @@ export class GroupSessionFiltersComponent {
   save(): void {
     this.facade.setFilters({
       name: this.form.value.name ?? '',
-      date: this.form.value.date == null ? undefined : this.form.value.date,
+      date: this.form.value.date,
       categoryId: this.form.value.category == null ? undefined : this.form.value.category,
       coachUid: this.form.value.coachUid == null ? undefined : this.form.value.coachUid,
     });

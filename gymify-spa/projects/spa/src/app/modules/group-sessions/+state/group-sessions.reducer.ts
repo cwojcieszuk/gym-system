@@ -16,6 +16,7 @@ const initialState: GroupSessionsState = {
     pageNumber: 1,
     pageSize: 15,
     name: '',
+    date: new Date(),
   },
 };
 
