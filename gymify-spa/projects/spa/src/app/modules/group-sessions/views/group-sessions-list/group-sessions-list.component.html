@@ -49,7 +49,7 @@
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let group">
                         <div class="flex justify-center items-center">
-                            <button mat-stroked-button color="primary" (click)="bookIn(group)">
+                            <button mat-stroked-button color="primary" (click)="bookIn(group)" [disabled]="group.availableSlots === group.takenSlots">
                                 <span>Book in</span>
                                 <mat-icon>save</mat-icon>
                             </button>

@@ -1,27 +1,29 @@
 <h1 class="text-center">{{ data.groupSessionName }}</h1>
 
-<div class="flex gap-x-2 items-center">
-    <mat-icon>people</mat-icon>
-    <span>Available {{ data.takenSlots + '/' + data.availableSlots }}</span>
+<div class="flex flex-col gap-y-2">
+    <div class="flex gap-x-2 items-center">
+        <mat-icon>people</mat-icon>
+        <span>{{ data.takenSlots === data.availableSlots ? 'Full' : 'Available' }} {{ data.takenSlots + '/' + data.availableSlots }}</span>
+    </div>
+
+    <div class="flex gap-x-2 items-center">
+        <mat-icon>person</mat-icon>
+        <span>{{ data.coachName }}</span>
+    </div>
+
+    <div class="flex gap-x-2 items-center">
+        <mat-icon>timer</mat-icon>
+        <span>{{ data.hour }}</span>
+    </div>
 </div>
 
-<div class="flex gap-x-2 items-center">
-    <mat-icon>person</mat-icon>
-    <span>{{ data.coachName }}</span>
-</div>
-
-<div class="flex gap-x-2 items-center">
-    <mat-icon>timer</mat-icon>
-    <span>{{ data.hour }}</span>
-</div>
-
-<div class="flex flex-col">
+<div class="flex flex-col pt-4">
     <span class="font-bold">Description</span>
 
     <span>{{ data.description }}</span>
 </div>
 
-<div class="flex justify-between" (click)="cancel()">
+<div class="flex justify-between pt-12" (click)="cancel()">
     <button mat-stroked-button color="primary">
         <mat-icon>cancel</mat-icon>
         <span>Cancel</span>
