@@ -1,4 +1,5 @@
 ﻿using Gymify.Application.GroupSessions.Commands.BookIn;
+using Gymify.Application.GroupSessions.Commands.Resign;
 using Gymify.Application.GroupSessions.Queries.GetGroupSessions;
 using GymifyApi.Extensions;
 using GymifyApi.Filters;
@@ -38,6 +39,23 @@ public class GroupSessionsController : ControllerBase
     [Route("book-in")]
     [ServiceFilter(typeof(GroupSessionExistenceCheckFilter))]
     public async Task<IActionResult> BookIn([FromBody] BookInCommand request)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        await _mediator.Send(request with { UserUid = userUid });
+
+        return NoContent();
+    }
+
+    [HttpPost]
+    [Route("resign")]
+    [ServiceFilter(typeof(GroupSessionExistenceCheckFilter))]
+    public async Task<IActionResult> Resign([FromBody] ResignCommand request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
 
