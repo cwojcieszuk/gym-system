@@ -27,3 +27,13 @@ export const getDifficultyLevels = createSelector(
   getDictionariesState,
   state => state.difficultyLevels
 );
+
+export const getCoachCategories = createSelector(
+  getDictionariesState,
+  state => state.coachCategories
+);
+
+export const getPlaces = createSelector(
+  getDictionariesState,
+  state => state.places
+);

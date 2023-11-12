@@ -22,6 +22,16 @@
         <a routerLink="trainings">Trainings</a>
     </div>
 
+    <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">
+        <mat-icon>person</mat-icon>
+        <a routerLink="coaches">Coaches</a>
+    </div>
+
+    <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">
+        <mat-icon>people</mat-icon>
+        <a routerLink="group-sessions">Group sessions</a>
+    </div>
+
     <ng-container *ngIf="facade.isAdmin$ | async">
         <span class="menu-header">Admin</span>
         <div class="flex pl-4 items-center gap-1 font-medium" routerLinkActive="active">

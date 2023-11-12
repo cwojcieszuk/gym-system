@@ -1,0 +1,23 @@
+<form class="flex flex-col gap-y-6" [formGroup]="form">
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId">
+            <mat-option *ngFor="let category of (dictionariesFacade.coachCategories$ | async)" [value]="category.coachCategoryId">{{ category.coachCategoryName }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-stroked-button color="primary" (click)="clear()">
+        <span>Clear</span>
+        <mat-icon>delete</mat-icon>
+    </button>
+
+    <button mat-raised-button color="primary" (click)="save()">
+        <span>Save</span>
+        <mat-icon>add</mat-icon>
+    </button>
+</form>

@@ -125,6 +125,23 @@ export class ProfileEffects {
       tap(() => this.toastr.error('Unable to upload avatar'))
     ), { dispatch: false });
 
+  updateCoachDescription$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.updateCoachDescription),
+      withLatestFrom(this.authFacade.user$),
+      mergeMap(([{ description, categoryId }, user]) => {
+        if (!user) {
+          return EMPTY;
+        }
+
+        return this.profileClient.updateCoachDescription(user.userUid, description, categoryId).pipe(
+          map(() => ProfileActions.updateCoachDescriptionSuccess()),
+          catchError(() => of(ProfileActions.updateCoachDescriptionFailure()))
+        );
+      })
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private profileClient: ProfileClient,
