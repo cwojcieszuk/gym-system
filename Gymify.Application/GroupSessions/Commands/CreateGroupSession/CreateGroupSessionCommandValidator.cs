@@ -15,8 +15,8 @@ public class CreateGroupSessionCommandValidator : AbstractValidator<CreateGroupS
         RuleFor(x => x.Description)
             .MaximumLength(GroupSessionColumnConstants.SessionDescriptionLimit);
 
-        RuleFor(x => x)
-            .Must(x => x.SessionEndDate.Date > x.SessionStartDate.Date);
+        RuleFor(x => x.SessionEndDate)
+            .GreaterThan(x => x.SessionStartDate);
 
         RuleFor(x => x.Slots)
             .GreaterThan(0);
