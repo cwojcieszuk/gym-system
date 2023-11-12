@@ -29,6 +29,7 @@ public class GetGroupSessionsQueryHandler : IRequestHandler<GetGroupSessionsQuer
             .Where(x => request.CategoryId == null ||
                         x.Coach.CoachTypes.Any(c => c.CoachCategoryId == request.CategoryId))
             .Where(x => request.CoachUid == null || x.CoachUid == request.CoachUid)
+            .OrderBy(x => x.SessionStartDate.Hour)
             .ToListAsync(cancellationToken);
 
         int totalRecords = groupSessions.Count;
