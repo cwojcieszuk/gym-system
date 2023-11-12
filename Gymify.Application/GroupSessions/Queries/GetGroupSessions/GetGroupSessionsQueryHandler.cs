@@ -41,7 +41,7 @@ public class GetGroupSessionsQueryHandler : IRequestHandler<GetGroupSessionsQuer
         {
             GroupSessionUid = x.GroupSessionUid,
             GroupSessionName = x.SessionName,
-            Hour = $"{x.SessionStartDate.Hour}:{x.SessionStartDate.Minute}",
+            Hour = x.SessionStartDate.ToString("HH:mm"),
             Place = $"{x.Place.PlaceName}",
             CoachName = $"{x.Coach.User.FirstName} {x.Coach.User.LastName}",
             Duration = CountDuration((x.SessionEndDate - x.SessionStartDate).TotalHours),
