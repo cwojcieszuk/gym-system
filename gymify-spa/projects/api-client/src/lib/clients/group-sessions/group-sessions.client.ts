@@ -6,6 +6,7 @@ import { GroupSessionListResponse } from './responses/group-session-list.respons
 import { mapToHttpParams } from '../../mappers/map-to-http-params';
 import { UUID } from '../../types/uuid.type';
 import { EmptyResponse } from '../../types/empty.response';
+import { CreateGroupSessionParams } from './params/create-group-session.params';
 
 @Injectable({ providedIn: 'root' })
 export class GroupSessionsClient {
@@ -23,5 +24,9 @@ export class GroupSessionsClient {
 
   resign(groupSessionUid: UUID): Observable<EmptyResponse> {
     return this.http.post(`${this.url}/resign`, { groupSessionUid });
+  }
+
+  createGroupSession(params: CreateGroupSessionParams): Observable<EmptyResponse> {
+    return this.http.post<EmptyResponse>(this.url, params);
   }
 }

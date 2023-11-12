@@ -7,6 +7,7 @@ import { GroupSessionsFacade } from '../../+state/group-sessions.facade';
 import { filter } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { BookInGroupSessionComponent } from '../../dialogs/book-in-group-session/book-in-group-session.component';
+import { CreateSessionComponent } from '../../dialogs/create-session/create-session.component';
 
 @Component({
   templateUrl: './group-sessions-list.component.html',
@@ -45,5 +46,13 @@ export class GroupSessionsListComponent extends BaseComponent {
     this.dialog.open(BookInGroupSessionComponent, {
       data: groupSession,
     });
+  }
+
+  createGroupSession(): void {
+    const dialog = this.dialog.open(CreateSessionComponent);
+
+    dialog.afterClosed()
+      .pipe(filter(Boolean))
+      .subscribe(value => this.facade.createGroupSession(value));
   }
 }

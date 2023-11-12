@@ -7,9 +7,16 @@
         <div class="grid grid-cols-3 items-center pb-6">
             <h1 class="col-start-2 text-center">Group Sessions</h1>
 
-            <button mat-icon-button color="primary" class="place-self-end" (click)="drawer.toggle()">
-                <mat-icon>filter_list</mat-icon>
-            </button>
+            <div class="flex gap-x-4 place-content-end items-center">
+                <button mat-raised-button color="primary" (click)="createGroupSession()">
+                    <span>New session</span>
+                    <mat-icon>add</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" (click)="drawer.toggle()">
+                    <mat-icon>filter_list</mat-icon>
+                </button>
+            </div>
         </div>
 
         <div class="mat-elevation-z8 mt-6">

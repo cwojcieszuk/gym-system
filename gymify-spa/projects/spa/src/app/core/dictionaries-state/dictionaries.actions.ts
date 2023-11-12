@@ -5,6 +5,7 @@ import { EquipmentDTO } from '../../../../../api-client/src/lib/clients/dictiona
 import { TargetDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/target.dto';
 import { DifficultyLevelDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/difficulty-level.dto';
 import { CoachCategoryDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/coach-category.dto';
+import { PlaceDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/place.dto';
 
 export const fetchUserRoles = createAction(
   '[Dictionaries/API] Fetch User Roles'
@@ -82,4 +83,17 @@ export const fetchCoachCategoriesSuccess = createAction(
 
 export const fetchCoachCategoriesFailure = createAction(
   '[Dictionaries/API] Fetch Coach Categories Failure'
+);
+
+export const fetchPlaces = createAction(
+  '[Dictionaries/API] Fetch Places'
+);
+
+export const fetchPlacesSuccess = createAction(
+  '[Dictionaries/API] Fetch Places Success',
+  props<{ data: PlaceDTO[] }>()
+);
+
+export const fetchPlacesFailure = createAction(
+  '[Dictionaries/API] Fetch Places Failure'
 );

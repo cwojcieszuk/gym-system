@@ -67,6 +67,16 @@ export class DictionariesEffects {
     )
   );
 
+  fetchPlaces$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DictionariesActions.fetchPlaces),
+      mergeMap(() => this.dictionariesClient.getPlaces().pipe(
+        map(data => DictionariesActions.fetchPlacesSuccess({ data })),
+        catchError(() => of(DictionariesActions.fetchPlacesFailure()))
+      ))
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private dictionariesClient: DictionariesClient

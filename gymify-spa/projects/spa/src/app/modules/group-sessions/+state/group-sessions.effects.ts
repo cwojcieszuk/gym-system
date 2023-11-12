@@ -74,6 +74,29 @@ export class GroupSessionsEffects {
       tap(() => this.toastr.error('Unable to resign'))
     ), { dispatch: false });
 
+  createGroupSession$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupSessionActions.createGroupSession),
+      mergeMap(({ params }) => this.client.createGroupSession(params).pipe(
+        map(() => GroupSessionActions.createGroupSessionSuccess()),
+        catchError(() => of(GroupSessionActions.createGroupSessionFailure()))
+      ))
+    )
+  );
+
+  createGroupSessionSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupSessionActions.createGroupSessionSuccess),
+      tap(() => this.toastr.success('Successfully created group session')),
+      map(() => GroupSessionActions.fetchGroupSessions())
+    ));
+
+  createGroupSessionFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupSessionActions.createGroupSessionFailure),
+      tap(() => this.toastr.error('Unable to create group session'))
+    ), { dispatch: false });
+
   constructor(
     private actions$: Actions,
     private client: GroupSessionsClient,

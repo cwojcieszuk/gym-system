@@ -6,6 +6,7 @@ import { EquipmentDTO } from '../../../../../api-client/src/lib/clients/dictiona
 import { TargetDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/target.dto';
 import { DifficultyLevelDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/difficulty-level.dto';
 import { CoachCategoryDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/coach-category.dto';
+import { PlaceDTO } from '../../../../../api-client/src/lib/clients/dictionaries/models/place.dto';
 
 export const DICTIONARIES_FEATURE_KEY = 'dictionaries';
 
@@ -16,6 +17,7 @@ export interface DictionariesState {
   targets: TargetDTO[];
   difficultyLevels: DifficultyLevelDTO[];
   coachCategories: CoachCategoryDTO[];
+  places: PlaceDTO[];
 }
 
 const initialState: DictionariesState = {
@@ -25,6 +27,7 @@ const initialState: DictionariesState = {
   targets: [],
   difficultyLevels: [],
   coachCategories: [],
+  places: [],
 };
 
 export const dictionariesReducer = createReducer<DictionariesState>(
@@ -53,4 +56,8 @@ export const dictionariesReducer = createReducer<DictionariesState>(
     ...state,
     coachCategories: payload.data,
   })),
+  on(DictionariesActions.fetchPlacesSuccess, (state, payload) => ({
+    ...state,
+    places: payload.data,
+  }))
 );

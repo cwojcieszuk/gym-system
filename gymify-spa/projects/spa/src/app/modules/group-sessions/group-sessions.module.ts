@@ -19,12 +19,19 @@ import { MatSelectModule } from '@angular/material/select';
 import { TextInputComponent } from '../../shared/ui/text-input/text-input.component';
 import { BookInGroupSessionComponent } from './dialogs/book-in-group-session/book-in-group-session.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CreateSessionComponent } from './dialogs/create-session/create-session.component';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
     GroupSessionsListComponent,
     GroupSessionFiltersComponent,
     BookInGroupSessionComponent,
+    CreateSessionComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +51,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     TextInputComponent,
     MatDialogModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
 })
 export class GroupSessionsModule { }
