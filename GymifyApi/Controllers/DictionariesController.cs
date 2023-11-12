@@ -2,6 +2,7 @@
 using Gymify.Application.Dictionaries.Queries.CoachCategories;
 using Gymify.Application.Dictionaries.Queries.DifficultyLevels;
 using Gymify.Application.Dictionaries.Queries.Equipments;
+using Gymify.Application.Dictionaries.Queries.Places;
 using Gymify.Application.Dictionaries.Queries.Targets;
 using Gymify.Application.Dictionaries.Queries.UserRoles;
 using MediatR;
@@ -67,6 +68,14 @@ public class DictionariesController: ControllerBase
     public async Task<IActionResult> GetCoachCategories()
     {
         GetCoachCategoriesQuery query = new GetCoachCategoriesQuery();
+
+        return Ok(await _mediator.Send(query));
+    }
+
+    [HttpGet("places")]
+    public async Task<IActionResult> GetPlaces()
+    {
+        PlacesQuery query = new PlacesQuery();
 
         return Ok(await _mediator.Send(query));
     }
