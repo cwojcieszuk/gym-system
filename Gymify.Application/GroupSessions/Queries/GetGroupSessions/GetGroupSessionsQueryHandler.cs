@@ -43,7 +43,7 @@ public class GetGroupSessionsQueryHandler : IRequestHandler<GetGroupSessionsQuer
             Hour = $"{x.SessionStartDate.Hour}:{x.SessionStartDate.Minute}",
             Place = $"{x.Place.PlaceName}",
             CoachName = $"{x.Coach.User.FirstName} {x.Coach.User.LastName}",
-            Duration = (x.SessionEndDate - x.SessionStartDate).TotalHours,
+            Duration = CountDuration((x.SessionEndDate - x.SessionStartDate).TotalHours),
             AvailableSlots = x.Slots,
             TakenSlots = x.ClientGroupSessions.Where(g => g.GroupSessionUid == x.GroupSessionUid).Count(),
             Description = x.Description,
@@ -63,5 +63,18 @@ public class GetGroupSessionsQueryHandler : IRequestHandler<GetGroupSessionsQuer
     private bool IsBookedIn(Guid groupSessionUid, Guid userUid)
     {
         return _gymifyDbContext.ClientGroupSessions.Any(x => x.GroupSessionUid == groupSessionUid && x.ClientUid == userUid);
+    }
+
+    private string CountDuration(double totalHours)
+    {
+        switch (totalHours)
+        {
+            case < 1.0:
+                return $"{totalHours * 60} minutes";
+            case 1.0:
+                return $"{totalHours} hour";
+            default:
+                return $"{totalHours} hours";
+        }
     }
 }

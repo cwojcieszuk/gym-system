@@ -7,7 +7,7 @@ public class GroupSessionDTO
     public string GroupSessionName { get; init; }
     public string Place { get; init; }
     public string CoachName { get; init; }
-    public double Duration { get; init; }
+    public string Duration { get; init; }
     public int AvailableSlots { get; init; }
     public int TakenSlots { get; init; }
     public string Description { get; init; }
