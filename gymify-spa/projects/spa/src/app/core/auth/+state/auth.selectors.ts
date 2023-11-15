@@ -38,3 +38,8 @@ export const getIsAdmin = createSelector(
   getAuthState,
   state => state.user?.role === Roles.Admin
 );
+
+export const getIsCoach = createSelector(
+  getAuthState,
+  state => state.user?.role === Roles.Coach
+);

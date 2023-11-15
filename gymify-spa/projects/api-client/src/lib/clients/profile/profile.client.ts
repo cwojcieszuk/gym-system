@@ -31,4 +31,8 @@ export class ProfileClient {
 
     return this.http.post(`${this.url}/${userUid}/avatar`, formData);
   }
+
+  updateCoachDescription(userUid: UUID, description: string, categoryId: number[]): Observable<EmptyResponse> {
+    return this.http.put<EmptyResponse>(`${this.url}/${userUid}/coach-data`, { userUid, description, categoryId });
+  }
 }

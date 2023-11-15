@@ -1,0 +1,44 @@
+<h1 class="text-center">{{ data.groupSessionName }}</h1>
+
+<div class="flex flex-col gap-y-2">
+    <div class="flex gap-x-2 items-center">
+        <mat-icon>people</mat-icon>
+        <span>{{ data.takenSlots === data.availableSlots ? 'Full' : 'Available' }} {{ data.takenSlots + '/' + data.availableSlots }}</span>
+    </div>
+
+    <div class="flex gap-x-2 items-center">
+        <mat-icon>person</mat-icon>
+        <span>{{ data.coachName }}</span>
+    </div>
+
+    <div class="flex gap-x-2 items-center">
+        <mat-icon>timer</mat-icon>
+        <span>{{ data.hour }}</span>
+    </div>
+</div>
+
+<div class="flex flex-col pt-4">
+    <span class="font-bold">Description</span>
+
+    <span>{{ data.description }}</span>
+</div>
+
+<div class="flex justify-between pt-12" (click)="cancel()">
+    <button mat-stroked-button color="primary">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+
+    <ng-template [ngIf]="data.isBookedIn" [ngIfElse]="notBookedIn">
+        <button mat-raised-button color="primary" (click)="resign()">
+            <mat-icon>cancel</mat-icon>
+            <span>Resign</span>
+        </button>
+    </ng-template>
+    <ng-template #notBookedIn>
+        <button mat-raised-button color="primary" (click)="bookIn()">
+            <mat-icon>save</mat-icon>
+            <span>Book in</span>
+        </button>
+    </ng-template>
+</div>

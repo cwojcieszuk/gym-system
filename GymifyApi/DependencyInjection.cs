@@ -32,15 +32,23 @@ public static class DependencyInjection
                     .GetBytes(jwtSettings.GetSection("securityKey").Value))
             };
         });
-        
-        services.AddScoped<TemplateExistenceCheckFilter>();
-        services.AddScoped<TemplateOwnerCheckFilter>();
-        services.AddScoped<TrainingExistenceCheckFilter>();
 
         services.AddAuthorization(options =>
         {
             options.AddPolicy("Rights", policy => policy.RequireRole("Admin", "Coach", "User"));
         });
+        
+        return services;
+    }
+
+    public static IServiceCollection AddFilters(this IServiceCollection services)
+    {
+        services.AddScoped<TemplateExistenceCheckFilter>();
+        services.AddScoped<TemplateOwnerCheckFilter>();
+        services.AddScoped<TrainingExistenceCheckFilter>();
+        services.AddScoped<CoachExistenceCheckFilter>();
+        services.AddScoped<CoachHourExistenceCheckFilter>();
+        services.AddScoped<GroupSessionExistenceCheckFilter>();
         
         return services;
     }

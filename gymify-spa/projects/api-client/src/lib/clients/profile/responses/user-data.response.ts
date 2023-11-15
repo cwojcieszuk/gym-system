@@ -5,4 +5,6 @@ export interface UserDataResponse {
   login: string;
   birthDate: Date;
   avatar: any;
+  description?: string;
+  categoryId: number[];
 }

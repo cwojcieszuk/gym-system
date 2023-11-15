@@ -4,6 +4,8 @@ import { ProfileFacade } from '../../+state/profile.facade';
 import { BaseComponent } from '../../../../shared/components/base.component';
 import { filter } from 'rxjs';
 import { ImageService } from '../../../../shared/services/image.service';
+import { AuthFacade } from '../../../../core/auth/+state/auth.facade';
+import { DictionariesFacade } from '../../../../core/dictionaries-state/dictionaries.facade';
 
 @Component({
   selector: 'gym-profile-view',
@@ -22,6 +24,11 @@ export class ProfileViewComponent extends BaseComponent implements OnInit {
     confirmPassword: this.fb.control<string>('')
   });
 
+  readonly coachForm = this.fb.group({
+    description: this.fb.control<string>(''),
+    categoryId: this.fb.control<number[]>([]),
+  });
+
   imgSrc: string | ArrayBuffer | null = null;
   image: any;
 
@@ -29,12 +36,15 @@ export class ProfileViewComponent extends BaseComponent implements OnInit {
     private fb: NonNullableFormBuilder,
     public profileFacade: ProfileFacade,
     private imgService: ImageService,
+    public authFacade: AuthFacade,
+    public dictionariesFacade: DictionariesFacade
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.profileFacade.fetchUserData();
+    this.dictionariesFacade.fetchCoachCategories();
 
     this.observe(this.profileFacade.user$)
       .pipe(filter(Boolean))
@@ -48,6 +58,12 @@ export class ProfileViewComponent extends BaseComponent implements OnInit {
         });
 
         this.image = this.imgService.getJpeg(value.avatar);
+
+        if (value.description) {
+          this.coachForm.controls.description.patchValue(value.description);
+        }
+
+        this.coachForm.controls.categoryId.patchValue(value.categoryId);
       });
   }
 
@@ -78,5 +94,9 @@ export class ProfileViewComponent extends BaseComponent implements OnInit {
       reader.onload = e => this.imgSrc = reader.result;
       reader.readAsDataURL(file);
     }
+  }
+
+  saveDescription(): void {
+    this.profileFacade.updateCoachDescription(this.coachForm.controls.description.value, this.coachForm.controls.categoryId.value);
   }
 }

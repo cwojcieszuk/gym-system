@@ -1,0 +1,57 @@
+<h1 class="text-center">Group Session</h1>
+
+<form [formGroup]="form" class="grid grid-cols-2 gap-4">
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Slots</mat-label>
+        <input matInput formControlName="slots">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput [ngxMatDatetimePicker]="picker1" formControlName="startDate">
+        <mat-datepicker-toggle matIconSuffix [for]="$any(picker1)"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #picker1 [showSpinners]="true" [showSeconds]="false"
+                                 [stepHour]="1" [stepMinute]="1"
+                                 [touchUi]="false" color="primary">
+        </ngx-mat-datetime-picker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>End date</mat-label>
+        <input matInput [ngxMatDatetimePicker]="picker2" formControlName="endDate">
+        <mat-datepicker-toggle matIconSuffix [for]="$any(picker2)"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="false"
+                                 [stepHour]="1" [stepMinute]="1"
+                                 [touchUi]="false" color="primary">
+        </ngx-mat-datetime-picker>
+    </mat-form-field>
+
+    <mat-form-field class="h-fit">
+        <mat-label>Place</mat-label>
+        <mat-select formControlName="placeId">
+            <mat-option *ngFor="let place of dictionariesFacade.places$ | async" [value]="place.placeId">{{ place.placeName }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+</form>
+
+<div class="flex justify-between pt-8">
+    <button mat-stroked-button color="primary" (click)="cancel()">
+        <span>Cancel</span>
+        <mat-icon>cancel</mat-icon>
+    </button>
+
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">
+        <span>Create</span>
+        <mat-icon>save</mat-icon>
+    </button>
+</div>

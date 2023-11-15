@@ -1,0 +1,10 @@
+@use '../../../../../styles/typography';
+
+:host {
+  @apply block min-w-[550px] p-6;
+}
+
+h1 {
+  @apply pb-6;
+  @extend .typography-subtitle1;
+}

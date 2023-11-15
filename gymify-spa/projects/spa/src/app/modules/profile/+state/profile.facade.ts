@@ -62,4 +62,8 @@ export class ProfileFacade {
   cancelEditAvatar(): void {
     this.store.dispatch(ProfileActions.cancelEditAvatar());
   }
+
+  updateCoachDescription(description: string, categoryId: number[]): void {
+    this.store.dispatch(ProfileActions.updateCoachDescription({ description, categoryId }));
+  }
 }
