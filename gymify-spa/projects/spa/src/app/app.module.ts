@@ -20,8 +20,7 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular
 import { DictionariesStoreModule } from './core/dictionaries-state/dictionaries-store.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ErrorsInterceptor } from './core/auth/interceptors/errors.interceptor';
-import { MAT_MOMENT_DATE_FORMATS, MatMomentDateModule } from '@angular/material-moment-adapter';
-import { MomentUtcDateAdapter } from './shared/adapters/moment-utc-date.adapter';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { CalendarModule } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
@@ -37,7 +36,16 @@ import { DateAdapter } from 'angular-calendar';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: false,    // otherwise Date cannot be used
+        strictActionSerializability: false,   // otherwise Date cannot be used
+        strictActionWithinNgZone: true,
+        strictActionTypeUniqueness: true,
+      },
+    }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
@@ -69,18 +77,19 @@ import { DateAdapter } from 'angular-calendar';
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },
     },
-    {
-      provide: MAT_DATE_LOCALE,
-      useValue: 'pl-PL',
-    },
-    {
-      provide: MAT_DATE_FORMATS,
-      useValue: MAT_MOMENT_DATE_FORMATS,
-    },
-    {
-      provide: DateAdapter,
-      useClass: MomentUtcDateAdapter,
-    },
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    { provide: MAT_DATE_FORMATS, useValue: {
+      parse: {
+        dateInput: 'DD-MM-YYYY',
+      },
+      display: {
+        dateInput: 'DD-MM-YYYY',
+        monthYearLabel: 'YYYY',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'YYYY',
+      },
+    } },
   ],
   bootstrap: [BootstrapComponent],
 })
