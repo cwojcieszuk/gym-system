@@ -1,5 +1,6 @@
 ﻿using Gymify.Application.Calendar.Commands.AddCoachHour;
 using Gymify.Application.Calendar.Queries.GetCalendarEvents;
+using Gymify.Application.Calendar.Queries.GetCoachHours;
 using Gymify.Shared.Constants;
 using GymifyApi.Extensions;
 using MediatR;
@@ -49,5 +50,20 @@ public class CalendarController : ControllerBase
         await _mediator.Send(request with { CoachUid = userUid });
         
         return NoContent();
+    }
+
+    [HttpGet]
+    [Route("coach-hours")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = $"{RoleConstants.Admin},{RoleConstants.Coach}")]
+    public async Task<IActionResult> GetCoachHours([FromQuery] GetCoachHoursQuery request)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        return Ok(await _mediator.Send(request with { CoachUid = userUid }));
     }
 }
