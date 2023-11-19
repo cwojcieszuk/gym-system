@@ -19,6 +19,7 @@
                [enableTime]="true"
                [minuteIncrement]="1"
                [dateFormat]="'Y-m-d H:i'"
+               [time24hr]="true"
         >
     </div>
 
@@ -33,13 +34,15 @@
                [enableTime]="true"
                [minuteIncrement]="1"
                [dateFormat]="'Y-m-d H:i'"
+               [time24hr]="true"
         >
     </div>
 
     <button mat-icon-button
             class="!bg-primary !text-white !rounded-md !items-center !justify-center !flex mt-auto"
             (click)="addCoachHour()"
-            [disabled]="endDate > startDate"
+            [disabled]="startDate > endDate"
+            [class.disabled]="startDate > endDate"
     >
         <mat-icon>add</mat-icon>
     </button>

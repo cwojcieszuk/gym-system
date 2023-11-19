@@ -7,3 +7,9 @@
 h3 {
   @extend .typography-h3;
 }
+
+button {
+  &.disabled {
+    @apply opacity-20 cursor-not-allowed;
+  }
+}
