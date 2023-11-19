@@ -38,7 +38,8 @@
             "styles": [
               "projects/spa/src/styles/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/angular-calendar/css/angular-calendar.css"
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/flatpickr/dist/flatpickr.css"
             ],
             "scripts": []
           },
@@ -113,7 +114,8 @@
             "styles": [
               "projects/spa/src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/angular-calendar/css/angular-calendar.css"
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/flatpickr/dist/flatpickr.css"
             ],
             "scripts": []
           }
@@ -150,7 +152,8 @@
             "styles": [
               "projects/api-client/src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/angular-calendar/css/angular-calendar.css"
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/flatpickr/dist/flatpickr.css"
             ],
             "scripts": []
           },
@@ -220,7 +223,8 @@
             "styles": [
               "projects/api-client/src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/angular-calendar/css/angular-calendar.css"
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/flatpickr/dist/flatpickr.css"
             ],
             "scripts": []
           }

@@ -6,10 +6,12 @@ export const CALENDAR_FEATURE_KEY = 'calendar';
 
 export interface CalendarState {
   calendarEvents: CalendarEventDTO[];
+  selectedDate: Date;
 }
 
 const initialState: CalendarState = {
   calendarEvents: [],
+  selectedDate: new Date(),
 };
 
 export const calendarReducer = createReducer<CalendarState>(
@@ -17,5 +19,9 @@ export const calendarReducer = createReducer<CalendarState>(
   on(CalendarActions.fetchCalendarEventsSuccess, (state, payload) => ({
     ...state,
     calendarEvents: payload.response,
+  })),
+  on(CalendarActions.selectDate, (state, payload) => ({
+    ...state,
+    selectedDate: payload.date,
   }))
 );

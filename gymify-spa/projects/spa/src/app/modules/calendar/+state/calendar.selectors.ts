@@ -7,3 +7,8 @@ export const getCalendarEvents = createSelector(
   getCalendarState,
   state => state.calendarEvents
 );
+
+export const getSelectedDate = createSelector(
+  getCalendarState,
+  state => state.selectedDate
+);

@@ -1,0 +1,9 @@
+@use '../../../../../styles/typography';
+
+:host {
+  @apply p-8 text-center;
+}
+
+h3 {
+  @extend .typography-h3;
+}

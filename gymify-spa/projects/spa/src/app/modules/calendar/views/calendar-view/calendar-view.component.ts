@@ -64,7 +64,9 @@ export class CalendarViewComponent extends BaseComponent implements OnInit {
       } else {
         this.activeDayIsOpen = true;
       }
+
       this.viewDate = date;
+      this.facade.selectDate(date);
     }
   }
 

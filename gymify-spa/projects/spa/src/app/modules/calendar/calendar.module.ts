@@ -15,10 +15,15 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { DateAdapter } from 'angular-calendar';
+import { CoachHoursViewComponent } from './views/coach-hours-view/coach-hours-view.component';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     CalendarViewComponent,
+    CoachHoursViewComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +40,9 @@ import { DateAdapter } from 'angular-calendar';
     }),
     FlatpickrModule,
     MatDatepickerModule,
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
   ],
 })
 export class CalendarModule { }
