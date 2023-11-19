@@ -22,6 +22,8 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ErrorsInterceptor } from './core/auth/interceptors/errors.interceptor';
 import { MAT_MOMENT_DATE_FORMATS, MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MomentUtcDateAdapter } from './shared/adapters/moment-utc-date.adapter';
+import { CalendarModule } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,10 @@ import { MomentUtcDateAdapter } from './shared/adapters/moment-utc-date.adapter'
     MatNativeDateModule,
     DictionariesStoreModule,
     MatMomentDateModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [
     {
