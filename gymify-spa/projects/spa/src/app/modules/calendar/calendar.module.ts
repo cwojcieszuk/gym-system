@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatIconModule,
     MatTableModule,
+    MatInputModule,
   ],
 })
 export class CalendarModule { }

@@ -1,4 +1,11 @@
-<h3>Manage hours {{ facade.selectedDate$ | async | date }}</h3>
+<div class="grid grid-cols-5">
+    <button mat-stroked-button color="primary" class="w-fit" routerLink="..">
+        <mat-icon>arrow_left</mat-icon>
+        <span>Back</span>
+    </button>
+
+    <h3 class="w-full col-span-3">Manage hours {{ facade.selectedDate$ | async | date }}</h3>
+</div>
 
 <div class="flex gap-x-4 pt-32 items-center">
     <div class="flex flex-col">
@@ -11,7 +18,7 @@
                [noCalendar]="true"
                [enableTime]="true"
                [minuteIncrement]="1"
-               [dateFormat]="'H:i'"
+               [dateFormat]="'Y-m-d H:i'"
         >
     </div>
 
@@ -25,13 +32,14 @@
                [noCalendar]="true"
                [enableTime]="true"
                [minuteIncrement]="1"
-               [dateFormat]="'H:i'"
+               [dateFormat]="'Y-m-d H:i'"
         >
     </div>
 
     <button mat-icon-button
             class="!bg-primary !text-white !rounded-md !items-center !justify-center !flex mt-auto"
             (click)="addCoachHour()"
+            [disabled]="endDate > startDate"
     >
         <mat-icon>add</mat-icon>
     </button>

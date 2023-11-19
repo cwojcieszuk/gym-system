@@ -1,5 +1,5 @@
 <div class="flex flex-wrap text-center justify-between">
-    <div class="flex">
+    <div class="flex mt-auto">
         <div class="flex gap-x-2 h-fit">
             <div
                 class="btn btn-primary"
@@ -32,7 +32,7 @@
     <div class="col-md-4">
         <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
     </div>
-    <div class="flex">
+    <div class="flex flex-col-reverse gap-y-4">
         <div class="flex gap-x-2 h-fit">
             <div
                 class="btn"
@@ -56,6 +56,11 @@
                 Day
             </div>
         </div>
+
+        <button mat-raised-button color="primary" routerLink="coach-hours">
+            <mat-icon >arrow_right</mat-icon>
+            <span>Manage coach hours</span>
+        </button>
     </div>
 </div>
 <br />

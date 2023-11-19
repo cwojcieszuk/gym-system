@@ -2,6 +2,7 @@ import { CalendarEventDTO } from '../../../../../../api-client/src/lib/clients/c
 import { createReducer, on } from '@ngrx/store';
 import * as CalendarActions from './calendar.actions';
 import { CoachHour } from '../../../../../../api-client/src/lib/clients/calendar/models/coach-hour.model';
+import { addHours } from 'date-fns';
 
 export const CALENDAR_FEATURE_KEY = 'calendar';
 
@@ -25,7 +26,7 @@ export const calendarReducer = createReducer<CalendarState>(
   })),
   on(CalendarActions.selectDate, (state, payload) => ({
     ...state,
-    selectedDate: payload.date,
+    selectedDate: addHours(payload.date, 1),
   })),
   on(CalendarActions.fetchCoachHoursSuccess, (state, payload) => ({
     ...state,
