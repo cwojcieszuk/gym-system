@@ -8,6 +8,7 @@ import { AddCoachHourParams } from '../../../../../../api-client/src/lib/clients
 export class CalendarFacade {
   calendarEvents$ = this.store.select(CalendarSelectors.getCalendarEvents);
   selectedDate$ = this.store.select(CalendarSelectors.getSelectedDate);
+  coachHours$ = this.store.select(CalendarSelectors.getCoachHours);
 
   constructor(private store: Store) {}
 
@@ -21,5 +22,9 @@ export class CalendarFacade {
 
   addCoachHour(params: AddCoachHourParams): void {
     this.store.dispatch(CalendarActions.addCoachHour({ params }));
+  }
+
+  fetchCoachHours(): void {
+    this.store.dispatch(CalendarActions.fetchCoachHours());
   }
 }

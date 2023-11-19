@@ -19,6 +19,7 @@ import { CoachHoursViewComponent } from './views/coach-hours-view/coach-hours-vi
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     MatButtonModule,
     MatIconModule,
+    MatTableModule,
   ],
 })
 export class CalendarModule { }

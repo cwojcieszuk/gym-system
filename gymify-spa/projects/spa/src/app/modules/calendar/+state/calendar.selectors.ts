@@ -12,3 +12,8 @@ export const getSelectedDate = createSelector(
   getCalendarState,
   state => state.selectedDate
 );
+
+export const getCoachHours = createSelector(
+  getCalendarState,
+  state => state.coachHours
+);

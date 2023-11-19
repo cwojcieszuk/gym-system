@@ -5,6 +5,7 @@ import { CalendarEventDTO } from './models/calendar-event.dto';
 import { mapToHttpParams } from '../../mappers/map-to-http-params';
 import { AddCoachHourParams } from './params/add-coach-hour.params';
 import { EmptyResponse } from '../../types/empty.response';
+import { CoachHour } from './models/coach-hour.model';
 
 @Injectable({ providedIn: 'root' })
 export class CalendarClient {
@@ -20,5 +21,9 @@ export class CalendarClient {
 
   addCoachHour(params: AddCoachHourParams): Observable<EmptyResponse> {
     return this.http.post(`${this.url}/coach-hours`, params);
+  }
+
+  getCoachHours(date: Date): Observable<CoachHour[]> {
+    return this.http.get<CoachHour[]>(`${this.url}/coach-hours`,{ params: mapToHttpParams({ date }) });
   }
 }
