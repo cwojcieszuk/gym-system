@@ -17,10 +17,14 @@ img {
 mat-nav-list {
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 5px;
   height: 80%;
 }
 
 .active {
-  @apply bg-primary py-2 text-white rounded-tr-xl rounded-br-xl mr-4;
+  @apply bg-primary text-white rounded-tr-xl rounded-br-xl mr-4;
+}
+
+.menu-item {
+  @apply flex pl-4 items-center gap-1 font-medium py-2;
 }
