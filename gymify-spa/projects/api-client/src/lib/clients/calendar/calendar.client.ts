@@ -13,6 +13,6 @@ export class CalendarClient {
   ) {}
 
   getCalendarEvents(date: Date): Observable<CalendarEventDTO[]> {
-    return this.http.get<CalendarEventDTO[]>(this.url, { params: mapToHttpParams(date) });
+    return this.http.get<CalendarEventDTO[]>(this.url, { params: mapToHttpParams({ date }) });
   }
 }

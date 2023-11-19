@@ -60,6 +60,10 @@ const routes: Routes = [
             path: 'group-sessions',
             loadChildren: () => import('./modules/group-sessions/group-sessions.module').then(m => m.GroupSessionsModule),
           },
+          {
+            path: 'calendar',
+            loadChildren: () => import('./modules/calendar/calendar.module').then(m => m.CalendarModule),
+          },
         ],
       },
     ],
