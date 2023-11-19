@@ -22,7 +22,7 @@ public class GetCoachHoursByDateQueryHandler : IRequestHandler<GetCoachHoursByDa
 
         return coach.CoachHours
             .Where(x => x.ClientUid == null)
-            .Where(x => x.StartDate.Date == Convert.ToDateTime(request.Date))
+            .Where(x => x.StartDate.Date == request.Date.Date)
             .Select(x => new CoachHourDTO(x.CoachHourUid, x.StartDate));
     }
 }
