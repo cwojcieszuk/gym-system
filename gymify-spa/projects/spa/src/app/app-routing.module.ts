@@ -23,6 +23,11 @@ const routes: Routes = [
         canActivate: [AuthenticatedGuard],
         children: [
           {
+            path: '',
+            redirectTo: 'dashboard',
+            pathMatch: 'full',
+          },
+          {
             path: 'users',
             loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule),
           },
@@ -63,6 +68,10 @@ const routes: Routes = [
           {
             path: 'calendar',
             loadChildren: () => import('./modules/calendar/calendar.module').then(m => m.CalendarModule),
+          },
+          {
+            path: 'dashboard',
+            loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
           },
         ],
       },
