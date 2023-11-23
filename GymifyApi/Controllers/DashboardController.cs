@@ -1,3 +1,4 @@
+using Gymify.Application.Dashboard.IncomingTrainings.Queries;
 using Gymify.Application.Dashboard.PopularExercises.Queries;
 using Gymify.Application.Dashboard.Queries;
 using GymifyApi.Extensions;
@@ -36,4 +37,15 @@ public class DashboardController :ControllerBase
         GetPopularExercisesQuery query = new GetPopularExercisesQuery(userUid);
         return Ok(await _mediator.Send(query));
     }
+
+    [HttpGet]
+    [Route("incoming-group-sessions")]
+    public async Task<IActionResult> GetIncomingGruopSessions([FromQuery] GetIncomingGroupSessionsQuery request)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+        GetIncomingGroupSessionsQuery query = new GetIncomingGroupSessionsQuery(userUid);
+        return Ok(await _mediator.Send(query));
+    }
+    
+    
 }
