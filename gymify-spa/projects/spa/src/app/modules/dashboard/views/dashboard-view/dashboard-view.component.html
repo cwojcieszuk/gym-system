@@ -1,0 +1,79 @@
+<div class="grid grid-cols-2 gap-8">
+    <gym-dashboard-card [header]="'Incoming trainings'" [subtitle]="'View group sessions'" [redirectUrl]="'../group-sessions'">
+        <div class="flex flex-col gap-y-4">
+            <div class="grid grid-cols-3 border-b-[1px] border-black pb-2" *ngFor="let session of facade.incomingGroupSessions$ | async">
+                <div class="flex flex-col">
+                    <span class="font-bold">{{ session.groupSessionName }}</span>
+                    <span class="text-[#737373]">{{ session.date | date }}</span>
+                </div>
+
+                <div class="flex flex-col">
+                    <span class="font-bold">Coach</span>
+                    <span class="text-[#737373]">{{ session.coachName }}</span>
+                </div>
+
+                <div class="flex flex-col">
+                    <span class="font-bold">Place</span>
+                    <span class="text-[#737373]">{{ session.place }}</span>
+                </div>
+            </div>
+        </div>
+    </gym-dashboard-card>
+
+    <gym-dashboard-card [header]="'Recent Templates'" [subtitle]="'View templates'" [redirectUrl]="'../community-templates'">
+        <div class="flex flex-col gap-y-4">
+            <div class="grid grid-cols-3 border-b-[1px] border-black pb-2" *ngFor="let template of facade.recentTemplates$ | async">
+                <div class="flex flex-col">
+                    <span class="font-bold">Name</span>
+                    <span class="text-[#737373]">{{ template.templateName }}</span>
+                </div>
+
+                <div class="flex flex-col">
+                    <span class="font-bold">Difficulty</span>
+                    <span class="text-[#737373]">{{ template.difficultyLevelId }}</span>
+                </div>
+
+                <div class="flex flex-col">
+                    <span class="font-bold">Author</span>
+                    <span class="text-[#737373]">{{ template.author }}</span>
+                </div>
+            </div>
+        </div>
+    </gym-dashboard-card>
+
+    <gym-dashboard-card [header]="'Popular Exercises'" [subtitle]="'View exercises'" [redirectUrl]="'../exercises'">
+        <div class="flex justify-between">
+            <div class="card" *ngFor="let exercise of (facade.popularExercises$ | async)">
+                <img [src]="imgService.getGif(exercise.exerciseGif)" alt="image-gif">
+                <span class="font-bold overflow-ellipsis line-clamp-1"
+                      [matTooltip]="exercise.exerciseName | firstLetterUppercase"
+                      [matTooltipDisabled]="exercise.exerciseName.length < 23"
+                >{{ exercise.exerciseName | firstLetterUppercase }}</span>
+                <span>{{ exercise.bodyPart | firstLetterUppercase }}</span>
+                <button mat-icon-button *ngIf="!exercise.isFavourite" (click)="exercisesFacade.likeExercise(exercise.exerciseUid)">
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+
+                <button mat-icon-button *ngIf="exercise.isFavourite" (click)="exercisesFacade.dislikeExercise(exercise.exerciseUid)">
+                    <mat-icon>favorite</mat-icon>
+                </button>
+            </div>
+        </div>
+    </gym-dashboard-card>
+
+    <gym-dashboard-card [header]="'Popular Coaches'" [subtitle]="'View coaches'" [redirectUrl]="'../coaches'">
+        <div class="flex justify-between">
+            <div class="card" *ngFor="let coach of facade.popularCoaches$ | async">
+                <img class="w-[200px] h-[200px]" [src]="coach.avatar == null ? '../../../../../assets/default-user.png' : imgService.getJpeg(coach.avatar)">
+                <span class="font-bold text-[14px]">{{ coach.coachName }}</span>
+                <span class="text-[14px]">{{ coach.categories[0] }}</span>
+                <button mat-icon-button *ngIf="!coach.isFavourite" (click)="coachesFacade.likeCoach(coach.coachUid)">
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="coach.isFavourite" (click)="coachesFacade.dislikeCoach(coach.coachUid)">
+                    <mat-icon>favorite</mat-icon>
+                </button>
+            </div>
+        </div>
+    </gym-dashboard-card>
+</div>
