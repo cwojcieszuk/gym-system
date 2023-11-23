@@ -1,6 +1,7 @@
 using Gymify.Application.Dashboard.IncomingTrainings.Queries;
 using Gymify.Application.Dashboard.PopularExercises.Queries;
 using Gymify.Application.Dashboard.Queries;
+using Gymify.Application.Dashboard.RecentTemplates.Queries;
 using GymifyApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -46,6 +47,14 @@ public class DashboardController :ControllerBase
         GetIncomingGroupSessionsQuery query = new GetIncomingGroupSessionsQuery(userUid);
         return Ok(await _mediator.Send(query));
     }
-    
-    
+
+    [HttpGet]
+    [Route("recent-templates")]
+    public async Task<IActionResult> GetRecentTemplates([FromQuery] GetRecentTemplatesQuery request)
+    {
+        Guid userUid = Guid.Parse((User.GetUserUid()));
+        GetRecentTemplatesQuery query = new GetRecentTemplatesQuery(userUid);
+        return Ok(await _mediator.Send(query));
+
+    }
 }

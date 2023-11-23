@@ -17,11 +17,11 @@ public class GetIncomingGroupSessionsQueryHandler : IRequestHandler<GetIncomingG
     public async Task<List<IncomingGroupSessionDTO>> Handle(GetIncomingGroupSessionsQuery request,
         CancellationToken cancellationToken)
     {
-        List<GroupSession> groupSessionsList = _gymifyDbContext.GroupSessions
+        List<GroupSession> groupSessionsList = await _gymifyDbContext.GroupSessions
             .Include(x => x.Coach)
             .ThenInclude(x => x.User)
             .Include(x => x.Place)
-            .ToList();
+            .ToListAsync();
         
         var sortedList = groupSessionsList
             .OrderBy(x => x.SessionStartDate.Day)
@@ -32,7 +32,8 @@ public class GetIncomingGroupSessionsQueryHandler : IRequestHandler<GetIncomingG
             g.GroupSessionUid,
             g.SessionName,
             g.Coach.User.FirstName + " " + g.Coach.User.LastName,
-            g.Place.PlaceName)).ToList();
+            g.Place.PlaceName,
+            g.SessionStartDate)).ToList();
         return content;
     } 
 }
