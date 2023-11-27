@@ -64,6 +64,7 @@ public class CalendarController : ControllerBase
             return Forbid();
         }
 
-        return Ok(await _mediator.Send(request with { CoachUid = userUid }));
+        IEnumerable<CoachHourDTO> content = await _mediator.Send(request with { CoachUid = userUid });
+        return Ok(content);
     }
 }
