@@ -23,19 +23,19 @@ public class DashboardController :ControllerBase
 
     [HttpGet]
     [Route("popular-coaches")]
-    public async Task<IActionResult> GetPopularCoaches([FromQuery] GetPopularCoachesQuery request)
+    public async Task<IActionResult> GetPopularCoaches([FromQuery] GetPopularCoachesQuery request, int amount)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
-        GetPopularCoachesQuery query = new GetPopularCoachesQuery(userUid);
+        GetPopularCoachesQuery query = new GetPopularCoachesQuery(userUid, amount);
         return Ok(await _mediator.Send(query));
     }
     
     [HttpGet]
     [Route("popular-exercises")]
-    public async Task<IActionResult> GetPopularExercises([FromQuery] GetPopularCoachesQuery request)
+    public async Task<IActionResult> GetPopularExercises([FromQuery] GetPopularCoachesQuery request, int amount)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
-        GetPopularExercisesQuery query = new GetPopularExercisesQuery(userUid);
+        GetPopularExercisesQuery query = new GetPopularExercisesQuery(userUid, amount);
         return Ok(await _mediator.Send(query));
     }
 
