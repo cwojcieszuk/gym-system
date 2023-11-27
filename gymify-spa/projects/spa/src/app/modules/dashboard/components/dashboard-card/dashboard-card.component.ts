@@ -14,4 +14,7 @@ export class DashboardCardComponent {
 
   @Input()
   redirectUrl?: string;
+
+  @Input()
+  isLoading: boolean | null = false;
 }

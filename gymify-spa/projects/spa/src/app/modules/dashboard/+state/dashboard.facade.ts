@@ -10,6 +10,11 @@ export class DashboardFacade {
   incomingGroupSessions$ = this.store.select(DashboardSelectors.getIncomingGroupSessions);
   recentTemplates$ = this.store.select(DashboardSelectors.getRecentTemplates);
 
+  areExercisesLoading$ = this.store.select(DashboardSelectors.areExercisesLoading);
+  areCoachesLoading$ = this.store.select(DashboardSelectors.areCoachesLoading);
+  areTemplatesLoading$ = this.store.select(DashboardSelectors.areTemplatesLoading);
+  areGroupSessionsLoading$ = this.store.select(DashboardSelectors.areGroupSessionsLoading);
+
   constructor(private store: Store) {}
 
   getPopularCoaches(): void {

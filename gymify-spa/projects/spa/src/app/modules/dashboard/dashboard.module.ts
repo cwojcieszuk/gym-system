@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ExercisesStoreModule } from '../exercises/+state/exercises-store.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ExercisesStoreModule } from '../exercises/+state/exercises-store.module
     MatIconModule,
     MatTooltipModule,
     ExercisesStoreModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class DashboardModule { }

@@ -22,3 +22,23 @@ export const getRecentTemplates = createSelector(
   getDashboardState,
   state => state.recentTemplates
 );
+
+export const areExercisesLoading = createSelector(
+  getDashboardState,
+  state => state.areExercisesLoading
+);
+
+export const areCoachesLoading = createSelector(
+  getDashboardState,
+  state => state.areCoachesLoading
+);
+
+export const areTemplatesLoading = createSelector(
+  getDashboardState,
+  state => state.areTemplatesLoading
+);
+
+export const areGroupSessionsLoading = createSelector(
+  getDashboardState,
+  state => state.areGroupSessionsLoading
+);

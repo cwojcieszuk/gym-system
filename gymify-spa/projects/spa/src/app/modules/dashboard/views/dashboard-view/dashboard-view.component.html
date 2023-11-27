@@ -1,5 +1,5 @@
 <div class="grid grid-cols-2 gap-8">
-    <gym-dashboard-card [header]="'Incoming trainings'" [subtitle]="'View group sessions'" [redirectUrl]="'../group-sessions'">
+    <gym-dashboard-card [header]="'Incoming trainings'" [subtitle]="'View group sessions'" [redirectUrl]="'../group-sessions'" [isLoading]="facade.areGroupSessionsLoading$ | async">
         <div class="flex flex-col gap-y-4">
             <div class="grid grid-cols-3 border-b-[1px] border-black pb-2" *ngFor="let session of facade.incomingGroupSessions$ | async">
                 <div class="flex flex-col">
@@ -20,7 +20,7 @@
         </div>
     </gym-dashboard-card>
 
-    <gym-dashboard-card [header]="'Recent Templates'" [subtitle]="'View templates'" [redirectUrl]="'../community-templates'">
+    <gym-dashboard-card [header]="'Recent Templates'" [subtitle]="'View templates'" [redirectUrl]="'../community-templates'" [isLoading]="facade.areTemplatesLoading$ | async">
         <div class="flex flex-col gap-y-4">
             <div class="grid grid-cols-3 border-b-[1px] border-black pb-2" *ngFor="let template of facade.recentTemplates$ | async">
                 <div class="flex flex-col">
@@ -41,7 +41,7 @@
         </div>
     </gym-dashboard-card>
 
-    <gym-dashboard-card [header]="'Popular Exercises'" [subtitle]="'View exercises'" [redirectUrl]="'../exercises'">
+    <gym-dashboard-card [header]="'Popular Exercises'" [subtitle]="'View exercises'" [redirectUrl]="'../exercises'" [isLoading]="facade.areExercisesLoading$ | async">
         <div class="flex justify-between">
             <div class="card" *ngFor="let exercise of (facade.popularExercises$ | async)">
                 <img [src]="imgService.getGif(exercise.exerciseGif)" alt="image-gif">
@@ -61,7 +61,7 @@
         </div>
     </gym-dashboard-card>
 
-    <gym-dashboard-card [header]="'Popular Coaches'" [subtitle]="'View coaches'" [redirectUrl]="'../coaches'">
+    <gym-dashboard-card [header]="'Popular Coaches'" [subtitle]="'View coaches'" [redirectUrl]="'../coaches'" [isLoading]="facade.areCoachesLoading$ | async">
         <div class="flex justify-between">
             <div class="card" *ngFor="let coach of facade.popularCoaches$ | async">
                 <img class="w-[200px] h-[200px]" [src]="coach.avatar == null ? '../../../../../assets/default-user.png' : imgService.getJpeg(coach.avatar)">

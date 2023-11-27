@@ -14,6 +14,11 @@ export interface DashboardState {
   popularExercises: PopularExerciseDTO[];
   incomingGroupSessions: IncomingGroupSessionDTO[];
   recentTemplates: RecentTemplateDTO[];
+
+  areCoachesLoading: boolean;
+  areExercisesLoading: boolean;
+  areGroupSessionsLoading: boolean;
+  areTemplatesLoading: boolean;
 }
 
 const initialState: DashboardState = {
@@ -21,6 +26,10 @@ const initialState: DashboardState = {
   popularExercises: [],
   incomingGroupSessions: [],
   recentTemplates: [],
+  areCoachesLoading: false,
+  areExercisesLoading: false,
+  areGroupSessionsLoading: false,
+  areTemplatesLoading: false,
 };
 
 export const dashboardReducer = createReducer<DashboardState>(
@@ -40,5 +49,37 @@ export const dashboardReducer = createReducer<DashboardState>(
   on(DashboardActions.fetchRecentTemplatesSuccess, (state, payload) => ({
     ...state,
     recentTemplates: payload.response,
+  })),
+  on(DashboardActions.fetchPopularCoaches, state => ({
+    ...state,
+    areCoachesLoading: true,
+  })),
+  on(DashboardActions.fetchPopularCoachesSuccess, DashboardActions.fetchPopularCoachesFailure, state => ({
+    ...state,
+    areCoachesLoading: false,
+  })),
+  on(DashboardActions.fetchPopularExercises, state => ({
+    ...state,
+    areExercisesLoading: true,
+  })),
+  on(DashboardActions.fetchPopularExercisesSuccess, DashboardActions.fetchPopularExercisesFailure, state => ({
+    ...state,
+    areExercisesLoading: false,
+  })),
+  on(DashboardActions.fetchRecentTemplates, state => ({
+    ...state,
+    areTemplatesLoading: true,
+  })),
+  on(DashboardActions.fetchRecentTemplatesSuccess, DashboardActions.fetchRecentTemplatesFailure, state => ({
+    ...state,
+    areTemplatesLoading: false,
+  })),
+  on(DashboardActions.fetchIncomingGroupSessions, state => ({
+    ...state,
+    areGroupSessionsLoading: true,
+  })),
+  on(DashboardActions.fetchIncomingGroupSessionsSuccess, DashboardActions.fetchIncomingGroupSessionsFailure, state => ({
+    ...state,
+    areGroupSessionsLoading: false,
   }))
 );
