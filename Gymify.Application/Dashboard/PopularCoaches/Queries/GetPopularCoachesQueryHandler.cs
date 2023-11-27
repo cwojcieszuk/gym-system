@@ -19,7 +19,8 @@ public class GetPopularCoachesQueryHandler : IRequestHandler<GetPopularCoachesQu
         List<Guid> top3 = await _gymifyDbContext.FavouriteCoaches.GroupBy(x => x)
             .OrderByDescending(x => x.Count())
             .Take(request.Amount)
-            .Select(x => x.Key.CoachUid).ToListAsync(cancellationToken);
+            .Select(x => x.Key.CoachUid)
+            .ToListAsync(cancellationToken);
 
         List<Coach> coaches = await _gymifyDbContext.Coaches
             .Include(c => c.CoachTypes)

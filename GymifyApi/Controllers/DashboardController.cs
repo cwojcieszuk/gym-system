@@ -23,19 +23,19 @@ public class DashboardController :ControllerBase
 
     [HttpGet]
     [Route("popular-coaches")]
-    public async Task<IActionResult> GetPopularCoaches([FromQuery] GetPopularCoachesQuery request, int amount)
+    public async Task<IActionResult> GetPopularCoaches([FromQuery] GetPopularCoachesQuery request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
-        GetPopularCoachesQuery query = new GetPopularCoachesQuery(userUid, amount);
+        GetPopularCoachesQuery query = new GetPopularCoachesQuery(userUid, request.Amount);
         return Ok(await _mediator.Send(query));
     }
     
     [HttpGet]
     [Route("popular-exercises")]
-    public async Task<IActionResult> GetPopularExercises([FromQuery] GetPopularCoachesQuery request, int amount)
+    public async Task<IActionResult> GetPopularExercises([FromQuery] GetPopularCoachesQuery request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
-        GetPopularExercisesQuery query = new GetPopularExercisesQuery(userUid, amount);
+        GetPopularExercisesQuery query = new GetPopularExercisesQuery(userUid, request.Amount);
         return Ok(await _mediator.Send(query));
     }
 
@@ -44,7 +44,7 @@ public class DashboardController :ControllerBase
     public async Task<IActionResult> GetIncomingGruopSessions([FromQuery] GetIncomingGroupSessionsQuery request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
-        GetIncomingGroupSessionsQuery query = new GetIncomingGroupSessionsQuery(userUid);
+        GetIncomingGroupSessionsQuery query = new GetIncomingGroupSessionsQuery(userUid, request.Amount);
         return Ok(await _mediator.Send(query));
     }
 

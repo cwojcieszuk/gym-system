@@ -26,7 +26,7 @@ public class GetIncomingGroupSessionsQueryHandler : IRequestHandler<GetIncomingG
         var sortedList = groupSessionsList
             .OrderBy(x => x.SessionStartDate.Day)
             .ThenBy(x => x.SessionStartDate.Hour)
-            .Take(3)
+            .Take(request.Amount)
             .ToList();
         
         List<IncomingGroupSessionDTO> content = sortedList.Select(g => new IncomingGroupSessionDTO(
