@@ -27,6 +27,10 @@ export class GroupSessionFiltersComponent {
     this.dictionariesFacade.fetchCoachCategories();
   }
 
+  clear(): void {
+    this.form.reset();
+  }
+
   save(): void {
     this.facade.setFilters({
       name: this.form.value.name ?? '',
