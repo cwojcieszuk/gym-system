@@ -21,8 +21,7 @@ public class GetCoachHoursByDateQueryHandler : IRequestHandler<GetCoachHoursByDa
             .SingleAsync(x => x.CoachUid == request.CoachUid, cancellationToken);
 
         return coach.CoachHours
-            .Where(x => x.ClientUid == null)
-            .Where(x => x.StartDate.Date == request.Date.Date)
+            .Where(x => x.ClientUid == null && x.StartDate.Date == request.Date.Date)
             .Select(x => new CoachHourDTO(x.CoachHourUid, x.StartDate));
     }
 }

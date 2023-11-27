@@ -18,20 +18,20 @@ public class GetCalendarEventsQueryHandler : IRequestHandler<GetCalendarEventsQu
     
     public async Task<IEnumerable<CalendarEventDTO>> Handle(GetCalendarEventsQuery request, CancellationToken cancellationToken)
     {
-        IEnumerable<CalendarEventDTO> trainings = await GetTrainingEvents(request.Date, request.UserUid);
+        IEnumerable<CalendarEventDTO> trainings = await GetTrainingEvents(request.Date, request.UserUid, cancellationToken);
         IEnumerable<CalendarEventDTO> groupSessions = await GetGroupSessionEvents(request.Date, request.UserUid);
         IEnumerable<CalendarEventDTO> coachHours = await GetCoachHoursEvents(request.Date, request.UserUid);
         
         return trainings.Concat(groupSessions).Concat(coachHours);
     }
 
-    private async Task<IEnumerable<CalendarEventDTO>> GetTrainingEvents(DateTime date, Guid userUid)
+    private async Task<IEnumerable<CalendarEventDTO>> GetTrainingEvents(DateTime date, Guid userUid, CancellationToken cancellationToken)
     {
         List<Training> trainings = await _gymifyDbContext.Training
             .Include(x => x.UserTrainings)
-            .Where(x => x.TrainingDate.Date.Month == date.Date.Month)
-            .Where(x => x.UserTrainings.Any(t => t.UserUid == userUid))
-            .ToListAsync();
+            .Where(x => x.TrainingDate.Date.Month == date.Date.Month && 
+                        x.UserTrainings.Any(t => t.UserUid == userUid))
+            .ToListAsync(cancellationToken);
 
         List<CalendarEventDTO> result = new List<CalendarEventDTO>();
 

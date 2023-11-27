@@ -16,10 +16,9 @@ public class GetCoachHoursQueryHandler : IRequestHandler<GetCoachHoursQuery, IEn
     public async Task<IEnumerable<CoachHourDTO>> Handle(GetCoachHoursQuery request, CancellationToken cancellationToken)
     {
         return await _gymifyDbContext.CoachHours
-            .Where(x => x.CoachUid == request.CoachUid)
-            .Where(x => x.StartDate.Date == request.Date.Date)
             .Include(x => x.Client)
             .ThenInclude(x => x.User)
+            .Where(x => x.CoachUid == request.CoachUid && x.StartDate.Date == request.Date.Date)
             .Select(x => new CoachHourDTO(
                 x.CoachHourUid, 
                 x.CoachUid, x.ClientUid, 
