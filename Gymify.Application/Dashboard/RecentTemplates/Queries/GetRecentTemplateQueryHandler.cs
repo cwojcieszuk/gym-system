@@ -20,17 +20,15 @@ public class GetRecentTemplateQueryHandler : IRequestHandler<GetRecentTemplatesQ
             .Include(t => t.DifficultyLevel)
             .Include(t => t.User)
             .Where(t => t.IsShared)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
         
-        var random = templates.Skip(Math.Max(0, templates.Count() - 3));
+        IEnumerable<Template> random = templates.Skip(Math.Max(0, templates.Count() - 3));
         
         List<RecentTemplateDTO> content = random.Select(r => new RecentTemplateDTO(
             r.TemplateUid,
             r.TemplateName,
             r.DifficultyLevel.DifficultyLevelName,
             r.User.FirstName + " " + r.User.LastName)).ToList();
-        
-        
         
         return content;
     }

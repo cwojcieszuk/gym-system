@@ -21,19 +21,21 @@ public class GetIncomingGroupSessionsQueryHandler : IRequestHandler<GetIncomingG
             .Include(x => x.Coach)
             .ThenInclude(x => x.User)
             .Include(x => x.Place)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
         
         var sortedList = groupSessionsList
             .OrderBy(x => x.SessionStartDate.Day)
-            .OrderBy(x => x.SessionStartDate.Hour)
+            .ThenBy(x => x.SessionStartDate.Hour)
             .Take(3)
             .ToList();
+        
         List<IncomingGroupSessionDTO> content = sortedList.Select(g => new IncomingGroupSessionDTO(
             g.GroupSessionUid,
             g.SessionName,
             g.Coach.User.FirstName + " " + g.Coach.User.LastName,
             g.Place.PlaceName,
             g.SessionStartDate)).ToList();
+        
         return content;
     } 
 }
