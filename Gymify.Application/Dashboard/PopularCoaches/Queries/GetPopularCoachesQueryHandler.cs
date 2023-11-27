@@ -13,30 +13,31 @@ public class GetPopularCoachesQueryHandler : IRequestHandler<GetPopularCoachesQu
     {
         _gymifyDbContext = gymifyDbContext;
     }
+    
     public async Task<List<PopularCoachDTO>> Handle(GetPopularCoachesQuery request, CancellationToken cancellationToken)
     {
-        var top2 = _gymifyDbContext.FavouriteCoaches.GroupBy(x => x)
+        List<Guid> top3 = await _gymifyDbContext.FavouriteCoaches.GroupBy(x => x)
             .OrderByDescending(x => x.Count())
-            .Take(2)
-            .Select(x => x.Key)
-            .Select(c => c.CoachUid).ToList();
+            .Take(request.Amount)
+            .Select(x => x.Key.CoachUid).ToListAsync(cancellationToken);
 
-        var coaches = _gymifyDbContext.Coaches
+        List<Coach> coaches = await _gymifyDbContext.Coaches
             .Include(c => c.CoachTypes)
             .ThenInclude(c => c.CoachCategory)
             .Include(c => c.User)
-            .Where(c => top2.Contains(c.CoachUid))
-            .ToList();
+            .Where(c => top3.Contains(c.CoachUid))
+            .ToListAsync(cancellationToken);
 
         List<PopularCoachDTO> content = coaches.Select(c => new PopularCoachDTO(
             c.CoachUid,
-            c.User.FirstName + " " + c.User.LastName,
+            $"{c.User.FirstName} {c.User.LastName}",
             c.User.Avatar,
             c.CoachTypes.Where(x => x.CoachUid == c.CoachUid).Select(x => x.CoachCategory.CoachCategoryName),
             IsFavorite(c.CoachUid, request.UserUid)
         )).ToList();
         return content;
     }
+    
     private bool IsFavorite(Guid coachUid, Guid userUid)
     {
         return _gymifyDbContext.FavouriteCoaches.Any(x => x.CoachUid == coachUid && x.ClientUid == userUid);
