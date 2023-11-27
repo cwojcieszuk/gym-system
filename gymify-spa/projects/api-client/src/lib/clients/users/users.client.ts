@@ -8,6 +8,7 @@ import { EmptyResponse } from '../../types/empty.response';
 import { EditUserParams } from './params/edit-user.params';
 import { UUID } from '../../types/uuid.type';
 import { mapToHttpParams } from '../../mappers/map-to-http-params';
+import { HttpHelpers } from '../../helpers/http.helpers';
 
 @Injectable({ providedIn: 'root' })
 export class UsersClient {
@@ -20,11 +21,11 @@ export class UsersClient {
   }
 
   addUser(params: AddUserParams): Observable<EmptyResponse> {
-    return this.http.post<EmptyResponse>(`${this.url}`, params);
+    return this.http.post<EmptyResponse>(`${this.url}`, HttpHelpers.getParamsWithFormattedDates(params));
   }
 
   editUser(params: EditUserParams): Observable<EmptyResponse> {
-    return this.http.put<EmptyResponse>(`${this.url}/${params.userUid}`, params);
+    return this.http.put<EmptyResponse>(`${this.url}/${params.userUid}`, HttpHelpers.getParamsWithFormattedDates(params));
   }
 
   deleteUser(userUid: UUID): Observable<EmptyResponse> {

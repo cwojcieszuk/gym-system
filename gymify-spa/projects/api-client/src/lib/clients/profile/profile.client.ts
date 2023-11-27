@@ -6,6 +6,7 @@ import { UserDataResponse } from './responses/user-data.response';
 import { UpdateUserDataParams } from './params/update-user-data.params';
 import { EmptyResponse } from '../../types/empty.response';
 import { UpdateUserPasswordParams } from './params/update-user-password.params';
+import { HttpHelpers } from '../../helpers/http.helpers';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileClient {
@@ -18,7 +19,7 @@ export class ProfileClient {
   }
 
   updateUserData(userUid: UUID, body: UpdateUserDataParams): Observable<EmptyResponse> {
-    return this.http.put<EmptyResponse>(`${this.url}/${userUid}/data`, { ...body, userUid });
+    return this.http.put<EmptyResponse>(`${this.url}/${userUid}/data`, { ...HttpHelpers.getParamsWithFormattedDates(body), userUid });
   }
 
   updateUserPassword(userUid: UUID, body: UpdateUserPasswordParams): Observable<EmptyResponse> {

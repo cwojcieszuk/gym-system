@@ -9,6 +9,7 @@ import { EmptyResponse } from '../../types/empty.response';
 import { UUID } from '../../types/uuid.type';
 import { UpdateTrainingParams } from './params/update-training.params';
 import { TrainingDetailsDTO } from './models/training-details.dto';
+import { HttpHelpers } from '../../helpers/http.helpers';
 
 @Injectable({ providedIn: 'root' })
 export class TrainingsClient {
@@ -21,7 +22,7 @@ export class TrainingsClient {
   }
 
   createTraining(params: CreateTrainingParams): Observable<EmptyResponse> {
-    return this.http.post<EmptyResponse>(this.url, params);
+    return this.http.post<EmptyResponse>(this.url, HttpHelpers.getParamsWithFormattedDates(params));
   }
 
   getTraining(trainingUid: UUID): Observable<TrainingDetailsDTO> {
@@ -29,7 +30,7 @@ export class TrainingsClient {
   }
 
   updateTraining(params: UpdateTrainingParams): Observable<EmptyResponse> {
-    return this.http.put<EmptyResponse>(`${this.url}/${params.trainingUid}`, params);
+    return this.http.put<EmptyResponse>(`${this.url}/${params.trainingUid}`, HttpHelpers.getParamsWithFormattedDates(params));
   }
 
   deleteTraining(trainingUid: UUID): Observable<EmptyResponse> {

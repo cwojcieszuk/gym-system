@@ -16,11 +16,10 @@ import { AuthStoreModule } from './core/auth/+state/auth-store.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccessTokenInterceptor } from './core/auth/interceptors/access-token.interceptor';
 import { LayoutModule } from './core/layout/layout.module';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { DictionariesStoreModule } from './core/dictionaries-state/dictionaries-store.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ErrorsInterceptor } from './core/auth/interceptors/errors.interceptor';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { CalendarModule } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
@@ -55,7 +54,6 @@ import { DateAdapter } from 'angular-calendar';
     LayoutModule,
     MatNativeDateModule,
     DictionariesStoreModule,
-    MatMomentDateModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
@@ -77,19 +75,10 @@ import { DateAdapter } from 'angular-calendar';
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },
     },
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
-    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
-    { provide: MAT_DATE_FORMATS, useValue: {
-      parse: {
-        dateInput: 'DD-MM-YYYY',
-      },
-      display: {
-        dateInput: 'DD-MM-YYYY',
-        monthYearLabel: 'YYYY',
-        dateA11yLabel: 'LL',
-        monthYearA11yLabel: 'YYYY',
-      },
-    } },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'pl-PL',
+    },
   ],
   bootstrap: [BootstrapComponent],
 })
