@@ -22,9 +22,9 @@ public class GetRecentTemplateQueryHandler : IRequestHandler<GetRecentTemplatesQ
             .Where(t => t.IsShared)
             .ToListAsync(cancellationToken);
         
-        IEnumerable<Template> random = templates.Skip(Math.Max(0, templates.Count() - 3));
+        IEnumerable<Template> recentTemplates = templates.Skip(Math.Max(0, templates.Count() - 3));
         
-        List<RecentTemplateDTO> content = random.Select(r => new RecentTemplateDTO(
+        List<RecentTemplateDTO> content = recentTemplates.Select(r => new RecentTemplateDTO(
             r.TemplateUid,
             r.TemplateName,
             r.DifficultyLevel.DifficultyLevelName,
