@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div class="flex gap-6">
+<div class="flex gap-6 max-md:flex-wrap">
     <div class="flex shadow-md rounded-md p-4 w-full">
         <form [formGroup]="form" class="grid grid-cols-3 items-center w-full" [class.gap-y-6]="(profileFacade.isEditing$ | async) === false">
             <span>First name</span>
@@ -117,7 +117,7 @@
         </form>
     </div>
 
-    <div class="flex flex-col justify-between shadow-md rounded-md p-4 w-[40%] gap-y-8">
+    <div class="flex flex-col justify-between shadow-md rounded-md p-4 w-[40%] gap-y-8 max-md:w-full">
         <span>Profile picture</span>
         <ng-container *ngIf="imgSrc || image">
             <img class="avatar" [src]="imgSrc || image" alt="avatar">
@@ -135,7 +135,7 @@
     </div>
 </div>
 
-<div class="flex flex-col shadow-md rounded-md mt-6 p-4 w-[70%]" *ngIf="(authFacade.isCoach$ | async) || (authFacade.isAdmin$ | async)">
+<div class="flex flex-col shadow-md rounded-md mt-6 p-4 w-[70%] max-md:w-full" *ngIf="(authFacade.isCoach$ | async) || (authFacade.isAdmin$ | async)">
     <form class="grid grid-cols-3 items-center w-full" [formGroup]="coachForm">
         <span>Description</span>
         <mat-form-field>

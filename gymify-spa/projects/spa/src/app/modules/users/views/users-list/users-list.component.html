@@ -4,17 +4,19 @@
     </mat-drawer>
 
     <div class="p-8 example-sidenav-content">
-        <div class="flex justify-between items-center">
-            <button mat-raised-button color="primary" (click)="addUser()">
-                <span>Add user</span>
-                <mat-icon>add</mat-icon>
-            </button>
+        <div class="grid grid-cols-3 items-center pb-6">
+            <h1 class="col-start-2 text-center max-md:col-start-1 max-md:col-span-2 max-md:place-self-start">Users</h1>
 
-            <h1>Users</h1>
+            <div class="flex gap-x-4 place-content-end items-center">
+                <button mat-raised-button color="primary" (click)="addUser()">
+                    <span>Add user</span>
+                    <mat-icon>add</mat-icon>
+                </button>
 
-            <button mat-icon-button color="primary" (click)="drawer.toggle()">
-                <mat-icon>filter_list</mat-icon>
-            </button>
+                <button mat-icon-button color="primary" (click)="drawer.toggle()">
+                    <mat-icon>filter_list</mat-icon>
+                </button>
+            </div>
         </div>
 
         <div class="mat-elevation-z8 mt-6">
