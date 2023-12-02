@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthFacade } from './core/auth/+state/auth.facade';
 
 @Component({
@@ -6,8 +6,10 @@ import { AuthFacade } from './core/auth/+state/auth.facade';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  constructor(private authFacade: AuthFacade) {
-    //authFacade.refresh();
+export class AppComponent implements OnInit {
+  constructor(private authFacade: AuthFacade) {}
+
+  ngOnInit(): void {
+    this.authFacade.init();
   }
 }
