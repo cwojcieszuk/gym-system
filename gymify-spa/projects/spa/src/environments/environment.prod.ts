@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseApiUrl: 'https://gymify-dev/api'
+  baseApiUrl: 'https://gymifyapi.azurewebsites.net/api',
 };
