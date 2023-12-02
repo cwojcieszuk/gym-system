@@ -29,7 +29,7 @@ public class GetCalendarEventsQueryHandler : IRequestHandler<GetCalendarEventsQu
     {
         List<Training> trainings = await _gymifyDbContext.Training
             .Include(x => x.UserTrainings)
-            .Where(x => x.TrainingDate.Date.Month == date.Date.Month && 
+            .Where(x => x.TrainingDate.Date.Year == date.Date.Year && 
                         x.UserTrainings.Any(t => t.UserUid == userUid))
             .ToListAsync(cancellationToken);
 
@@ -43,23 +43,23 @@ public class GetCalendarEventsQueryHandler : IRequestHandler<GetCalendarEventsQu
                 EventType = CalendarEventType.Trainings,
                 Title = x.TrainingName
             });
-            
+
             if (x.IsCyclical)
             {
-                 int weeks = (int)(new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month)) - x.TrainingDate).TotalDays / 7;
-
-                 for (int i = 0; i < weeks; i++)
-                 {
-                     result.Add(new CalendarEventDTO
-                     {
-                         StartDate = x.TrainingDate.AddDays(7 * (i + 1)),
-                         EventType = CalendarEventType.Trainings,
-                         Title = x.TrainingName
-                     });
-                 }
+                int weeks2 = (int)(new DateTime(x.TrainingDate.Year, 12, 31) - x.TrainingDate).TotalDays / 7;
+                DateTime trainingDate = x.TrainingDate;
+                for (int i = 0; i < weeks2; i++)
+                {
+                    trainingDate = trainingDate.AddDays(7);
+                    result.Add(new CalendarEventDTO
+                    {
+                        StartDate = trainingDate,
+                        EventType = CalendarEventType.Trainings,
+                        Title = x.TrainingName
+                    });
+                }
             }
         });
-
         return result;
     }
 
