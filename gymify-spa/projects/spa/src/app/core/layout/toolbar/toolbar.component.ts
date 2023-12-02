@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthFacade } from '../../auth/+state/auth.facade';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent {
+  @Output()
+  openMenu = new EventEmitter<void>();
+
   userFirstName = this.facade.user$.pipe(map(user => user?.name.split(' ')[0]));
 
   constructor(

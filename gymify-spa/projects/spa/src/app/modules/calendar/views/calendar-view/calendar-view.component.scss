@@ -1,0 +1,28 @@
+@use '../../../../../styles/typography';
+
+:host {
+  @apply p-8;
+}
+
+h3 {
+  @extend .typography-h3;
+
+  margin: 0 0 10px;
+}
+
+pre {
+  background-color: #f5f5f5;
+  padding: 15px;
+}
+
+.btn {
+  @apply font-bold py-2 px-4 rounded cursor-pointer border;
+
+  &.active {
+    @apply bg-primary text-white;
+  }
+}
+
+.btn-primary {
+  @apply bg-primary text-white;
+}

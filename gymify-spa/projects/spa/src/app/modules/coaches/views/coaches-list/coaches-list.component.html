@@ -5,7 +5,7 @@
 
     <div class="p-8 example-sidenav-content">
         <div class="grid grid-cols-3 items-center pb-6">
-            <h1 class="col-start-2 text-center">Coaches</h1>
+            <h1 class="col-start-2 text-center max-md:col-start-1 max-md:col-span-2 max-md:place-self-start">Coaches</h1>
 
             <button mat-icon-button color="primary" class="place-self-end" (click)="drawer.toggle()">
                 <mat-icon>filter_list</mat-icon>
@@ -16,7 +16,7 @@
             <mat-progress-spinner class="spinner" mode="indeterminate" diameter="40"></mat-progress-spinner>
         </div>
 
-        <div class="grid grid-cols-5 gap-8" *ngIf="(coachesFacade.areCoachesLoading$ | async) === false">
+        <div class="grid grid-cols-5 gap-8 max-lg:grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2" *ngIf="(coachesFacade.areCoachesLoading$ | async) === false">
             <div class="shadow-base rounded-md p-2 flex flex-col items-center gap-y-4" *ngFor="let coach of (coachesResponse)?.content">
                 <img class="w-[240px] h-[240px]" [src]="coach.avatar == null ? '../../../../../assets/default-user.png' : imgService.getJpeg(coach.avatar)" (click)="openCoachDialog(coach)">
                 <span>{{ coach.coachName }}</span>

@@ -23,11 +23,14 @@ export class UsersFiltersComponent implements OnInit {
     private fb: NonNullableFormBuilder,
     private facade: UsersFacade,
     public dictionariesFacade: DictionariesFacade
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.dictionariesFacade.fetchUserRoles();
+  }
+
+  clear(): void {
+    this.form.reset();
   }
 
   save(): void {

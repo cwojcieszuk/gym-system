@@ -7,6 +7,7 @@ import { mapToHttpParams } from '../../mappers/map-to-http-params';
 import { UUID } from '../../types/uuid.type';
 import { EmptyResponse } from '../../types/empty.response';
 import { CreateGroupSessionParams } from './params/create-group-session.params';
+import { HttpHelpers } from '../../helpers/http.helpers';
 
 @Injectable({ providedIn: 'root' })
 export class GroupSessionsClient {
@@ -27,6 +28,6 @@ export class GroupSessionsClient {
   }
 
   createGroupSession(params: CreateGroupSessionParams): Observable<EmptyResponse> {
-    return this.http.post<EmptyResponse>(this.url, params);
+    return this.http.post<EmptyResponse>(this.url, HttpHelpers.getParamsWithFormattedDates(params));
   }
 }

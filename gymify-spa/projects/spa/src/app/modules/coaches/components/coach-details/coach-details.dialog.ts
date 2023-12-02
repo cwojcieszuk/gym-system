@@ -29,10 +29,4 @@ export class CoachDetailsDialog extends BaseComponent {
   close(): void {
     this.dialogRef.close();
   }
-
-  getHours(date: Date): string {
-    const value = new Date(date);
-
-    return `${value.getHours()} : ${value.getMinutes()}`;
-  }
 }

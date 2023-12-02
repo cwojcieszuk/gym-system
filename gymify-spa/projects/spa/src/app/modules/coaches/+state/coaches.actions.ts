@@ -84,5 +84,5 @@ export const signupForCoachSuccess = createAction(
 );
 
 export const signupForCoachFailure = createAction(
-  '[Coaches/API] Sign Up For Coach'
+  '[Coaches/API] Sign Up For Coach Failure'
 );

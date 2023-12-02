@@ -1,0 +1,15 @@
+<div class="flex justify-between items-end pb-4">
+    <h1>{{ header }}</h1>
+
+    <a [routerLink]="redirectUrl">{{ subtitle }}</a>
+</div>
+
+<div class="shadow-base w-full rounded-md p-8">
+    <ng-template [ngIf]="isLoading" [ngIfElse]="content">
+        <mat-spinner class="spinner" mode="indeterminate" diameter="40"></mat-spinner>
+    </ng-template>
+
+    <ng-template #content>
+        <ng-content></ng-content>
+    </ng-template>
+</div>

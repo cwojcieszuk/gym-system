@@ -16,12 +16,14 @@ import { AuthStoreModule } from './core/auth/+state/auth-store.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccessTokenInterceptor } from './core/auth/interceptors/access-token.interceptor';
 import { LayoutModule } from './core/layout/layout.module';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { DictionariesStoreModule } from './core/dictionaries-state/dictionaries-store.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ErrorsInterceptor } from './core/auth/interceptors/errors.interceptor';
-import { MAT_MOMENT_DATE_FORMATS, MatMomentDateModule } from '@angular/material-moment-adapter';
-import { MomentUtcDateAdapter } from './shared/adapters/moment-utc-date.adapter';
+import { CalendarModule } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { DateAdapter } from 'angular-calendar';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,16 @@ import { MomentUtcDateAdapter } from './shared/adapters/moment-utc-date.adapter'
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: false,    // otherwise Date cannot be used
+        strictActionSerializability: false,   // otherwise Date cannot be used
+        strictActionWithinNgZone: true,
+        strictActionTypeUniqueness: true,
+      },
+    }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
@@ -43,7 +54,11 @@ import { MomentUtcDateAdapter } from './shared/adapters/moment-utc-date.adapter'
     LayoutModule,
     MatNativeDateModule,
     DictionariesStoreModule,
-    MatMomentDateModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    FlatpickrModule.forRoot(),
   ],
   providers: [
     {
@@ -63,14 +78,6 @@ import { MomentUtcDateAdapter } from './shared/adapters/moment-utc-date.adapter'
     {
       provide: MAT_DATE_LOCALE,
       useValue: 'pl-PL',
-    },
-    {
-      provide: MAT_DATE_FORMATS,
-      useValue: MAT_MOMENT_DATE_FORMATS,
-    },
-    {
-      provide: DateAdapter,
-      useClass: MomentUtcDateAdapter,
     },
   ],
   bootstrap: [BootstrapComponent],

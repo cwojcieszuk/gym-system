@@ -1,0 +1,17 @@
+@use '../../../../../styles/typography';
+
+h1 {
+  @extend .typography-subtitle1;
+}
+
+a {
+  @extend .typography-regular-14;
+}
+
+.spinner {
+  @apply mx-auto;
+
+  ::ng-deep circle {
+    stroke: #660033 !important;
+  }
+}

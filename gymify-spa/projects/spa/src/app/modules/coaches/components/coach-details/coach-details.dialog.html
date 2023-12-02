@@ -25,13 +25,13 @@
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <div class="flex flex-wrap pb-4">
+    <div class="flex flex-wrap pb-4 gap-x-4">
         <div class="p-2 border-solid border-black border rounded-md w-fit cursor-pointer"
              [class.active]="selectedHour === hour.coachHourUid"
              *ngFor="let hour of facade.coachHours$ | async"
              (click)="facade.selectCoachHour(hour.coachHourUid)"
         >
-            <span>{{ getHours(hour.date) }}</span>
+            <span>{{ hour.date | date: "H:mm" }}</span>
         </div>
     </div>
 

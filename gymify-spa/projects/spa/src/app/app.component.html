@@ -1,9 +1,9 @@
 <mat-drawer-container>
-    <mat-drawer mode="side" opened>
+    <mat-drawer mode="over" #drawer>
         <gym-menu></gym-menu>
     </mat-drawer>
     <mat-drawer-content>
-        <gym-toolbar class="w-full"></gym-toolbar>
+        <gym-toolbar class="w-full" (openMenu)="drawer.toggle()"></gym-toolbar>
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
