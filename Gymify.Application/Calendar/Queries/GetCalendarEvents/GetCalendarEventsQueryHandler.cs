@@ -19,8 +19,8 @@ public class GetCalendarEventsQueryHandler : IRequestHandler<GetCalendarEventsQu
     public async Task<IEnumerable<CalendarEventDTO>> Handle(GetCalendarEventsQuery request, CancellationToken cancellationToken)
     {
         IEnumerable<CalendarEventDTO> trainings = await GetTrainingEvents(request.Date, request.UserUid, cancellationToken);
-        IEnumerable<CalendarEventDTO> groupSessions = await GetGroupSessionEvents(request.Date, request.UserUid);
-        IEnumerable<CalendarEventDTO> coachHours = await GetCoachHoursEvents(request.Date, request.UserUid);
+        IEnumerable<CalendarEventDTO> groupSessions = await GetGroupSessionEvents(request.Date, request.UserUid, cancellationToken);
+        IEnumerable<CalendarEventDTO> coachHours = await GetCoachHoursEvents(request.Date, request.UserUid, cancellationToken);
         
         return trainings.Concat(groupSessions).Concat(coachHours);
     }
@@ -29,47 +29,50 @@ public class GetCalendarEventsQueryHandler : IRequestHandler<GetCalendarEventsQu
     {
         List<Training> trainings = await _gymifyDbContext.Training
             .Include(x => x.UserTrainings)
-            .Where(x => x.TrainingDate.Date.Year == date.Date.Year && 
-                        x.UserTrainings.Any(t => t.UserUid == userUid))
+            .Where(x => x.UserTrainings.Any(t => t.UserUid == userUid))
             .ToListAsync(cancellationToken);
 
         List<CalendarEventDTO> result = new List<CalendarEventDTO>();
 
         trainings.ForEach(x =>
         {
-            result.Add(new CalendarEventDTO
+            if (!x.IsCyclical)
             {
-                StartDate = x.TrainingDate,
-                EventType = CalendarEventType.Trainings,
-                Title = x.TrainingName
-            });
-
-            if (x.IsCyclical)
+                result.Add(new CalendarEventDTO
+                {
+                    StartDate = x.TrainingDate,
+                    EventType = CalendarEventType.Trainings,
+                    Title = x.TrainingName
+                });
+            }
+            else 
             {
                 int weeks2 = (int)(new DateTime(x.TrainingDate.Year, 12, 31) - x.TrainingDate).TotalDays / 7;
                 DateTime trainingDate = x.TrainingDate;
                 for (int i = 0; i < weeks2; i++)
                 {
-                    trainingDate = trainingDate.AddDays(7);
-                    result.Add(new CalendarEventDTO
+                    if (trainingDate.Month == date.Month)
                     {
-                        StartDate = trainingDate,
-                        EventType = CalendarEventType.Trainings,
-                        Title = x.TrainingName
-                    });
+                        result.Add(new CalendarEventDTO
+                        {
+                            StartDate = trainingDate,
+                            EventType = CalendarEventType.Trainings,
+                            Title = x.TrainingName
+                        });
+                    }
+                    trainingDate = trainingDate.AddDays(7);
                 }
             }
         });
         return result;
     }
 
-    private async Task<IEnumerable<CalendarEventDTO>> GetGroupSessionEvents(DateTime date, Guid userUid)
+    private async Task<IEnumerable<CalendarEventDTO>> GetGroupSessionEvents(DateTime date, Guid userUid, CancellationToken cancellationToken)
     {
         List<GroupSession> groupSessions = await _gymifyDbContext.GroupSessions
             .Include(x => x.ClientGroupSessions)
-            .Where(x => x.SessionStartDate.Date.Month == date.Date.Month)
-            .Where(x => x.ClientGroupSessions.Any(c => c.ClientUid == userUid))
-            .ToListAsync();
+            .Where(x => x.SessionStartDate.Date.Month == date.Date.Month && x.ClientGroupSessions.Any(c => c.ClientUid == userUid))
+            .ToListAsync(cancellationToken);
 
         return groupSessions.Select(x => new CalendarEventDTO
         {
@@ -80,14 +83,13 @@ public class GetCalendarEventsQueryHandler : IRequestHandler<GetCalendarEventsQu
         });
     }
 
-    private async Task<IEnumerable<CalendarEventDTO>> GetCoachHoursEvents(DateTime date, Guid userUid)
+    private async Task<IEnumerable<CalendarEventDTO>> GetCoachHoursEvents(DateTime date, Guid userUid, CancellationToken cancellationToken)
     {
         List<CoachHour> coachHours = await _gymifyDbContext.CoachHours
             .Include(x => x.Coach)
             .ThenInclude(x => x.User)
-            .Where(x => x.StartDate.Date.Month == date.Date.Month)
-            .Where(x => x.ClientUid == userUid)
-            .ToListAsync();
+            .Where(x => x.StartDate.Date.Month == date.Date.Month && x.ClientUid == userUid)
+            .ToListAsync(cancellationToken);
 
         return coachHours.Select(x => new CalendarEventDTO
         {
