@@ -17,7 +17,7 @@ export class CalendarClient {
   ) {}
 
   getCalendarEvents(date: Date): Observable<CalendarEventDTO[]> {
-    return this.http.get<CalendarEventDTO[]>(this.url, { params: mapToHttpParams({ date }) });
+    return this.http.get<CalendarEventDTO[]>(this.url, { params: mapToHttpParams({ date: HttpHelpers.formatDate(date) }) });
   }
 
   addCoachHour(params: AddCoachHourParams): Observable<EmptyResponse> {
@@ -25,6 +25,6 @@ export class CalendarClient {
   }
 
   getCoachHours(date: Date): Observable<CoachHour[]> {
-    return this.http.get<CoachHour[]>(`${this.url}/coach-hours`,{ params: mapToHttpParams({ date }) });
+    return this.http.get<CoachHour[]>(`${this.url}/coach-hours`,{ params: mapToHttpParams({ date: HttpHelpers.formatDate(date) }) });
   }
 }

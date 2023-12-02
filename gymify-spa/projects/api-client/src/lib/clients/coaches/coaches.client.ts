@@ -8,6 +8,7 @@ import { mapToHttpParams } from '../../mappers/map-to-http-params';
 import { UUID } from '../../types/uuid.type';
 import { EmptyResponse } from '../../types/empty.response';
 import { CoachHourDTO } from './models/coach-hour.dto';
+import { HttpHelpers } from '../../helpers/http.helpers';
 
 @Injectable({ providedIn: 'root' })
 export class CoachesClient {
@@ -28,7 +29,7 @@ export class CoachesClient {
   }
 
   getCoachHoursByDate(coachUid: UUID, date: Date): Observable<CoachHourDTO[]> {
-    return this.http.get<CoachHourDTO[]>(`${this.url}/hours`,{ params: mapToHttpParams({ coachUid, date }) });
+    return this.http.get<CoachHourDTO[]>(`${this.url}/hours`,{ params: mapToHttpParams({ coachUid, date: HttpHelpers.formatDate(date) }) });
   }
 
   signupForCoach(coachHourUid: UUID): Observable<EmptyResponse> {

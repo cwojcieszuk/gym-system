@@ -16,7 +16,7 @@ export class GroupSessionsClient {
   constructor(private http: HttpClient) {}
 
   getGroupSessions(query: GroupSessionListFilters): Observable<GroupSessionListResponse> {
-    return this.http.get<GroupSessionListResponse>(this.url, { params: mapToHttpParams(query) });
+    return this.http.get<GroupSessionListResponse>(this.url, { params: mapToHttpParams(HttpHelpers.getParamsWithFormattedDates(query)) });
   }
 
   bookIn(groupSessionUid: UUID): Observable<EmptyResponse> {
