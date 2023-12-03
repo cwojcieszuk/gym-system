@@ -1,10 +1,13 @@
 @use '../../../../../styles/typography';
+@use '../../../../../styles/mixins';
 
 :host {
   @apply flex flex-col h-full;
 }
 
 h1 {
+  @apply max-lg:text-3xl;
+
   @extend .typography-h3;
 }
 

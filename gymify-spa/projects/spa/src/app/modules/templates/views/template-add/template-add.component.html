@@ -12,7 +12,7 @@
     </button>
 </div>
 
-<form class="flex gap-x-10 shadow-base p-4 rounded-md" [formGroup]="form">
+<form class="flex gap-x-10 shadow-base p-4 rounded-md max-md:flex-col" [formGroup]="form">
     <mat-form-field>
         <mat-label>Template name</mat-label>
         <input matInput formControlName="templateName" [readonly]="isShared">
@@ -37,7 +37,7 @@
 </form>
 
 <div class="flex flex-col overflow-y-auto p-1 gap-y-4 max-h-[508px]" style="scrollbar-gutter: stable">
-    <div class="grid grid-cols-3 shadow-base p-4 rounded-md" *ngFor="let ex of exercisesForm.controls; index as i">
+    <div class="grid grid-cols-3 shadow-base p-4 rounded-md max-md:grid-cols-1 max-md:gap-y-4" *ngFor="let ex of exercisesForm.controls; index as i">
         <ng-template [ngIf]="exerciseControl(i) === null" [ngIfElse]="exercise">
             <button mat-stroked-button class="w-fit" (click)="chooseExercise(i)" [disabled]="isShared">
                 <mat-icon class="rotate-[135deg]">fitness_center</mat-icon>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <button mat-stroked-button class="w-fit" (click)="chooseExercise(i)" *ngIf="!isShared">
+                <button mat-stroked-button class="w-fit mt-4" (click)="chooseExercise(i)" *ngIf="!isShared">
                     <mat-icon>edit</mat-icon>
                     <span>Change exercise</span>
                 </button>

@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <button mat-raised-button color="primary" routerLink="coach-hours">
+        <button mat-raised-button color="primary" routerLink="coach-hours" *ngIf="(authFacade.isAdmin$ | async) || (authFacade.isCoach$ | async)">
             <mat-icon >arrow_right</mat-icon>
             <span>Manage coach hours</span>
         </button>

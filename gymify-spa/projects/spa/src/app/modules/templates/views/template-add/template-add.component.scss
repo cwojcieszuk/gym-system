@@ -5,5 +5,7 @@
 }
 
 h1 {
+  @apply max-lg:text-3xl;
+
   @extend .typography-h3;
 }

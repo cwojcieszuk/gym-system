@@ -5,6 +5,7 @@ import { EventColor } from 'calendar-utils';
 import { isSameDay, isSameMonth } from 'date-fns';
 import { filter, Subject } from 'rxjs';
 import { CalendarFacade } from '../../+state/calendar.facade';
+import { AuthFacade } from '../../../../core/auth/+state/auth.facade';
 
 const colors: EventColor[] = [
   {
@@ -35,7 +36,8 @@ export class CalendarViewComponent extends BaseComponent implements OnInit {
   activeDayIsOpen = true;
 
   constructor(
-    private facade: CalendarFacade
+    private facade: CalendarFacade,
+    public authFacade: AuthFacade
   ) {
     super();
   }

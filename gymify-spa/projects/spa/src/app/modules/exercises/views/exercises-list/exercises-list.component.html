@@ -16,7 +16,7 @@
             <mat-progress-spinner class="spinner" mode="indeterminate" diameter="40"></mat-progress-spinner>
         </div>
 
-        <div class="grid grid-cols-5 grid-rows-2 gap-x-16 gap-y-6 max-lg:grid-cols-4 max-md:grid-cols-3 max-sm:grid-cols-2" *ngIf="(facade.isLoading$ | async) === false">
+        <div class="grid grid-cols-5 grid-rows-2 gap-x-16 gap-y-6 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1" *ngIf="(facade.isLoading$ | async) === false">
             <div class="card" *ngFor="let exercise of (facade.exerciseResponse$ | async)?.content">
                 <img [src]="imgService.getGif(exercise.exerciseGif)" alt="image-gif">
                 <span class="font-bold overflow-ellipsis line-clamp-1"
@@ -36,7 +36,7 @@
         </div>
 
         <gym-paginator *ngIf="exerciseResponse"
-            class="pt-4"
+            class="pt-4 mt-auto"
             [pageSizeOptions]="[10, 15, 20]"
             [totalRecords]="exerciseResponse.totalRecords"
             [totalPages]="exerciseResponse.totalPages"

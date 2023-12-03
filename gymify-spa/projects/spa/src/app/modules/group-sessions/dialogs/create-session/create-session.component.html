@@ -1,6 +1,6 @@
 <h1 class="text-center">Group Session</h1>
 
-<form [formGroup]="form" class="grid grid-cols-2 gap-4">
+<form [formGroup]="form" class="grid grid-cols-2 gap-4 max-md:grid-cols-1 max-md:gap-1">
     <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput formControlName="name">
@@ -42,9 +42,7 @@
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
-</form>
 
-<div class="flex justify-between pt-8">
     <button mat-stroked-button color="primary" (click)="cancel()">
         <span>Cancel</span>
         <mat-icon>cancel</mat-icon>
@@ -54,4 +52,4 @@
         <span>Create</span>
         <mat-icon>save</mat-icon>
     </button>
-</div>
+</form>

@@ -5,11 +5,13 @@
 }
 
 h1 {
+  @apply max-lg:text-3xl;
+
   @extend .typography-h3;
 }
 
 .exercise {
-  @apply justify-between;
+  @apply justify-between max-md:flex-col max-md:gap-y-4;
 
   display: flex !important;
 }

@@ -1,7 +1,7 @@
 @use '../../../../../styles/typography';
 
 :host {
-  @apply block w-[800px] p-8;
+  @apply block min-w-[400px] p-8 max-h-[700px] overflow-y-scroll;
 }
 
 h1 {
@@ -10,5 +10,5 @@ h1 {
 }
 
 .generate-button {
-  @apply h-[70%];
+  @apply h-[70%] max-md:h-full;
 }

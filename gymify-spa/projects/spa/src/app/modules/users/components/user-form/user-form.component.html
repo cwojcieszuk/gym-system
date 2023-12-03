@@ -1,6 +1,6 @@
 <h1>{{ isNew ? 'Add User' : 'Edit User' }}</h1>
 
-<form [formGroup]="form" class="grid grid-cols-2 gap-4">
+<form [formGroup]="form" class="grid grid-cols-2 gap-4 max-md:grid-cols-1 max-md:gap-1">
     <mat-form-field appearance="outline">
         <mat-label>First name</mat-label>
         <input matInput formControlName="firstName">

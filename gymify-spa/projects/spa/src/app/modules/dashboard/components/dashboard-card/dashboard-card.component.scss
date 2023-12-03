@@ -1,6 +1,8 @@
 @use '../../../../../styles/typography';
 
 h1 {
+  @apply max-lg:text-3xl;
+
   @extend .typography-subtitle1;
 }
 
