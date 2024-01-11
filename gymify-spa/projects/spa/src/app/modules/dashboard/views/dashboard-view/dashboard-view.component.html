@@ -42,7 +42,7 @@
     </gym-dashboard-card>
 
     <gym-dashboard-card [header]="'Popular Exercises'" [subtitle]="'View exercises'" [redirectUrl]="'../exercises'" [isLoading]="facade.areExercisesLoading$ | async">
-        <div class="flex justify-between flex-wrap gap-y-4">
+        <div class="flex gap-x-12 flex-wrap gap-y-4">
             <div class="card" *ngFor="let exercise of (facade.popularExercises$ | async)">
                 <img [src]="imgService.getGif(exercise.exerciseGif)" alt="image-gif">
                 <span class="font-bold overflow-ellipsis line-clamp-1"
@@ -62,7 +62,7 @@
     </gym-dashboard-card>
 
     <gym-dashboard-card [header]="'Popular Coaches'" [subtitle]="'View coaches'" [redirectUrl]="'../coaches'" [isLoading]="facade.areCoachesLoading$ | async">
-        <div class="flex justify-between flex-wrap gap-y-4">
+        <div class="flex gap-x-12 flex-wrap gap-y-4">
             <div class="card" *ngFor="let coach of facade.popularCoaches$ | async">
                 <img [src]="coach.avatar == null ? '../../../../../assets/default-user.png' : imgService.getJpeg(coach.avatar)">
                 <span class="font-bold text-[14px]">{{ coach.coachName }}</span>

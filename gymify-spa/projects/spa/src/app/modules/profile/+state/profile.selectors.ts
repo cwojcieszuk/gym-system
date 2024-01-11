@@ -27,3 +27,8 @@ export const getIsEditAvatar = createSelector(
   getProfileState,
   state => state.isAvatarEdit
 );
+
+export const getIsCoachDetailsEdit = createSelector(
+  getProfileState,
+  state => state.isCoachDetailsEdit
+);

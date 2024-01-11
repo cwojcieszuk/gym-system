@@ -6,6 +6,9 @@ import { filter } from 'rxjs';
 import { ImageService } from '../../../../shared/services/image.service';
 import { AuthFacade } from '../../../../core/auth/+state/auth.facade';
 import { DictionariesFacade } from '../../../../core/dictionaries-state/dictionaries.facade';
+import {
+  CoachCategoryDTO
+} from '../../../../../../../api-client/src/lib/clients/dictionaries/models/coach-category.dto';
 
 @Component({
   selector: 'gym-profile-view',
@@ -98,5 +101,15 @@ export class ProfileViewComponent extends BaseComponent implements OnInit {
 
   saveDescription(): void {
     this.profileFacade.updateCoachDescription(this.coachForm.controls.description.value, this.coachForm.controls.categoryId.value);
+  }
+
+  getCoachCategories(coachCategories: CoachCategoryDTO[] | null): string {
+    if (!coachCategories) {
+      return '';
+    }
+
+    return coachCategories.filter(x => this.coachForm.controls.categoryId.value.includes(x.coachCategoryId))
+      .map(x => x.coachCategoryName)
+      .join(' ');
   }
 }

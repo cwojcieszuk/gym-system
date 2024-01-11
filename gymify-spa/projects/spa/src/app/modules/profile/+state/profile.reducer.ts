@@ -10,12 +10,14 @@ export interface ProfileState {
   isPasswordEdit: boolean;
   isAvatarEdit: boolean;
   avatar?: File;
+  isCoachDetailsEdit: boolean;
 }
 
 const initialState: ProfileState = {
   isEditing: false,
   isPasswordEdit: false,
   isAvatarEdit: false,
+  isCoachDetailsEdit: false,
 };
 
 export const profileReducer = createReducer(
@@ -51,5 +53,13 @@ export const profileReducer = createReducer(
   on(ProfileActions.cancelEditAvatar, state => ({
     ...state,
     isAvatarEdit: false,
+  })),
+  on(ProfileActions.editCoachDetails, state => ({
+    ...state,
+    isCoachDetailsEdit: true,
+  })),
+  on(ProfileActions.cancelEditCoachDetails,state => ({
+    ...state,
+    isCoachDetailsEdit: false,
   }))
 );

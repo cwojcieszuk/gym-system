@@ -142,6 +142,21 @@ export class ProfileEffects {
     )
   );
 
+  updateCoachDescriptionSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.updateCoachDescriptionSuccess),
+      tap(() => {
+        this.profileFacade.cancelEditCoachDetails();
+        this.toastr.success('Successfully updated coach data');
+      })
+    ), { dispatch: false });
+
+  updateCoachDescriptionFailure = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.updateCoachDescriptionFailure),
+      tap(() => this.toastr.error('Unable to update coach data'))
+    ), { dispatch: false });
+
   constructor(
     private actions$: Actions,
     private profileClient: ProfileClient,

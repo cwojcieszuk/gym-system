@@ -16,6 +16,7 @@ export class ProfileFacade {
   isPasswordEdit$ = this.store.select(ProfileSelectors.getIsPasswordEdit);
   avatar$ = this.store.select(ProfileSelectors.getAvatar);
   isAvatarEdit$ = this.store.select(ProfileSelectors.getIsEditAvatar);
+  isCoachDetailsEdit$ = this.store.select(ProfileSelectors.getIsCoachDetailsEdit);
 
   constructor(private store: Store) {}
 
@@ -65,5 +66,13 @@ export class ProfileFacade {
 
   updateCoachDescription(description: string, categoryId: number[]): void {
     this.store.dispatch(ProfileActions.updateCoachDescription({ description, categoryId }));
+  }
+
+  editCoachDetails(): void {
+    this.store.dispatch(ProfileActions.editCoachDetails());
+  }
+
+  cancelEditCoachDetails(): void {
+    this.store.dispatch(ProfileActions.cancelEditCoachDetails());
   }
 }

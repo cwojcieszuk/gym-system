@@ -99,3 +99,11 @@ export const updateCoachDescriptionSuccess = createAction(
 export const updateCoachDescriptionFailure = createAction(
   '[Profile/API] Update Coach Description Failure'
 );
+
+export const editCoachDetails = createAction(
+  '[Profile] Edit Coach Details'
+);
+
+export const cancelEditCoachDetails = createAction(
+  '[Profile] Cancel Edit Coach Details'
+);
