@@ -10,6 +10,6 @@ export class AppComponent implements OnInit {
   constructor(private authFacade: AuthFacade) {}
 
   ngOnInit(): void {
-    //this.authFacade.init();
+    this.authFacade.init();
   }
 }
