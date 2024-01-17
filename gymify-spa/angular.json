@@ -33,7 +33,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/spa/src/favicon.ico",
-              "projects/spa/src/assets"
+              "projects/spa/src/assets",
+              "projects/spa/src/_redirects"
             ],
             "styles": [
               "projects/spa/src/styles/styles.scss",
@@ -109,7 +110,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/spa/src/favicon.ico",
-              "projects/spa/src/assets"
+              "projects/spa/src/assets",
+              "projects/spa/src/_redirects"
             ],
             "styles": [
               "projects/spa/src/styles.scss",
@@ -147,7 +149,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/api-client/src/favicon.ico",
-              "projects/api-client/src/assets"
+              "projects/api-client/src/assets",
+              "projects/spa/src/_redirects"
             ],
             "styles": [
               "projects/api-client/src/styles.scss",
@@ -218,7 +221,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/api-client/src/favicon.ico",
-              "projects/api-client/src/assets"
+              "projects/api-client/src/assets",
+              "projects/spa/src/_redirects"
             ],
             "styles": [
               "projects/api-client/src/styles.scss",
