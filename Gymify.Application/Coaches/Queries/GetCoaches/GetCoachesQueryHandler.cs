@@ -32,7 +32,7 @@ public class GetCoachesQueryHandler : IRequestHandler<GetCoachesQuery, PagedResp
 
         List<CoachDTO> content = coaches.Select(c => new CoachDTO(
             c.CoachUid,
-            c.User.FirstName + " " + c.User.LastName,
+            $"{c.User.FirstName} {c.User.LastName}",
             c.User.Gender,
             c.User.Avatar,
             c.CoachTypes.Where(x => x.CoachUid == c.CoachUid).Select(x => x.CoachCategory.CoachCategoryName),
