@@ -14,7 +14,7 @@ import { CreateSessionComponent } from '../../dialogs/create-session/create-sess
   styleUrls: ['./group-sessions-list.component.scss'],
 })
 export class GroupSessionsListComponent extends BaseComponent {
-  displayedColumns = ['hour', 'sessionName', 'place', 'coachName', 'duration', 'slots', 'bookin'];
+  displayedColumns = ['date', 'hour', 'sessionName', 'place', 'coachName', 'duration', 'slots', 'bookin'];
   dataSource = new MatTableDataSource<GroupSessionDTO>([]);
   groupSessionsResponse?: GroupSessionListResponse;
 
@@ -54,5 +54,12 @@ export class GroupSessionsListComponent extends BaseComponent {
     dialog.afterClosed()
       .pipe(filter(Boolean))
       .subscribe(value => this.facade.createGroupSession(value));
+  }
+
+  canRemoveGroupSession(session: GroupSessionDTO): boolean {
+    const date = new Date();
+    const hours = Math.abs(date.getTime() - new Date(session.endDate).getTime()) / 36e5;
+
+    return hours > 1 && session.canEdit;
   }
 }
