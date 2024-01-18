@@ -92,6 +92,7 @@ public class GroupSessionsController : ControllerBase
     [HttpPut]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = $"{RoleConstants.Admin},{RoleConstants.Coach}")]
     [ServiceFilter(typeof(GroupSessionExistenceCheckFilter))]
+    [ServiceFilter(typeof(GroupSessionOwnerCheckFilter))]
     public async Task<IActionResult> EditGroupSession([FromBody] EditGroupSessionCommand request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
@@ -110,6 +111,7 @@ public class GroupSessionsController : ControllerBase
     [Route("{groupSessionUid}")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = $"{RoleConstants.Admin},{RoleConstants.Coach}")]
     [ServiceFilter(typeof (GroupSessionExistenceCheckFilter))]
+    [ServiceFilter(typeof (GroupSessionOwnerCheckFilter))]
     public async Task<IActionResult> DeleteGroupSession([FromRoute] DeleteGroupSessionCommand request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());

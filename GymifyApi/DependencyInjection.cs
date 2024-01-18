@@ -49,6 +49,7 @@ public static class DependencyInjection
         services.AddScoped<CoachExistenceCheckFilter>();
         services.AddScoped<CoachHourExistenceCheckFilter>();
         services.AddScoped<GroupSessionExistenceCheckFilter>();
+        services.AddScoped<GroupSessionOwnerCheckFilter>();
         
         return services;
     }
