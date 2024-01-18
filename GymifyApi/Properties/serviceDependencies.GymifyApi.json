@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/GymifyApiapi/apis/GymifyApi",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/GymifyApi/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsgymify_AC9665AC7C",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/gymifydbserver/databases/GymifyApi_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:gymify",
+      "dynamicId": null
+    }
+  }
+}
