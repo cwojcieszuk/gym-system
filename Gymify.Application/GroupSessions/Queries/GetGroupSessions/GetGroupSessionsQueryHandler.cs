@@ -30,7 +30,8 @@ public class GetGroupSessionsQueryHandler : IRequestHandler<GetGroupSessionsQuer
                         x.Coach.CoachTypes.Any(c => c.CoachCategoryId == request.CategoryId))
             .Where(x => request.CoachUid == null || x.CoachUid == request.CoachUid)
             .Where(x => request.Date == null && x.SessionStartDate.Date >= DateTime.Now.Date)
-            .OrderBy(x => x.SessionStartDate.Hour)
+            .OrderBy(x => x.SessionStartDate.Date)
+            .ThenBy(x => x.SessionStartDate.Hour)
             .ToListAsync(cancellationToken);
 
         int totalRecords = groupSessions.Count;
@@ -52,7 +53,8 @@ public class GetGroupSessionsQueryHandler : IRequestHandler<GetGroupSessionsQuer
             IsBookedIn = IsBookedIn(x.GroupSessionUid, request.UserUid),
             CanEdit = x.CoachUid == request.UserUid,
             StartDate = x.SessionStartDate,
-            EndDate = x.SessionEndDate
+            EndDate = x.SessionEndDate,
+            PlaceId = x.PlaceId
         }).ToList();
 
         return new PagedResponse<GroupSessionDTO>()

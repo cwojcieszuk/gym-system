@@ -1,5 +1,6 @@
 ﻿using Gymify.Application.GroupSessions.Commands.BookIn;
 using Gymify.Application.GroupSessions.Commands.CreateGroupSession;
+using Gymify.Application.GroupSessions.Commands.EditGroupSession;
 using Gymify.Application.GroupSessions.Commands.Resign;
 using Gymify.Application.GroupSessions.Queries.GetGroupSessions;
 using Gymify.Shared.Constants;
@@ -74,6 +75,23 @@ public class GroupSessionsController : ControllerBase
     [HttpPost]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = $"{RoleConstants.Admin},{RoleConstants.Coach}")]
     public async Task<IActionResult> CreateGroupSession([FromBody] CreateGroupSessionCommand request)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        await _mediator.Send(request with { CoachUid = userUid });
+
+        return NoContent();
+    }
+
+    [HttpPut]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = $"{RoleConstants.Admin},{RoleConstants.Coach}")]
+    [ServiceFilter(typeof(GroupSessionExistenceCheckFilter))]
+    public async Task<IActionResult> EditGroupSession([FromBody] EditGroupSessionCommand request)
     {
         Guid userUid = Guid.Parse(User.GetUserUid());
 

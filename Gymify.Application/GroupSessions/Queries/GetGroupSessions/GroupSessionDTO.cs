@@ -15,4 +15,5 @@ public class GroupSessionDTO
     public bool CanEdit { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
+    public int PlaceId { get; set; }
 }
