@@ -12,4 +12,7 @@ public class GroupSessionDTO
     public int TakenSlots { get; init; }
     public string Description { get; init; }
     public bool IsBookedIn { get; init; }
+    public bool CanEdit { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
 }

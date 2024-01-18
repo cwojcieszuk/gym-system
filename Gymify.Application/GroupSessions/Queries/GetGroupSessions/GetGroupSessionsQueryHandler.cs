@@ -24,11 +24,12 @@ public class GetGroupSessionsQueryHandler : IRequestHandler<GetGroupSessionsQuer
             .ThenInclude(x => x.User)
             .Include(x => x.Place)
             .Include(x => x.ClientGroupSessions)
-            .Where(x => x.SessionStartDate.Date == request.Date.Date)
+            .Where(x => request.Date == null || x.SessionStartDate.Date == request.Date.Value.Date)
             .Where(x => request.Name == null || x.SessionName == request.Name)
             .Where(x => request.CategoryId == null ||
                         x.Coach.CoachTypes.Any(c => c.CoachCategoryId == request.CategoryId))
             .Where(x => request.CoachUid == null || x.CoachUid == request.CoachUid)
+            .Where(x => request.Date == null && x.SessionStartDate.Date >= DateTime.Now.Date)
             .OrderBy(x => x.SessionStartDate.Hour)
             .ToListAsync(cancellationToken);
 
@@ -48,7 +49,10 @@ public class GetGroupSessionsQueryHandler : IRequestHandler<GetGroupSessionsQuer
             AvailableSlots = x.Slots,
             TakenSlots = x.ClientGroupSessions.Where(g => g.GroupSessionUid == x.GroupSessionUid).Count(),
             Description = x.Description,
-            IsBookedIn = IsBookedIn(x.GroupSessionUid, request.UserUid)
+            IsBookedIn = IsBookedIn(x.GroupSessionUid, request.UserUid),
+            CanEdit = x.CoachUid == request.UserUid,
+            StartDate = x.SessionStartDate,
+            EndDate = x.SessionEndDate
         }).ToList();
 
         return new PagedResponse<GroupSessionDTO>()
