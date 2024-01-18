@@ -51,3 +51,17 @@ input::-webkit-calendar-picker-indicator {
   border-radius: 4px !important;
   display: block !important;
 }
+
+.mat-calendar-body-disabled>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.mat-calendar-body-selected {
+  background: #660033;
+  color: white;
+}
+
+.mat-calendar-body-selected.mat-calendar-body-today {
+  box-shadow: inset 0 0 0 1px white;
+}
+

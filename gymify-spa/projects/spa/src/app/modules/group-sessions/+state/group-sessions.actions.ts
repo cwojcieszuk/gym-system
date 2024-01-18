@@ -5,6 +5,9 @@ import { UUID } from '../../../../../../api-client/src/lib/types/uuid.type';
 import {
   CreateGroupSessionParams
 } from '../../../../../../api-client/src/lib/clients/group-sessions/params/create-group-session.params';
+import {
+  EditGroupSessionParams
+} from '../../../../../../api-client/src/lib/clients/group-sessions/params/edit-group-session.params';
 
 export const setFilters = createAction(
   '[Group Sessions] Set Filters',
@@ -61,4 +64,17 @@ export const createGroupSessionSuccess = createAction(
 
 export const createGroupSessionFailure = createAction(
   '[Group Sessions] Create Group Session Failure'
+);
+
+export const editGroupSession = createAction(
+  '[Group Sessions] Edit Group Session',
+  props<{ params: EditGroupSessionParams }>()
+);
+
+export const editGroupSessionSuccess = createAction(
+  '[Group Sessions] Edit Group Session Success'
+);
+
+export const editGroupSessionFailure = createAction(
+  '[Group Sessions] Edit Group Session Failure'
 );

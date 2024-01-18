@@ -13,7 +13,7 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Start Date</mat-label>
-        <input matInput [ngxMatDatetimePicker]="picker1" formControlName="startDate">
+        <input matInput [ngxMatDatetimePicker]="picker1" formControlName="startDate" [min]="minDate">
         <mat-datepicker-toggle matIconSuffix [for]="$any(picker1)"></mat-datepicker-toggle>
         <ngx-mat-datetime-picker #picker1 [showSpinners]="true" [showSeconds]="false"
                                  [stepHour]="1" [stepMinute]="1"
@@ -23,7 +23,7 @@
 
     <mat-form-field appearance="outline">
         <mat-label>End date</mat-label>
-        <input matInput [ngxMatDatetimePicker]="picker2" formControlName="endDate">
+        <input matInput [ngxMatDatetimePicker]="picker2" formControlName="endDate" [min]="minEndDate">
         <mat-datepicker-toggle matIconSuffix [for]="$any(picker2)"></mat-datepicker-toggle>
         <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="false"
                                  [stepHour]="1" [stepMinute]="1"
@@ -49,7 +49,7 @@
     </button>
 
     <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">
-        <span>Create</span>
+        <span>{{ isNew ? 'Create' : 'Save'  }}</span>
         <mat-icon>save</mat-icon>
     </button>
 </form>

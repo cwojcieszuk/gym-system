@@ -48,6 +48,16 @@ export class GroupSessionsListComponent extends BaseComponent {
     });
   }
 
+  edit(groupSession: GroupSessionDTO): void {
+    const dialog = this.dialog.open(CreateSessionComponent, {
+      data: groupSession,
+    });
+
+    dialog.afterClosed()
+      .pipe(filter(Boolean))
+      .subscribe(value => this.facade.editGroupSession({ ...value, groupSessionUid: groupSession.groupSessionUid }));
+  }
+
   createGroupSession(): void {
     const dialog = this.dialog.open(CreateSessionComponent);
 

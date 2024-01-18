@@ -97,6 +97,28 @@ export class GroupSessionsEffects {
       tap(() => this.toastr.error('Unable to create group session'))
     ), { dispatch: false });
 
+  editGroupSession$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupSessionActions.editGroupSession),
+      mergeMap(({ params }) => this.client.editGroupSession(params).pipe(
+        map(() => GroupSessionActions.editGroupSessionSuccess()),
+        catchError(() => of(GroupSessionActions.editGroupSessionFailure()))
+      ))
+    ));
+
+  editGroupSessionSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupSessionActions.editGroupSessionSuccess),
+      tap(() => this.toastr.success('Successfully edited group session')),
+      map(() => GroupSessionActions.fetchGroupSessions())
+    ));
+
+  editGroupSessionFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupSessionActions.createGroupSessionFailure),
+      tap(() => this.toastr.error('Unable to edit group session'))
+    ), { dispatch: false });
+
   constructor(
     private actions$: Actions,
     private client: GroupSessionsClient,

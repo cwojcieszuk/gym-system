@@ -14,4 +14,5 @@ export interface GroupSessionDTO {
   canEdit: boolean;
   startDate: Date;
   endDate: Date;
+  placeId: number;
 }

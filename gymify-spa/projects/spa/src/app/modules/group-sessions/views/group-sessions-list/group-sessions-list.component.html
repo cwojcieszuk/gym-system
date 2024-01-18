@@ -64,7 +64,7 @@
                                 <mat-icon>save</mat-icon>
                             </button>
 
-                            <button mat-icon-button color="primary" [disabled]="!group.canEdit">
+                            <button mat-icon-button color="primary" (click)="edit(group)" [disabled]="!canRemoveGroupSession(group)">
                                 <mat-icon>edit</mat-icon>
                             </button>
 

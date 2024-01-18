@@ -8,6 +8,7 @@ import { UUID } from '../../types/uuid.type';
 import { EmptyResponse } from '../../types/empty.response';
 import { CreateGroupSessionParams } from './params/create-group-session.params';
 import { HttpHelpers } from '../../helpers/http.helpers';
+import { EditGroupSessionParams } from './params/edit-group-session.params';
 
 @Injectable({ providedIn: 'root' })
 export class GroupSessionsClient {
@@ -29,5 +30,9 @@ export class GroupSessionsClient {
 
   createGroupSession(params: CreateGroupSessionParams): Observable<EmptyResponse> {
     return this.http.post<EmptyResponse>(this.url, HttpHelpers.getParamsWithFormattedDates(params));
+  }
+
+  editGroupSession(params: EditGroupSessionParams): Observable<EmptyResponse> {
+    return this.http.put(this.url, HttpHelpers.getParamsWithFormattedDates(params));
   }
 }
