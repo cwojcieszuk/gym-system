@@ -42,4 +42,8 @@ export class GroupSessionsFacade {
   editGroupSession(params: EditGroupSessionParams): void {
     this.store.dispatch(GroupSessionActions.editGroupSession({ params }));
   }
+
+  deleteGroupSession(groupSessionUid: UUID): void {
+    this.store.dispatch(GroupSessionActions.deleteGroupSession({ groupSessionUid }));
+  }
 }

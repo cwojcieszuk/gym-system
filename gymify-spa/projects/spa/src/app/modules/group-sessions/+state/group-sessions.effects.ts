@@ -119,6 +119,28 @@ export class GroupSessionsEffects {
       tap(() => this.toastr.error('Unable to edit group session'))
     ), { dispatch: false });
 
+  deleteGroupSession$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupSessionActions.deleteGroupSession),
+      mergeMap(({ groupSessionUid }) => this.client.deleteGroupSession(groupSessionUid).pipe(
+        map(() => GroupSessionActions.deleteGroupSessionSuccess()),
+        catchError(() => of(GroupSessionActions.deleteGroupSessionFailure()))
+      ))
+    ));
+
+  deleteGroupSessionSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupSessionActions.deleteGroupSessionSuccess),
+      tap(() => this.toastr.success('Successfully deleted group session')),
+      map(() => GroupSessionActions.fetchGroupSessions())
+    ));
+
+  deleteGroupSessionFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupSessionActions.deleteGroupSessionFailure),
+      tap(() => this.toastr.error('Unable to delete group session'))
+    ), { dispatch: false });
+
   constructor(
     private actions$: Actions,
     private client: GroupSessionsClient,

@@ -8,6 +8,8 @@ import { filter } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { BookInGroupSessionComponent } from '../../dialogs/book-in-group-session/book-in-group-session.component';
 import { CreateSessionComponent } from '../../dialogs/create-session/create-session.component';
+import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { UUID } from '../../../../../../../api-client/src/lib/types/uuid.type';
 
 @Component({
   templateUrl: './group-sessions-list.component.html',
@@ -64,6 +66,19 @@ export class GroupSessionsListComponent extends BaseComponent {
     dialog.afterClosed()
       .pipe(filter(Boolean))
       .subscribe(value => this.facade.createGroupSession(value));
+  }
+
+  deleteGroupSession(groupSessionUid: UUID): void {
+    const dialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Group session',
+        message: 'Are you sure to delete group session?',
+      },
+    });
+
+    dialog.afterClosed()
+      .pipe(filter(Boolean))
+      .subscribe(() => this.facade.deleteGroupSession(groupSessionUid));
   }
 
   canRemoveGroupSession(session: GroupSessionDTO): boolean {

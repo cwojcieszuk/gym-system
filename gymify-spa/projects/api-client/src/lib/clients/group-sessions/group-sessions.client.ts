@@ -35,4 +35,8 @@ export class GroupSessionsClient {
   editGroupSession(params: EditGroupSessionParams): Observable<EmptyResponse> {
     return this.http.put(this.url, HttpHelpers.getParamsWithFormattedDates(params));
   }
+
+  deleteGroupSession(groupSessionUid: UUID): Observable<EmptyResponse> {
+    return this.http.delete(`${this.url}/${groupSessionUid}`);
+  }
 }

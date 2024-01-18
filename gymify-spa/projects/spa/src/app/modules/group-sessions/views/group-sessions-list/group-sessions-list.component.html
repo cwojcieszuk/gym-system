@@ -68,7 +68,7 @@
                                 <mat-icon>edit</mat-icon>
                             </button>
 
-                            <button mat-icon-button color="warn" [disabled]="!canRemoveGroupSession(group)">
+                            <button mat-icon-button color="warn" (click)="deleteGroupSession(group.groupSessionUid)" [disabled]="!canRemoveGroupSession(group)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </div>

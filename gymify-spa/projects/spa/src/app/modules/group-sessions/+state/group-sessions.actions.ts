@@ -78,3 +78,16 @@ export const editGroupSessionSuccess = createAction(
 export const editGroupSessionFailure = createAction(
   '[Group Sessions] Edit Group Session Failure'
 );
+
+export const deleteGroupSession = createAction(
+  '[Group Sessions] Delete Group Session',
+  props<{ groupSessionUid: UUID }>()
+);
+
+export const deleteGroupSessionSuccess = createAction(
+  '[Group Sessions] Delete Group Session Success'
+);
+
+export const deleteGroupSessionFailure = createAction(
+  '[Group Sessions] Delete Group Session Failure'
+);
