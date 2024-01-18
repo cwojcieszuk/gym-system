@@ -11,4 +11,7 @@ export interface GroupSessionDTO {
   takenSlots: number;
   description: string;
   isBookedIn: boolean;
+  canEdit: boolean;
+  startDate: Date;
+  endDate: Date;
 }

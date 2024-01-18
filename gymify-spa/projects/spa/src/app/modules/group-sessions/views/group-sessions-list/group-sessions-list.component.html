@@ -21,6 +21,10 @@
 
         <div class="mat-elevation-z8 mt-6">
             <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Date</th>
+                    <td mat-cell *matCellDef="let group">{{ group.startDate | date }}</td>
+                </ng-container>
 
                 <ng-container matColumnDef="hour">
                     <th mat-header-cell *matHeaderCellDef>Hour</th>
@@ -55,10 +59,17 @@
                 <ng-container matColumnDef="bookin">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let group">
-                        <div class="flex justify-center items-center">
-                            <button mat-stroked-button color="primary" (click)="bookIn(group)" [disabled]="group.availableSlots === group.takenSlots">
-                                <span>Book in</span>
+                        <div class="flex justify-end items-center">
+                            <button mat-icon-button (click)="bookIn(group)" [disabled]="group.availableSlots === group.takenSlots">
                                 <mat-icon>save</mat-icon>
+                            </button>
+
+                            <button mat-icon-button color="primary" [disabled]="!group.canEdit">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+
+                            <button mat-icon-button color="warn" [disabled]="!canRemoveGroupSession(group)">
+                                <mat-icon>delete</mat-icon>
                             </button>
                         </div>
                     </td>
