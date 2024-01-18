@@ -24,12 +24,11 @@ public class GetGroupSessionsQueryHandler : IRequestHandler<GetGroupSessionsQuer
             .ThenInclude(x => x.User)
             .Include(x => x.Place)
             .Include(x => x.ClientGroupSessions)
-            .Where(x => request.Date == null || x.SessionStartDate.Date == request.Date.Value.Date)
+            .Where(x => request.Date == null ? (x.SessionStartDate.Date >= DateTime.Now.Date) : x.SessionStartDate.Date == request.Date.Value.Date)
             .Where(x => request.Name == null || x.SessionName == request.Name)
             .Where(x => request.CategoryId == null ||
                         x.Coach.CoachTypes.Any(c => c.CoachCategoryId == request.CategoryId))
             .Where(x => request.CoachUid == null || x.CoachUid == request.CoachUid)
-            .Where(x => request.Date == null && x.SessionStartDate.Date >= DateTime.Now.Date)
             .OrderBy(x => x.SessionStartDate.Date)
             .ThenBy(x => x.SessionStartDate.Hour)
             .ToListAsync(cancellationToken);

@@ -1,5 +1,6 @@
 ﻿using Gymify.Application.GroupSessions.Commands.BookIn;
 using Gymify.Application.GroupSessions.Commands.CreateGroupSession;
+using Gymify.Application.GroupSessions.Commands.DeleteGroupSession;
 using Gymify.Application.GroupSessions.Commands.EditGroupSession;
 using Gymify.Application.GroupSessions.Commands.Resign;
 using Gymify.Application.GroupSessions.Queries.GetGroupSessions;
@@ -101,6 +102,24 @@ public class GroupSessionsController : ControllerBase
         }
 
         await _mediator.Send(request with { CoachUid = userUid });
+
+        return NoContent();
+    }
+
+    [HttpDelete]
+    [Route("{groupSessionUid}")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = $"{RoleConstants.Admin},{RoleConstants.Coach}")]
+    [ServiceFilter(typeof (GroupSessionExistenceCheckFilter))]
+    public async Task<IActionResult> DeleteGroupSession([FromRoute] DeleteGroupSessionCommand request)
+    {
+        Guid userUid = Guid.Parse(User.GetUserUid());
+
+        if (userUid == null)
+        {
+            return Forbid();
+        }
+
+        await _mediator.Send(request with { UserUid = userUid });
 
         return NoContent();
     }
